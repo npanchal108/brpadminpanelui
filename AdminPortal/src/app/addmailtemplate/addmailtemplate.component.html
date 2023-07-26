@@ -1,0 +1,73 @@
+<div class="main-content" style="margin-top:0">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header" data-background-color="darkblue">
+            <h4 class="title">Mail Template</h4>
+            <p class="category">Manage your Mail Template</p>
+          </div>
+          <div class="card-content">
+            <form #mailConfigForm="ngForm">
+              <div class="row" *ngIf="Mailtemplate!=null && Mailtemplate!=undefined">
+                <div class="col-md-12" *ngIf=" Mailtemplate.MailTemplateName!='' && Mailtemplate.MailTemplateName!=null && Mailtemplate.MailTemplateName!=undefined  && Mailtemplate.MailTemplateName!='undefined'">
+                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': Mailtemplate.MailTemplateName=='','is-focused' : Mailtemplate.MailTemplateName!=''}">
+                    <label class="control-label">MailTemplate Name</label>
+                    <input type="text" name="MailTemplateName" #MailTemplateName="ngModel" disabled=true value="Mailtemplate.MailTemplateName" [value]="Mailtemplate.MailTemplateName" [(ngModel)]="Mailtemplate.MailTemplateName" class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': Mailtemplate.MailTemplateSubject=='','is-focused' : Mailtemplate.MailTemplateSubject!=''}">
+                    <label class="control-label">MailTemplate Subject</label>
+                    <input class="validate" type="text" name="MailTemplateSubject" #MailTemplateSubject="ngModel" [(ngModel)]="Mailtemplate.MailTemplateSubject" class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group form-black label-floating" style="margin-top:39px">
+                      <mat-checkbox [(ngModel)]="Mailtemplate.IsActive"  name="IsActive">Active</mat-checkbox>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': Mailtemplate.MailType==undefined,'is-focused' :Mailtemplate.MailType!=undefined}">
+                    <mat-form-field>
+                      
+                      <mat-select placeholder="Select Type" [(ngModel)]="Mailtemplate.MailType" name="MailType" class="validate" required>
+                        <mat-option  value="1">
+                          In
+                        </mat-option>
+                        <mat-option  value="2">
+                          Out
+                        </mat-option>
+                      </mat-select>
+                      
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': Mailtemplate.MailTemplateContent=='','is-focused' : Mailtemplate.MailTemplateContent!=''}">
+                    <label class="control-label">MailTemplate Content</label>
+                    <textarea class="validate" style="height: 500px;"  name="MailTemplateContent" #MailTemplateContent="ngModel" [(ngModel)]="Mailtemplate.MailTemplateContent" class="form-control" required> </textarea>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group form-black label-floating">
+                    <label class="control-label">MailTemplate Preview</label>
+                    <!-- <div style="margin-top:10px;" *ngIf="Mailtemplate.MailTemplateContent!=null && Mailtemplate.MailTemplateContent!=undefined  && Mailtemplate.MailTemplateContent!='undefined'" [innerHTML]="Mailtemplate.MailTemplateContent"></div> -->
+                    <div style="margin-top:10px;"  *ngIf=" Mailtemplate.MailTemplateContent!='' && Mailtemplate.MailTemplateContent!=null && Mailtemplate.MailTemplateContent!=undefined  && Mailtemplate.MailTemplateContent!='undefined'" [innerHTML]="transform(Mailtemplate.MailTemplateContent,'html')" class="list-d" ></div>
+                  </div>
+                </div>
+                <button (click)="back()" class="btn btn-default pull-right">Back</button>
+                <button class="btn btn-info pull-right" (click)="OnSubmit(mailConfigForm)">Submit</button>  
+
+             </div>
+              
+             
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+

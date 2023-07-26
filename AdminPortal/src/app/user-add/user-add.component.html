@@ -1,0 +1,149 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header" data-background-color="darkblue">
+            <h4 class="title">User Profile</h4>
+            <p class="category">Complete your profile</p>
+          </div>
+          <div class="card-content">
+            <form #userRegistrationForm="ngForm" (ngSubmit)="OnSubmit(userRegistrationForm)">
+              <div class="row">
+                
+                <div class="col-md-4">
+                  <div class="form-group form-black label-floating is-focused" [ngClass]="{'is-empty': user.FirstName=='','is-focused' : user.FirstName!=''}">
+                    <label class="control-label">First Name</label>
+                    <input type="text" name="FirstName" #FirstName="ngModel" [(ngModel)]="user.FirstName" class="validate" [disabled]=isdesable class="form-control" required >
+                    <input type="text" name="UserID" #UserID="ngModel" [(ngModel)]="user.UserID" style="display:none">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': user.LastName=='','is-focused' : user.LastName!=''}">
+                    <label class="control-label">Last Name</label>
+                    <input type="text" name="LastName" #LastName="ngModel" [(ngModel)]="user.LastName" [disabled]=isdesable class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': user.Mobile=='','is-focused' : user.Mobile!=''}">
+                    <label class="control-label">Mobile</label>
+                    <input class="validate" type="text" name="Mobile" #Mobile="ngModel" [disabled]=isdesable [(ngModel)]="user.Mobile" required class="form-control">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': user.Password=='','is-focused' : user.Password!=''}">
+                    <label class="control-label">Password</label>
+                    <input type="password" name="Password" #Password="ngModel" [(ngModel)]="user.Password" [disabled]=isdesable required minlength="3" class="validate"
+                      class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': user.Email=='','is-focused' : user.Email!=''}">
+                    <label class="control-label">Email</label>
+                    <input type="text" name="Email" #Email="ngModel" [(ngModel)]="user.Email" [disabled]=isdesable class="validate" class="form-control" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': user.MemberRefNo=='','is-focused' :user.MemberRefNo!=''}">
+                    <label class="control-label" *ngIf="userType == 'Admin'">User ID</label>
+                    <label class="control-label" *ngIf="userType == 'Client'">Customer ID</label>
+                    
+                    <input type="text" name="MemberRefNo" #MemberRefNo="ngModel" [(ngModel)]="user.MemberRefNo" *ngIf="id == 0" class="validate" required class="form-control">
+                    <input type="text" name="MemberRefNo" #MemberRefNo="ngModel" [(ngModel)]="user.MemberRefNo" [disabled]="true" *ngIf="id > 0"  class="validate" required class="form-control">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': user.ProjectTypeID==undefined,'is-focused' :user.ProjectTypeID!=undefined}">
+                    <mat-form-field>
+                      <mat-select placeholder="Select Project" [(ngModel)]="user.ProjectTypeID" name="ProjectTypeID" class="validate" *ngIf="id == 0" required>
+                        <mat-option *ngFor="let pro of projecttypes" [value]="pro.ProjectTypeID">
+                          {{ pro.ProjectTypeName }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-select placeholder="Select Project" [(ngModel)]="user.ProjectTypeID" name="ProjectTypeID" class="validate" [disabled]="true" *ngIf="id > 0" required>
+                        <mat-option *ngFor="let pro of projecttypes" [value]="pro.ProjectTypeID">
+                          {{ pro.ProjectTypeName }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': user.HostName=='','is-focused' : user.HostName!=''}">
+                    <label class="control-label">Host Name</label>
+                    <input type="text" name="HostName" #HostName="ngModel" [(ngModel)]="user.HostName" [disabled]=isdesable *ngIf="id == 0" class="validate" required class="form-control">
+                    <input type="text" name="HostName" #HostName="ngModel" [(ngModel)]="user.HostName" [disabled]=true class="validate" *ngIf="id > 0" required class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': user.CompanyID=='','is-focused' :user.CompanyID!=''}">
+                      <label class="control-label">CompanyID</label>
+                      <input type="text" name="CompanyID" #CompanyID="ngModel" [(ngModel)]="user.CompanyID" class="validate" *ngIf="id == 0" [disabled]=isdesable required class="form-control">
+                      <input type="text" name="CompanyID" #CompanyID="ngModel" [(ngModel)]="user.CompanyID" [disabled]="true" *ngIf="id > 0" class="validate" required class="form-control">
+                  </div>
+                </div>
+                
+                
+              </div>
+
+              <div class="row">
+                  <div class="col-md-4">
+                      <div class="form-group form-black label-floating" [ngClass]="{'is-empty': user.ApiEndPoint=='','is-focused' :user.ApiEndPoint!=''}">
+                        <label class="control-label">API End Point</label>
+                        <input type="text" name="ApiEndPoint" #ApiEndPoint="ngModel" [(ngModel)]="user.ApiEndPoint" class="validate" *ngIf="id == 0" [disabled]=isdesable required class="form-control">
+                        <input type="text" name="ApiEndPoint" #ApiEndPoint="ngModel" [(ngModel)]="user.ApiEndPoint" [disabled]="true" *ngIf="id > 0" class="validate" required class="form-control">
+                      </div>
+                    </div>
+                  <div class="col-md-4">
+                      <div class="form-group form-black label-floating" [ngClass]="{'is-empty': user.ApiUserName=='','is-focused' :user.ApiUserName!=''}">
+                        <label class="control-label">API User Name</label>
+                        <input type="text" name="ApiUserName" #ApiUserName="ngModel" [(ngModel)]="user.ApiUserName" [disabled]=isdesable *ngIf="id == 0" class="validate" required class="form-control">
+                        <input type="text" name="ApiUserName" #ApiUserName="ngModel" [(ngModel)]="user.ApiUserName" [disabled]="true" *ngIf="id > 0" class="validate" required class="form-control">
+                      </div>
+                    </div>
+                <div class="col-md-4">                  
+                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': user.ApiPassword=='','is-focused' : user.ApiPassword!=''}">
+                      <label class="control-label">API Password</label>
+                      <input type="password" name="ApiPassword" #ApiPassword="ngModel" [(ngModel)]="user.ApiPassword" [disabled]=isdesable *ngIf="id == 0" class="validate" required class="form-control">
+                      <input type="password" name="ApiPassword" #ApiPassword="ngModel" [(ngModel)]="user.ApiPassword" [disabled]="true" *ngIf="id > 0" class="validate" required class="form-control">
+                  </div>
+                </div>
+               
+              
+                
+              </div>
+              <div class="row">
+                  <div class="col-md-4">
+                      <div class="form-group form-black label-floating" [ngClass]="{'is-empty': user.NotificationEmails=='','is-focused' : user.NotificationEmails!=''}">
+                          <label class="control-label">Notification Emails</label>
+                          <input type="text" name="NotificationEmails" #NotificationEmails="ngModel"  [(ngModel)]="user.NotificationEmails" class="form-control">
+                      </div>
+                    </div>
+                  <div class="col-md-4">
+                      <div class="form-group form-black label-floating" style="margin-top:39px">
+                          <mat-checkbox [(ngModel)]="user.IsActive" [disabled]=isdesable name="IsActive">Active</mat-checkbox>
+                      </div>
+                    </div>
+                <div class="col-md-4">
+                  <div class="form-group form-black label-floating" style="margin-top:39px;">
+                      <mat-checkbox [(ngModel)]="user.IsLocked" [disabled]=isdesable name="IsLocked">Lock</mat-checkbox>
+                  </div>
+                </div>
+              </div>
+              <button *ngIf="userType!='Client'" (click)="back()" class="btn btn-default pull-right">Back</button>
+              <button class="btn btn-info pull-right" type="submit">{{user.ButtenText}}</button>
+                            <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

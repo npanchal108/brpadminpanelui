@@ -1,0 +1,131 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="darkblue">
+                        <table width=100%;>
+                            <tr>
+                                <td>
+                                    <h4 class="title">Home Page Banners List</h4>
+                                    <p class="category">Manage your Home Page Banners</p>
+                                </td>
+                                <td style="text-align: right;">
+                                    <button (click)="OnAddheaderlink()" class="btn btn-success">Add New</button>
+                                    <!-- <a (click)="OnAddheaderlink()" style="cursor: pointer;">
+              <i class="material-icons small" style="position: relative;bottom: 52px;left: 520px;">add_circle</i>
+            </a> -->
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div *ngIf="Bannerlist!=null && Bannerlist!=undefined && showtype==1" class="card-content table-responsive table-mobile">
+                        <table class="table">
+                            <thead class="text-info">
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Description </th>
+                                    <th>Image</th>
+                                    <th>IsActive</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let headlink of Bannerlist">
+                                    <td data-title="Title">{{headlink.Title}}</td>
+                                    <td data-title="Description">{{headlink.Description}}</td>
+                                    <td data-title="Image"> <img src="{{headlink.ImageUrl}}" style="height: 100px;width: 200px;"> </td>
+                                    <td data-title="IsActive">{{headlink.IsActive}}</td>
+                                    <td class="btnalign">
+                                        <button (click)="getBannerDetails(headlink.BannerId)" class="btn btn-default">Edit</button>
+                                        <!-- <a style="cursor: pointer;" (click)="getBannerDetails(headlink.BannerId)" >
+                      <i class="material-icons">mode_edit</i>
+                    </a> -->
+
+                                        <!-- <a style="cursor: pointer;" (click)="openDialog(headlink.BannerId)">
+                      <i class="material-icons">mode_delete</i>
+                    </a> -->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                    </div>
+
+
+                    <div class="card-content" *ngIf="showtype==2">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating" [ngClass]="{'is-empty': Title=='','is-focused' : Title!=''}">
+                                    <label class="control-label">Title</label>
+                                    <input type="text" [(ngModel)]="Title" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating" [ngClass]="{'is-empty': Description=='','is-focused' : Description!=''}">
+                                    <label class="control-label">Description</label>
+                                    <input type="text" [(ngModel)]="Description" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating" [ngClass]="{'is-empty': targeturl=='','is-focused' : targeturl!=''}">
+                                    <label class="control-label">Target URL</label>
+                                    <input type="text" [(ngModel)]="targeturl" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating" [ngClass]="{'is-empty': linkname=='','is-focused' : linkname!=''}">
+                                    <label class="control-label">Link Name</label>
+                                    <input type="text" [(ngModel)]="linkname" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating">
+                                    <label class="control-label">Types</label>
+
+                                    <mat-form-field>
+                                        <mat-select placeholder="Select Type" [(ngModel)]="types" name="types" class="validate" required>
+                                            <mat-option value="home">home</mat-option>
+                                            <mat-option value="footer">footer</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating">
+                                    <label class="control-label">IsActive</label>
+                                    <input type="checkbox" [(ngModel)]="IsActive" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating">
+                                    <label class="control-label">Image</label>
+                                    <img *ngIf="ImageUrl!=undefined && ImageUrl!=''" src="{{ImageUrl}}" style="height: 100px;width: 200px;"> <br />
+                                    <input type="file" style="position: relative;opacity: inherit;" (change)="onFileSelected($event)">
+                                </div>
+                            </div>
+                        </div>
+                        <button (click)="GetAllBanners()" class="btn btn-default pull-right">Back</button>
+                        <button class="btn btn-info pull-right" (click)="OnUpload()">Submit</button>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

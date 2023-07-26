@@ -1,0 +1,57 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="darkblue">
+
+                        <table width=100%;>
+                            <tr>
+                                <td>
+                                    <h4 class="title">Sorting List</h4>
+                                    <p class="category">Manage your Sorting List</p>
+                                </td>
+                                <td style="text-align: right;">
+                                    <button (click)="onEditconf(0)" class="btn btn-success">Add New</button>
+                                    <!-- <a (click)="OnAddheaderlink()" style="cursor: pointer;">
+              <i class="material-icons small" style="position: relative;bottom: 52px;left: 520px;">add_circle</i>
+            </a> -->
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div *ngIf="configlist!=null && configlist!=undefined" class="card-content table-responsive table-mobile">
+                        <table class="table" width=100%;>
+                            <thead class="text-info">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type </th>
+                                    <th>Order</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let conf of configlist">
+                                    <td data-title="Name">{{conf.Name}}</td>
+                                    <td data-title="Type">{{conf.stype}}</td>
+                                    <td data-title="Order">{{conf.sorder}}</td>
+
+                                    <td class="btnalign" style="cursor: pointer;">
+                                        <button (click)="onEditconf(conf.id)" class="btn btn-default">Edit</button>
+                                        <button (click)="openDialog(conf.id)" class="btn btn-danger">Delete</button>
+                                        <!-- <a >
+                      <i class="material-icons">mode_edit</i>
+                    </a> -->
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

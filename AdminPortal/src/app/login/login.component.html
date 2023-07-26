@@ -1,0 +1,42 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-7">
+        <div class="card">
+          <div class="card-header" data-background-color="darkblue">
+            <h4 class="title">Login</h4>
+            <p class="category">Login into the portal</p>
+          </div>
+          <div class="card-content">
+            <form #loginForm="ngForm" (ngSubmit)="OnSubmit(loginForm)">
+              <div *ngIf="isLoginError" class="red-text center error-message">
+                <i class="material-icons">error</i> {{Errormsg}}
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group form-black label-floating is-focused">
+                    <label class="control-label">User Name</label>
+                    <input type="text" class="form-control" #UserName ngModel name="UserName" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group form-black label-floating is-focused">
+                    <label class="control-label">Password</label>
+                    <input type="password" class="form-control" #Password ngModel name="Password" required>
+                  </div>
+                </div>
+              </div>
+              <!-- <re-captcha name="resolved" (resolved)="resolved($event)" required siteKey="6Lc2-l4UAAAAAN8mmuWceB_l8vYl7_dC3mpg36bX"></re-captcha> -->
+              <!-- <re-captcha name="resolved" (resolved)="resolved($event)" required siteKey="6LfA-14UAAAAAPAhAS0ULME3IatKB0Y9jwFvTK2u"></re-captcha> -->
+              <button type="submit" class="btn btn-info pull-right" [disabled]="!loginForm.valid">Login</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="main-content" style="margin-top:0">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header" data-background-color="darkblue">
+            <h4 class="title">Website SA FILTER SORT</h4>
+            <p class="category">Manage your Website SA FILTER SORT</p>
+          </div>
+          <div class="card-content">
+            <form #mailConfigForm="ngForm">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group form-black label-floating is-focused" >
+                    <label class="control-label">Name</label>
+                    <input type="text" name="Name" [value]="Name" [ngModelOptions]="{standalone: true}" [(ngModel)]="Name" class="form-control" required>
+                  </div>
+                </div>
+                <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group form-black label-floating is-focused">
+                    <label class="control-label">Sorting Type (1 for heading 2 for categories)</label>
+                    <input class="validate" type="number" [value]="stype" [ngModelOptions]="{standalone: true}"  [(ngModel)]="stype" class="form-control" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group form-black label-floating is-focused">
+                    <label class="control-label">Sorting Order</label>
+                    <input class="validate" type="number" [value]="sorder" [ngModelOptions]="{standalone: true}" [(ngModel)]="sorder" class="form-control" required>
+                  </div>
+                </div>
+                </div>
+
+             </div>
+              <button (click)="back()" class="btn btn-default pull-right">Back</button>
+              <button class="btn btn-info pull-right" (click)="OnSubmit(mailConfigForm)">Submit</button>
+             
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+

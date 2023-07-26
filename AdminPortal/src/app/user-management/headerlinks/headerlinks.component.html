@@ -1,0 +1,117 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="darkblue">
+                        <table width=100%;>
+                            <tr>
+                                <td>
+                                    <h4 class="title">Header Link List</h4>
+                                    <p class="category">Manage your Header Links</p>
+                                </td>
+                                <td style="text-align: right;">
+                                    <button (click)="OnAddheaderlink()" class="btn btn-success">Add New</button>
+                                    
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div *ngIf="headerlinklist!=null && headerlinklist!=undefined && showtype==1" class="card-content table-responsive table-mobile">
+                        <table class="table">
+                            <thead class="text-info">
+                                <tr>
+                                    <th>Link Name</th>
+                                    <th>Link URL </th>
+                                    <th>Sequence</th>
+                                    <th>Popover</th>
+                                    <th>Type</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let headlink of headerlinklist">
+                                    <td data-title="Name">{{headlink.linkname}}</td>
+                                    <td data-title="URL">{{headlink.linkurl}}</td>
+                                    <td data-title="Sequence">{{headlink.seq}}</td>
+                                    <td data-title="Popover">{{headlink.popover}}</td>
+                                    <td data-title="Type">{{headlink.types}}</td>
+                                    <td class="btnalign">
+                                        <button (click)="onEditLink(headlink.linkid)" class="btn btn-default">Edit</button>
+                                        <button (click)="openDialog(headlink.linkid)" class="btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                    </div>
+
+
+                    <div class="card-content" *ngIf="showtype==2">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating">
+                                    <label class="control-label">Link Name</label>
+                                    <input type="text" [(ngModel)]="linkname" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating">
+                                    <label class="control-label">Link URL</label>
+                                    <input type="text" [(ngModel)]="linkurl" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating">
+                                    <label class="control-label">Link Sequence</label>
+                                    <input type="text" [(ngModel)]="seq" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating">
+                                    <label class="control-label">Link Popover</label>
+                                    <!-- <input type="text" [(ngModel)]="popover" class="form-control" required> -->
+                                    <mat-checkbox [(ngModel)]="popover" [ngModelOptions]="{standalone:true}" name="popover">popover</mat-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating">
+                                    <label class="control-label">Types</label>
+
+                                    <mat-form-field>
+                                        <mat-select placeholder="Select Type" [(ngModel)]="types" name="types" class="validate" required>
+                                            
+                                            <mat-option value="header">Header</mat-option>
+                                            <mat-option value="footer">Footer</mat-option>
+                                            <mat-option value="dashboard">Dashboard</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <button (click)="getheaderlinks()" class="btn btn-default pull-right">Back</button>
+                        <button class="btn btn-info pull-right" (click)="UpdateHeaderlinkByID()">Submit</button>
+
+                        <div class="clearfix"></div>
+
+                    </div>
+
+                    <div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

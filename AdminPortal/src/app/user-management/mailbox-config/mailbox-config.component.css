@@ -1,0 +1,39 @@
+@media (max-width: 767px) {
+    .table-mobile table thead {
+        display: none;
+    }
+    .table-mobile table td {
+        white-space: normal !important;
+        word-break: break-all;
+        position: relative;
+        padding-left: 43.7% !important;
+        float: left;
+        width: 100%;
+        border-bottom: 0 !important;
+        min-height: 40px;
+        text-align: left !important;
+        border-top: 1px solid #e3e3e3 !important;
+    }
+    .table-panel table td {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+        padding-right: 10px !important;
+    }
+    .table-mobile table td::before {
+        left: 15px;
+    }
+    .table-mobile table td::before {
+        content: attr(data-title);
+        position: absolute;
+        top: 11px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+    }
+    .table-mobile table td.btnalign {
+        padding-left: 0px!important;
+    }
+}

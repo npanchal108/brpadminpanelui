@@ -1,0 +1,44 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="darkblue">
+                        <h4 class="title">Configuration List</h4>
+                        <p class="category">Manage your Configurations</p>
+
+                    </div>
+                    <div *ngIf="configlist!=null && configlist!=undefined" class="card-content table-responsive table-mobile">
+                        <table class="table" width=100%;>
+                            <thead class="text-info">
+                                <tr>
+                                    <th style="width:30%">Key</th>
+                                    <th style="width:30%">value </th>
+                                    <th style="width:30%">Details</th>
+                                    <th style="width:10%">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let conf of configlist">
+                                    <td data-title="Key">{{conf.ConfigKey}}</td>
+                                    <td data-title="value">{{conf.ConfigValue}}</td>
+                                    <td data-title="Details">{{conf.descr}}</td>
+
+                                    <td class="btnalign" style="cursor: pointer;">
+                                        <button (click)="onEditconf(conf.ConfigId)" class="btn btn-default">Edit</button>
+                                        <!-- <a >
+                      <i class="material-icons">mode_edit</i>
+                    </a> -->
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

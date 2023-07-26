@@ -1,0 +1,103 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="darkblue">
+                        <h4 class="title">User Process Config</h4>
+                        <p class="category">Set your Process</p>
+                    </div>
+                    <div class="card-content">
+                        <form #userRegistrationForm="ngForm">
+                            <div class="row">
+                                <input type="text" name="MemRefNo" #UserID="ngModel" [(ngModel)]="schedulerData.MemRefNo" style="display:none;">
+                                <div class="col-md-3">
+                                    <h4>Full Data Migration</h4>
+                                    <mat-form-field style="width:80%;">
+                                        <mat-label>Select Time</mat-label>
+                                        <mat-select name="SchedulerTime1" [disabled]=isdesable [(ngModel)]="schedulerData.SchedulerTime1">
+                                            <mat-option *ngFor="let food of foods" [value]="food">
+                                                {{food}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <br />
+
+                                    <button class="btn btn-info" type="submit" [disabled]=isdesable (click)="addScheduler1Config(userRegistrationForm)">Submit</button>
+                                </div>
+                                <div class="col-md-3">
+                                    <h4>Scheduler 2</h4>
+                                    <mat-form-field style="width:80%;">
+                                        <mat-label>Select Time</mat-label>
+                                        <mat-select name="SchedulerTime2" [disabled]=isdesable [(ngModel)]="schedulerData.SchedulerTime2">
+                                            <mat-option *ngFor="let food of foods1" [value]="food">
+                                                {{food}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <br />
+                                    <mat-form-field style="width:80%;">
+                                        <mat-label>Tables</mat-label>
+                                        <mat-select multiple name="Table2" [disabled]=isdesable [(ngModel)]="schedulerData.Table2">
+                                            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <button class="btn btn-info" type="submit" [disabled]=isdesable (click)="addScheduler2Config(userRegistrationForm)">Submit</button>
+                                </div>
+                                <div class="col-md-3">
+                                    <h4>Scheduler 3</h4>
+                                    <mat-form-field style="width:80%;">
+                                        <mat-label>Select Time</mat-label>
+                                        <mat-select name="SchedulerTime3" [disabled]=isdesable [(ngModel)]="schedulerData.SchedulerTime3">
+                                            <mat-option *ngFor="let food of foods2" [value]="food">
+                                                {{food}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <br />
+                                    <mat-form-field style="width:80%;">
+                                        <mat-label>Tables</mat-label>
+                                        <mat-select multiple name="Table3" [disabled]=isdesable [(ngModel)]="schedulerData.Table3">
+                                            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <button class="btn btn-info" type="submit" [disabled]=isdesable (click)="addScheduler3Config(userRegistrationForm)">Submit</button>
+                                </div>
+                                <div class="col-md-3">
+                                    <h4>Sync Now</h4>
+                                    <label>
+                    Date Time:
+                  </label>
+                                    <angular2-date-picker [(ngModel)]="date" [settings]="settings" name="dd"></angular2-date-picker>
+
+                                    <mat-form-field style="width:80%;">
+                                        <mat-label>Tables</mat-label>
+                                        <mat-select multiple name="Table4" [(ngModel)]="schedulerData.Table4">
+                                            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <button class="btn btn-info" type="submit" (click)="syncTblNow()">Submit</button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button (click)="SyncNow()" class="btn btn-success">Full Data Sync</button>
+                                    <button (click)="AllProductImages()" class="btn btn-info">All Products Images Sync</button>
+                                    <button (click)="ProductImages()" class="btn btn-default">Products Images Sync</button>
+                                    <button (click)="AllTreeImages()" class="btn btn-primary">All Tree Images Sync</button>
+                                    <button (click)="TreeImages()" class="btn btn-success">Tree Images Sync</button>
+                                    <button (click)="CompressAllImages()" class="btn btn-warning">Compress Images</button>                                    
+                                    <button *ngIf="userType!='Client'" (click)="back()" class="btn btn-default">Back</button>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

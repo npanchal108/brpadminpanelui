@@ -1,0 +1,43 @@
+<div style="padding:50px">
+  <h3>Customer Details</h3>
+  <mat-tab-group [selectedIndex]="tabindex">
+
+    <mat-tab label="Customer-Config" id="userm" *ngIf="userType=='Client' || isAdmin">
+      <app-user-add></app-user-add>
+    </mat-tab>
+    <mat-tab label="Mail-Config" id="mailc" *ngIf="userType=='Client' || isAdmin">
+      <app-mailbox-config></app-mailbox-config>
+    </mat-tab>
+    <mat-tab label="Process-Config" id="processc" *ngIf="userType=='Client' || isAdmin">
+      <app-process-config></app-process-config>
+    </mat-tab>
+    <mat-tab label="Web-Design" id="webdc" *ngIf="userType=='Client' || isAdmin">
+      <app-logo-upload></app-logo-upload>
+    </mat-tab>
+    <mat-tab label="Website - Configurations" id="webcc" *ngIf="isAdmin">
+      <app-userconfiglist></app-userconfiglist>
+    </mat-tab>
+    <mat-tab label="Mail-Template" id="templc" *ngIf="userType=='Client' || isAdmin">
+      <app-mailtemplatelist></app-mailtemplatelist>
+    </mat-tab>
+    <mat-tab label="Dynamic-Pages" id="dpage" *ngIf="userType=='Client' || isAdmin">
+      <app-dynamicpagelist></app-dynamicpagelist>
+    </mat-tab>
+    <mat-tab label="Header-Links" id="linkc" *ngIf="userType=='Client' || isAdmin">
+      <app-headerlinks></app-headerlinks>
+    </mat-tab>
+    <mat-tab label="Home-Banners" id="bannerc" *ngIf="userType=='Client' || isAdmin">
+      <app-Add-Banners></app-Add-Banners>
+    </mat-tab>
+    <mat-tab label="Activity Logs" id="logsc" *ngIf="userType=='Client' || isAdmin">
+      <app-activitylog></app-activitylog>
+    </mat-tab>
+    <mat-tab label="SA FILTERS SORT" id="safc" *ngIf="userType=='Client' || isAdmin">
+      <app-safiltersortlist></app-safiltersortlist>
+    </mat-tab>
+    <mat-tab label="Delete-Cacher" id="cachc" *ngIf="userType=='Client' || isAdmin">
+      <app-delete-cacher></app-delete-cacher>
+    </mat-tab>
+
+  </mat-tab-group>
+</div>

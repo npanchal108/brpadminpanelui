@@ -1,0 +1,48 @@
+<div class="main-content" style="margin-top:0">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header" data-background-color="darkblue">
+            <h4 class="title">Website Configuration</h4>
+            <p class="category">Manage your Website configuration</p>
+          </div>
+          <div class="card-content" *ngIf="config!=null && config!=undefined">
+            <form #mailConfigForm="ngForm">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': config.ConfigKey=='','is-focused' : config.ConfigKey!=''}">
+                    <label class="control-label">Configuration Key</label>
+                    <input type="text" name="ConfigKey" #ConfigKey="ngModel" disabled value="config.ConfigKey" [value]="config.ConfigKey" [(ngModel)]="config.ConfigKey" class="form-control" required>
+                  </div>
+                </div>
+                <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': config.ConfigValue=='','is-focused' : config.ConfigValue!=''}">
+                    <label class="control-label">Configuration Value</label>
+                    <input class="validate" type="text" name="ConfigValue" #ConfigValue="ngModel" [(ngModel)]="config.ConfigValue" class="form-control" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': config.descr=='','is-focused' : config.descr!=''}">
+                    <label class="control-label">Configuration Details</label>
+                    <input class="validate" disabled type="text" name="descr" #descr="ngModel" [(ngModel)]="config.descr" class="form-control" required>
+                  </div>
+                </div>
+                </div>
+
+             </div>
+              <button (click)="back()" class="btn btn-default pull-right">Back</button>
+              <button class="btn btn-info pull-right" (click)="OnSubmit(mailConfigForm)">Submit</button>
+             
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+

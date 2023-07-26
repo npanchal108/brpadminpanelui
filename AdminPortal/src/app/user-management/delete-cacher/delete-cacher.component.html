@@ -1,0 +1,12 @@
+<h2>Delete Cacher</h2>
+<button (click)="DeleteAllMemoryCacher()" class="btn btn-default pull-right">Delete All</button>
+
+
+
+<table id="table1" *ngIf="cacherlist!=null && cacherlist!=undefined" style="margin-top: 29px;" class="table table-striped">
+  <tr *ngFor="let order of cacherlist">
+    <td (click)="Deletecacher(order.sKey)">
+{{order.sKey}}
+    </td>
+    </tr>
+  </table>
