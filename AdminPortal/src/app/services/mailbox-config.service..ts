@@ -79,8 +79,9 @@ export class MailConfigService {
     return this.http.get(this.common.RootUrl + '/CompanyProfile/Getdynamicpagelist?UserMemRefNo=' + memRefNo , { headers: reqHeader });
   }
   Updatedynamicpage(pagemodels) {
-    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
-    return this.http.post(this.common.RootUrl + '/CompanyProfile/Updatedynamicpage',pagemodels, { headers: reqHeader });
+    //var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
+    //return this.http.post(this.common.RootUrl + '/CompanyProfile/Updatedynamicpage',pagemodels, { headers: reqHeader });
+    return this.http.post(this.common.RootUrl + '/CompanyProfile/Updatedynamicpage',pagemodels);
   }
 
   UpdateWebConfig(memRefNo: string, configid: number, configkey: string, configvalue: string) {
@@ -140,7 +141,7 @@ export class MailConfigService {
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
     return this.http.get(this.common.RootUrl + '/CompanyProfile/DeletesafiltersortByID?memRefNo=' + memRefNo + '&sortid=' + sortid, { headers: reqHeader });
   }
-  UpdateHeaderlinkByID(linkid: number, linkname: string, linkurl: string, seq: number, popover: boolean, memRefNo: string,types:string) {
+  UpdateHeaderlinkByID(linkid: number, linkname: string, linkurl: string, seq: number, popover: boolean, memRefNo: string,types:string,parentseq:number,ismenu:boolean) {
     var headerlinkView = {
       linkid: linkid,
       linkname: linkname,
@@ -148,8 +149,11 @@ export class MailConfigService {
       seq: seq,
       popover: popover,
       memRefNo: memRefNo,
-      types:types
+      types:types,
+      parentseq : parentseq,
+      ismenu:ismenu == true ? 1 : null
     }
+    console.log('Payload headerlinkView',headerlinkView);
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
     return this.http.post(this.common.RootUrl + '/CompanyProfile/UpdateHeaderlinkByID', headerlinkView, { headers: reqHeader });
   }

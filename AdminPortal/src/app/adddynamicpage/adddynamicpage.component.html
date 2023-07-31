@@ -11,54 +11,85 @@
             <form #mailConfigForm="ngForm">
               <div class="row" *ngIf="Mailtemplate!=null && Mailtemplate!=undefined">
                 <div class="col-md-12">
-                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': Mailtemplate.PageName=='','is-focused' : Mailtemplate.PageName!=''}">
+                  <div class="form-group form-black label-floating"
+                    [ngClass]="{'is-empty': Mailtemplate.PageName=='','is-focused' : Mailtemplate.PageName!=''}">
                     <label class="control-label">Page Name</label>
-                    <input type="text" name="PageName" id="PageName" #PageName="ngModel" value="Mailtemplate.PageName" [value]="Mailtemplate.PageName" [(ngModel)]="Mailtemplate.PageName" class="form-control" required>
+                    <input type="text" name="PageName" id="PageName" #PageName="ngModel" value="Mailtemplate.PageName"
+                      [value]="Mailtemplate.PageName" [(ngModel)]="Mailtemplate.PageName" class="form-control" required>
                   </div>
                 </div>
                 <div class="col-md-12">
-                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': Mailtemplate.PageTitle=='','is-focused' : Mailtemplate.PageTitle!=''}">
+                  <div class="form-group form-black label-floating"
+                    [ngClass]="{'is-empty': Mailtemplate.PageTitle=='','is-focused' : Mailtemplate.PageTitle!=''}">
                     <label class="control-label">Page Title</label>
-                    <input class="validate" type="text" name="PageTitle" #PageTitle="ngModel" [(ngModel)]="Mailtemplate.PageTitle" class="form-control" required>
+                    <input class="validate" type="text" name="PageTitle" #PageTitle="ngModel"
+                      [(ngModel)]="Mailtemplate.PageTitle" class="form-control" required>
                   </div>
                 </div>
                 <div class="col-md-12">
-                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': Mailtemplate.PageDescription=='','is-focused' : Mailtemplate.PageDescription!=''}">
+                  <div class="form-group form-black label-floating"
+                    [ngClass]="{'is-empty': Mailtemplate.PageDescription=='','is-focused' : Mailtemplate.PageDescription!=''}">
                     <label class="control-label">Page Description</label>
-                    <input class="validate" type="text" name="PageDescription" #PageDescription="ngModel" [(ngModel)]="Mailtemplate.PageDescription" class="form-control" required>
+                    <input class="validate" type="text" name="PageDescription" #PageDescription="ngModel"
+                      [(ngModel)]="Mailtemplate.PageDescription" class="form-control" required>
                   </div>
                 </div>
                 <div class="col-md-12">
-                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': Mailtemplate.PageKeywords=='','is-focused' : Mailtemplate.PageKeywords!=''}">
+                  <div class="form-group form-black label-floating"
+                    [ngClass]="{'is-empty': Mailtemplate.PageKeywords=='','is-focused' : Mailtemplate.PageKeywords!=''}">
                     <label class="control-label">Page Keywords</label>
-                    <input class="validate" type="text" name="PageKeywords" #PageKeywords="ngModel" [(ngModel)]="Mailtemplate.PageKeywords" class="form-control" required>
+                    <input class="validate" type="text" name="PageKeywords" #PageKeywords="ngModel"
+                      [(ngModel)]="Mailtemplate.PageKeywords" class="form-control" required>
                   </div>
                 </div>
                 <div class="col-md-12">
-                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': Mailtemplate.PageContent=='','is-focused' : Mailtemplate.PageContent!=''}">
+                  <mat-form-field>
+                    <mat-label>Page Type</mat-label>
+                    <mat-select [(ngModel)]="Mailtemplate.ptype" name="pageTypeOption" required>
+                      <mat-option *ngFor="let ptype of pageType" [value]="ptype.value">
+                        {{ptype.key}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group form-black label-floating">
+                      <label class="control-label">Image</label>
+                      <img *ngIf="Mailtemplate.imageurl!=undefined && Mailtemplate.imageurl!=''" src="{{Mailtemplate.imageurl}}"
+                        style="height: 100px;width: 200px;"> <br />
+                      <input type="file" style="position: relative;opacity: inherit;" (change)="onFileSelected($event)">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group form-black label-floating"
+                    [ngClass]="{'is-empty': Mailtemplate.PageContent=='','is-focused' : Mailtemplate.PageContent!=''}">
                     <label class="control-label">Page Content</label>
-                    <textarea class="validate" style="height: 500px;"  name="PageContent" #PageContent="ngModel" [(ngModel)]="Mailtemplate.PageContent" class="form-control" required> </textarea>
+                    <textarea class="validate" style="height: 500px;" name="PageContent" #PageContent="ngModel"
+                      [(ngModel)]="Mailtemplate.PageContent" class="form-control" required> </textarea>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group form-black label-floating">
                     <label class="control-label">Page Preview</label>
                     <!-- <div style="margin-top:10px;" *ngIf="Mailtemplate.MailTemplateContent!=null && Mailtemplate.MailTemplateContent!=undefined  && Mailtemplate.MailTemplateContent!='undefined'" [innerHTML]="Mailtemplate.MailTemplateContent"></div> -->
-                    <div style="margin-top:10px;"  *ngIf=" Mailtemplate.PageContent!='' && Mailtemplate.PageContent!=null && Mailtemplate.PageContent!=undefined  && Mailtemplate.PageContent!='undefined'" [innerHTML]="transform(Mailtemplate.PageContent,'html')" class="list-d" ></div>
+                    <div style="margin-top:10px;"
+                      *ngIf=" Mailtemplate.PageContent!='' && Mailtemplate.PageContent!=null && Mailtemplate.PageContent!=undefined  && Mailtemplate.PageContent!='undefined'"
+                      [innerHTML]="transform(Mailtemplate.PageContent,'html')" class="list-d"></div>
                   </div>
                 </div>
                 <button (click)="back()" class="btn btn-default pull-right">Back</button>
-                <button class="btn btn-info pull-right" (click)="OnSubmit(mailConfigForm)">Submit</button>  
+                <button class="btn btn-info pull-right" (click)="OnSubmit(mailConfigForm)">Submit</button>
 
-             </div>
-              
-             
+              </div>
+
+
               <div class="clearfix"></div>
             </form>
           </div>
         </div>
-        </div>
-        </div>
-        </div>
-        </div>
-
+      </div>
+    </div>
+  </div>
+</div>
