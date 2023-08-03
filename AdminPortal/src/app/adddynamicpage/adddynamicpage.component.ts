@@ -76,17 +76,20 @@ export class adddynamicpageComponent implements OnInit ,PipeTransform {
     this.Mailtemplate.PageDescription='';
     this.Mailtemplate.PageKeywords='';
     this.Mailtemplate.PageContent='';
+    this.Mailtemplate.Sequence='';
   }
   }
   sendMessage(message): void {
-    this.loadingService.LoadingMessage(message);
+    //this.loadingService.LoadingMessage(message);
   }
   OnSubmit(form: NgForm) {    
-    this.sendMessage('start');
-    if((this.ImageUrl==undefined || this.ImageUrl=='' || this.ImageUrl==null) && (this.SelectedFile==undefined || this.SelectedFile==null)){
-      this.toastr.error('Please Select The Image File')
+   
+    if((this.Mailtemplate.imageurl ==undefined || this.Mailtemplate.imageurl ==' ' || this.Mailtemplate.imageurl==null) && (this.SelectedFile==undefined || this.SelectedFile==null)){
+      this.toastr.error('Please Select The Image File');
       return;
     }
+
+    this.sendMessage('start');
     const fd = new FormData();
     if(this.SelectedFile!=undefined && this.SelectedFile!=null){
       fd.append('FileName',this.SelectedFile.name);        
@@ -100,8 +103,10 @@ export class adddynamicpageComponent implements OnInit ,PipeTransform {
      fd.append('PageKeywords',form.value.PageKeywords);        
      fd.append('PageContent',form.value.PageContent);        
      fd.append('PageType',form.value.pageTypeOption);      
-     console.log('dynamic pages',fd);
-     this.MailConfigService.Updatedynamicpage(fd).subscribe((data: any) => {      
+     fd.append('Sequence',form.value.Sequence);      
+     
+     this.MailConfigService.Updatedynamicpage(fd).subscribe((data: any) => {  
+      this.sendMessage('stop');      
       if (data == true || data == "true") {
             form.resetForm();
             this.toastr.success("Sucessfully Updated");
@@ -112,7 +117,6 @@ export class adddynamicpageComponent implements OnInit ,PipeTransform {
           else {
             this.toastr.error("Error occured please try again");
           }
-         this.sendMessage('stop');   
     });
   }
   back() {
