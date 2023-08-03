@@ -12,13 +12,14 @@
                                 </td>
                                 <td style="text-align: right;">
                                     <button (click)="OnAddheaderlink()" class="btn btn-success">Add New</button>
-                                    
+
                                 </td>
                             </tr>
                         </table>
                     </div>
 
-                    <div *ngIf="headerlinklist!=null && headerlinklist!=undefined && showtype==1" class="card-content table-responsive table-mobile">
+                    <div *ngIf="headerlinklist!=null && headerlinklist!=undefined && showtype==1"
+                        class="card-content table-responsive table-mobile">
                         <table class="table">
                             <thead class="text-info">
                                 <tr>
@@ -38,8 +39,10 @@
                                     <td data-title="Popover">{{headlink.popover}}</td>
                                     <td data-title="Type">{{headlink.types}}</td>
                                     <td class="btnalign">
-                                        <button (click)="onEditLink(headlink.linkid)" class="btn btn-default">Edit</button>
-                                        <button (click)="openDialog(headlink.linkid)" class="btn btn-danger">Delete</button>
+                                        <button (click)="onEditLink(headlink.linkid)"
+                                            class="btn btn-default">Edit</button>
+                                        <button (click)="openDialog(headlink.linkid)"
+                                            class="btn btn-danger">Delete</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -75,27 +78,43 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group form-black label-floating">
-                                    <label class="control-label">Link Popover</label>
-                                    <!-- <input type="text" [(ngModel)]="popover" class="form-control" required> -->
-                                    <mat-checkbox [(ngModel)]="popover" [ngModelOptions]="{standalone:true}" name="popover">popover</mat-checkbox>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-3">
                                 <div class="form-group form-black label-floating">
                                     <label class="control-label">Types</label>
-
                                     <mat-form-field>
-                                        <mat-select placeholder="Select Type" [(ngModel)]="types" name="types" class="validate" required>
-                                            
+                                        <mat-select placeholder="Select Type" [(ngModel)]="types" name="types"
+                                            class="validate" required>
                                             <mat-option value="header">Header</mat-option>
                                             <mat-option value="footer">Footer</mat-option>
                                             <mat-option value="dashboard">Dashboard</mat-option>
                                         </mat-select>
                                     </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group form-black label-floating chkbx">
+                                    <label class="control-label">Link Popover</label>
+                                    <mat-checkbox [(ngModel)]="popover" [ngModelOptions]="{standalone:true}"
+                                        name="popover">popover</mat-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group form-black label-floating">
+                                    <label class="control-label">Parent Sequence</label>
+                                    <mat-form-field>
+                                        <mat-select [(ngModel)]="parentseq" placeholder="Select Parent Link" name="parentLinkSequence" required>
+                                            <mat-option *ngFor="let link of headerlinklist" [value]="link.seq">
+                                                {{link.linkname}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group form-black label-floating chkbx">
+                                    <mat-checkbox [(ngModel)]="ismenu" name="ismenu">Is Menu</mat-checkbox>
                                 </div>
                             </div>
                         </div>

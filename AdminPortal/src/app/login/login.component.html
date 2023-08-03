@@ -1,3 +1,28 @@
+<!-- <form #loginForm="ngForm" (ngSubmit)="OnSubmit(loginForm)">
+  <mat-card>
+    <mat-card-header>
+      <img src="assets/img/BRP-Logo-White.png" alt="Login Image">
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field appearance="outline">
+        <mat-icon matSuffix>person</mat-icon>
+        <input matInput placeholder="Username" class="form-control" #UserName ngModel name="UserName" require>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-form-field>
+          <mat-label>Enter your password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" class="form-control" #Password ngModel name="Password" required>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button type="submit" class="btn btn-info pull-right" [disabled]="!loginForm.valid">Login</button>
+    </mat-card-actions>
+  </mat-card>
+</form> -->
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
@@ -29,8 +54,6 @@
                   </div>
                 </div>
               </div>
-              <!-- <re-captcha name="resolved" (resolved)="resolved($event)" required siteKey="6Lc2-l4UAAAAAN8mmuWceB_l8vYl7_dC3mpg36bX"></re-captcha> -->
-              <!-- <re-captcha name="resolved" (resolved)="resolved($event)" required siteKey="6LfA-14UAAAAAPAhAS0ULME3IatKB0Y9jwFvTK2u"></re-captcha> -->
               <button type="submit" class="btn btn-info pull-right" [disabled]="!loginForm.valid">Login</button>
               <div class="clearfix"></div>
             </form>

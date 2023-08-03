@@ -39,5 +39,9 @@ a {
     }
     .table-mobile table td.btnalign {
         padding-left: 0px!important;
-    }
+    }  
+}
+
+.chkbx{
+    margin-top: 13px;
 }

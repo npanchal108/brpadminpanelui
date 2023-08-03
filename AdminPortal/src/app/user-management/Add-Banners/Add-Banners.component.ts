@@ -115,7 +115,8 @@ this.GetAllBanners();
      fd.append('IsActive',this.IsActive);        
      fd.append('targeturl',this.targeturl);        
      fd.append('types',this.types);        
-     fd.append('linkname',this.linkname);        
+     fd.append('linkname',this.linkname);     
+     console.log('Banner pages',fd);   
     this.userprocesstimeService.PostBannerImage(fd).subscribe((data: any) => {      
       this.sendMessage('stop');
       this.toastr.success(data.Message);      
