@@ -23,6 +23,9 @@
     <mat-tab label="Dynamic-Pages" id="dpage" *ngIf="userType=='Client' || isAdmin">
       <app-dynamicpagelist></app-dynamicpagelist>
     </mat-tab>
+    <mat-tab label="Product-List" id="dpage" *ngIf="userType=='Client' || isAdmin">
+      <app-productlist></app-productlist>
+    </mat-tab>
     <mat-tab label="Header-Links" id="linkc" *ngIf="userType=='Client' || isAdmin">
       <app-headerlinks></app-headerlinks>
     </mat-tab>

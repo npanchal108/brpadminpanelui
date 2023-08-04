@@ -19,6 +19,7 @@ import { HeaderlinksComponent } from './user-management/headerlinks/headerlinks.
 import { ActivitylogComponent } from './activitylog/activitylog.component';
 import { dynamicpagelistComponent } from './user-management/dynamicpagelist/dynamicpagelist.component';
 import { adddynamicpageComponent } from './adddynamicpage/adddynamicpage.component';
+import { productlistComponent } from './productdetails/productlist.component';
 export const appRoutes: Routes = [
     // { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     {
@@ -60,6 +61,7 @@ export const appRoutes: Routes = [
             { path: 'dynamicpagelist', component: dynamicpagelistComponent, canActivate:[AuthGuard] },
             { path: 'headerlinks', component: HeaderlinksComponent, canActivate:[AuthGuard] },
             { path: 'activitylog', component: ActivitylogComponent, canActivate:[AuthGuard] },
+            { path: 'productlist', component: productlistComponent, canActivate:[AuthGuard] },
             
         ]
     },

@@ -47,6 +47,7 @@ import { addsafiltersortComponent } from './addsafiltersort/addsafiltersort.comp
 import { ActivitylogComponent } from './activitylog/activitylog.component';
 import { adddynamicpageComponent } from './adddynamicpage/adddynamicpage.component';
 import { Deletedynamicpagedialog, dynamicpagelistComponent } from './user-management/dynamicpagelist/dynamicpagelist.component';
+import { productlistComponent } from './productdetails/productlist.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { Deletedynamicpagedialog, dynamicpagelistComponent } from './user-manage
     ActivitylogComponent,
     adddynamicpageComponent,
     dynamicpagelistComponent,
-    Deletedynamicpagedialog
+    Deletedynamicpagedialog,
+    productlistComponent
   ],
   imports: [
     BrowserModule,
@@ -94,7 +96,7 @@ import { Deletedynamicpagedialog, dynamicpagelistComponent } from './user-manage
     LoadingModule,
     NgxPaginationModule,
     RecaptchaModule.forRoot(),
-    AngularDateTimePickerModule
+    AngularDateTimePickerModule,
   ],
   providers: [UserService, AuthGuard, MenuService, MailConfigService, LoadingService, CompanyProfileService, UserprocesstimeService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],

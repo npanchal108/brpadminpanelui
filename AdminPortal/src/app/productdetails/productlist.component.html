@@ -1,0 +1,66 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="darkblue">
+                        <table width=100%;>
+                            <tr>
+                                <td>
+                                    <h4 class="title">Product List</h4>
+                                    <p class="category">Manage your Products</p>
+                                </td>
+                                <td style="text-align: right;">
+                                    <button (click)="onEditconf(0)" class="btn btn-success">Add New</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div *ngIf="productlist!=null && productlist!=undefined"
+                        class="card-content table-responsive table-mobile">
+                        <table class="table">
+                            <thead class="text-info">
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Active</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let product of productlist | paginate: { itemsPerPage:7, currentPage: page }">
+                                <!-- <tr *ngFor="let product of productlist"> -->
+                                    <td data-title="Name">{{product.item1}}</td>
+                                    <td data-title="Subject">{{product.discontinued == 0 ? "Active" : "Deactive"}}</td>
+                                    <td class="btnalign">
+                                        <button (click)="onEditconf(product.item1)" class="btn btn-default">Edit</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                        <!-- <table class="table">
+                            <thead class="text-info">
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Active</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let product of productlist">
+                                    <td data-title="Name">{{product.item1}}</td>
+                                    <td data-title="Subject">{{product.discontinued == 0 ? "Active" : "Deactive"}}</td>
+                                    <td class="btnalign">
+                                        <button (click)="onEditconf(product.item1)" class="btn btn-default">Edit</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr> -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
