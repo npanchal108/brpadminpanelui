@@ -1,0 +1,86 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header" data-background-color="darkblue">
+            <table width=100%;>
+              <tr>
+                <td>
+                  <h4 class="title">Product Details</h4>
+                  <p class="category">Manage your Products Details</p>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+            <mat-tab label="Item Doc Details">
+              <div *ngIf="productDetails != null && productDetails != 'undefined' &&  productDetails.length > 0"
+                class="card-content table-responsive table-mobile">
+                <button style="float: right;" (click)="openDialog(memRefNo,0,productDetails[0].Item,'','','')"
+                  class="btn btn-success">Add New</button>
+                <table class="custom-table">
+                  <thead class="text-info">
+                    <tr>
+                      <th align="center" width="15%">Item Id</th>
+                      <th align="center" width="15%">Doc Type</th>
+                      <th align="center" width="15%">Name</th>
+                      <th align="center" width="40%">Detatils/Url</th>
+                      <th align="center" width="15%">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let product of productDetails | paginate: { itemsPerPage:7, currentPage: page }">
+                      <td data-title="Id">{{product.Id}}</td>
+                      <td data-title="DocType">{{product.DocType}}</td>
+                      <td data-title="DocTypeName">{{product.DocTypeName}}</td>
+                      <td data-title="ItemTextUrl" class="detailurl" style="width: 50px;text-align: left;">
+                        {{product.DocTypeTextUrl}}</td>
+                      <td class="btnalign">
+                        <button
+                          (click)="openDialog(memRefNo,product.Id,product.Item,product.DocType,product.DocTypeName,product.DocTypeTextUrl)"
+                          style="background: none;border: none;" mat-icon-button>
+                          <mat-icon>edit</mat-icon>
+                        </button>
+                        <button (click)="openDeleteDialog(product.Id)" style="background: none;border: none;"
+                          mat-icon-button>
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+              </div>
+            </mat-tab>
+            <mat-tab label="Item Price Details">
+              <form #productPriceForm="ngForm">
+                <div *ngIf="productPriceDetails != null && productPriceDetails != 'undefined'"
+                  class="card-content table-responsive table-mobile">
+                  <div class="col-md-4">
+                    <label>Item Price</label>
+                    <div class="form-group form-black label-floating">
+                      <input type="text" type="number" [(ngModel)]="productPriceDetails.ItemPrice" name="ItemPrice"
+                        id="ItemPrice" class="form-control" required>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <label>Is Item Active</label>
+                    <div class="form-group form-black label-floating chkbx">
+                      <mat-checkbox [(ngModel)]="productPriceDetails.ItemIsActive" name="Is Item Active">Is Item
+                        Active</mat-checkbox>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <button class="btn btn-info pull-right" (click)="OnSave()">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </mat-tab>
+          </mat-tab-group>
+          <button (click)="back()" style="margin-right: 10px;" class="btn btn-default pull-right">Back</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

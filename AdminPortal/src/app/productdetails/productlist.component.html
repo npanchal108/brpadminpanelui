@@ -16,8 +16,14 @@
                             </tr>
                         </table>
                     </div>
-                    <div *ngIf="productlist!=null && productlist!=undefined"
+                    <div *ngIf="filteredProductlist != null && filteredProductlist != undefined"
                         class="card-content table-responsive table-mobile">
+                        <div>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Search Item</mat-label>
+                                <input matInput placeholder="Search" [(ngModel)]="searchQuery" (keyup)="applyFilter()">
+                            </mat-form-field>
+                        </div>
                         <table class="table">
                             <thead class="text-info">
                                 <tr>
@@ -27,12 +33,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let product of productlist | paginate: { itemsPerPage:7, currentPage: page }">
-                                <!-- <tr *ngFor="let product of productlist"> -->
+                                <tr
+                                    *ngFor="let product of filteredProductlist | paginate: { itemsPerPage:7, currentPage: page }">
                                     <td data-title="Name">{{product.item1}}</td>
                                     <td data-title="Subject">{{product.discontinued == 0 ? "Active" : "Deactive"}}</td>
                                     <td class="btnalign">
-                                        <button (click)="onEditconf(product.item1)" class="btn btn-default">Edit</button>
+                                        <button (click)="onEditconf(product.item1)"
+                                            class="btn btn-default">Edit</button>
                                     </td>
                                 </tr>
                             </tbody>

@@ -18,7 +18,11 @@ export class productlistComponent implements OnInit {
   userType: string;
   id: string;
   page = 1;
-  constructor(private dialog: MatDialog, private route: ActivatedRoute, private MailConfigService: MailConfigService, private toastr: ToastrService, private router: Router, private loadingService: LoadingService, private changeDetectorRef: ChangeDetectorRef) { }
+
+  filteredProductlist: any[];
+  searchQuery: string = '';
+
+  constructor(private route: ActivatedRoute, private MailConfigService: MailConfigService, private toastr: ToastrService, private router: Router, private loadingService: LoadingService, private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.sendMessage('start');
@@ -27,12 +31,21 @@ export class productlistComponent implements OnInit {
     this.userType = this.route.snapshot.paramMap.get('userType');
     this.MailConfigService.Getproductlist(this.memRefNo).subscribe((data: any) => {
       this.productlist = data;
+      this.filteredProductlist = this.productlist;
       this.sendMessage('stop');
     });
   }
-  
+  applyFilter() {
+    const lowerCaseQuery = this.searchQuery.toLowerCase().trim();
+    this.filteredProductlist = this.productlist.filter((i) => {
+      return (
+        i.item1.toLowerCase().includes(lowerCaseQuery)
+      );
+    });
+  }
+
   onEditconf(ConfigId) {
-    this.router.navigate(['/adddynamicpage', this.id, this.memRefNo, ConfigId]);
+    this.router.navigate(['/addproduct', this.id, this.memRefNo, ConfigId]);
   }
   sendMessage(message): void {
     this.loadingService.LoadingMessage(message);

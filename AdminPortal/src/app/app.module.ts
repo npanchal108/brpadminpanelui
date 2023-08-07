@@ -48,6 +48,9 @@ import { ActivitylogComponent } from './activitylog/activitylog.component';
 import { adddynamicpageComponent } from './adddynamicpage/adddynamicpage.component';
 import { Deletedynamicpagedialog, dynamicpagelistComponent } from './user-management/dynamicpagelist/dynamicpagelist.component';
 import { productlistComponent } from './productdetails/productlist.component';
+import { addproductComponent,DialogAddEditProduct,DeleteItemDocdialog } from './productdetails/addproduct.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -80,7 +83,10 @@ import { productlistComponent } from './productdetails/productlist.component';
     adddynamicpageComponent,
     dynamicpagelistComponent,
     Deletedynamicpagedialog,
-    productlistComponent
+    productlistComponent,
+    addproductComponent,
+    DialogAddEditProduct,
+    DeleteItemDocdialog
   ],
   imports: [
     BrowserModule,
@@ -97,6 +103,8 @@ import { productlistComponent } from './productdetails/productlist.component';
     NgxPaginationModule,
     RecaptchaModule.forRoot(),
     AngularDateTimePickerModule,
+    MatInputModule,
+    MatIconModule,
   ],
   providers: [UserService, AuthGuard, MenuService, MailConfigService, LoadingService, CompanyProfileService, UserprocesstimeService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
@@ -104,7 +112,9 @@ import { productlistComponent } from './productdetails/productlist.component';
     DialogOverviewExampleDialog,
     Deleteheaderlinkdialog,
     Deletesafiltersort,
-    Deletedynamicpagedialog
+    Deletedynamicpagedialog,
+    DialogAddEditProduct,
+    DeleteItemDocdialog
   ]
 })
 export class AppModule { }

@@ -82,6 +82,21 @@ export class MailConfigService {
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
     return this.http.get(this.common.RootUrl + '/CompanyProfile/Getproductlist?UserMemRefNo=' + memRefNo , { headers: reqHeader });
   }
+  GetproductDocBYId(memRefNo: string,item: string) {
+    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
+    return this.http.get(this.common.RootUrl + '/CompanyProfile/GetItemDocByID?memRefNo=' + memRefNo + '&item=' +  item , { headers: reqHeader });
+  }
+  GetItemPriceByItem(memRefNo: string,item: string) {
+    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
+    return this.http.get(this.common.RootUrl + '/CompanyProfile/GetItemPriceByItem?memRefNo=' + memRefNo + '&item=' +  item , { headers: reqHeader });
+  }
+  DeleteItemDocByID(memRefNo: string, itemDocId: number) {
+    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
+    return this.http.get(this.common.RootUrl + '/CompanyProfile/DeleteItemDocByID?memRefNo=' + memRefNo + '&itemDocId=' + itemDocId, { headers: reqHeader });
+  }
+  UpdateImageDocument(itemDocModel) {
+    return this.http.post(this.common.RootUrl + '/CompanyProfile/UpdateItemDocument',itemDocModel);
+  }
   Updatedynamicpage(pagemodels) {
     //var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
     //return this.http.post(this.common.RootUrl + '/CompanyProfile/Updatedynamicpage',pagemodels, { headers: reqHeader });
