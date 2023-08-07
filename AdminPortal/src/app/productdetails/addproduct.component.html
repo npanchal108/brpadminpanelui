@@ -15,42 +15,43 @@
           </div>
           <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
             <mat-tab label="Item Doc Details">
-              <div *ngIf="productDetails != null && productDetails != 'undefined' &&  productDetails.length > 0"
-                class="card-content table-responsive table-mobile">
-                <button style="float: right;" (click)="openDialog(memRefNo,0,productDetails[0].Item,'','','')"
+              <div class="card-content table-responsive table-mobile">
+                <button style="float: right;" (click)="openDialog(memRefNo,0,itemId,'','','')"
                   class="btn btn-success">Add New</button>
-                <table class="custom-table">
-                  <thead class="text-info">
-                    <tr>
-                      <th align="center" width="15%">Item Id</th>
-                      <th align="center" width="15%">Doc Type</th>
-                      <th align="center" width="15%">Name</th>
-                      <th align="center" width="40%">Detatils/Url</th>
-                      <th align="center" width="15%">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let product of productDetails | paginate: { itemsPerPage:7, currentPage: page }">
-                      <td data-title="Id">{{product.Id}}</td>
-                      <td data-title="DocType">{{product.DocType}}</td>
-                      <td data-title="DocTypeName">{{product.DocTypeName}}</td>
-                      <td data-title="ItemTextUrl" class="detailurl" style="width: 50px;text-align: left;">
-                        {{product.DocTypeTextUrl}}</td>
-                      <td class="btnalign">
-                        <button
-                          (click)="openDialog(memRefNo,product.Id,product.Item,product.DocType,product.DocTypeName,product.DocTypeTextUrl)"
-                          style="background: none;border: none;" mat-icon-button>
-                          <mat-icon>edit</mat-icon>
-                        </button>
-                        <button (click)="openDeleteDialog(product.Id)" style="background: none;border: none;"
-                          mat-icon-button>
-                          <mat-icon>delete</mat-icon>
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                <div *ngIf="productDetails != null && productDetails != 'undefined' &&  productDetails.length > 0">
+                  <table class="custom-table">
+                    <thead class="text-info">
+                      <tr>
+                        <th align="center" width="15%">Item Id</th>
+                        <th align="center" width="15%">Doc Type</th>
+                        <th align="center" width="15%">Name</th>
+                        <th align="center" width="40%">Detatils/Url</th>
+                        <th align="center" width="15%">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let product of productDetails | paginate: { itemsPerPage:7, currentPage: page }">
+                        <td data-title="Id">{{product.Id}}</td>
+                        <td data-title="DocType">{{product.DocType}}</td>
+                        <td data-title="DocTypeName">{{product.DocTypeName}}</td>
+                        <td data-title="ItemTextUrl" class="detailurl" style="width: 50px;text-align: left;">
+                          {{product.DocTypeTextUrl}}</td>
+                        <td class="btnalign">
+                          <button
+                            (click)="openDialog(memRefNo,product.Id,itemId,product.DocType,product.DocTypeName,product.DocTypeTextUrl)"
+                            style="background: none;border: none;" mat-icon-button>
+                            <mat-icon>edit</mat-icon>
+                          </button>
+                          <button (click)="openDeleteDialog(product.Id)" style="background: none;border: none;"
+                            mat-icon-button>
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                </div>
               </div>
             </mat-tab>
             <mat-tab label="Item Price Details">
@@ -60,8 +61,9 @@
                   <div class="col-md-4">
                     <label>Item Price</label>
                     <div class="form-group form-black label-floating">
-                      <input type="text" type="number" [(ngModel)]="productPriceDetails.ItemPrice" name="ItemPrice"
-                        id="ItemPrice" class="form-control" required>
+                      <input type="text" type="number" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"
+                        [(ngModel)]="productPriceDetails.ItemPrice" name="ItemPrice" id="ItemPrice" class="form-control"
+                        required>
                     </div>
                   </div>
                   <div class="col-md-2">

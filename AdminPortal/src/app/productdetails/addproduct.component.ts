@@ -32,11 +32,12 @@ export class addproductComponent implements OnInit {
         { key: 'image', value: 'image' }
     ];
 
-    constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute, private MailConfigService: MailConfigService, private dialog: MatDialog, private router: Router) { }
+    constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute,private toastr: ToastrService, private MailConfigService: MailConfigService, private dialog: MatDialog, private router: Router) { }
     cleanURL(oldURL: string): SafeResourceUrl {
         return this.sanitizer.bypassSecurityTrustResourceUrl(oldURL);
     }
     ngOnInit() {
+        console.log('this.route.snapshot.paramMap.get',this.route.snapshot.paramMap);
         this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
         this.itemId = this.route.snapshot.paramMap.get('itemId');
         this.uid = parseInt(this.route.snapshot.paramMap.get('id'));
@@ -57,7 +58,7 @@ export class addproductComponent implements OnInit {
             this.sendMessage('start');
             this.MailConfigService.GetItemPriceByItem(this.memRefNo, this.itemId).subscribe((data: any) => {
                 this.productPriceDetails = data;
-                console.log('this.productPriceDetails',this.productPriceDetails)
+                console.log('this.productPriceDetails',data)
                 this.sendMessage('stop');
             });
         }
@@ -104,7 +105,17 @@ export class addproductComponent implements OnInit {
         console.log('item id', id);
     }
     OnSave(){
-        console.log('Save Clicked');
+        console.log('this.productPriceDetails',this.productPriceDetails);
+        console.log('form.value.ItemPrice',this.productPriceDetails.ItemPrice);
+        this.MailConfigService.UpdateItemPrice(this.memRefNo,this.productPriceDetails.Item,this.productPriceDetails.ItemPrice,this.productPriceDetails.ItemIsActive).subscribe((data: any) => {
+            if (data == true || data == "true") {
+              this.toastr.success("Sucessfully Updated");
+            }
+            else {
+              this.toastr.error("Error occured please try again");
+            }
+            this.sendMessage('stop');
+          });
     }
 }
 

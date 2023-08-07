@@ -44,8 +44,8 @@ export class productlistComponent implements OnInit {
     });
   }
 
-  onEditconf(ConfigId) {
-    this.router.navigate(['/addproduct', this.id, this.memRefNo, ConfigId]);
+  onEditconf(itemDocID) {
+    this.router.navigate(['/addproduct', this.id, this.memRefNo, itemDocID]);
   }
   sendMessage(message): void {
     this.loadingService.LoadingMessage(message);

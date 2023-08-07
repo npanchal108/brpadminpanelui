@@ -97,6 +97,10 @@ export class MailConfigService {
   UpdateImageDocument(itemDocModel) {
     return this.http.post(this.common.RootUrl + '/CompanyProfile/UpdateItemDocument',itemDocModel);
   }
+  UpdateItemPrice(memRefNo: string, item: string, price: number, ItemIsActive : boolean) {
+    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
+    return this.http.get(this.common.RootUrl + '/CompanyProfile/UpdateItemPrice?memRefNo=' + memRefNo + '&item=' + item + '&price=' + price + '&isItemActive=' + ItemIsActive , { headers: reqHeader });
+  }
   Updatedynamicpage(pagemodels) {
     //var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
     //return this.http.post(this.common.RootUrl + '/CompanyProfile/Updatedynamicpage',pagemodels, { headers: reqHeader });
