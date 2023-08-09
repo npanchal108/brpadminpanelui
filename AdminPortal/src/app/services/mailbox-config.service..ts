@@ -40,14 +40,14 @@ export class MailConfigService {
 
   GetAllMemoryCacher(memRefNo: string) {
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
-    return this.http.get(this.common.userurl + memRefNo + 'Api/DistOneAPi/GetAllMemoryCacher1', { headers: reqHeader });
+    return this.http.get(this.common.userurl + memRefNo + 'Api/ecommerce/GetAllMemoryCacher1', { headers: reqHeader });
   }
   DeleteMemoryCacher(memRefNo: string, keyName: string) {
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
-    return this.http.get(this.common.userurl + memRefNo + 'Api/DistOneAPi/DeleteMemoryCacher?keyName=' + keyName, { headers: reqHeader });
+    return this.http.get(this.common.userurl + memRefNo + 'Api/ecommerce/DeleteMemoryCacher?keyName=' + keyName, { headers: reqHeader });
   }
   AllDeleteMemoryCacher(memRefNo: string) {
-    return this.http.get(this.common.userurl + memRefNo + 'Api/DistOneAPi/DeleteAllMemoryCacher');
+    return this.http.get(this.common.userurl + memRefNo + 'Api/ecommerce/DeleteAllMemoryCacher');
   }
 
   getWebConfig(memRefNo: string, id: number) {

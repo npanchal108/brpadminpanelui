@@ -104,7 +104,7 @@ import { MatIconModule } from '@angular/material/icon';
     RecaptchaModule.forRoot(),
     AngularDateTimePickerModule,
     MatInputModule,
-    MatIconModule,
+    MatIconModule
   ],
   providers: [UserService, AuthGuard, MenuService, MailConfigService, LoadingService, CompanyProfileService, UserprocesstimeService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],

@@ -27,7 +27,7 @@ export class MailboxConfigComponent implements OnInit {
 
   sendtestingmail(){
     this.sendMessage('start');
-    var geturl = location.origin + '/' + this.memRefNo + 'Api/DistOneApi/SendTestingEmail?company_sy='+this.mail.Company;
+    var geturl = location.origin + '/' + this.memRefNo + 'Api/ecommerce/SendTestingEmail?company_sy='+this.mail.Company;
     
     this.userprocesstimeService.SyncNow(geturl).subscribe((data: any) => {
       this.sendMessage('stop');

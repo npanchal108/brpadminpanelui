@@ -29,9 +29,8 @@
       <div class="col-md-1"></div>
       <div class="col-md-7">
         <div class="card">
-          <div class="card-header" data-background-color="darkblue">
-            <h4 class="title">Login</h4>
-            <p class="category">Login into the portal</p>
+          <div class="divlogo">
+            <img class="logo-img" src="assets/img/BRP-Logo-White.png" alt="Login Image">
           </div>
           <div class="card-content">
             <form #loginForm="ngForm" (ngSubmit)="OnSubmit(loginForm)">
@@ -40,16 +39,16 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
+                  <label>User Name</label>
                   <div class="form-group form-black label-floating is-focused">
-                    <label class="control-label">User Name</label>
                     <input type="text" class="form-control" #UserName ngModel name="UserName" required>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
+                  <label>Password</label>
                   <div class="form-group form-black label-floating is-focused">
-                    <label class="control-label">Password</label>
                     <input type="password" class="form-control" #Password ngModel name="Password" required>
                   </div>
                 </div>
