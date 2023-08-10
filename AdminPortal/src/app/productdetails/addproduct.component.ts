@@ -5,7 +5,6 @@ import { NgForm } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DomSanitizer, SafeHtml, SafeStyle, SafeScript, SafeUrl, SafeResourceUrl } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
-import { CsvUploadService } from '../services/csv-upload.service';
 
 interface ItemType {
     key: string;
@@ -19,6 +18,8 @@ interface ItemType {
 })
 export class addproductComponent implements OnInit {
     @ViewChild('filePriceListInput') filePriceListInput: any;
+    @ViewChild('fileDocListInput') fileDocListInput: any;
+
     memRefNo: string;
     productDetails: any;
     productPriceDetails: any;
@@ -36,7 +37,7 @@ export class addproductComponent implements OnInit {
         { key: 'image', value: 'image' }
     ];
 
-    constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute, private CsvUploadService: CsvUploadService, private toastr: ToastrService, private MailConfigService: MailConfigService, private dialog: MatDialog, private router: Router) { }
+    constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute, private toastr: ToastrService, private MailConfigService: MailConfigService, private dialog: MatDialog, private router: Router) { }
     cleanURL(oldURL: string): SafeResourceUrl {
         return this.sanitizer.bypassSecurityTrustResourceUrl(oldURL);
     }
@@ -79,12 +80,12 @@ export class addproductComponent implements OnInit {
                             this.toastr.error("Error occured please try again");
                         }
                         this.selectedProductDocumentFile = undefined;
-                        this.filePriceListInput.nativeElement.value = '';
+                        this.fileDocListInput.nativeElement.value = '';
                     });
                 } else{
                     this.toastr.error('Invalid column names in the CSV file.');
                     this.selectedProductDocumentFile = undefined;
-                    this.filePriceListInput.nativeElement.value = '';
+                    this.fileDocListInput.nativeElement.value = '';
                     return;
                 }
             };
