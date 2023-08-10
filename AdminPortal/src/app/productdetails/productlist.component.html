@@ -37,7 +37,7 @@
                             </thead>
                             <tbody>
                                 <tr
-                                    *ngFor="let product of filteredProductlist | paginate: { itemsPerPage:7, currentPage: page }">
+                                    *ngFor="let product of filteredProductlist | paginate : { itemsPerPage:50, currentPage:page,totalItems:totalPage, id:'first' }">
                                     <!-- <td>
                                         <input type="checkbox" [(ngModel)]="product.discontinued" (change)="selectItem(product.item1)">
                                     </td> -->
@@ -50,7 +50,10 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                        <div style="text-align:center">
+                            <pagination-controls (pageChange)="page = getProductList($event)" id="first">
+                            </pagination-controls>
+                        </div>
                     </div>
                 </div>
             </div>

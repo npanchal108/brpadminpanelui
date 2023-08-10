@@ -17,21 +17,39 @@
                             </tr>
                         </table>
                     </div>
-                    <div *ngIf="mailconfiglist!=null && mailconfiglist!=undefined" class="card-content table-responsive table-mobile">
+                    <div *ngIf="filteredDynamicPagelist != null && filteredDynamicPagelist != undefined" 
+                    class="card-content table-responsive table-mobile">
+                        <div>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Search Page Name</mat-label>
+                                <input matInput placeholder="Search" [(ngModel)]="searchPageNameQuery">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Search Page Type</mat-label>
+                                <mat-select [(ngModel)]="searchPageTypeQuery" name="pageTypeOption">
+                                  <mat-option *ngFor="let ptype of pageType" [value]="ptype.value">
+                                    {{ptype.key}}
+                                  </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <button (click)="applyFilter()" class="btn btn-danger">Search</button>
+                        </div>
                         <table class="table">
                             <thead class="text-info">
                                 <tr>
                                     <th>Name</th>
                                     <th>Title </th>
+                                    <th>Page Type </th>
                                     <th>Description </th>
                                     <th>URL </th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let mails of mailconfiglist">
+                                <tr *ngFor="let mails of filteredDynamicPagelist">
                                     <td data-title="Name">{{mails.PageName}}</td>
                                     <td data-title="Subject">{{mails.PageTitle}}</td>
+                                    <td data-title="Subject">{{mails.ptype}}</td>
                                     <td data-title="Subject">{{mails.PageDescription}}</td>
                                     <td data-title="Subject">/info/{{mails.PageID}}/{{mails.PageName}}
                                         
@@ -44,8 +62,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <hr>
-
                     </div>
                 </div>
             </div>

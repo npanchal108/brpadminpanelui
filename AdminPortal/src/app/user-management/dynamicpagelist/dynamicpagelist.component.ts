@@ -7,6 +7,11 @@ import { MailConfigService } from '../../services/mailbox-config.service.';
 import { NgForm } from '@angular/forms';
 import { LoadingService } from '../../services/loading.service';
 
+interface PageType {
+  key: string;
+  value: string;
+}
+
 
 @Component({
   selector: 'app-dynamicpagelist',
@@ -18,7 +23,18 @@ export class dynamicpagelistComponent implements OnInit {
   mailconfiglist:any;
   userType: string;
   id:string;
-   
+  page = 1;
+  filteredDynamicPagelist: any[];
+  searchPageNameQuery: string = '';
+  searchPageTypeQuery: string = '';
+
+  pageType: PageType[] =  [  
+    {key: 'blogs',value: 'blogs'},
+    {key: 'info',value: 'info'},
+    {key: 'our-lines',value: 'our-lines'},
+    {key: 'services',value: 'services'}
+  ];
+
   constructor(private dialog: MatDialog,private route: ActivatedRoute, private MailConfigService:MailConfigService,  private toastr: ToastrService,private router: Router, private loadingService: LoadingService, private changeDetectorRef:ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -28,9 +44,23 @@ export class dynamicpagelistComponent implements OnInit {
     this.userType = this.route.snapshot.paramMap.get('userType');    
     this.MailConfigService.Getdynamicpagelist(this.memRefNo).subscribe((data: any) => {
       this.mailconfiglist = data;
+      this.filteredDynamicPagelist = this.mailconfiglist;
       this.sendMessage('stop');   
     });
   }
+  applyFilter() {
+    this.page = 1;
+    const lowerCasePageNameQuery = this.searchPageNameQuery ? this.searchPageNameQuery.toLowerCase().trim() : '';
+    const lowerCasePageTypeQuery = this.searchPageTypeQuery ? this.searchPageTypeQuery.toLowerCase().trim() : '';
+    
+    this.filteredDynamicPagelist = this.mailconfiglist.filter((i) => {
+      const item1Matches = i.PageName.toLowerCase().includes(lowerCasePageNameQuery);
+      const item2Matches = i.ptype.toLowerCase().includes(lowerCasePageTypeQuery);
+
+      return item1Matches && item2Matches
+    });
+  }
+
   openDialog(PageID): void {
     let dialogRef = this.dialog.open(Deletedynamicpagedialog, {
       width: '400px',

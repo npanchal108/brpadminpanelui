@@ -18,8 +18,9 @@ export class productlistComponent implements OnInit {
   productlist: any = [];
   userType: string;
   id: string;
-  page = 1;
-  
+  page: number = 1;
+  totalPage: number;
+
   filteredProductlist: any[];
   searchQuery: string = '';
 
@@ -30,10 +31,18 @@ export class productlistComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
     this.userType = this.route.snapshot.paramMap.get('userType');
-    this.MailConfigService.Getproductlist(this.memRefNo).subscribe((data: any) => {
+    this.getProductList(this.page)
+  }
+  getProductList(pageNo){
+    this.MailConfigService.Getproductlist(this.memRefNo,pageNo).subscribe((data: any) => {
       this.productlist = data;
       this.filteredProductlist = this.productlist;
-      this.sendMessage('stop');
+      try {
+        this.totalPage = data[0].TotalPage;
+      } catch (Ex) {
+        this.totalPage = 1;
+      }
+      //this.filteredProductlist = this.productlist;
     });
   }
   applyFilter() {
@@ -59,12 +68,10 @@ export class productlistComponent implements OnInit {
   }
 
   selectItem(item: any) {
-    console.log('selectItem==>', item);
     this.updateSelectedIds(item);
   }
 
   updateSelectedIds(item: any) {
-    console.log('updateSelectedIds==>', item);
     if (item.selected) {
       this.selectedIds.push(item);
     } else {
