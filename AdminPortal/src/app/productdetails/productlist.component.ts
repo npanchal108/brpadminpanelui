@@ -7,6 +7,7 @@ import { MailConfigService } from '../services/mailbox-config.service.';
 import { NgForm } from '@angular/forms';
 import { LoadingService } from '../services/loading.service';
 
+
 @Component({
   selector: 'app-productlist',
   templateUrl: './productlist.component.html',
@@ -18,7 +19,7 @@ export class productlistComponent implements OnInit {
   userType: string;
   id: string;
   page = 1;
-
+  
   filteredProductlist: any[];
   searchQuery: string = '';
 
@@ -50,4 +51,29 @@ export class productlistComponent implements OnInit {
   sendMessage(message): void {
     this.loadingService.LoadingMessage(message);
   }
+
+  selectAllCheckbox() {
+    this.filteredProductlist.forEach(item => {
+      this.updateSelectedIds(item.item1);
+    });
+  }
+
+  selectItem(item: any) {
+    console.log('selectItem==>', item);
+    this.updateSelectedIds(item);
+  }
+
+  updateSelectedIds(item: any) {
+    console.log('updateSelectedIds==>', item);
+    if (item.selected) {
+      this.selectedIds.push(item);
+    } else {
+      const index = this.selectedIds.indexOf(item);
+      if (index !== -1) {
+        this.selectedIds.splice(index, 1);
+      }
+    }
+  }
+
+  selectedIds: string[] = [];
 }

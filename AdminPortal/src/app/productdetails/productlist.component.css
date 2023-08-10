@@ -14,3 +14,11 @@
 .mat-checkbox-layout{
     padding: 10px !important;
 }  
+.bulk-file-input{
+    margin-top: 20px;
+    margin-left: 35px;
+}
+.bulk-file-btn{
+    width: 230px;
+}
+

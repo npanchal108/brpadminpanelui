@@ -14,6 +14,31 @@
             </table>
           </div>
           <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+            <mat-tab label="Item Price Details">
+              <form #productPriceForm="ngForm">
+                <div *ngIf="productPriceDetails != null && productPriceDetails != 'undefined'"
+                  class="card-content table-responsive table-mobile">
+                  <div class="col-md-4">
+                    <label>Item Price</label>
+                    <div class="form-group form-black label-floating">
+                      <input type="text" type="number" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"
+                        [(ngModel)]="productPriceDetails.ItemPrice" name="ItemPrice" id="ItemPrice" class="form-control"
+                        required>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <label>Is Item Active</label>
+                    <div class="form-group form-black label-floating chkbx">
+                      <mat-checkbox [(ngModel)]="productPriceDetails.ItemIsActive" name="Is Item Active">Is Item
+                        Active</mat-checkbox>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <button class="btn btn-info pull-right" (click)="OnSave()">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </mat-tab>
             <mat-tab label="Item Doc Details">
               <div class="card-content table-responsive table-mobile">
                 <button style="float: right;" (click)="openDialog(memRefNo,0,itemId,'','','')"
@@ -54,30 +79,23 @@
                 </div>
               </div>
             </mat-tab>
-            <mat-tab label="Item Price Details">
-              <form #productPriceForm="ngForm">
-                <div *ngIf="productPriceDetails != null && productPriceDetails != 'undefined'"
-                  class="card-content table-responsive table-mobile">
-                  <div class="col-md-4">
-                    <label>Item Price</label>
-                    <div class="form-group form-black label-floating">
-                      <input type="text" type="number" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"
-                        [(ngModel)]="productPriceDetails.ItemPrice" name="ItemPrice" id="ItemPrice" class="form-control"
-                        required>
-                    </div>
-                  </div>
-                  <div class="col-md-2">
-                    <label>Is Item Active</label>
-                    <div class="form-group form-black label-floating chkbx">
-                      <mat-checkbox [(ngModel)]="productPriceDetails.ItemIsActive" name="Is Item Active">Is Item
-                        Active</mat-checkbox>
-                    </div>
-                  </div>
-                  <div class="col-md-2">
-                    <button class="btn btn-info pull-right" (click)="OnSave()">Submit</button>
-                  </div>
+            <mat-tab label="Bulk Upload">
+              <div class="row">
+                <div class="col-md-4">
+                    <input type="file" #fileDocumentInput  class="bulk-file-input" (change)="handleItemDocumentFileInput($event)">
                 </div>
-              </form>
+                <div class="col-md-2">
+                  <button class="btn btn-info pull-right bulk-file-btn" (click)="OnItemDocumentBulkUpload()">Upload Product Document</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <input type="file" #filePriceListInput class="bulk-file-input" (change)="handleItemPriceListFileInput($event)">
+                </div>
+                <div class="col-md-2">
+                  <button class="btn btn-info pull-right bulk-file-btn" (click)="OnItemPriceListBulkUpload()">Upload Product Price</button>
+                </div>
+              </div>
             </mat-tab>
           </mat-tab-group>
           <button (click)="back()" style="margin-right: 10px;" class="btn btn-default pull-right">Back</button>

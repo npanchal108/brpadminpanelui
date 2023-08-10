@@ -51,6 +51,7 @@ import { productlistComponent } from './productdetails/productlist.component';
 import { addproductComponent,DialogAddEditProduct,DeleteItemDocdialog } from './productdetails/addproduct.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { CsvUploadService } from './services/csv-upload.service';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatIconModule
   ],
-  providers: [UserService, AuthGuard, MenuService, MailConfigService, LoadingService, CompanyProfileService, UserprocesstimeService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [UserService, AuthGuard, MenuService, MailConfigService, LoadingService, CompanyProfileService, UserprocesstimeService,CsvUploadService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
   entryComponents: [
     DialogOverviewExampleDialog,

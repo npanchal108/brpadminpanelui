@@ -101,6 +101,12 @@ export class MailConfigService {
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
     return this.http.get(this.common.RootUrl + '/CompanyProfile/UpdateItemPrice?memRefNo=' + memRefNo + '&item=' + item + '&price=' + price + '&isItemActive=' + ItemIsActive , { headers: reqHeader });
   }
+  UpdateItemPriceBulk(itemsPriceListModel) {
+    return this.http.post(this.common.RootUrl + '/CompanyProfile/UpdateItemPriceList',itemsPriceListModel);
+  }
+  UpdateItemDocumentList(itemsDocumentListModel) {
+     return this.http.post(this.common.RootUrl + '/CompanyProfile/UpdateItemDocumentList',itemsDocumentListModel);
+   }
   Updatedynamicpage(pagemodels) {
     //var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
     //return this.http.post(this.common.RootUrl + '/CompanyProfile/Updatedynamicpage',pagemodels, { headers: reqHeader });

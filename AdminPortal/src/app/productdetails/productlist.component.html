@@ -27,14 +27,20 @@
                         <table class="table">
                             <thead class="text-info">
                                 <tr>
+                                    <!-- <th>
+                                        <input type="checkbox" (change)="selectAllCheckbox()">
+                                    </th> -->
                                     <th>Product Name</th>
-                                    <th>Active</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr
                                     *ngFor="let product of filteredProductlist | paginate: { itemsPerPage:7, currentPage: page }">
+                                    <!-- <td>
+                                        <input type="checkbox" [(ngModel)]="product.discontinued" (change)="selectItem(product.item1)">
+                                    </td> -->
                                     <td data-title="Name">{{product.item1}}</td>
                                     <td data-title="Subject">{{product.discontinued == 0 ? "Active" : "Deactive"}}</td>
                                     <td class="btnalign">
