@@ -82,6 +82,10 @@ export class MailConfigService {
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
     return this.http.get(this.common.RootUrl + '/CompanyProfile/Getproductlist?UserMemRefNo=' + memRefNo + '&pageno=' + pageNo, { headers: reqHeader });
   }
+  GetFilteredproductlist(memRefNo: string, filterQuery:string ,pageNo: number) {
+    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
+    return this.http.get(this.common.RootUrl + '/CompanyProfile/GetFilteredproductlist?UserMemRefNo=' + memRefNo + '&filterQuery=' + filterQuery +  '&pageno=' + pageNo, { headers: reqHeader });
+  }
   GetproductDocBYId(memRefNo: string,item: string) {
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
     return this.http.get(this.common.RootUrl + '/CompanyProfile/GetItemDocByID?memRefNo=' + memRefNo + '&item=' +  item , { headers: reqHeader });

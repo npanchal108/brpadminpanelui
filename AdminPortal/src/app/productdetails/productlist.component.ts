@@ -42,17 +42,36 @@ export class productlistComponent implements OnInit {
       } catch (Ex) {
         this.totalPage = 1;
       }
-      //this.filteredProductlist = this.productlist;
+      this.page = pageNo;
+      return this.page;
     });
   }
-  applyFilter() {
-    const lowerCaseQuery = this.searchQuery.toLowerCase().trim();
-    this.filteredProductlist = this.productlist.filter((i) => {
-      return (
-        i.item1.toLowerCase().includes(lowerCaseQuery)
-      );
+  GetProductByFilter(pageNo){
+    this.MailConfigService.GetFilteredproductlist(this.memRefNo,this.searchQuery,pageNo).subscribe((data: any) => {
+      this.productlist = data;
+      this.filteredProductlist = this.productlist;
+      try {
+        this.totalPage = data[0].TotalPage;
+      } catch (Ex) {
+        this.totalPage = 1;
+      }
+      this.page = 1;
+      return this.page;
     });
   }
+  clearFilter(){
+    this.searchQuery = '';
+    this.page = 1;
+    this.getProductList(this.page);
+  }
+  // applyFilter() {
+  //   const lowerCaseQuery = this.searchQuery.toLowerCase().trim();
+  //   this.filteredProductlist = this.productlist.filter((i) => {
+  //     return (
+  //       i.item1.toLowerCase().includes(lowerCaseQuery)
+  //     );
+  //   });
+  // }
 
   onEditconf(itemDocID) {
     this.router.navigate(['/addproduct', this.id, this.memRefNo, itemDocID]);

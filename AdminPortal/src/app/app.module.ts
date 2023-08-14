@@ -51,7 +51,8 @@ import { productlistComponent } from './productdetails/productlist.component';
 import { addproductComponent,DialogAddEditProduct,DeleteItemDocdialog } from './productdetails/addproduct.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-
+import { productBulkUploadComponent } from './productdetails/bulkproductlist.component';
+import { CsvGeneratorService } from './services/csvgenerator.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,7 +87,8 @@ import { MatIconModule } from '@angular/material/icon';
     productlistComponent,
     addproductComponent,
     DialogAddEditProduct,
-    DeleteItemDocdialog
+    DeleteItemDocdialog,
+    productBulkUploadComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,7 +108,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatIconModule
   ],
-  providers: [UserService, AuthGuard, MenuService, MailConfigService, LoadingService, CompanyProfileService, UserprocesstimeService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [UserService, AuthGuard, MenuService, MailConfigService, LoadingService, CompanyProfileService, UserprocesstimeService,CsvGeneratorService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
   entryComponents: [
     DialogOverviewExampleDialog,

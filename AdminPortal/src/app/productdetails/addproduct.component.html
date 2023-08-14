@@ -18,6 +18,9 @@
               <form #productPriceForm="ngForm">
                 <div *ngIf="productPriceDetails != null && productPriceDetails != 'undefined'"
                   class="card-content table-responsive table-mobile">
+                  <div class="col-md-12">
+                    <label>Item : <h5>{{itemId}}</h5></label>
+                  </div>
                   <div class="col-md-4">
                     <label>Item Price</label>
                     <div class="form-group form-black label-floating">
@@ -41,13 +44,13 @@
             </mat-tab>
             <mat-tab label="Item Doc Details">
               <div class="card-content table-responsive table-mobile">
+                <div style="float: left;"><label>Item : <h5>{{itemId}}</h5></label></div>
                 <button style="float: right;" (click)="openDialog(memRefNo,0,itemId,'','','')"
                   class="btn btn-danger">Add New</button>
                 <div *ngIf="productDetails != null && productDetails != 'undefined' &&  productDetails.length > 0">
                   <table class="custom-table">
                     <thead class="text-info">
                       <tr>
-                        <th align="center" width="15%">Item Id</th>
                         <th align="center" width="15%">Doc Type</th>
                         <th align="center" width="15%">Name</th>
                         <th align="center" width="40%">Detatils/Url</th>
@@ -56,12 +59,11 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let product of productDetails | paginate: { itemsPerPage:7, currentPage: page }">
-                        <td data-title="Id">{{product.Id}}</td>
-                        <td data-title="DocType">{{product.DocType}}</td>
-                        <td data-title="DocTypeName">{{product.DocTypeName}}</td>
+                        <td data-title="DocType" style="text-align: left;">{{product.DocType}}</td>
+                        <td data-title="DocTypeName"  style="text-align: left;">{{product.DocTypeName}}</td>
                         <td data-title="ItemTextUrl" class="detailurl" style="width: 50px;text-align: left;">
                           {{product.DocTypeTextUrl}}</td>
-                        <td class="btnalign">
+                        <td style="text-align: center;" class="btnalign">
                           <button
                             (click)="openDialog(memRefNo,product.Id,itemId,product.DocType,product.DocTypeName,product.DocTypeTextUrl)"
                             style="background: none;border: none;" mat-icon-button>
@@ -76,24 +78,6 @@
                     </tbody>
                   </table>
                   <pagination-controls (pageChange)="page = $event"></pagination-controls>
-                </div>
-              </div>
-            </mat-tab>
-            <mat-tab label="Bulk Upload">
-              <div class="row">
-                <div class="col-md-4">
-                    <input type="file" #fileDocListInput  class="bulk-file-input" (change)="handleItemDocumentFileInput($event)">
-                </div>
-                <div class="col-md-2">
-                  <button class="btn btn-info pull-right bulk-file-btn" (click)="OnItemDocumentBulkUpload()">Upload Product Document</button>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <input type="file" #filePriceListInput class="bulk-file-input" (change)="handleItemPriceListFileInput($event)">
-                </div>
-                <div class="col-md-2">
-                  <button class="btn btn-info pull-right bulk-file-btn" (click)="OnItemPriceListBulkUpload()">Upload Product Price</button>
                 </div>
               </div>
             </mat-tab>

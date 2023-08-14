@@ -12,57 +12,169 @@
                                 </td>
                                 <td style="text-align: right;">
                                     <button (click)="onEditconf(0)" class="btn btn-danger">Add New</button>
-                                    
                                 </td>
                             </tr>
                         </table>
                     </div>
-                    <div *ngIf="filteredDynamicPagelist != null && filteredDynamicPagelist != undefined" 
-                    class="card-content table-responsive table-mobile">
-                        <div>
-                            <mat-form-field appearance="outline">
-                                <mat-label>Search Page Name</mat-label>
-                                <input matInput placeholder="Search" [(ngModel)]="searchPageNameQuery">
-                            </mat-form-field>
-                            <mat-form-field>
-                                <mat-label>Search Page Type</mat-label>
-                                <mat-select [(ngModel)]="searchPageTypeQuery" name="pageTypeOption">
-                                  <mat-option *ngFor="let ptype of pageType" [value]="ptype.value">
-                                    {{ptype.key}}
-                                  </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                            <button (click)="applyFilter()" class="btn btn-danger">Search</button>
-                        </div>
-                        <table class="table">
-                            <thead class="text-info">
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Title </th>
-                                    <th>Page Type </th>
-                                    <th>Description </th>
-                                    <th>URL </th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let mails of filteredDynamicPagelist">
-                                    <td data-title="Name">{{mails.PageName}}</td>
-                                    <td data-title="Subject">{{mails.PageTitle}}</td>
-                                    <td data-title="Subject">{{mails.ptype}}</td>
-                                    <td data-title="Subject">{{mails.PageDescription}}</td>
-                                    <td data-title="Subject">/info/{{mails.PageID}}/{{mails.PageName}}
-                                        
-                                    </td>
-                                    <td class="btnalign">
-                                        <button (click)="onEditconf(mails.PageID)" class="btn btn-default">Edit</button>
-                                        <button (click)="openDialog(mails.PageID)" class="btn btn-danger">Delete</button>
+                    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" (selectedTabChange)="tabChanged($event)">
+                        <mat-tab class="tab-border" label="Blogs">
+                            <div *ngIf="blogPageList != null && blogPageList != undefined"
+                                class="card-content table-responsive table-mobile">
+                                <div>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Search Page Name</mat-label>
+                                        <input matInput placeholder="Search"  (input)="applyFilter('blogs')" [(ngModel)]="searchPageNameQuery">
+                                    </mat-form-field>
+                                </div>
+                                <table class="table">
+                                    <thead class="text-info">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Title </th>
+                                            <th>Page Type </th>
+                                            <th>Description </th>
+                                            <th>URL </th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let mails of blogPageList">
+                                            <td data-title="Name">{{mails.PageName}}</td>
+                                            <td data-title="Subject">{{mails.PageTitle}}</td>
+                                            <td data-title="Subject">{{mails.ptype}}</td>
+                                            <td data-title="Subject">{{mails.PageDescription}}</td>
+                                            <td data-title="Subject">/info/{{mails.PageID}}/{{mails.PageName}}</td>
+                                            <td class="btnalign">
+                                                <button (click)="onEditconf(mails.PageID)"
+                                                    class="btn btn-default">Edit</button>
+                                                <button (click)="openDialog(mails.PageID)"
+                                                    class="btn btn-danger">Delete</button>
 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </mat-tab>
+                        <mat-tab class="tab-border" label="Info">
+                            <div *ngIf="infoPageList != null && infoPageList != undefined"
+                                class="card-content table-responsive table-mobile">
+                                <div>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Search Page Name</mat-label>
+                                        <input matInput placeholder="Search"  (input)="applyFilter('info')" [(ngModel)]="searchPageNameQuery">
+                                    </mat-form-field>
+                                </div>
+                                <table class="table">
+                                    <thead class="text-info">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Title </th>
+                                            <th>Page Type </th>
+                                            <th>Description </th>
+                                            <th>URL </th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let mails of infoPageList">
+                                            <td data-title="Name">{{mails.PageName}}</td>
+                                            <td data-title="Subject">{{mails.PageTitle}}</td>
+                                            <td data-title="Subject">{{mails.ptype}}</td>
+                                            <td data-title="Subject">{{mails.PageDescription}}</td>
+                                            <td data-title="Subject">/info/{{mails.PageID}}/{{mails.PageName}}</td>
+                                            <td class="btnalign">
+                                                <button (click)="onEditconf(mails.PageID)"
+                                                    class="btn btn-default">Edit</button>
+                                                <button (click)="openDialog(mails.PageID)"
+                                                    class="btn btn-danger">Delete</button>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </mat-tab>
+                        <mat-tab class="tab-border" label="Our-Lines">
+                            <div *ngIf="ourlinesPageList != null && ourlinesPageList != undefined"
+                                class="card-content table-responsive table-mobile">
+                                <div>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Search Page Name</mat-label>
+                                        <input matInput placeholder="Search"  (input)="applyFilter('our-lines')" [(ngModel)]="searchPageNameQuery">
+                                    </mat-form-field>
+                                </div>
+                                <table class="table">
+                                    <thead class="text-info">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Title </th>
+                                            <th>Page Type </th>
+                                            <th>Description </th>
+                                            <th>URL </th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let mails of ourlinesPageList">
+                                            <td data-title="Name">{{mails.PageName}}</td>
+                                            <td data-title="Subject">{{mails.PageTitle}}</td>
+                                            <td data-title="Subject">{{mails.ptype}}</td>
+                                            <td data-title="Subject">{{mails.PageDescription}}</td>
+                                            <td data-title="Subject">/info/{{mails.PageID}}/{{mails.PageName}}</td>
+                                            <td class="btnalign">
+                                                <button (click)="onEditconf(mails.PageID)"
+                                                    class="btn btn-default">Edit</button>
+                                                <button (click)="openDialog(mails.PageID)"
+                                                    class="btn btn-danger">Delete</button>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </mat-tab>
+                        <mat-tab class="tab-border" label="Servies">
+                            <div *ngIf="servicesPageList != null && servicesPageList != undefined"
+                                class="card-content table-responsive table-mobile">
+                                <div>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Search Page Name</mat-label>
+                                        <input matInput placeholder="Search"  (input)="applyFilter('services')" [(ngModel)]="searchPageNameQuery">
+                                    </mat-form-field>
+                                </div>
+                                <table class="table">
+                                    <thead class="text-info">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Title </th>
+                                            <th>Page Type </th>
+                                            <th>Description </th>
+                                            <th>URL </th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let mails of servicesPageList">
+                                            <td data-title="Name">{{mails.PageName}}</td>
+                                            <td data-title="Subject">{{mails.PageTitle}}</td>
+                                            <td data-title="Subject">{{mails.ptype}}</td>
+                                            <td data-title="Subject">{{mails.PageDescription}}</td>
+                                            <td data-title="Subject">/info/{{mails.PageID}}/{{mails.PageName}}</td>
+                                            <td class="btnalign">
+                                                <button (click)="onEditconf(mails.PageID)"
+                                                    class="btn btn-default">Edit</button>
+                                                <button (click)="openDialog(mails.PageID)"
+                                                    class="btn btn-danger">Delete</button>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+
                 </div>
             </div>
         </div>

@@ -7,19 +7,31 @@
                     <div class="card-content">
                         <form #productForm="ngForm">
                             <div class="row">
-                                <div class="col-md-12">
+                                <!-- <div class="col-md-12">
                                     <label>Doc Type Name</label>
                                     <div class="form-group form-black label-floating">
                                         <input class="validate" [(ngModel)]="docTypeName" type="text" name="DocTypeName"
                                             class="form-control" required>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-md-12">
                                     <label>Doc Type</label>
                                     <div class="form-group form-black label-floating">
                                         <mat-form-field>
                                             <mat-select [(ngModel)]="selectedfileType" name="selectedfileType" required>
                                                 <mat-option *ngFor="let type of fileType" [value]="type.value">
+                                                    {{type.key}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div  *ngIf="selectedfileType === 'doc'" class="col-md-12">
+                                    <label>Doc Name</label>
+                                    <div class="form-group form-black label-floating">
+                                        <mat-form-field>
+                                            <mat-select [(ngModel)]="selectedDocName" name="selectedDocName" required>
+                                                <mat-option *ngFor="let type of docName" [value]="type.value">
                                                     {{type.key}}
                                                 </mat-option>
                                             </mat-select>

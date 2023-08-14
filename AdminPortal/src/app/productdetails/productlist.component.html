@@ -23,6 +23,8 @@
                                 <mat-label>Search Item</mat-label>
                                 <input matInput placeholder="Search" [(ngModel)]="searchQuery" (keyup)="applyFilter()">
                             </mat-form-field>
+                            <button (click)="GetProductByFilter(page)" class="btn btn-danger">Search</button>
+                            <button (click)="clearFilter()" class="btn btn-danger">Reset</button>
                         </div>
                         <table class="table">
                             <thead class="text-info">

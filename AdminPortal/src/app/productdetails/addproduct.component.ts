@@ -11,6 +11,11 @@ interface ItemType {
     value: string;
 }
 
+interface DocName {
+    key: string;
+    value: string;
+}
+
 @Component({
     selector: 'app-addproduct',
     templateUrl: './addproduct.component.html',
@@ -49,98 +54,7 @@ export class addproductComponent implements OnInit {
         this.getItemList();
         this.getItemPrice();
     }
-    OnItemDocumentBulkUpload() {
-        if ((this.selectedProductDocumentFile == undefined || this.selectedProductDocumentFile == null)) {
-            this.toastr.error('Please Select The CSV File');
-            return;
-        }
-        else {
-            const fileReader = new FileReader();
-            fileReader.onload = (e) => {
-                const contents = fileReader.result as string;
-                const lines = contents.split('\n');
-                const firstLine = lines[0].trim();
-                const expectedHeader = 'Item,Type,Name,DocDetailsUrl'; 
-                console.log('firstLine===>',firstLine)
-                if (firstLine === expectedHeader) {
-                    this.sendMessage('start');
-                    const fd = new FormData();
-                    if (this.selectedProductDocumentFile != undefined && this.selectedProductDocumentFile != null) {
-                        fd.append('FileName', this.selectedProductDocumentFile.name);
-                        fd.append('csv', this.selectedProductDocumentFile, this.selectedProductDocumentFile.name);
-                    }
-                    fd.append('memRefNo', this.memRefNo);
-            
-                    this.MailConfigService.UpdateItemDocumentList(fd).subscribe((data: any) => {
-                        this.sendMessage('stop');
-                        if (data == true || data == "true") {
-                            this.toastr.success("Sucessfully Updated");
-                        }
-                        else {
-                            this.toastr.error("Error occured please try again");
-                        }
-                        this.selectedProductDocumentFile = undefined;
-                        this.fileDocListInput.nativeElement.value = '';
-                    });
-                } else{
-                    this.toastr.error('Invalid column names in the CSV file.');
-                    this.selectedProductDocumentFile = undefined;
-                    this.fileDocListInput.nativeElement.value = '';
-                    return;
-                }
-            };
-            fileReader.readAsText(this.selectedProductDocumentFile);
-        }
-    }
-    OnItemPriceListBulkUpload() {
-        if ((this.selectedProductPriceFile == undefined || this.selectedProductPriceFile == null)) {
-            this.toastr.error('Please Select The CSV File');
-            return;
-        }
-        else {
-            const fileReader = new FileReader();
-            fileReader.onload = (e) => {
-                const contents = fileReader.result as string;
-                const lines = contents.split('\n');
-                const firstLine = lines[0].trim();
-                const expectedHeader = 'Item,Price'; 
-
-                if (firstLine === expectedHeader) {
-                    this.sendMessage('start');
-                    const fd = new FormData();
-                    if (this.selectedProductPriceFile != undefined && this.selectedProductPriceFile != null) {
-                        fd.append('FileName', this.selectedProductPriceFile.name);
-                        fd.append('csv', this.selectedProductPriceFile, this.selectedProductPriceFile.name);
-                    }
-                    fd.append('memRefNo', this.memRefNo);
-            
-                    this.MailConfigService.UpdateItemPriceBulk(fd).subscribe((data: any) => {
-                        this.sendMessage('stop');
-                        if (data == true || data == "true") {
-                            this.toastr.success("Sucessfully Updated");
-                        }
-                        else {
-                            this.toastr.error("Error occured please try again");
-                        }
-                        this.selectedProductPriceFile = undefined;
-                        this.filePriceListInput.nativeElement.value = '';
-                    });
-                } else{
-                    this.toastr.error('Invalid column names in the CSV file.');
-                    this.selectedProductPriceFile = undefined;
-                    this.filePriceListInput.nativeElement.value = '';
-                    return;
-                }
-            };
-            fileReader.readAsText(this.selectedProductPriceFile);
-        }
-    }
-    handleItemPriceListFileInput(event) {
-        this.selectedProductPriceFile = <File>event.target.files[0];
-    }
-    handleItemDocumentFileInput(event) {
-        this.selectedProductDocumentFile = <File>event.target.files[0];
-    }
+    
     getItemList() {
         if (this.itemId != null && this.itemId != undefined && this.itemId != '') {
             this.sendMessage('start');
@@ -231,6 +145,7 @@ export class DialogAddEditProduct {
         @Inject(MAT_DIALOG_DATA) public data: any) { }
 
     selectedfileType: string;
+    selectedDocName: string;
     itemContent: any;
     docTypeName: string;
     docTypeId: number;
@@ -247,6 +162,9 @@ export class DialogAddEditProduct {
         this.selectedfileType = this.data.docType;
         this.itemContent = this.data.docTypeTextUrl;
         this.docTypeName = this.data.docTypeName;
+        if(this.selectedfileType == "doc"){
+            this.selectedDocName = this.data.docTypeName;
+        }
         this.itemDocId = this.data.itemDocId;
     }
 
@@ -257,8 +175,15 @@ export class DialogAddEditProduct {
         { key: 'image', value: 'image' }
     ];
 
+    docName: DocName[] = [
+        { key: 'tds', value: 'tds' },
+        { key: 'liturature', value: 'liturature' },
+        { key: 'sds', value: 'sds' }
+    ];
+
     onFileSelected(event) {
         this.SelectedFile = <File>event.target.files[0];
+        console.log('selected file',this.SelectedFile);
     }
 
     onCancel(): void {
@@ -286,7 +211,16 @@ export class DialogAddEditProduct {
         fd.append('memRefNo', this.memRefNo);
         fd.append('ItemDocId', this.itemDocId.toString());
         fd.append('DocType', this.selectedfileType);
-        fd.append('DocName', this.docTypeName);
+        if(this.selectedfileType == "doc"){
+            fd.append('DocName', this.selectedDocName);
+        }else if(this.selectedfileType == "image"){
+            fd.append('DocName', this.SelectedFile.name);
+        }else if(this.selectedfileType == "video"){
+            fd.append('DocName', "video");
+        }else if(this.selectedfileType == "text"){
+            fd.append('DocName', "details");
+        }
+       
         fd.append('Item', this.item);
         console.log('this.memRefNo===>', this.memRefNo)
         this.MailConfigService.UpdateImageDocument(fd).subscribe((data: any) => {

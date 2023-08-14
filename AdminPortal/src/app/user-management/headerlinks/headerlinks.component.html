@@ -87,6 +87,7 @@
                                             <mat-option value="header">Header</mat-option>
                                             <mat-option value="footer">Footer</mat-option>
                                             <mat-option value="dashboard">Dashboard</mat-option>
+                                            <mat-option value="both">Both</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
@@ -104,7 +105,7 @@
                                 <div class="form-group form-black label-floating">
                                     <label class="control-label">Parent Sequence</label>
                                     <mat-form-field>
-                                        <mat-select [(ngModel)]="parentseq" placeholder="Select Parent Link" name="parentLinkSequence" required>
+                                        <mat-select [(ngModel)]="parentseq" placeholder="Select Parent Link" name="parentLinkSequence">
                                             <mat-option *ngFor="let link of headerlinklist" [value]="link.seq">
                                                 {{link.linkname}}
                                             </mat-option>
@@ -122,7 +123,6 @@
                         <button class="btn btn-info pull-right" (click)="UpdateHeaderlinkByID()">Submit</button>
 
                         <div class="clearfix"></div>
-
                     </div>
 
                     <div>
