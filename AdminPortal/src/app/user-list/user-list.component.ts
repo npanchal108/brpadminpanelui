@@ -7,7 +7,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { LoadingService } from '../services/loading.service';
 
-declare var $:any;
+declare var $: any;
 
 @Component({
   selector: 'app-user-list',
@@ -17,16 +17,16 @@ declare var $:any;
 export class UserListComponent implements OnInit {
   userList: any;
   userType: string;
-  page:number = 1;
-  totalPage:number;
+  page: number = 1;
+  totalPage: number;
 
   constructor(private userService: UserService, private router: Router, private route: ActivatedRoute, private dialog: MatDialog, private loadingService: LoadingService) {
-    
+
     this.route.params.subscribe(params => {
       this.userType = this.route.snapshot.paramMap.get('userType');
-      this.getUserList(this.page);      
+      this.getUserList(this.page);
     });
-  
+
   }
   sendMessage(message): void {
     this.loadingService.LoadingMessage(message);
@@ -34,23 +34,23 @@ export class UserListComponent implements OnInit {
   ngOnInit() {
     $('.nav li').removeClass('active');
     $('#liCustomer').addClass('active');
-    
+
     this.userType = this.route.snapshot.paramMap.get('userType');
     this.getUserList(this.page);
-   
+
   }
 
   getUserList(pageNo) {
-  
-    this.userService.getUsers(this.userType,pageNo).subscribe(res => {
-      this.userList = res;  
-      try{
-      this.totalPage = res[0].TotalPage;      
-      }catch(Ex){
-        this.totalPage =1;       
+
+    this.userService.getUsers(this.userType, pageNo).subscribe(res => {
+      this.userList = res;
+      try {
+        this.totalPage = res[0].TotalPage;
+      } catch (Ex) {
+        this.totalPage = 1;
       }
     });
-    
+
     return pageNo;
   }
 
@@ -62,9 +62,9 @@ export class UserListComponent implements OnInit {
     this.router.navigate(['/useradd', 0, this.userType]);
   }
 
-  onManageUser(useid,memRefNo) {
+  onManageUser(useid, memRefNo) {
     localStorage.setItem('TabIndex', '0');
-    this.router.navigate(['/manageuser', useid,memRefNo, this.userType]);
+    this.router.navigate(['/manageuser', useid, memRefNo, this.userType]);
   }
 
   openDialog(userId): void {
@@ -99,7 +99,7 @@ export class DialogOverviewExampleDialog {
     //this.loadingService.LoadingMessage(message);
   }
   onYesClick(userId): void {
-    
+
     this.userService.deleteUser(userId).subscribe(res => {
       if (res) {
         this.toastr.success("Record deleted successfully");
@@ -107,7 +107,7 @@ export class DialogOverviewExampleDialog {
       else {
         this.toastr.error("Something went wrong. Please try again.");
       }
-    
+
     });
     this.dialogRef.close();
   }

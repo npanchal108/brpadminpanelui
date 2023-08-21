@@ -1,9 +1,42 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header" data-background-color="darkblue">
+            <div class="custom-container">
+                <div class="custom-inner-container">
+                    <h5>User List
+                        <small>Manage users list</small>
+                    </h5>
+                    <table class="table table-striped table-bordered custom-table">
+                        <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>User Id</th>
+                                <th style="text-align: center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of userList | paginate : { itemsPerPage:50, currentPage:page,totalItems:totalPage, id:'first' }">
+                                <td data-title="First Name">{{user.FirstName}}</td>
+                                <td data-title="Last Name">{{user.LastName}}</td>
+                                <td data-title="Customer ID">{{user.MemberRefNo}}</td>
+                                <td class="font-20" align="center">
+                                    <button class="btn-icon" (click)="onManageUser(user.UserID,user.MemberRefNo)">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
+                                    <button class="btn-icon" (click)="openDialog(user.UserID)">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- <div class="col-md-12">
+                <div class="card"> -->
+
+            <!-- <div class="card-header" data-background-color="darkblue">
                         <table width=100%>
                             <tr>
                                 <td>
@@ -13,7 +46,7 @@
                                     <p class="category" *ngIf="userType == 'Client'">Manage customer users</p>
                                 </td>
                                 <td style="text-align: right;">
-                                    <button (click)="OnAddUser()" class="btn btn-success">Add New</button>
+                                    <button (click)="OnAddUser()" class="btn btn-danger">Add New</button>
                                 </td>
                             </tr>
                         </table>
@@ -38,24 +71,19 @@
                                     <td class="btnalign">
                                         <button (click)="onManageUser(user.UserID,user.MemberRefNo)" class="btn btn-default">Edit</button>
                                         <button (click)="openDialog(user.UserID)" class="btn btn-danger">Delete</button>
-                                        <!-- <a (click)="onManageUser(user.UserID,user.MemberRefNo)">
-                      <i class="material-icons">mode_edit</i>
-                    </a> -->
-                                        <!-- <a (click)="openDialog(user.UserID)">
-                      <i class="material-icons">mode_delete</i>
-                    </a> -->
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <hr>
-                        <div style="text-align:center">
-                            <pagination-controls (pageChange)="page = getUserList($event)" id="first">
-                            </pagination-controls>
-                        </div>
+                                       
+                    </td>
+                    </tr>
+                    </tbody>
+                    </table>
+                    <hr>
+                    <div style="text-align:center">
+                        <pagination-controls (pageChange)="page = getUserList($event)" id="first">
+                        </pagination-controls>
                     </div>
-                </div>
-            </div>
+                </div> -->
+            <!-- </div>
+            </div> -->
         </div>
     </div>
 </div>

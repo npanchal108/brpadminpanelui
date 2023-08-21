@@ -1,9 +1,9 @@
 <div class="logo">
     <a href="http://distone.com" target="_blank" class="simple-text">
         <div class="logo-img">
-            <img src="/assets/img/D1-logo-NIFMSE2017-500px.png" />
+            <img src="assets/img/BRP-Logo-White.png" />
         </div>
-        Admin Portal
+        <span class="sidebar-admin-txt">Admin Portal</span>
     </a>
 </div>
 <div class="sidebar-wrapper">
@@ -20,30 +20,117 @@
 
     <div class="nav-container" *ngIf="isAdmin">
         <ul class="nav">
-            <li routerLinkActive="active" id="liDashboard">
+            <li  id="liDashboard" class="active">
+                <a [routerLink]="['/dashboard']">
+                    <i (click)="GoToDashboard()" class="material-icons">person</i>
+                    <p (click)="GoToDashboard()">Customer Config</p>
+                </a>
+            </li>
+            <li  id="liDashboard">
+                <a [routerLink]="['/dashboard']">
+                    <i (click)="GoToDashboard()" class="material-icons">person</i>
+                    <p (click)="GoToDashboard()">Mail Config</p>
+                </a>
+            </li>
+            <li  id="liDashboard">
+                <a [routerLink]="['/dashboard']">
+                    <i (click)="GoToDashboard()" class="material-icons">person</i>
+                    <p (click)="GoToDashboard()">Process Config</p>
+                </a>
+            </li>
+            <li  id="liDashboard">
+                <a [routerLink]="['/dashboard']">
+                    <i (click)="GoToDashboard()" class="material-icons">person</i>
+                    <p (click)="GoToDashboard()">Web Design</p>
+                </a>
+            </li>
+            <li  id="liDashboard">
+                <a [routerLink]="['/dashboard']">
+                    <i (click)="GoToDashboard()" class="material-icons">person</i>
+                    <p (click)="GoToDashboard()">Website Configurations</p>
+                </a>
+            </li>
+            <li  id="liDashboard">
+                <a [routerLink]="['/dashboard']">
+                    <i (click)="GoToDashboard()" class="material-icons">person</i>
+                    <p (click)="GoToDashboard()">Mail Template</p>
+                </a>
+            </li>
+            <li  id="liDashboard" >
+                <a [routerLink]="['/dashboard']">
+                    <i (click)="GoToDashboard()" class="material-icons">person</i>
+                    <p (click)="GoToDashboard()">Dynamic Pages</p>
+                </a>
+            </li>
+            <li  id="liDashboard" >
+                <a [routerLink]="['/dashboard']">
+                    <i (click)="GoToDashboard()" class="material-icons">person</i>
+                    <p (click)="GoToDashboard()">Product List</p>
+                </a>
+            </li>
+            <li  id="liDashboard" >
+                <a [routerLink]="['/dashboard']">
+                    <i (click)="GoToDashboard()" class="material-icons">person</i>
+                    <p (click)="GoToDashboard()">Product Bulk Upload</p>
+                </a>
+            </li>
+            <li  id="liDashboard" >
+                <a [routerLink]="['/dashboard']">
+                    <i (click)="GoToDashboard()" class="material-icons">person</i>
+                    <p (click)="GoToDashboard()">Header Links</p>
+                </a>
+            </li>
+            <li  id="liDashboard" >
+                <a [routerLink]="['/dashboard']">
+                    <i (click)="GoToDashboard()" class="material-icons">person</i>
+                    <p (click)="GoToDashboard()">Home Banners</p>
+                </a>
+            </li>
+            <li  id="liDashboard" >
+                <a [routerLink]="['/dashboard']">
+                    <i (click)="GoToDashboard()" class="material-icons">person</i>
+                    <p (click)="GoToDashboard()">Activity Logs</p>
+                </a>
+            </li>
+            <li  id="liDashboard" >
+                <a [routerLink]="['/dashboard']">
+                    <i (click)="GoToDashboard()" class="material-icons">person</i>
+                    <p (click)="GoToDashboard()">SA FILTERS SORT</p>
+                </a>
+            </li>
+            <li  id="liDashboard" >
+                <a [routerLink]="['/dashboard']">
+                    <i (click)="GoToDashboard()" class="material-icons">person</i>
+                    <p (click)="GoToDashboard()">Delete Cacher</p>
+                </a>
+
+            </li>
+        </ul>
+        <!-- <ul class="nav">
+            <li  id="liDashboard">
                 <a [routerLink]="['/dashboard']">
                     <i (click)="GoToDashboard()" class="material-icons">dashboard</i>
                     <p (click)="GoToDashboard()">Dashboard</p>
                 </a>
-            </li>
-            <li routerLinkActive="active" id="liAdmin">
+            </li></li>
+            <li  id="liAdmin">
                 <a [routerLink]="['/userlist', 'Admin']">
                     <i (click)="GoToAdmin()" class="material-icons">person</i>
                     <p (click)="GoToAdmin()">Admin Users</p>
                 </a>
-            </li>
-            <li routerLinkActive="active" id="liCustomer">
+            </li></li>
+            <li  id="liCustomer">
                 <a [routerLink]="['/userlist', 'Client']">
                     <i (click)="GoToClient()" class="material-icons">person</i>
                     <p (click)="GoToClient()">Customer</p>
                 </a>
-            </li>
-            <li routerLinkActive="active" *ngIf="isMobileMenu()" (click)="Logout()">
+            </li></li>
+            <li  *ngIf="isMobileMenu()" (click)="Logout()">
                 <a>
                     <i class="material-icons">person</i>
                     <p>Logout</p>
                 </a>
-            </li>
-        </ul>
+            </li></li>
+        </ul> -->
     </div>
 </div>

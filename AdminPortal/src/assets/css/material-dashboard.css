@@ -6653,3 +6653,169 @@ footer .btn {
     padding-right: 0px!important;
     margin-right: 5px!important;
 }
+
+/* New admin css starts */
+
+/* @media (min-width: 768px) {
+    .sidebar .logo {
+        background: #fff;
+    }
+
+    .sidebar .logo-img img {
+        background-color: #000;
+    }
+
+    .sidebar-admin-txt {
+        margin-left: 40px;
+        color: #6B7A99;
+        font-weight: 500;
+    }
+
+    body .navbar.navbar-transparent {
+        margin: 0;
+        background: #fff !important;
+        color: #6B7A99;
+
+    }
+
+    .navbar .navbar-collapse {
+        border-bottom: 1px solid rgba(180, 180, 180, 0.3);
+    }
+
+    a.menu-link {
+
+        padding: 10px 20px;
+        margin: 0 10px 0 0;
+
+        color: #6B7A99;
+        font-weight: 400;
+        font-size: 14px;
+        cursor: pointer;
+        text-transform: uppercase;
+    }
+
+    .sidebar .sidebar-wrapper {
+        background: #FFF;
+    }
+
+    .sidebar .nav li>a {
+        margin: 0 10px;
+        color: #7D8FB3;
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    .sidebar .nav li.active a {
+        background: #445FD2 !important;
+    }
+
+    .nav-bar-menu-items {
+        display: flex;
+        width: 70%;
+        justify-content: center;
+        margin-bottom: 5px;
+    }
+    .custom-container {
+        margin-top: 80px;
+        padding: 20px;
+    }
+    .custom-inner-container {
+        border: 1px solid #c3c3c3;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 4px 4px 0px -1px #c3c3c3;
+        background: #fff;
+    }
+    .custom-inner-container h5 {
+        font-weight: 600;
+        font-size: 16px;
+        margin: 0 0 20px 0;
+        padding: 0;
+        border-bottom: 1px solid #c3c3c3;
+    }
+    .custom-inner-container h5 small {
+        width: 100%;
+        display: inline-block;
+    }
+    .custom-table thead th {
+        font-weight: 500 !important;
+        font-size: 15px !important;
+        color: #1B212D;
+    }
+    .custom-table tbody th,.custom-table tbody td {
+        font-weight: 400 !important;
+        font-size: 14px !important;
+        color: #1B212D;
+    }
+    .font-20{
+        font-size: 20px;
+    }
+    .btn-icon{
+        border: none;
+        background: none;
+    }
+    .sidebar .sidebar-wrapper{
+        width: 280px;
+    }
+} */
+
+
+@media (min-width: 768px) {
+
+    .sidebar .logo {
+        background: #fff;
+    }
+
+    .sidebar .logo-img img {
+        background-color: #000;
+    }
+
+    .sidebar-admin-txt {
+        margin-left: 40px;
+        color: #fff;
+        font-weight: 500;
+    }
+    .nav-bar-menu-items {
+        display: flex;
+        width: 70%;
+        justify-content: center;
+        margin-bottom: 5px;
+    }
+    .sidebar .logo {
+        padding: 25px 0px;
+        background: #31322D;
+    }
+
+    body .navbar.navbar-transparent {
+        padding: 20px 0px;
+        margin: 0;
+        background: #31322D !important;
+    }
+
+    a.menu-link {
+        background: #464741;
+        padding: 10px 20px;
+        margin: 0 10px 0 0;
+        border: 1px solid #464741;
+        border-radius: 10px;
+        color: #fff;
+        font-weight: 400;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .sidebar .sidebar-wrapper{
+        background: #31322D;
+    }
+    .sidebar .nav li>a{
+        margin: 0 10px;
+        color: #FFF;
+        font-weight: 600;
+        font-size: 16px;
+    }
+    .sidebar .nav li.active a{
+        background: #464741 !important;
+    }
+}
+
+
+/* New admin css ends */
