@@ -629,7 +629,6 @@ h2.title {
 .off-canvas-sidebar .nav li:hover>a,
 .off-canvas-sidebar .nav li.active:focus {
     background: rgba(200, 200, 200, 0.2);
-    color: #3C4858;
 }
 
 .sidebar .nav p,
@@ -808,7 +807,7 @@ h2.title {
     z-index: 2;
     float: right;
     overflow: auto;
-    width: calc(100% - 260px);
+    width: calc(100% - 300px);
     min-height: 100%;
     -webkit-transform: translate3d(0px, 0, 0);
     -moz-transform: translate3d(0px, 0, 0);
@@ -4430,6 +4429,7 @@ fieldset[disabled] .navbar .btn-link:focus {
     font-size: 20px;
     line-height: 2.42857;
     font-weight: 500;
+    letter-spacing: 1.2px;
 }
 
 .navbar-fixed-top {
@@ -6846,8 +6846,8 @@ footer .btn {
 
 .mat-tab-header-pagination-after,
 .mat-tab-header-rtl .mat-tab-header-pagination-before {
-    padding-right: 0px!important;
-    margin-right: 5px!important;
+    padding-right: 0px !important;
+    margin-right: 5px !important;
 }
 
 /* New admin css starts */
@@ -6963,53 +6963,171 @@ footer .btn {
     }
 
     .sidebar .logo-img img {
-        background-color: #000;
+        background-color: #31322D;
     }
 
     .sidebar-admin-txt {
+        text-transform: capitalize;
         margin-left: 40px;
         color: #fff;
-        font-weight: 500;
+        font-weight: 600;
+        letter-spacing: 1.2px;
     }
+
     .nav-bar-menu-items {
         display: flex;
         width: 70%;
         justify-content: center;
         margin-bottom: 5px;
     }
+
     .sidebar .logo {
-        padding: 25px 0px;
+        padding: 15px 20px;
         background: #31322D;
     }
 
     body .navbar.navbar-transparent {
-        padding: 20px 0px;
         margin: 0;
         background: #31322D !important;
     }
 
     a.menu-link {
-        background: #464741;
-        padding: 10px 20px;
+        /* background: #464741; */
+        padding: 5px 10px;
         margin: 0 10px 0 0;
         border: 1px solid #464741;
         border-radius: 10px;
         color: #fff;
-        font-weight: 400;
-        font-size: 16px;
+        font-weight: 500;
+        font-size: 14px;
         cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 1.6px;
     }
-    .sidebar .sidebar-wrapper{
+
+    a.menu-link.active {
+        background: #464741;
+    }
+
+    .sidebar .sidebar-wrapper {
         background: #31322D;
     }
-    .sidebar .nav li>a{
+
+    .sidebar .nav li>a {
         margin: 0 10px;
         color: #FFF;
         font-weight: 600;
         font-size: 16px;
     }
-    .sidebar .nav li.active a{
+
+    .sidebar .nav li.active a {
         background: #464741 !important;
+    }
+
+    .sidebar .sidebar-wrapper {
+        width: 300px;
+    }
+
+    .custom-container {
+        margin-top: 80px;
+        padding: 20px;
+    }
+
+    .custom-inner-container {
+        border: 1px solid #c3c3c3;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 4px 4px 0px -1px #c3c3c3;
+        background: #fff;
+    }
+
+    .custom-inner-container h5 {
+        font-weight: 600;
+        font-size: 16px;
+        margin: 0 0 20px 0;
+        padding: 0;
+        border-bottom: 1px solid #c3c3c3;
+        letter-spacing: 0.8px;
+    }
+
+    .custom-inner-container h5 small {
+        width: 100%;
+        display: inline-block;
+    }
+
+    .custom-table thead th {
+        font-weight: 500 !important;
+        font-size: 15px !important;
+        color: #1B212D;
+        letter-spacing: 0.8px;
+        padding: 6px 10px !important;
+    }
+
+    .custom-table tbody th,
+    .custom-table tbody td {
+        font-weight: 400 !important;
+        font-size: 14px !important;
+        color: #1B212D;
+        letter-spacing: 0.8px;
+        padding: 6px 10px !important;
+    }
+
+    .font-20 {
+        font-size: 20px;
+    }
+
+    .btn-icon {
+        border: none;
+        background: none;
+    }
+
+    .sidebar .nav p {
+        font-size: 16px;
+        letter-spacing: 0.8px;
+        font-weight: 500;
+    }
+
+    .record-count-section {
+        padding: 8px 0;
+        color: #1B212D;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .record-count-section label {
+        color: #1B212D;
+        font-weight: 400;
+        letter-spacing: 0.8px;
+    }
+
+    .record-count-section select,.record-count-section input {
+        background: #fff;
+        padding: 5px;
+        border: 1px solid #c3c3c3;
+        border-radius: 5px;
+    }
+    .ngx-pagination{
+        text-align: right;
+    }
+    .ngx-pagination li{
+        background: #fff;
+        border: 1px solid #c3c3c3;
+        border-radius: 5px !important;
+        padding: 0 3px;
+    }
+    .ngx-pagination .current{
+        background: #464741 !important;
+        border: 1px solid #464741;
+        border-radius: 5px !important;
+        padding: 3px 12px !important;
+        color: #fff !important;
+        margin: 0 6px 0 0;
+    }
+    .ngx-pagination li.pagination-next, .ngx-pagination li.pagination-previous{
+        border: none;
+        color: #1B212D;
+        font-weight: 400;
+        letter-spacing: 0.5px;
     }
 }
 

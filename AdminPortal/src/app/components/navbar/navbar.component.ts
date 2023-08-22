@@ -37,23 +37,5 @@ export class NavbarComponent implements OnInit {
     localStorage.removeItem('TabIndex');
     this.router.navigate(['/login']);
   }
-  sidebarOpen() {
-    const body = document.getElementsByTagName('body')[0]
-    body.classList.add('nav-open');
-    $('.navbar-toggle').addClass('toggled');
-  };
-  sidebarClose() {
-    const body = document.getElementsByTagName('body')[0];
-    body.classList.remove('nav-open');
-    $('.navbar-toggle').removeClass('toggled');
-  };
-  sidebarToggle() {
-    const body = document.getElementsByTagName('body')[0];
-     if(!body.classList.contains('nav-open')){
-      this.sidebarOpen();
-    } else {
-      this.sidebarClose();
-    }
-      };
-
+  
 }
