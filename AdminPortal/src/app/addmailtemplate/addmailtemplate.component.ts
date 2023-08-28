@@ -64,9 +64,7 @@ export class AddmailtemplateComponent implements OnInit ,PipeTransform {
       if (data == true || data == "true") {
         form.resetForm();
         this.toastr.success("Sucessfully Updated");
-        // this.router.navigate(['/userlist', 'Client']);
-        localStorage.setItem('TabIndex', '5');
-    this.router.navigate(['/manageuser',this.uid ,this.memRefNo, 'Client']);
+        this.router.navigate(['/manageuser',this.uid ,this.memRefNo, 'Client']);
       }
       else {
         this.toastr.error("Error occured please try again");
@@ -75,9 +73,7 @@ export class AddmailtemplateComponent implements OnInit ,PipeTransform {
     });
   }
   back() {
-    // this.router.navigate(['/userlist', 'Client']);
-    localStorage.setItem('TabIndex', '5');
-    this.router.navigate(['/manageuser',this.uid ,this.memRefNo, 'Client']);
+    this.router.navigate(['/mailtemplate',this.uid ,this.memRefNo, this.cid]);
   }
 
 }

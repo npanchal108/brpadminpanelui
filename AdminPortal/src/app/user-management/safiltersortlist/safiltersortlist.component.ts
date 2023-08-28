@@ -2,23 +2,24 @@ import { Component, OnInit, ChangeDetectorRef, Inject } from '@angular/core';
 import { MailConfig } from '../../model/mail-config.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import {MatDialog, MatDialogRef, MatDialogModule,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { MailConfigService } from '../../services/mailbox-config.service.';
-import { NgForm } from '@angular/forms';
 import { LoadingService } from '../../services/loading.service';
-
+import { NgFor,NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-safiltersortlist',
   templateUrl: './safiltersortlist.component.html',
-  styleUrls: ['./safiltersortlist.component.css']
+  styleUrls: ['./safiltersortlist.component.css'],
+  imports: [MatDialogModule,NgFor,NgIf],
+  standalone:true
 })
 export class safiltersortlistComponent implements OnInit {
   memRefNo: string;
   configlist:any;
   userType: string;
   id:string;
-  constructor(private dialog: MatDialog,private route: ActivatedRoute, private MailConfigService:MailConfigService,  private toastr: ToastrService,private router: Router, private loadingService: LoadingService, private changeDetectorRef:ChangeDetectorRef) { }
+  constructor(public dialog: MatDialog,private route: ActivatedRoute, private MailConfigService:MailConfigService,  private toastr: ToastrService,private router: Router, private loadingService: LoadingService, private changeDetectorRef:ChangeDetectorRef) { }
 
   ngOnInit() {
     this.sendMessage('start');
@@ -56,6 +57,8 @@ export class safiltersortlistComponent implements OnInit {
 @Component({
   selector: 'Deletesafiltersort',
   templateUrl: 'Deletesafiltersort.html',
+  imports: [MatDialogModule],
+  standalone:true
 })
 export class Deletesafiltersort {
 
@@ -64,7 +67,9 @@ export class Deletesafiltersort {
     private toastr: ToastrService,
     private router: Router,
     public dialogRef: MatDialogRef<Deletesafiltersort>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private loadingService: LoadingService) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, 
+    private loadingService: LoadingService
+    ) { }
 
   onNoClick(): void {
     this.dialogRef.close();

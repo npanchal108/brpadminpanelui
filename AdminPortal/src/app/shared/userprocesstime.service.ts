@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http'
-import 'rxjs/add/operator/map';
-import { ProcessTime } from './processtime.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserProcessTimes } from './userprocesstime.model';
 import { Common } from '../services/common.model';
 

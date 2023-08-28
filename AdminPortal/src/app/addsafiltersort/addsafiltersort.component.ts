@@ -1,8 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { MailConfig } from '../model/mail-config.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { MailConfigService } from '../services/mailbox-config.service.';
 import { NgForm } from '@angular/forms';
 import { LoadingService } from '../services/loading.service';

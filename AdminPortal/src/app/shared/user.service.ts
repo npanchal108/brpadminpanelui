@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import 'rxjs/add/operator/map';
+import { map } from 'rxjs/operators';
 import { User } from './user.model';
 import { Login } from './login.model';
 import { Common } from '../services/common.model';

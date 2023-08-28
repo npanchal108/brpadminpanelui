@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MailConfigService } from '../../services/mailbox-config.service.';
 import { NgForm } from '@angular/forms';
 import { LoadingService } from '../../services/loading.service';
@@ -45,9 +45,6 @@ this.GetAllBanners();
     this.targeturl='';
     //this.types='home';
     this.linkname='';
-  }
-  onEditLink(){
-
   }
 
    GetAllBanners(){

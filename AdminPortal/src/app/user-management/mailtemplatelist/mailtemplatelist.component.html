@@ -1,45 +1,47 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header" data-background-color="darkblue">
-                        <h4 class="title">Mail Template List</h4>
-                        <p class="category">Manage your Mail Template</p>
-
+            <div class="custom-container">
+                <div class="custom-inner-container">
+                    <h5> Mail Template List
+                        <small>Manage your Mail Template</small>
+                    </h5>
+                    <div class="record-count-section">
+                        <label>
+                            Search:
+                            <input type="text" (input)="applyFilter()" [(ngModel)]="searchText" />
+                        </label>
                     </div>
-                    <div *ngIf="mailconfiglist!=null && mailconfiglist!=undefined" class="card-content table-responsive table-mobile">
-                        <table class="table">
+                    <div *ngIf="mailconfiglist!=null && mailconfiglist!=undefined">
+                        <table class="table table-striped table-bordered custom-table">
                             <thead class="text-info">
                                 <tr>
                                     <th>Name</th>
                                     <th>Subject </th>
                                     <th>Active </th>
                                     <th>Mail Type </th>
-
-                                    <th>Action</th>
+                                    <th style="text-align: center;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let mails of mailconfiglist">
+                                <tr *ngFor="let mails of filteredMailConfigList  | paginate : { itemsPerPage:12, currentPage:page,totalItems:totalPage, id:'first' }">
                                     <td data-title="Name">{{mails.MailTemplateName}}</td>
                                     <td data-title="Subject">{{mails.MailTemplateSubject}}</td>
                                     <td data-title="Subject">{{mails.IsActive}}</td>
                                     <td data-title="Subject" *ngIf="mails.MailType=='1'">In</td>
                                     <td data-title="Subject" *ngIf="mails.MailType=='2'">Out</td>
-
-                                    <td class="btnalign">
-                                        <button (click)="onEditconf(mails.MailTemplateID)" class="btn btn-default">Edit</button>
-                                        <!-- <a (click)="onEditconf(mails.MailTemplateID)">
-                      <i class="material-icons">mode_edit</i>
-                    </a> -->
-
+                                    <td class="font-20" align="center">
+                                        <button (click)="onEditconf(mails.MailTemplateID)" class="btn-icon">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <hr>
-
+                        <div style="text-align:center">
+                            <pagination-controls (pageChange)="pageChanged($event)" id="first">
+                            </pagination-controls>
+                        </div>
                     </div>
                 </div>
             </div>

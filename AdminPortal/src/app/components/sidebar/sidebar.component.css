@@ -1,12 +1,78 @@
-.active a{
-    background-color: #00203FFF;
-    box-shadow: none;
-    color:white;
+.example-container {
+    height: 100%;
+    width: 100%;
+    /* Set the sidebar to full page height */
+    position: fixed;
+    top: 59px;
+    left: 0;
+    z-index: 1;
+    overflow-x: hidden;
+    padding-top: 20px;
+    overflow: scroll;
 }
 
-.active a:hover{
-    background-color: #00203FFF;
-    box-shadow: none;
-    color:white;
+.example-sidenav {
+    padding: 20px;
+    background: #31322D;
 }
 
+.mat-drawer-content {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    background: #fff;
+}
+
+.sidebar-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+.sidebar-container li {
+    margin: 2px 0;
+}
+
+.sidebar-container li a {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 5px;
+    text-decoration: none;
+    padding:10px 10px 10px 1px;
+}
+
+.sidebar-container li a i {
+    color: #a9afbb;
+}
+
+.sidebar-container li a p {
+    margin: 0;
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 0.8px;
+    font-weight: 400;
+}
+
+.main-container {
+    padding: 10px;
+    width: 100%;
+}
+
+.main-container.with-sidebar {
+    width: calc(100% - 370px);
+}
+.mat-mdc-button.mat-mdc-button-base{
+    height: 100%;
+    background: #31322D;
+    color: #FFF;
+    border: 0;
+    border-radius: 0;
+    margin-left: -2px;    
+}
+.active{
+    background: #464741;
+    border: 1px solid #464741;
+    border-radius: 10px;
+}

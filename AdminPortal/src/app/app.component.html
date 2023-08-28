@@ -1,5 +1,15 @@
 <div class="wrapper">
-  <ngx-loading [show]="loading"></ngx-loading>
+  <app-navbar *ngIf="isLogin('login')"></app-navbar>
+  <div class="row" *ngIf="isLogin('login')">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div *ngIf="!isLogin('login')" class="main-panel">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+
+<!-- <div class="wrapper">
   <div class="sidebar" data-color='blue' data-image="">
     <app-sidebar *ngIf="isLogin('login')"></app-sidebar>
     <div class="sidebar-background" style="background-image: url(../assets/img/sidebar-4.jpg)"></div>
@@ -9,4 +19,4 @@
     <router-outlet></router-outlet>
     <app-footer *ngIf="isLogin('login')"></app-footer>
   </div>
-</div>
+</div> -->

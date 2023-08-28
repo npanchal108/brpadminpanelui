@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-declare var $:any;
+
 
 @Component({
   selector: 'app-user-management',
@@ -23,8 +23,7 @@ tabindex:any;
     if(this.tabindex==null || this.tabindex==undefined){
       this.tabindex='0';
     }
-    $('.nav li').removeClass('active');
-    $('#liCustomer').addClass('active');
+   
     this.id = parseInt(this.route.snapshot.paramMap.get('id'));
     this.userType = this.route.snapshot.paramMap.get('userType');
   }

@@ -1,136 +1,118 @@
-<div class="logo">
-    <a href="http://distone.com" target="_blank" class="simple-text">
-        <div class="logo-img">
-            <img src="assets/img/BRP-Logo-White.png" />
-        </div>
-        <span class="sidebar-admin-txt">Admin Portal</span>
-    </a>
-</div>
-<div class="sidebar-wrapper">
-    <form class="navbar-form navbar-right" role="search" *ngIf="isMobileMenu()">
-        <div class="form-group form-black is-empty">
-            <input type="text" class="form-control" placeholder="Search">
-            <span class="material-input"></span>
-        </div>
-        <button type="submit" class="btn btn-white btn-round btn-just-icon">
-            <i class="material-icons">search</i>
-            <div class="ripple-container"></div>
-        </button>
-    </form>
-
+<mat-drawer-container class="example-container" autosize>
+  <!-- opened -->
+  <mat-drawer #drawer class="example-sidenav" mode="side" [opened]="openSidebar">
     <div class="nav-container" *ngIf="isAdmin">
-        <ul class="nav">
-            <li  id="liDashboard" class="active">
-                <a [routerLink]="['/dashboard']">
-                    <i (click)="GoToDashboard()" class="material-icons">person</i>
-                    <p (click)="GoToDashboard()">Customer Config</p>
-                </a>
-            </li>
-            <li  id="liDashboard">
-                <a [routerLink]="['/dashboard']">
-                    <i (click)="GoToDashboard()" class="material-icons">person</i>
-                    <p (click)="GoToDashboard()">Mail Config</p>
-                </a>
-            </li>
-            <li  id="liDashboard">
-                <a [routerLink]="['/dashboard']">
-                    <i (click)="GoToDashboard()" class="material-icons">person</i>
-                    <p (click)="GoToDashboard()">Process Config</p>
-                </a>
-            </li>
-            <li  id="liDashboard">
-                <a [routerLink]="['/dashboard']">
-                    <i (click)="GoToDashboard()" class="material-icons">person</i>
-                    <p (click)="GoToDashboard()">Web Design</p>
-                </a>
-            </li>
-            <li  id="liDashboard">
-                <a [routerLink]="['/dashboard']">
-                    <i (click)="GoToDashboard()" class="material-icons">person</i>
-                    <p (click)="GoToDashboard()">Website Configurations</p>
-                </a>
-            </li>
-            <li  id="liDashboard">
-                <a [routerLink]="['/dashboard']">
-                    <i (click)="GoToDashboard()" class="material-icons">person</i>
-                    <p (click)="GoToDashboard()">Mail Template</p>
-                </a>
-            </li>
-            <li  id="liDashboard" >
-                <a [routerLink]="['/dashboard']">
-                    <i (click)="GoToDashboard()" class="material-icons">person</i>
-                    <p (click)="GoToDashboard()">Dynamic Pages</p>
-                </a>
-            </li>
-            <li  id="liDashboard" >
-                <a [routerLink]="['/dashboard']">
-                    <i (click)="GoToDashboard()" class="material-icons">person</i>
-                    <p (click)="GoToDashboard()">Product List</p>
-                </a>
-            </li>
-            <li  id="liDashboard" >
-                <a [routerLink]="['/dashboard']">
-                    <i (click)="GoToDashboard()" class="material-icons">person</i>
-                    <p (click)="GoToDashboard()">Product Bulk Upload</p>
-                </a>
-            </li>
-            <li  id="liDashboard" >
-                <a [routerLink]="['/dashboard']">
-                    <i (click)="GoToDashboard()" class="material-icons">person</i>
-                    <p (click)="GoToDashboard()">Header Links</p>
-                </a>
-            </li>
-            <li  id="liDashboard" >
-                <a [routerLink]="['/dashboard']">
-                    <i (click)="GoToDashboard()" class="material-icons">person</i>
-                    <p (click)="GoToDashboard()">Home Banners</p>
-                </a>
-            </li>
-            <li  id="liDashboard" >
-                <a [routerLink]="['/dashboard']">
-                    <i (click)="GoToDashboard()" class="material-icons">person</i>
-                    <p (click)="GoToDashboard()">Activity Logs</p>
-                </a>
-            </li>
-            <li  id="liDashboard" >
-                <a [routerLink]="['/dashboard']">
-                    <i (click)="GoToDashboard()" class="material-icons">person</i>
-                    <p (click)="GoToDashboard()">SA FILTERS SORT</p>
-                </a>
-            </li>
-            <li  id="liDashboard" >
-                <a [routerLink]="['/dashboard']">
-                    <i (click)="GoToDashboard()" class="material-icons">person</i>
-                    <p (click)="GoToDashboard()">Delete Cacher</p>
-                </a>
+      <ul class="nav sidebar-container">
+        <li id="useradd">
+          <a [routerLink]="['/useradd', userId, userType]"  routerLinkActive="active">
+            <i class="material-icons">person</i>
+            <p>Customer Config</p>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/mailboxconfig', userId, memRefNo,userType]" routerLinkActive="active">
+            <i class="material-icons">person</i>
+            <p>Mail Config</p>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/processconfig', userId, memRefNo,userType]"  routerLinkActive="active">
+            <i class="material-icons">person</i>
+            <p>Process Config</p>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/webdesign', userId, memRefNo,userType]" routerLinkActive="active">
+            <i class="material-icons">person</i>
+            <p>Web Design</p>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/websiteconfigurations', userId, memRefNo,userType]" routerLinkActive="active">
+            <i class="material-icons">person</i>
+            <p>Website Configurations</p>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/mailtemplate', userId, memRefNo,userType]" routerLinkActive="active">
+            <i class="material-icons">person</i>
+            <p>Mail Template</p>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/dynamicpages', userId, memRefNo,userType]" routerLinkActive="active">
+            <i class="material-icons">person</i>
+            <p>Dynamic Pages</p>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/productlist', userId, memRefNo,userType]" routerLinkActive="active">
+            <i class="material-icons">person</i>
+            <p>Product List</p>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/productbulkupload', userId, memRefNo,userType]" routerLinkActive="active">
+            <i class="material-icons">person</i>
+            <p>Product Bulk Upload</p>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/headerlinks', userId, memRefNo,userType]" routerLinkActive="active">
+            <i class="material-icons">person</i>
+            <p>Header Links</p>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/homebanners', userId, memRefNo,userType]" routerLinkActive="active">
+            <i class="material-icons">person</i>
+            <p>Home Banners</p>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/activitylogs', userId, memRefNo,userType]" routerLinkActive="active">
+            <i class="material-icons">person</i>
+            <p>Activity Logs</p>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/safilterssort', userId, memRefNo,userType]" routerLinkActive="active">
+            <i class="material-icons">person</i>
+            <p>SA FILTERS SORT</p>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/deletecacher', userId, memRefNo,userType]" routerLinkActive="active">
+            <i class="material-icons">person</i>
+            <p>Delete Cacher</p>
+          </a>
 
-            </li>
-        </ul>
-        <!-- <ul class="nav">
-            <li  id="liDashboard">
-                <a [routerLink]="['/dashboard']">
-                    <i (click)="GoToDashboard()" class="material-icons">dashboard</i>
-                    <p (click)="GoToDashboard()">Dashboard</p>
-                </a>
-            </li></li>
-            <li  id="liAdmin">
-                <a [routerLink]="['/userlist', 'Admin']">
-                    <i (click)="GoToAdmin()" class="material-icons">person</i>
-                    <p (click)="GoToAdmin()">Admin Users</p>
-                </a>
-            </li></li>
-            <li  id="liCustomer">
-                <a [routerLink]="['/userlist', 'Client']">
-                    <i (click)="GoToClient()" class="material-icons">person</i>
-                    <p (click)="GoToClient()">Customer</p>
-                </a>
-            </li></li>
-            <li  *ngIf="isMobileMenu()" (click)="Logout()">
-                <a>
-                    <i class="material-icons">person</i>
-                    <p>Logout</p>
-                </a>
-            </li></li>
-        </ul> -->
+        </li>
+      </ul>
     </div>
-</div>
+  </mat-drawer>
+  <mat-drawer-content>
+
+    <div class="example-sidenav-content">
+      <button type="button" [disabled]="isDrawerDisabled" mat-button (click)="drawer.toggle()">
+        <i *ngIf="!drawer.opened" class="fa fa-chevron-right" aria-hidden="true"></i>
+        <i *ngIf="drawer.opened" class="fa fa-chevron-left" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div [ngClass]="drawer.opened ? 'main-container with-sidebar' : 'main-container'">
+      <div class="col">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+  </mat-drawer-content>
+
+
+
+
+</mat-drawer-container>
+
+
+<!-- Copyright 2023 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at https://angular.io/license -->

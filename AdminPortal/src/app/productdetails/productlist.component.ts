@@ -1,10 +1,7 @@
-import { Component, OnInit, ChangeDetectorRef, Inject, ViewChild } from '@angular/core';
-import { MailConfig } from '../model/mail-config.model';
+import { Component, OnInit, ChangeDetectorRef, } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MailConfigService } from '../services/mailbox-config.service.';
-import { NgForm } from '@angular/forms';
 import { LoadingService } from '../services/loading.service';
 
 
@@ -33,7 +30,7 @@ export class productlistComponent implements OnInit {
     this.userType = this.route.snapshot.paramMap.get('userType');
     this.getProductList(this.page)
   }
-  getProductList(pageNo){
+  getProductList(pageNo : number): number {
     this.MailConfigService.Getproductlist(this.memRefNo,pageNo).subscribe((data: any) => {
       this.productlist = data;
       this.filteredProductlist = this.productlist;
@@ -43,8 +40,8 @@ export class productlistComponent implements OnInit {
         this.totalPage = 1;
       }
       this.page = pageNo;
-      return this.page;
     });
+    return this.page;
   }
   GetProductByFilter(pageNo){
     this.MailConfigService.GetFilteredproductlist(this.memRefNo,this.searchQuery,pageNo).subscribe((data: any) => {

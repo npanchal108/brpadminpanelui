@@ -1,12 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { MailConfig } from '../model/mail-config.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ProcessTime } from '../shared/processtime.model';
-import { UserProcessTimes } from '../shared/userprocesstime.model';
-import { Common } from '../services/common.model';
 import { UserprocesstimeService } from '../shared/userprocesstime.service';
-import { NgForm } from '@angular/forms';
 import { LoadingService } from '../services/loading.service';
 import * as XLSX from "xlsx"
 

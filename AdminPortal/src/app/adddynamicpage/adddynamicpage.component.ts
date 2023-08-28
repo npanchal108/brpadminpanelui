@@ -63,10 +63,8 @@ export class adddynamicpageComponent implements OnInit ,PipeTransform {
     this.uid = parseInt(this.route.snapshot.paramMap.get('id'));    
     
     if(this.cid>0){
-      this.sendMessage('start');
     this.MailConfigService.GetdynamicpageByID(this.memRefNo,this.cid).subscribe((data: any) => {
       this.Mailtemplate = data;      
-      this.sendMessage('stop');   
     });
   }
   else{
@@ -79,9 +77,6 @@ export class adddynamicpageComponent implements OnInit ,PipeTransform {
     this.Mailtemplate.Sequence='';
   }
   }
-  sendMessage(message): void {
-    //this.loadingService.LoadingMessage(message);
-  }
   OnSubmit(form: NgForm) {    
    
     if((this.Mailtemplate.imageurl ==undefined || this.Mailtemplate.imageurl ==' ' || this.Mailtemplate.imageurl==null) && (this.SelectedFile==undefined || this.SelectedFile==null)){
@@ -89,7 +84,6 @@ export class adddynamicpageComponent implements OnInit ,PipeTransform {
       return;
     }
 
-    this.sendMessage('start');
     const fd = new FormData();
     if(this.SelectedFile!=undefined && this.SelectedFile!=null){
       fd.append('FileName',this.SelectedFile.name);        
@@ -106,13 +100,10 @@ export class adddynamicpageComponent implements OnInit ,PipeTransform {
      fd.append('Sequence',form.value.Sequence);      
      
      this.MailConfigService.Updatedynamicpage(fd).subscribe((data: any) => {  
-      this.sendMessage('stop');      
       if (data == true || data == "true") {
             form.resetForm();
             this.toastr.success("Sucessfully Updated");
-            // this.router.navigate(['/userlist', 'Client']);
-            localStorage.setItem('TabIndex', '6');
-            this.router.navigate(['/manageuser',this.uid ,this.memRefNo, 'Client']);
+            this.router.navigate(['/dynamicpages',this.uid ,this.memRefNo, this.cid]);
           }
           else {
             this.toastr.error("Error occured please try again");
@@ -120,9 +111,7 @@ export class adddynamicpageComponent implements OnInit ,PipeTransform {
     });
   }
   back() {
-    // this.router.navigate(['/userlist', 'Client']);
-    localStorage.setItem('TabIndex', '6');
-    this.router.navigate(['/manageuser',this.uid ,this.memRefNo, 'Client']);
+    this.router.navigate(['/dynamicpages',this.uid ,this.memRefNo, this.cid]);
   }
 
 }

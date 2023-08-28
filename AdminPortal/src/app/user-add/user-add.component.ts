@@ -6,9 +6,7 @@ import { Toast, ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { LoadingService } from '../services/loading.service';
-import { Md5 } from 'ts-md5';
-import { AsyncPipe } from '@angular/common';
-declare var $: any;
+
 @Component({
   selector: 'app-user-add',
   templateUrl: './user-add.component.html',
@@ -27,12 +25,10 @@ export class UserAddComponent implements OnInit {
 
 
   ngOnInit() {
-    //this.sendMessage('start');
     this.user = new User();
     this.getRoles();
-    // tslint:disable-next-line: radix
-    this.id = parseInt(this.route.snapshot.paramMap.get('id'));
-    this.userType = this.route.snapshot.paramMap.get('userType');
+    this.id = parseInt(localStorage.getItem('UserId'));
+    this.userType = localStorage.getItem('UserType')
     this.userroles = localStorage.getItem('Role');
     if (this.userroles == 'Admin') {
       this.isdesable = false;
@@ -41,55 +37,42 @@ export class UserAddComponent implements OnInit {
       this.isdesable = true;
     }
     this.getProjectType();
-    if (this.userType == 'Admin') {
-      $('.nav li').removeClass('active');
-      $('#liAdmin').addClass('active');
-    }
-    else {
-      $('.nav li').removeClass('active');
-      $('#liCustomer').addClass('active');
-    }
 
     if (!isNaN(this.id) && this.id > 0) {
       this.getUser(this.id);
     }
-    //this.sendMessage('stop');
+  }
+
+  ngAfterContentChecked(): void {
+    this.id = parseInt(localStorage.getItem('UserId'));
+    this.userType = localStorage.getItem('UserType');
+    this.userroles = localStorage.getItem('Role');
   }
 
   getProjectType() {
-
     this.userService.getProjectType().subscribe(res => {
       this.projecttypes = res;
     });
   }
-  sendMessage(message): void {
-    this.loadingService.LoadingMessage(message);
-  }
+
   OnSubmit(form: NgForm) {
-    this.sendMessage('start');
-    if(this.user.UserID>0){
+    if (this.user.UserID > 0) {
 
     }
-    else{
-    this.toastr.success("Web Site creation and Data Syncronization is in process please Wait...");
+    else {
+      this.toastr.success("Web Site creation and Data Syncronization is in process please Wait...");
     }
     //this.user.Password=Md5.hashStr(this.user.Password).toString();
     this.userService.insertUser(this.user, this.userType).subscribe((data: any) => {
-      this.sendMessage('stop');
-
       if (data.Status == "Success") {
-        form.resetForm();
+        //form.resetForm();
         this.toastr.success(data.Message);
-        //this.router.navigate(['/userlist', this.userType]);
-        //this.router.navigate(['/manageuser', this.user.UserID,this.user.MemberRefNo, this.userType]);
-        window.location.reload();
+        this.router.navigate(['/userlist', this.userType]);
       }
       else {
         this.toastr.error(data.Message);
       }
-
     });
-
   }
 
   getRoles() {
@@ -99,14 +82,11 @@ export class UserAddComponent implements OnInit {
   }
 
   getUser(userId) {
-    this.sendMessage('start');
     this.userService.getUserById(userId).subscribe((res: User) => {
-      this.sendMessage('stop');
       this.user = res;
-      this.user.Password="";
+      this.user.Password = "";
       this.user.ButtenText = "Update";
     });
-
   }
 
   back() {

@@ -1,15 +1,27 @@
-<nav class="navbar navbar-transparent navbar-absolute">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" (click)="sidebarToggle()">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="nav-custom-section">
+        <div class="logo">
+            <a href="http://distone.com" target="_blank" class="simple-text logo-section">
+                <div class="logo-img">
+                    <img src="assets/img/BRP-Logo-White.png" />
+                </div>
+                <span class="sidebar-admin-txt">Admin Portal</span>
+            </a>
         </div>
-        <div class="collapse navbar-collapse hoverNavbar">
-            <ul class="nav navbar-nav navbar-right">
+
+        <div class="collapse navbar-collapse" id="">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="menu-link" [routerLink]="['/userlist', 'Admin']" routerLinkActive="active">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="menu-link" [routerLink]="['/userlist', 'Client']"  routerLinkActive="active">Customers</a>
+                </li>
+            </ul>
+        </div>
+        <div class="nav-right-section">
+            <span class="welcomtxt nav navbar-nav navbar-right"> Welcome Admin !</span>
+            <!-- <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="material-icons">person</i>
@@ -21,12 +33,15 @@
                         </li>
                     </ul>
                 </li>
-            </ul>
-            <span class="welcomtxt nav navbar-nav navbar-left nav-bar-menu-items">
-                <a class="menu-link" [routerLink]="['/userlist', 'Admin']">Users</a>
-                <a class="menu-link" [routerLink]="['/userlist', 'Client']">Customers</a>
-            </span>
-            <span class="welcomtxt nav navbar-nav navbar-right"> Welcome Admin !</span>
+            </ul> -->
         </div>
+
     </div>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+        <i class="material-icons" style="color: #FFF;">person</i>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="Logout()">Log Out</button>
+    </mat-menu>
 </nav>

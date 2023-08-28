@@ -1,100 +1,107 @@
 <div class="main-content" style="margin-top:0" *ngIf="config!=null && config!=undefined">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-header" data-background-color="darkblue">
-            <h4 class="title">Website Configuration</h4>
-            <p class="category">Manage your Website configuration</p>
-          </div>
-          <div class="card-content">
-            <form #mailConfigForm="ngForm">
+      <div class="custom-container">
+        <div class="custom-inner-container">
+          <div class="col-md-12">
+            <h5>Website Configuration
+              <small>Manage your Website configuration</small>
+            </h5>
+            <div class="card-content">
+              <form #mailConfigForm="ngForm">
                 <div class="col-md-12">
-                    <div class="row">
-                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': config.ColorConfigKey=='','is-focused' : config.ColorConfigKey!=''}">
+                  <div class="form-group form-black label-floating"
+                    [ngClass]="{'is-empty': config.ColorConfigKey=='','is-focused' : config.ColorConfigKey!=''}">
                     <label class="control-label">Configuration Key</label>
-                    <input type="text" name="ColorConfigKey" #ConfigKey="ngModel" disabled value="config.ColorConfigKey" [value]="config.ColorConfigKey" [(ngModel)]="config.ColorConfigKey" class="form-control" required>
+                    <input type="text" name="ColorConfigKey" #ConfigKey="ngModel" disabled value="config.ColorConfigKey"
+                      [value]="config.ColorConfigKey" [(ngModel)]="config.ColorConfigKey" class="form-control" required>
                   </div>
                 </div>
-                <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': config.ColorValue=='','is-focused' : config.ColorValue!=''}">
+                  <div class="form-group form-black label-floating"
+                    [ngClass]="{'is-empty': config.ColorValue=='','is-focused' : config.ColorValue!=''}">
                     <label class="control-label">Configuration Value</label>
+                    <br />
                     <span style="margin-top:20px;" *ngIf="config.ColorConfigKey=='Logo'">{{config.ColorValue}}</span>
                     <span style="margin-top:20px;" *ngIf="config.ColorConfigKey!='Logo'">{{config.ColorValue}}</span>
-                    <input style="margin-top:10px;" *ngIf="config.ColorConfigKey!='Logo'" class="validate" type="color" name="ColorValue" #ConfigValue="ngModel" [(ngModel)]="config.ColorValue" class="form-control" required>                    
+                    <input style="margin-top:10px;" *ngIf="config.ColorConfigKey!='Logo'" class="validate" type="color"
+                      name="ColorValue" #ConfigValue="ngModel" [(ngModel)]="config.ColorValue" class="form-control"
+                      required>
                   </div>
                 </div>
-              </div>              
                 <div class="col-md-12">
-                    <div class="row">
-                  <div class="form-group form-black label-floating" [ngClass]="{'is-empty': config.Description=='','is-focused' : config.Description!=''}">
+                  <div class="form-group form-black label-floating"
+                    [ngClass]="{'is-empty': config.Description=='','is-focused' : config.Description!=''}">
                     <label class="control-label">Configuration Details</label>
-                    <input class="validate" disabled type="text" name="Description" #descr="ngModel" [(ngModel)]="config.Description" class="form-control" required>
+                    <input class="validate" disabled type="text" name="Description" #descr="ngModel"
+                      [(ngModel)]="config.Description" class="form-control" required>
                   </div>
                 </div>
-                </div>
-             </div>             
-              <div class="col-md-12" *ngIf="config.ColorConfigKey=='menucolor' || config.ColorConfigKey=='menufontcolor'">
+                <div class="col-md-12"
+                  *ngIf="config.ColorConfigKey=='menucolor' || config.ColorConfigKey=='menufontcolor'">
                   <div class="row">
-                <img src="assets/img/menu1.png" style="width:1000px;height:57px;">
-                </div>
-             </div>             
-                <div class="col-md-12" *ngIf="config.ColorConfigKey=='menuhovercolor'">
-                    <div class="row">
-                  <img src="assets/img/menu2.png" style="width:1000px;height:57px;">
+                    <img src="assets/img/menu1.png" style="width:1000px;height:57px;">
                   </div>
-               </div>               
-                  <div class="col-md-12" *ngIf="config.ColorConfigKey=='menuselectioncolor'">
-                      <div class="row">
+                </div>
+                <div class="col-md-12" *ngIf="config.ColorConfigKey=='menuhovercolor'">
+                  <div class="row">
+                    <img src="assets/img/menu2.png" style="width:1000px;height:57px;">
+                  </div>
+                </div>
+                <div class="col-md-12" *ngIf="config.ColorConfigKey=='menuselectioncolor'">
+                  <div class="row">
                     <img src="assets/img/menu3.png" style="width:333px;height:44px;">
-                    </div>
-                 </div>                 
-                    <div class="col-md-12" *ngIf="config.ColorConfigKey=='footercolor' || config.ColorConfigKey=='footerfontcolor' || config.ColorConfigKey=='footerhovercolor'">
-                        <div class="row">
-                      <img src="assets/img/footer1.png" style="width:800px;height:210px;">
-                      
-                      </div>
-                   </div>                   
-                      <div class="col-md-12" *ngIf="config.ColorConfigKey=='headercolor' || config.ColorConfigKey=='headerfontcolor' || config.ColorConfigKey=='headerhovercolor'">
-                          <div class="row">
-                        <img src="assets/img/header.png" style="width:171px;height:99px;">
-                        </div>
-                     </div>                     
-                      <div class="col-md-12" *ngIf="config.ColorConfigKey=='tabscolor' || config.ColorConfigKey=='tabsfontcolor' || config.ColorConfigKey=='tabshovercolor' || config.ColorConfigKey=='tabsselectioncolor'">
-                          <div class="row">
-                        <img src="assets/img/tabs1.png" style="width:800px;height:55px;">
-                        </div>
-                     </div>                     
-                      <div class="col-md-12" *ngIf="config.ColorConfigKey=='addtocartbuttoncolor' || config.ColorConfigKey=='addtocartbuttonhovercolor'">
-                          <div class="row">
-                        <img src="assets/img/addtocart.png" style="width:142px;height:151px;">
-                        </div>
-                     </div>
-<div class="col-md-12" *ngIf="config.ColorConfigKey=='Logo'">
-    <div class="row">
-  <h3>Logo Upload</h3>
-  <div style="width:262px;height:105px;">
-  <img src={{config.ColorValue}} style="width: 100%;height: 100%;">
-</div>
-  <p>Image Size should be width 160px and height 105px.</p>
-  <input type="file" (change)="onFileSelected($event)" >  
-  <button type="button" class="btn btn-info" (click)="OnUpload()" >Upload</button>  
-  <button (click)="back()" class="btn btn-default">Back</button>  
-</div>
-</div>
+                  </div>
+                </div>
+                <div class="col-md-12"
+                  *ngIf="config.ColorConfigKey=='footercolor' || config.ColorConfigKey=='footerfontcolor' || config.ColorConfigKey=='footerhovercolor'">
+                  <div class="row">
+                    <img src="assets/img/footer1.png" style="width:800px;height:210px;">
 
-  <div class="col-md-12" *ngIf="config.ColorConfigKey!='Logo'">
-      <div class="row">
-              <button (click)="back()" class="btn btn-default pull-right">Back</button>
-              <button class="btn btn-info pull-right" (click)="OnSubmit(mailConfigForm)">Submit</button>
-             </div></div>
-              <div class="clearfix"></div>
-            </form>
+                  </div>
+                </div>
+                <div class="col-md-12"
+                  *ngIf="config.ColorConfigKey=='headercolor' || config.ColorConfigKey=='headerfontcolor' || config.ColorConfigKey=='headerhovercolor'">
+                  <div class="row">
+                    <img src="assets/img/header.png" style="width:171px;height:99px;">
+                  </div>
+                </div>
+                <div class="col-md-12"
+                  *ngIf="config.ColorConfigKey=='tabscolor' || config.ColorConfigKey=='tabsfontcolor' || config.ColorConfigKey=='tabshovercolor' || config.ColorConfigKey=='tabsselectioncolor'">
+                  <div class="row">
+                    <img src="assets/img/tabs1.png" style="width:800px;height:55px;">
+                  </div>
+                </div>
+                <div class="col-md-12"
+                  *ngIf="config.ColorConfigKey=='addtocartbuttoncolor' || config.ColorConfigKey=='addtocartbuttonhovercolor'">
+                  <div class="row">
+                    <img src="assets/img/addtocart.png" style="width:142px;height:151px;">
+                  </div>
+                </div>
+                <div class="col-md-12" *ngIf="config.ColorConfigKey=='Logo'">
+                  <h3>Logo Upload</h3>
+                  <div style="width:262px;height:105px;">
+                    <img src={{config.ColorValue}} style="width: 100%;height: 100%;">
+                  </div>
+                  <p>Image Size should be width 160px and height 105px.</p>
+                </div>
+                <div class="col-md-12">
+                  <input type="file" (change)="onFileSelected($event)">
+                </div>
+                <button (click)="back()" class="custom-white-btn">Back</button>
+                <button type="button" class="custom-btn" (click)="OnUpload()">Upload</button>
+                <div class="col-md-12" *ngIf="config.ColorConfigKey!='Logo'">
+                  <div class="row">
+                    <button (click)="back()" class="custom-white-btn">Back</button>
+                    <button class="custom-btn" (click)="OnSubmit(mailConfigForm)">Submit</button>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </form>
+            </div>
           </div>
         </div>
-        </div>
-        </div>
-        </div>
-        </div>
-
+      </div>
+    </div>
+  </div>
+</div>

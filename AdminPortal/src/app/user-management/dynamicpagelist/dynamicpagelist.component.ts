@@ -2,7 +2,8 @@ import { Component, OnInit, ChangeDetectorRef, Inject } from '@angular/core';
 import { MailConfig } from '../../model/mail-config.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTabChangeEvent } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MailConfigService } from '../../services/mailbox-config.service.';
 import { NgForm } from '@angular/forms';
 import { LoadingService } from '../../services/loading.service';
@@ -23,8 +24,8 @@ export class dynamicpagelistComponent implements OnInit {
   mailconfiglist: any;
   userType: string;
   id: string;
-  page = 1;
-
+  page: number = 1;
+  totalPage: number;
   blogPageList: any[];
   infoPageList: any[];
   servicesPageList: any[];
@@ -104,6 +105,9 @@ export class dynamicpagelistComponent implements OnInit {
   }
   sendMessage(message): void {
     this.loadingService.LoadingMessage(message);
+  }
+  pageChanged(event: any): void {
+    this.page = event;
   }
 }
 

@@ -58,7 +58,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let product of productDetails | paginate: { itemsPerPage:7, currentPage: page }">
+                      <tr *ngFor="let product of productDetails">
                         <td data-title="DocType" style="text-align: left;">{{product.DocType}}</td>
                         <td data-title="DocTypeName"  style="text-align: left;">{{product.DocTypeName}}</td>
                         <td data-title="ItemTextUrl" class="detailurl" style="width: 50px;text-align: left;">
@@ -77,7 +77,7 @@
                       </tr>
                     </tbody>
                   </table>
-                  <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                  <!-- <pagination-controls (pageChange)="page = $event"></pagination-controls> -->
                 </div>
               </div>
             </mat-tab>

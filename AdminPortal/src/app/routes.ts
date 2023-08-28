@@ -21,6 +21,9 @@ import { dynamicpagelistComponent } from './user-management/dynamicpagelist/dyna
 import { adddynamicpageComponent } from './adddynamicpage/adddynamicpage.component';
 import { productlistComponent } from './productdetails/productlist.component';
 import { addproductComponent } from './productdetails/addproduct.component';
+import { productBulkUploadComponent } from './productdetails/bulkproductlist.component';
+import { AddBannersComponent } from './user-management/Add-Banners/Add-Banners.component';
+import { DeleteCacherComponent } from './user-management/delete-cacher/delete-cacher.component';
 export const appRoutes: Routes = [
     // { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     {
@@ -36,10 +39,46 @@ export const appRoutes: Routes = [
         path: 'useradd/:id/:userType', component: UserAddComponent, canActivate: [AuthGuard]
     },
     {
-        path: 'addconfig/:id/:memRefNo/:userType', component: AddconfigComponent, canActivate: [AuthGuard]
+        path: 'mailboxconfig/:id/:memRefNo/:userType', component: MailboxConfigComponent, canActivate: [AuthGuard]
     },
     {
-        path: 'addsafiltersort/:id/:memRefNo/:userType', component: addsafiltersortComponent, canActivate: [AuthGuard]
+        path: 'processconfig/:id/:memRefNo/:userType', component: ProcessConfigComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'webdesign/:id/:memRefNo/:userType', component: LogoUploadComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'websiteconfigurations/:id/:memRefNo/:userType', component: UserconfiglistComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'mailtemplate/:id/:memRefNo/:userType', component: MailtemplatelistComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'dynamicpages/:id/:memRefNo/:userType', component: dynamicpagelistComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'productlist/:id/:memRefNo/:userType', component: productlistComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'productbulkupload/:id/:memRefNo/:userType', component: productBulkUploadComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'headerlinks/:id/:memRefNo/:userType', component: HeaderlinksComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'homebanners/:id/:memRefNo/:userType', component: AddBannersComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'activitylogs/:id/:memRefNo/:userType', component: ActivitylogComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'safilterssort/:id/:memRefNo/:userType', component: safiltersortlistComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'deletecacher/:id/:memRefNo/:userType', component: DeleteCacherComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'addconfig/:id/:memRefNo/:userType', component: AddconfigComponent, canActivate: [AuthGuard]
     },
     {
         path: 'addcolorconfig/:id/:memRefNo/:userType', component: AddColorConfigComponent, canActivate: [AuthGuard]

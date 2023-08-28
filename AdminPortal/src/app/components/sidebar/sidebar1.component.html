@@ -1,0 +1,49 @@
+<div class="logo">
+    <a href="http://distone.com" target="_blank" class="simple-text">
+        <div class="logo-img">
+            <img src="assets/img/BRP-Logo-White.png" />
+        </div>
+        <span class="sidebar-admin-txt">Admin Portal</span>
+    </a>
+</div>
+<div class="sidebar-wrapper">
+    <form class="navbar-form navbar-right" role="search" *ngIf="isMobileMenu()">
+        <div class="form-group form-black is-empty">
+            <input type="text" class="form-control" placeholder="Search">
+            <span class="material-input"></span>
+        </div>
+        <button type="submit" class="btn btn-white btn-round btn-just-icon">
+            <i class="material-icons">search</i>
+            <div class="ripple-container"></div>
+        </button>
+    </form>
+
+    <div class="nav-container" *ngIf="isAdmin">
+        <ul class="nav">
+            <li routerLinkActive="active" id="liDashboard">
+                <a [routerLink]="['/dashboard']">
+                    <i (click)="GoToDashboard()" class="material-icons">dashboard</i>
+                    <p (click)="GoToDashboard()">Dashboard</p>
+                </a>
+            </li>
+            <li routerLinkActive="active" id="liAdmin">
+                <a [routerLink]="['/userlist', 'Admin']">
+                    <i (click)="GoToAdmin()" class="material-icons">person</i>
+                    <p (click)="GoToAdmin()">Admin Users</p>
+                </a>
+            </li>
+            <li routerLinkActive="active" id="liCustomer">
+                <a [routerLink]="['/userlist', 'Client']">
+                    <i (click)="GoToClient()" class="material-icons">person</i>
+                    <p (click)="GoToClient()">Customer</p>
+                </a>
+            </li>
+            <li routerLinkActive="active" *ngIf="isMobileMenu()" (click)="Logout()">
+                <a>
+                    <i class="material-icons">person</i>
+                    <p>Logout</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

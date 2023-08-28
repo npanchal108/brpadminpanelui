@@ -1,134 +1,142 @@
 <div class="main-content" style="margin-top:0">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header" data-background-color="darkblue">
-                        <table width=100%;>
-                            <tr>
-                                <td>
-                                    <h4 class="title">Mailbox Configuration</h4>
-                                    <p class="category">Manage your email configuration</p>
-                                </td>
-                                <td style="text-align: right;"><button (click)="oncreatenew()" class="btn btn-danger">Add New</button></td>
-                            </tr>
-                        </table>
-                    </div>
-
-
-
-                    <div *ngIf="Mailconfiglist!=undefined && Mailconfiglist!=null && flag==true" class="card-content table-responsive table-mobile">
-
-                        <!-- <a (click)="onEditconf()" style="cursor: pointer;">
-              <i class="material-icons small">add_circle</i>
-            </a> -->
-                        <table class="table">
-                            <thead class="text-info">
-                                <tr>
-                                    <th>Name</th>
-                                    <th>UserName</th>
-                                    <th>Display Name</th>
-                                    <th>Company</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let conf of Mailconfiglist">
-                                    <td data-title="Name">{{conf.MailBoxName}}</td>
-                                    <td data-title="UserName">{{conf.UserName}}</td>
-                                    <td data-title="Display Name">{{conf.DisplayName}}</td>
-                                    <td data-title="Company">{{conf.Company}}</td>
-                                    <td style="cursor: pointer;" class="btnalign">
-                                        <button (click)="onEditconf(conf)" class="btn btn-default">Edit</button>
-                                        <!-- <a >
-                      <i class="material-icons">mode_edit</i>
-                    </a> -->
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <hr>
-
-                    </div>
-
-
-
-                    <div class="card-content" *ngIf="flag==false">
-                        <form #mailConfigForm="ngForm">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group form-black label-floating" [ngClass]="{'is-empty': mail.SMTPServer=='','is-focused' : mail.SMTPServer!=''}">
-                                        <label class="control-label">SMTP Server</label>
-                                        <input type="text" name="SMTPServer" #SMTPServer="ngModel" value="mail.SMTPServer" [value]="mail.SMTPServer" [(ngModel)]="mail.SMTPServer" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group form-black label-floating" [ngClass]="{'is-empty': mail.SMTPPort==null,'is-focused' : mail.SMTPPort>0}">
-                                        <label class="control-label">SMTP Port</label>
-                                        <input class="validate" type="text" name="SMTPPort" #SMTPPort="ngModel" [(ngModel)]="mail.SMTPPort" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group form-black label-floating" [ngClass]="{'is-empty': mail.MailFrom=='','is-focused' : mail.MailFrom!=''}">
-                                        <label class="control-label">Mail From</label>
-                                        <input type="text" name="MailFrom" #MailFrom="ngModel" [(ngModel)]="mail.MailFrom" class="form-control" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
-                                    </div>
-                                </div>
+            <div class="custom-container">
+                <div class="custom-inner-container">
+                    <div class="col-md-12">
+                        <div *ngIf="Mailconfiglist!=undefined && Mailconfiglist!=null && flag==true">
+                            <h5>Mailbox Configuration
+                                <small>Manage your email configuration</small>
+                                <button class="header-button" (click)="oncreatenew()">Add New</button>
+                            </h5>
+                            <div class="record-count-section">
+                                <label>
+                                    Search:
+                                    <input type="text" (input)="applyFilter()" [(ngModel)]="searchText" />
+                                </label>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group form-black label-floating" [ngClass]="{'is-empty': mail.UserName=='','is-focused' : mail.UserName!=''}">
-                                        <label class="control-label">User Name</label>
-                                        <input type="text" name="UserName" #UserName="ngModel" [(ngModel)]="mail.UserName" class="form-control" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                            <table class="table table-striped table-bordered custom-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>UserName</th>
+                                        <th>Display Name</th>
+                                        <th>Company</th>
+                                        <th style="text-align: center;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let conf of filteredMailConfigList">
+                                        <td data-title="Name">{{conf.MailBoxName}}</td>
+                                        <td data-title="UserName">{{conf.UserName}}</td>
+                                        <td data-title="Display Name">{{conf.DisplayName}}</td>
+                                        <td data-title="Company">{{conf.Company}}</td>
+                                        <td class="font-20" align="center">
+                                            <button (click)="onEditconf(conf)" class="btn-icon">
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div *ngIf="flag==false">
+                            <h5>Mailbox Configuration
+                                <small>Manage your email configuration</small>
+                            </h5>
+                            <div class="card-content">
+                                <form #mailConfigForm="ngForm">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group form-black label-floating "
+                                                [ngClass]="{'is-empty': mail.SMTPServer=='','is-focused' : mail.SMTPServer!=''}">
+                                                <label class="control-label">SMTP Server</label>
+                                                <input type="text" name="SMTPServer" #SMTPServer="ngModel"
+                                                    value="mail.SMTPServer" [value]="mail.SMTPServer"
+                                                    [(ngModel)]="mail.SMTPServer" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group form-black label-floating"
+                                                [ngClass]="{'is-empty': mail.SMTPPort==null,'is-focused' : mail.SMTPPort>0}">
+                                                <label class="control-label">SMTP Port</label>
+                                                <input class="validate" type="text" name="SMTPPort" #SMTPPort="ngModel"
+                                                    [(ngModel)]="mail.SMTPPort" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group form-black label-floating"
+                                                [ngClass]="{'is-empty': mail.MailFrom=='','is-focused' : mail.MailFrom!=''}">
+                                                <label class="control-label">Mail From</label>
+                                                <input type="text" name="MailFrom" #MailFrom="ngModel"
+                                                    [(ngModel)]="mail.MailFrom" class="form-control" required
+                                                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group form-black label-floating" [ngClass]="{'is-empty': mail.Password=='','is-focused' : mail.Password!=''}">
-                                        <label class="control-label">Password</label>
-                                        <input type="password" name="Password" #Password="ngModel" [(ngModel)]="mail.Password" class="form-control" required>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group form-black label-floating"
+                                                [ngClass]="{'is-empty': mail.UserName=='','is-focused' : mail.UserName!=''}">
+                                                <label class="control-label">User Name</label>
+                                                <input type="text" name="UserName" #UserName="ngModel"
+                                                    [(ngModel)]="mail.UserName" class="form-control" required
+                                                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group form-black label-floating"
+                                                [ngClass]="{'is-empty': mail.Password=='','is-focused' : mail.Password!=''}">
+                                                <label class="control-label">Password</label>
+                                                <input type="password" name="Password" #Password="ngModel"
+                                                    [(ngModel)]="mail.Password" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group form-black label-floating"
+                                                [ngClass]="{'is-empty': mail.ReplyTo=='','is-focused' : mail.ReplyTo!=''}">
+                                                <label class="control-label">Reply To</label>
+                                                <input type="text" name="ReplyTo" #ReplyTo="ngModel"
+                                                    [(ngModel)]="mail.ReplyTo"
+                                                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group form-black label-floating" [ngClass]="{'is-empty': mail.ReplyTo=='','is-focused' : mail.ReplyTo!=''}">
-                                        <label class="control-label">Reply To</label>
-                                        <input type="text" name="ReplyTo" #ReplyTo="ngModel" [(ngModel)]="mail.ReplyTo" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" class="form-control">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group form-black label-floating"
+                                                [ngClass]="{'is-empty': mail.DisplayName=='','is-focused' : mail.DisplayName!=''}">
+                                                <label class="control-label">Display Name</label>
+                                                <input type="text" name="DisplayName" #DisplayName="ngModel"
+                                                    [(ngModel)]="mail.DisplayName" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group form-black label-floating"
+                                                [ngClass]="{'is-empty': mail.Company=='','is-focused' : mail.Company!=''}">
+                                                <label class="control-label">Company Name</label>
+                                                <input type="text" name="Company" #Company="ngModel"
+                                                    [(ngModel)]="mail.Company" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group form-black label-floating mt-4">
+                                                <mat-checkbox [(ngModel)]="mail.IsSSL" name="IsSSL">SSL</mat-checkbox>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-
+                                    <button class="custom-white-btn" (click)="back()">Back</button>
+                                    <button class="custom-btn" (click)="OnSubmit(mailConfigForm)">Submit</button>
+                                    <button class="custom-btn" (click)="Delete()">Delete</button>
+                                    <button class="custom-btn" (click)="sendtestingmail()">Test Email</button>
+                                    <div class="clearfix"></div>
+                                </form>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group form-black label-floating" [ngClass]="{'is-empty': mail.DisplayName=='','is-focused' : mail.DisplayName!=''}">
-                                        <label class="control-label">Display Name</label>
-                                        <input type="text" name="DisplayName" #DisplayName="ngModel" [(ngModel)]="mail.DisplayName" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group form-black label-floating" style="margin-top:39px;">
-                                        <mat-checkbox [(ngModel)]="mail.IsSSL" name="IsSSL">SSL</mat-checkbox>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group form-black label-floating" [ngClass]="{'is-empty': mail.Company=='','is-focused' : mail.Company!=''}">
-                                        <label class="control-label">Company Name</label>
-                                        <input type="text" name="Company" #Company="ngModel" [(ngModel)]="mail.Company" class="form-control">
-                                        <!-- <span *ngIf="mail.Company!=undefined && mail.Company!=null && mail.Company!=''">{{mail.Company}}</span> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <button (click)="back()" class="btn btn-default pull-right">Back</button>
-                            <button class="btn btn-info pull-right" (click)="OnSubmit(mailConfigForm)">Submit</button>
-                            <button (click)="Delete()" class="btn btn-primary pull-right">Delete</button>
-                            <button (click)="sendtestingmail()" class="btn btn-info pull-right">Test Email</button>
-                            <div class="clearfix"></div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

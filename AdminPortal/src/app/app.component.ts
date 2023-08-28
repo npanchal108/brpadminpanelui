@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
-import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
+import { Subject } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { LoadingService } from './services/loading.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Component({

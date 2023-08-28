@@ -1,0 +1,94 @@
+/* styles.css or your component's CSS file */
+.navbar {
+    background: #31322D;
+    padding: 5px 10px;
+}
+
+.navbar .logo img {
+    width: 100px;
+}
+
+.navbar .logo-section {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar .sidebar-admin-txt {
+    text-transform: capitalize;
+    margin-left: 40px;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    font-size: 28px;
+}
+
+.navbar .navbar-collapse {
+    align-items: center;
+    justify-content: start;
+    margin-left: 100px;
+}
+
+.navbar .nav-right-section {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.navbar a {
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.navbar .nav-custom-section {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar .nav-bar-menu-items {
+    display: flex;
+    width: 70%;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.navbar a.menu-link {
+    /* background: #464741; */
+    padding: 10px;
+    margin: 0 10px 0 0;
+    border: 1px solid #464741;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+}
+
+a.menu-link.active {
+    background: #464741;
+}
+
+.navbar .welcomtxt {
+    color: white;
+    font-size: 20px;
+    line-height: 2.42857;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+}
+
+/* app.component.css */
+.spacer {
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+
+    /* Adjust styles for smaller screens */
+    .spacer {
+        display: none;
+    }
+}

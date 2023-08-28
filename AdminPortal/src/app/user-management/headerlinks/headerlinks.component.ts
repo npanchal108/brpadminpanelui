@@ -3,8 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MailConfigService } from '../../services/mailbox-config.service.';
 import { LoadingService } from '../../services/loading.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-
+import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-headerlinks',
@@ -25,6 +24,8 @@ export class HeaderlinksComponent implements OnInit {
   showtype:any;
   parentseq:any;
   ismenu:any;
+  filteredHeaderlinkList: any[] = [];
+  searchText: string = '';
   constructor(private dialog: MatDialog,private route: ActivatedRoute, private MailConfigService:MailConfigService,  private toastr: ToastrService,private router: Router, private loadingService: LoadingService, private changeDetectorRef:ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -51,8 +52,17 @@ export class HeaderlinksComponent implements OnInit {
     this.sendMessage('start');
     this.MailConfigService.GetHeaderlinklist(this.memRefNo).subscribe((data: any) => {
       this.headerlinklist = data;
+      this.filteredHeaderlinkList = this.headerlinklist;
       this.sendMessage('stop');   
     });
+  }
+  applyFilter() {
+    this.filteredHeaderlinkList = this.headerlinklist.filter(item => {
+      return Object.values(item).some((value: any) =>
+        value && value.toString().toLowerCase().includes(this.searchText.toLowerCase())
+      );
+    });
+   
   }
   onEditLink(linkid){
     this.showtype=2;
