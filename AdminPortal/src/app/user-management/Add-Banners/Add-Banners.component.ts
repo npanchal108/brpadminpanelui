@@ -29,6 +29,10 @@ export class AddBannersComponent implements OnInit {
   targeturl:any;
   types:any='home';
   linkname:any;
+  filteredBannerlist: any[] = [];
+  searchText: string = '';
+  page: number = 1;
+  totalPage: number;
   constructor(private route: ActivatedRoute,private userprocesstimeService: UserprocesstimeService, private MailConfigService:MailConfigService,  private toastr: ToastrService,private router: Router, private loadingService: LoadingService, private changeDetectorRef:ChangeDetectorRef) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
@@ -43,21 +47,31 @@ this.GetAllBanners();
     this.ImageUrl='';
     this.IsActive=true;
     this.targeturl='';
-    //this.types='home';
     this.linkname='';
+  }
+
+  pageChanged(event: any): void {
+    this.page = event;
+  }
+
+  applyFilter() {
+    this.filteredBannerlist = this.Bannerlist.filter(item => {
+      return Object.values(item).some((value: any) =>
+        value && value.toString().toLowerCase().includes(this.searchText.toLowerCase())
+      );
+    });
+   
   }
 
    GetAllBanners(){
     this.showtype=1;
-    this.sendMessage('start');
     this.userprocesstimeService.GetBannerListforClient(this.memRefNo).subscribe((data: any) => {
       this.Bannerlist = data;
-      this.sendMessage('stop');   
+      this.filteredBannerlist = this.Bannerlist;
     });
    }
    getBannerDetails(id){
     this.showtype=2;
-    this.sendMessage('start');
     this.userprocesstimeService.GetBannerDetailsByID(this.memRefNo,id).subscribe((data: any) => {
       this.BannerId=data.BannerId;
       this.Title=data.Title;
@@ -67,7 +81,6 @@ this.GetAllBanners();
       this.targeturl=data.targeturl;
       this.types=data.types;
       this.linkname=data.linkname;
-      this.sendMessage('stop');   
     });
    }
 
@@ -79,18 +92,10 @@ this.GetAllBanners();
   }
 
    OnUpload(){
-    //  if(this.Title==undefined || this.Title==''){
-    //    this.toastr.error('Please Insert Title of the image')
-    //    return;
-    //  }
      if(this.types==undefined || this.types==null || this.types==''){
       this.toastr.error('Please Insert Type of the image')
       return;
     }
-    //  else if(this.Description==undefined || this.Description==''){
-    //   this.toastr.error('Please Insert Title of the Description')
-    //   return;
-    // }
 
     else if((this.ImageUrl==undefined || this.ImageUrl=='' || this.ImageUrl==null) && (this.SelectedFile==undefined || this.SelectedFile==null)){
       this.toastr.error('Please Select The Image File')
@@ -98,7 +103,6 @@ this.GetAllBanners();
     }
     {
       
-    this.sendMessage('start');
     const fd = new FormData();
     if(this.SelectedFile!=undefined && this.SelectedFile!=null){
       fd.append('FileName',this.SelectedFile.name);        
@@ -115,20 +119,13 @@ this.GetAllBanners();
      fd.append('linkname',this.linkname);     
      console.log('Banner pages',fd);   
     this.userprocesstimeService.PostBannerImage(fd).subscribe((data: any) => {      
-      this.sendMessage('stop');
       this.toastr.success(data.Message);      
       this.GetAllBanners();
     });
-    this.sendMessage('stop');
   }
   }
   
   ngOnInit() {
    
   }
-  sendMessage(message): void {
-    //this.loadingService.LoadingMessage(message);
-  }
-  
-
 }

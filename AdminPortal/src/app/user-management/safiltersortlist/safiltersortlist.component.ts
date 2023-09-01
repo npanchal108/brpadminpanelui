@@ -19,26 +19,33 @@ export class safiltersortlistComponent implements OnInit {
   configlist:any;
   userType: string;
   id:string;
+  filteredConfiglist: any[] = [];
+  searchText: string = '';
+  page:number = 1;
   constructor(public dialog: MatDialog,private route: ActivatedRoute, private MailConfigService:MailConfigService,  private toastr: ToastrService,private router: Router, private loadingService: LoadingService, private changeDetectorRef:ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.sendMessage('start');
     this.id = this.route.snapshot.paramMap.get('id');
     this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
     this.userType = this.route.snapshot.paramMap.get('userType');
     
     this.MailConfigService.GetsafiltersortList(this.memRefNo).subscribe((data: any) => {
       this.configlist = data;
-      this.sendMessage('stop');
-   
+      this.filteredConfiglist = this.configlist;
     });
+  }
+
+  applyFilter() {
+    this.filteredConfiglist = this.configlist.filter(item => {
+      return Object.values(item).some((value: any) =>
+        value && value.toString().toLowerCase().includes(this.searchText.toLowerCase())
+      );
+    });
+    this.page = 1;
   }
 
   onEditconf(ConfigId){
     this.router.navigate(['/addsafiltersort',this.id,this.memRefNo, ConfigId]);
-  }
-  sendMessage(message): void {
-    this.loadingService.LoadingMessage(message);
   }
 
   openDialog(linkid): void {

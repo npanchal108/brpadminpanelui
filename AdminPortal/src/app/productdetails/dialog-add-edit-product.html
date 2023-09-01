@@ -7,13 +7,6 @@
                     <div class="card-content">
                         <form #productForm="ngForm">
                             <div class="row">
-                                <!-- <div class="col-md-12">
-                                    <label>Doc Type Name</label>
-                                    <div class="form-group form-black label-floating">
-                                        <input class="validate" [(ngModel)]="docTypeName" type="text" name="DocTypeName"
-                                            class="form-control" required>
-                                    </div>
-                                </div> -->
                                 <div class="col-md-12">
                                     <label>Doc Type</label>
                                     <div class="form-group form-black label-floating">
@@ -83,6 +76,6 @@
     </div>
 </div>
 <div>
-    <button class="btn btn-default pull-right" (click)="onSave()">Save</button>
-    <button class="btn btn-default pull-right" (click)="onCancel()" style="margin-left:10px">Cancel</button>
+    <button class="custom-white-btn" (click)="onCancel()" style="margin-left:10px">Cancel</button>
+    <button class="custom-btn" (click)="onSave()">Save</button>
 </div>

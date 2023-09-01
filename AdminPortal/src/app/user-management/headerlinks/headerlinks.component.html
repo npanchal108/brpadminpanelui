@@ -5,49 +5,47 @@
                 <div class="custom-inner-container">
                     <h5> Header Link List
                         <small>Manage your Header Links</small>
-                        <button class="header-button" (click)="OnAddheaderlink()">Add New</button>
+                        <button *ngIf="showtype==1" class="header-button" (click)="OnAddheaderlink()">Add New</button>
                     </h5>
-                    <div class="record-count-section">
+                    <div *ngIf="showtype==1" class="record-count-section">
                         <label>
                             Search:
                             <input type="text" (input)="applyFilter()" [(ngModel)]="searchText" />
                         </label>
                     </div>
-                    <div class="col-md-12">
-                        <div *ngIf="filteredHeaderlinkList!=null && filteredHeaderlinkList!=undefined && showtype==1"
-                            class="card-content table-responsive table-mobile">
-                            <table class="table">
-                                <thead class="text-info">
-                                    <tr>
-                                        <th>Link Name</th>
-                                        <th>Link URL </th>
-                                        <th>Sequence</th>
-                                        <th>Popover</th>
-                                        <th>Type</th>
-                                        <th style="text-align: center;">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let headlink of filteredHeaderlinkList">
-                                        <td data-title="Name">{{headlink.linkname}}</td>
-                                        <td data-title="URL">{{headlink.linkurl}}</td>
-                                        <td data-title="Sequence">{{headlink.seq}}</td>
-                                        <td data-title="Popover">{{headlink.popover}}</td>
-                                        <td data-title="Type">{{headlink.types}}</td>
-                                        <td class="font-20" align="center">
-                                            <button class="btn-icon" (click)="onEditLink(headlink.linkid)">
-                                                <i class="fa fa-pencil"></i>
-                                            </button>
-                                            <button (click)="openDialog(headlink.linkid)" class="btn-icon"><i
-                                                    class="fa fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <hr>
-                        </div>
-                        <div class="card-content" *ngIf="showtype==2">
-
+                    <div *ngIf="filteredHeaderlinkList!=null && filteredHeaderlinkList!=undefined && showtype==1">
+                        <table class="table table-striped table-bordered custom-table">
+                            <thead class="text-info">
+                                <tr>
+                                    <th>Link Name</th>
+                                    <th>Link URL </th>
+                                    <th>Sequence</th>
+                                    <th>Popover</th>
+                                    <th>Type</th>
+                                    <th style="text-align: center;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let headlink of filteredHeaderlinkList">
+                                    <td data-title="Name">{{headlink.linkname}}</td>
+                                    <td data-title="URL">{{headlink.linkurl}}</td>
+                                    <td data-title="Sequence">{{headlink.seq}}</td>
+                                    <td data-title="Popover">{{headlink.popover}}</td>
+                                    <td data-title="Type">{{headlink.types}}</td>
+                                    <td class="font-20" align="center">
+                                        <button class="btn-icon" (click)="onEditLink(headlink.linkid)">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                                        <button (click)="openDialog(headlink.linkid)" class="btn-icon"><i
+                                                class="fa fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                    </div>
+                    <div *ngIf="showtype==2" class="col-md-12">
+                        <div class="card-content">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group form-black label-floating">
@@ -74,22 +72,19 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-3">
+                                    <label class="control-label">Types</label>
                                     <div class="form-group form-black label-floating">
-                                        <label class="control-label">Types</label>
-                                        <mat-form-field>
-                                            <mat-select placeholder="Select Type" [(ngModel)]="types" name="types"
-                                                class="validate" required>
-                                                <mat-option value="header">Header</mat-option>
-                                                <mat-option value="footer">Footer</mat-option>
-                                                <mat-option value="dashboard">Dashboard</mat-option>
-                                                <mat-option value="both">Both</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
+                                        <select class="form-select" aria-label="Select Types"
+                                            [(ngModel)]="types" name="types" required>
+                                            <option value="header">Header</option>
+                                            <option value="footer">Footer</option>
+                                            <option value="dashboard">Dashboard</option>
+                                            <option value="both">Both</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group form-black label-floating chkbx">
-                                        <label class="control-label">Link Popover</label>
                                         <mat-checkbox [(ngModel)]="popover" [ngModelOptions]="{standalone:true}"
                                             name="popover">popover</mat-checkbox>
                                     </div>
@@ -97,16 +92,14 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-3">
+                                    <label class="control-label">Parent Sequence</label>
                                     <div class="form-group form-black label-floating">
-                                        <label class="control-label">Parent Sequence</label>
-                                        <mat-form-field>
-                                            <mat-select [(ngModel)]="parentseq" placeholder="Select Parent Link"
-                                                name="parentLinkSequence">
-                                                <mat-option *ngFor="let link of headerlinklist" [value]="link.seq">
-                                                    {{link.linkname}}
-                                                </mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
+                                        <select class="form-select" aria-label="Select Parent Sequence"
+                                            [(ngModel)]="parentseq" name="parentLinkSequence" required>
+                                            <option selected>Select Sequence</option>
+                                            <option *ngFor="let link of headerlinklist" [value]="link.seq">{{ link.linkname }}
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -115,12 +108,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <button (click)="getheaderlinks()" class="btn btn-default pull-right">Back</button>
-                            <button class="btn btn-info pull-right" (click)="UpdateHeaderlinkByID()">Submit</button>
-
+                            <button (click)="getheaderlinks()" class="custom-white-btn">Back</button>
+                            <button class="custom-btn" (click)="UpdateHeaderlinkByID()">Submit</button>
                             <div class="clearfix"></div>
-                        </div>
-                        <div>
                         </div>
                     </div>
                 </div>

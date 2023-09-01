@@ -52,9 +52,7 @@ export class addsafiltersortComponent implements OnInit {
       if (data == true || data == "true") {
         form.resetForm();
         this.toastr.success("Sucessfully Updated");
-        //this.router.navigate(['/userlist', 'Client']);
-        localStorage.setItem('TabIndex', '8');
-        this.router.navigate(['/manageuser',this.uid ,this.memRefNo, 'Client']);
+        this.router.navigate(['/safilterssort',this.uid ,this.memRefNo, 'Client']);
       }
       else {
         this.toastr.error("Error occured please try again");
@@ -63,9 +61,7 @@ export class addsafiltersortComponent implements OnInit {
     });
   }
   back() {
-    // this.router.navigate(['/userlist', 'Client']);
-    localStorage.setItem('TabIndex', '8');
-    this.router.navigate(['/manageuser',this.uid ,this.memRefNo, 'Client']);
-  }
+    this.router.navigate(['/safilterssort',this.uid ,this.memRefNo, 'Client']);
+  } 
 
 }

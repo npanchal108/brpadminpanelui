@@ -1,53 +1,41 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header" data-background-color="darkblue">
-                        <table width=100%;>
-                            <tr>
-                                <td>
-                                    <h4 class="title">Product List</h4>
-                                    <p class="category">Manage your Products</p>
-                                </td>
-                                <td style="text-align: right;">
-                                    <button (click)="onEditconf(0)" class="btn btn-danger">Add New</button>
-                                </td>
-                            </tr>
-                        </table>
+            <div class="custom-container">
+                <div class="custom-inner-container">
+                    <h5> Product List
+                        <small>Manage your Products</small>
+                    </h5>
+                    <div class="record-count-section">
+                        <label>
+                            Search: 
+                            <input type="text" (input)="applyFilter()" [(ngModel)]="searchText"/>
+                        </label>
                     </div>
-                    <div *ngIf="filteredProductlist != null && filteredProductlist != undefined"
-                        class="card-content table-responsive table-mobile">
-                        <div>
-                            <mat-form-field appearance="outline">
-                                <mat-label>Search Item</mat-label>
-                                <input matInput placeholder="Search" [(ngModel)]="searchQuery">
-                            </mat-form-field>
-                            <button (click)="GetProductByFilter(page)" class="btn btn-danger">Search</button>
-                            <button (click)="clearFilter()" class="btn btn-danger">Reset</button>
-                        </div>
-                        <table class="table">
-                            <thead class="text-info">
+                    <div *ngIf="filteredProductlist != null && filteredProductlist != undefined">
+                        <table class="table table-striped table-bordered custom-table">
+                            <thead>
                                 <tr>
                                     <!-- <th>
                                         <input type="checkbox" (change)="selectAllCheckbox()">
                                     </th> -->
                                     <th>Product Name</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th style="text-align: center;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr
-                                    *ngFor="let product of filteredProductlist | paginate : { itemsPerPage:50, currentPage:page,totalItems:totalPage, id:'first' }">
+                                    *ngFor="let product of filteredProductlist | paginate : { itemsPerPage:15, currentPage:page,totalItems:totalPage, id:'first' }">
                                     <!-- <td>
                                         <input type="checkbox" [(ngModel)]="product.discontinued" (change)="selectItem(product.item1)">
                                     </td> -->
-                                    <td data-title="Name">{{product.item1}}</td>
-                                    <td data-title="Subject">{{product.discontinued == 0 ? "Active" : "Deactive"}}</td>
-                                    <td class="btnalign">
+                                    <td>{{product.item1}}</td>
+                                    <td>{{product.discontinued == 0 ? "Active" :
+                                        "Deactive"}}</td>
+                                    <td class="font-20" align="center">
                                         <button (click)="onEditconf(product.item1)"
-                                            class="btn btn-default">Edit</button>
+                                            class="btn-icon"> <i class="fa fa-pencil"></i></button>
                                     </td>
                                 </tr>
                             </tbody>

@@ -48,6 +48,10 @@ export const appRoutes: Routes = [
         path: 'webdesign/:id/:memRefNo/:userType', component: LogoUploadComponent, canActivate: [AuthGuard]
     },
     {
+        path: 'addwebdesign/:id/:memRefNo/:userType', component: AddColorConfigComponent, canActivate: [AuthGuard]
+        //path: 'addcolorconfig/:id/:memRefNo/:userType', component: AddColorConfigComponent, canActivate: [AuthGuard]
+    },
+    {
         path: 'websiteconfigurations/:id/:memRefNo/:userType', component: UserconfiglistComponent, canActivate: [AuthGuard]
     },
     {
@@ -81,9 +85,6 @@ export const appRoutes: Routes = [
         path: 'addconfig/:id/:memRefNo/:userType', component: AddconfigComponent, canActivate: [AuthGuard]
     },
     {
-        path: 'addcolorconfig/:id/:memRefNo/:userType', component: AddColorConfigComponent, canActivate: [AuthGuard]
-    },
-    {
         path: 'addmailtemplate/:id/:memRefNo/:userType', component: AddmailtemplateComponent, canActivate: [AuthGuard]
     },
     {
@@ -91,6 +92,9 @@ export const appRoutes: Routes = [
     },
     {
         path: 'addproduct/:id/:memRefNo/:itemId', component: addproductComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'addsafiltersort/:id/:memRefNo/:itemId', component: addsafiltersortComponent, canActivate: [AuthGuard]
     },
     {
         path: 'manageuser/:id/:memRefNo/:userType', component: UserManagementComponent, canActivate: [AuthGuard], children: [

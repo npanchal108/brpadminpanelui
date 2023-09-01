@@ -9,6 +9,7 @@ import { UserprocesstimeService } from '../../shared/userprocesstime.service';
 import { NgForm } from '@angular/forms';
 import { LoadingService } from '../../services/loading.service';
 import * as XLSX from "xlsx"
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-process-config',
@@ -301,4 +302,8 @@ export class ProcessConfigComponent implements OnInit {
     val = val.toString();
     return val.length == 1 ? "0" + val : val;
   }
+
+  tabChanged(event: MatTabChangeEvent) {
+  }
+
 }

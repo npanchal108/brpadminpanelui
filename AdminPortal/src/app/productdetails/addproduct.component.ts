@@ -57,29 +57,22 @@ export class addproductComponent implements OnInit {
     
     getItemList() {
         if (this.itemId != null && this.itemId != undefined && this.itemId != '') {
-            this.sendMessage('start');
             this.MailConfigService.GetproductDocBYId(this.memRefNo, this.itemId).subscribe((data: any) => {
                 this.productDetails = data;
-                this.sendMessage('stop');
             });
         }
     }
     getItemPrice() {
         if (this.itemId != null && this.itemId != undefined && this.itemId != '') {
-            this.sendMessage('start');
             this.MailConfigService.GetItemPriceByItem(this.memRefNo, this.itemId).subscribe((data: any) => {
                 this.productPriceDetails = data;
                 console.log('this.productPriceDetails', data)
-                this.sendMessage('stop');
             });
         }
     }
-    sendMessage(message): void {
-        //this.loadingService.LoadingMessage(message);
-    }
+   
     back() {
-        localStorage.setItem('TabIndex', '7');
-        this.router.navigate(['/manageuser', this.uid, this.memRefNo, 'Client']);
+        this.router.navigate(['/productlist', this.uid, this.memRefNo, 'Client']);
     }
 
     openDialog(MemRefNo, ItemDocId, Item, DocType, DocTypeName, DocTypeTextUrl): void {
@@ -125,7 +118,6 @@ export class addproductComponent implements OnInit {
             else {
                 this.toastr.error("Error occured please try again");
             }
-            this.sendMessage('stop');
         });
     }
 }

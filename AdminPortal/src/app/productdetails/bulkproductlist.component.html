@@ -6,6 +6,59 @@
                     <h5> Product Bulk Upload
                         <small>Manage your Bulk Products Details</small>
                     </h5>
+                    <div class="card-content">
+                        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+                            <mat-tab class="tab-border" label="Product Document">
+                                <div class="custom-file-upload-section">
+                                    <label for="images" class="drop-container" id="dropcontainer">
+                                        <span class="drop-title">Drag & Drop upload or browse to choose a file</span>
+                                        Supported formats: CSV, XLSX
+                                        <input type="file" #fileDocListInput class="bulk-file-input"
+                                            (change)="handleItemDocumentFileInput($event)">
+                                        <span>You can download sample file <a href="javascript:void(0)"
+                                                (click)="generateProductDocCsv()">here</a></span>
+                                    </label>
+                                    <div class="full-width-button-container">
+                                        <button style="width: auto;margin-top: 20px;float: none;" class="custom-btn" (click)="OnItemDocumentBulkUpload()">Upload Product
+                                            Document</button>
+                                    </div>
+                                </div>
+
+                            </mat-tab>
+                            <mat-tab class="tab-border" label="Product Price">
+                                <div class="custom-file-upload-section">
+                                    <label for="images" class="drop-container" id="dropcontainer">
+                                        <span class="drop-title">Drag & Drop upload or browse to choose a file</span>
+                                        Supported formats: CSV, XLSX
+                                        <input type="file" #filePriceListInput class="bulk-file-input"
+                                            (change)="handleItemPriceListFileInput($event)">
+                                        <span>You can download sample file <a href="javascript:void(0)"
+                                                (click)="generateProductPriceCsv()">here</a></span>
+                                    </label>
+                                    <div class="full-width-button-container">
+                                        <button  style="width: auto;margin-top: 20px;float: none;" class="custom-btn" (click)="OnItemPriceListBulkUpload()">Upload Product
+                                            Price</button>
+                                    </div>
+                                </div>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="custom-container">
+                <div class="custom-inner-container">
+                    <h5> Product Bulk Upload
+                        <small>Manage your Bulk Products Details</small>
+                    </h5>
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-4">
@@ -13,7 +66,7 @@
                                     (change)="handleItemDocumentFileInput($event)">
                             </div>
                             <div class="col-md-2">
-                                <button class="custom-btn" (click)="generateProductPriceCsv()">Download Sample
+                                <button class="custom-btn" (click)="generateProductDocCsv()">Download Sample
                                     file</button>
                             </div>
                             <div class="col-md-2">
@@ -27,7 +80,7 @@
                                     (change)="handleItemPriceListFileInput($event)">
                             </div>
                             <div class="col-md-2">
-                                <button class="custom-btn" (click)="generateProductDocCsv()">Download Sample
+                                <button class="custom-btn" (click)="generateProductPriceCsv()">Download Sample
                                     file</button>
                             </div>
                             <div class="col-md-2">
@@ -40,4 +93,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

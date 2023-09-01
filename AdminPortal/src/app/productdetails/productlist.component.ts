@@ -19,7 +19,7 @@ export class productlistComponent implements OnInit {
   totalPage: number;
 
   filteredProductlist: any[];
-  searchQuery: string = '';
+  searchText: string = '';
 
   constructor(private route: ActivatedRoute, private MailConfigService: MailConfigService, private toastr: ToastrService, private router: Router, private loadingService: LoadingService, private changeDetectorRef: ChangeDetectorRef) { }
 
@@ -43,32 +43,32 @@ export class productlistComponent implements OnInit {
     });
     return this.page;
   }
-  GetProductByFilter(pageNo){
-    this.MailConfigService.GetFilteredproductlist(this.memRefNo,this.searchQuery,pageNo).subscribe((data: any) => {
-      this.productlist = data;
-      this.filteredProductlist = this.productlist;
-      try {
-        this.totalPage = data[0].TotalPage;
-      } catch (Ex) {
-        this.totalPage = 1;
-      }
-      this.page = 1;
-      return this.page;
-    });
-  }
-  clearFilter(){
-    this.searchQuery = '';
-    this.page = 1;
-    this.getProductList(this.page);
-  }
-  // applyFilter() {
-  //   const lowerCaseQuery = this.searchQuery.toLowerCase().trim();
-  //   this.filteredProductlist = this.productlist.filter((i) => {
-  //     return (
-  //       i.item1.toLowerCase().includes(lowerCaseQuery)
-  //     );
+  // GetProductByFilter(pageNo){
+  //   this.MailConfigService.GetFilteredproductlist(this.memRefNo,this.searchQuery,pageNo).subscribe((data: any) => {
+  //     this.productlist = data;
+  //     this.filteredProductlist = this.productlist;
+  //     try {
+  //       this.totalPage = data[0].TotalPage;
+  //     } catch (Ex) {
+  //       this.totalPage = 1;
+  //     }
+  //     this.page = 1;
+  //     return this.page;
   //   });
   // }
+  // clearFilter(){
+  //   this.searchQuery = '';
+  //   this.page = 1;
+  //   this.getProductList(this.page);
+  // }
+  applyFilter() {
+    this.filteredProductlist = this.productlist.filter(item => {
+      return Object.values(item).some((value: any) =>
+        value && value.toString().toLowerCase().includes(this.searchText.toLowerCase())
+      );
+    });
+    //this.page = 1;
+  }
 
   onEditconf(itemDocID) {
     this.router.navigate(['/addproduct', this.id, this.memRefNo, itemDocID]);

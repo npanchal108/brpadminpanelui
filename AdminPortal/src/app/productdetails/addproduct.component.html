@@ -1,88 +1,83 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-header" data-background-color="darkblue">
-            <table width=100%;>
-              <tr>
-                <td>
-                  <h4 class="title">Product Details</h4>
-                  <p class="category">Manage your Products Details</p>
-                </td>
-              </tr>
-            </table>
-          </div>
-          <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-            <mat-tab label="Item Price Details">
-              <form #productPriceForm="ngForm">
-                <div *ngIf="productPriceDetails != null && productPriceDetails != 'undefined'"
-                  class="card-content table-responsive table-mobile">
-                  <div class="col-md-12">
-                    <label>Item : <h5>{{itemId}}</h5></label>
-                  </div>
-                  <div class="col-md-4">
-                    <label>Item Price</label>
-                    <div class="form-group form-black label-floating">
-                      <input type="text" type="number" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"
-                        [(ngModel)]="productPriceDetails.ItemPrice" name="ItemPrice" id="ItemPrice" class="form-control"
-                        required>
-                    </div>
-                  </div>
-                  <div class="col-md-2">
-                    <label>Is Item Active</label>
-                    <div class="form-group form-black label-floating chkbx">
-                      <mat-checkbox [(ngModel)]="productPriceDetails.ItemIsActive" name="Is Item Active">Is Item
-                        Active</mat-checkbox>
-                    </div>
-                  </div>
-                  <div class="col-md-2">
-                    <button class="btn btn-info pull-right" (click)="OnSave()">Submit</button>
-                  </div>
-                </div>
-              </form>
-            </mat-tab>
-            <mat-tab label="Item Doc Details">
-              <div class="card-content table-responsive table-mobile">
-                <div style="float: left;"><label>Item : <h5>{{itemId}}</h5></label></div>
-                <button style="float: right;" (click)="openDialog(memRefNo,0,itemId,'','','')"
-                  class="btn btn-danger">Add New</button>
-                <div *ngIf="productDetails != null && productDetails != 'undefined' &&  productDetails.length > 0">
-                  <table class="custom-table">
-                    <thead class="text-info">
-                      <tr>
-                        <th align="center" width="15%">Doc Type</th>
-                        <th align="center" width="15%">Name</th>
-                        <th align="center" width="40%">Detatils/Url</th>
-                        <th align="center" width="15%">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let product of productDetails">
-                        <td data-title="DocType" style="text-align: left;">{{product.DocType}}</td>
-                        <td data-title="DocTypeName"  style="text-align: left;">{{product.DocTypeName}}</td>
-                        <td data-title="ItemTextUrl" class="detailurl" style="width: 50px;text-align: left;">
-                          {{product.DocTypeTextUrl}}</td>
-                        <td style="text-align: center;" class="btnalign">
-                          <button
-                            (click)="openDialog(memRefNo,product.Id,itemId,product.DocType,product.DocTypeName,product.DocTypeTextUrl)"
-                            style="background: none;border: none;" mat-icon-button>
-                            <mat-icon>edit</mat-icon>
-                          </button>
-                          <button (click)="openDeleteDialog(product.Id)" style="background: none;border: none;"
-                            mat-icon-button>
-                            <mat-icon>delete</mat-icon>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <!-- <pagination-controls (pageChange)="page = $event"></pagination-controls> -->
+      <div class="custom-container">
+        <div class="custom-inner-container">
+          <div class="col-md-12">
+            <h5>Product Details
+              <small>Manage your Products Details</small>
+            </h5>
+            <div class="card-content">
+              <div class="row">
+                <div class="col-md-12">
+                  <label>Item : <h5>{{itemId}}</h5></label>
                 </div>
               </div>
-            </mat-tab>
-          </mat-tab-group>
-          <button (click)="back()" style="margin-right: 10px;" class="btn btn-default pull-right">Back</button>
+              <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+                <mat-tab label="Item Price Details">
+                  <form #productPriceForm="ngForm">
+                    <div *ngIf="productPriceDetails != null && productPriceDetails != 'undefined'"
+                      class="card-content table-responsive table-mobile">
+                      <div class="col-md-4">
+                        <label>Item Price</label>
+                        <div class="form-group form-black label-floating">
+                          <input type="text" type="number" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"
+                            [(ngModel)]="productPriceDetails.ItemPrice" name="ItemPrice" id="ItemPrice"
+                            class="form-control" required>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <label>Is Item Active</label>
+                        <div class="form-group form-black label-floating chkbx">
+                          <mat-checkbox [(ngModel)]="productPriceDetails.ItemIsActive" name="Is Item Active">Is Item
+                            Active</mat-checkbox>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <button class="custom-btn" (click)="OnSave()">Submit</button>
+                      </div>
+                    </div>
+                  </form>
+                </mat-tab>
+                <mat-tab label="Item Doc Details">
+                  <div>
+                    <button (click)="openDialog(memRefNo,0,itemId,'','','')" class="custom-btn">Add New</button>
+                    <div *ngIf="productDetails != null && productDetails != 'undefined' &&  productDetails.length > 0">
+                      <table class="table table-striped table-bordered custom-table">
+                        <thead>
+                          <tr>
+                            <th>Doc Type</th>
+                            <th>Name</th>
+                            <th>Detatils/Url</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let product of productDetails">
+                            <td data-title="DocType" style="text-align: left;">{{product.DocType}}</td>
+                            <td data-title="DocTypeName" style="text-align: left;">{{product.DocTypeName}}</td>
+                            <td data-title="ItemTextUrl" class="detailurl" style="width: 50px;text-align: left;">
+                              {{product.DocTypeTextUrl}}</td>
+                            <td style="text-align: center;" class="btnalign">
+                              <button class="btn-icon"
+                                (click)="openDialog(memRefNo,product.Id,itemId,product.DocType,product.DocTypeName,product.DocTypeTextUrl)">
+                                <i class="fa fa-pencil"></i>
+                              </button>
+                              <button (click)="openDeleteDialog(product.Id)" class="btn-icon">
+                                <i class="fa fa-trash"></i>
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <!-- <pagination-controls (pageChange)="page = $event"></pagination-controls> -->
+                    </div>
+                  </div>
+                </mat-tab>
+              </mat-tab-group>
+              <button (click)="back()" class="custom-white-btn">Back</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

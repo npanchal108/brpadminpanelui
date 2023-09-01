@@ -1,12 +1,24 @@
-<h2>Delete Cacher</h2>
-<button (click)="DeleteAllMemoryCacher()" class="btn btn-default pull-right">Delete All</button>
-
-
-
-<table id="table1" *ngIf="cacherlist!=null && cacherlist!=undefined" style="margin-top: 29px;" class="table table-striped">
-  <tr *ngFor="let order of cacherlist">
-    <td (click)="Deletecacher(order.sKey)">
-{{order.sKey}}
-    </td>
-    </tr>
-  </table>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="custom-container">
+        <div class="custom-inner-container">
+          <h5>Delete cacher
+            <small>Cash Data</small>
+            <button (click)="DeleteAllMemoryCacher()" class="custom-btn">Delete All</button>
+          </h5>
+          <div class="card-content">
+            <table id="table1" *ngIf="cacherlist!=null && cacherlist!=undefined" style="margin-top: 29px;"
+              class="table table-striped table-bordered custom-table">
+              <tr *ngFor="let order of cacherlist">
+                <td (click)="Deletecacher(order.sKey)">
+                  {{order.sKey}}
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

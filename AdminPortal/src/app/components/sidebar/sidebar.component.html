@@ -4,87 +4,90 @@
     <div class="nav-container" *ngIf="isAdmin">
       <ul class="nav sidebar-container">
         <li id="useradd">
-          <a [routerLink]="['/useradd', userId, userType]"  routerLinkActive="active">
-            <i class="material-icons">person</i>
-            <p>Customer Config</p>
+          <a [routerLink]="['/useradd', userId, userType]" routerLinkActive="active">
+            &nbsp;<i class="fa-solid fa-id-card fa-lg"></i> &nbsp; 
+            <p>User Profile</p>
           </a>
         </li>
         <li>
           <a [routerLink]="['/mailboxconfig', userId, memRefNo,userType]" routerLinkActive="active">
-            <i class="material-icons">person</i>
-            <p>Mail Config</p>
+            &nbsp; <i class="fa-solid fa-envelope  fa-lg"></i> &nbsp; 
+            <p>Mail Settings</p>
           </a>
         </li>
         <li>
-          <a [routerLink]="['/processconfig', userId, memRefNo,userType]"  routerLinkActive="active">
-            <i class="material-icons">person</i>
-            <p>Process Config</p>
+          <a [routerLink]="['/processconfig', userId, memRefNo,userType]" routerLinkActive="active">
+            &nbsp; <i class="fa-solid fa-chalkboard-user   fa-lg"></i> &nbsp; 
+            <p>Data Sync Settings</p>
           </a>
         </li>
         <li>
-          <a [routerLink]="['/webdesign', userId, memRefNo,userType]" routerLinkActive="active">
-            <i class="material-icons">person</i>
-            <p>Web Design</p>
+          <a [routerLink]="['/webdesign', userId, memRefNo,userType]" [ngClass]="checkActiveClass('logosettings')">
+            &nbsp; <i class="fa-solid fa-cubes fa-lg"></i> &nbsp; 
+            <p>Logo Settings</p>
           </a>
         </li>
         <li>
-          <a [routerLink]="['/websiteconfigurations', userId, memRefNo,userType]" routerLinkActive="active">
-            <i class="material-icons">person</i>
-            <p>Website Configurations</p>
+          <a [routerLink]="['/websiteconfigurations', userId, memRefNo,userType]" [ngClass]="checkActiveClass('websettings')">
+            &nbsp; <i class="fa-regular fa-window-maximize fa-lg"></i> &nbsp; 
+            <p>Website Settings</p>
           </a>
         </li>
         <li>
-          <a [routerLink]="['/mailtemplate', userId, memRefNo,userType]" routerLinkActive="active">
-            <i class="material-icons">person</i>
-            <p>Mail Template</p>
+          <a [routerLink]="['/mailtemplate', userId, memRefNo,userType]" [ngClass]="checkActiveClass('mailsettings')">
+            &nbsp; <i class="fa-solid fa-envelopes-bulk fa-lg"></i> &nbsp; 
+            <p>E-Mail Template</p>
           </a>
         </li>
         <li>
-          <a [routerLink]="['/dynamicpages', userId, memRefNo,userType]" routerLinkActive="active">
-            <i class="material-icons">person</i>
-            <p>Dynamic Pages</p>
+          <a [routerLink]="['/dynamicpages', userId, memRefNo,userType]" 
+            [ngClass]="checkActiveClass('dynamic-pages')">
+            <!-- &nbsp; <i class="fa fa-trash fa-lg" aria-hidden="true fa-lg"></i> &nbsp;  &nbsp; -->
+            &nbsp; <i class="fa-solid fa-table-columns fa-lg"></i> &nbsp; 
+
+            <p>Page Management</p>
           </a>
         </li>
         <li>
-          <a [routerLink]="['/productlist', userId, memRefNo,userType]" routerLinkActive="active">
-            <i class="material-icons">person</i>
-            <p>Product List</p>
+          <a [routerLink]="['/productlist', userId, memRefNo,userType]" [ngClass]="checkActiveClass('products')">
+            &nbsp; <i class="fa-solid fa-table-list fa-lg"></i> &nbsp; 
+            <p>Products</p>
           </a>
         </li>
         <li>
           <a [routerLink]="['/productbulkupload', userId, memRefNo,userType]" routerLinkActive="active">
-            <i class="material-icons">person</i>
-            <p>Product Bulk Upload</p>
+            &nbsp; <i class="fa-solid fa-cloud-arrow-up fa-lg"></i> &nbsp; 
+            <p>Bulk Upload</p>
           </a>
         </li>
         <li>
           <a [routerLink]="['/headerlinks', userId, memRefNo,userType]" routerLinkActive="active">
-            <i class="material-icons">person</i>
-            <p>Header Links</p>
+            &nbsp; <i class="fa-solid fa-link fa-lg"></i> &nbsp; 
+            <p>Navigation Settings</p>
           </a>
         </li>
         <li>
           <a [routerLink]="['/homebanners', userId, memRefNo,userType]" routerLinkActive="active">
-            <i class="material-icons">person</i>
-            <p>Home Banners</p>
+            &nbsp; <i class="fa-solid fa-house-laptop fa-lg"></i> &nbsp; 
+            <p>Banners Settings</p>
           </a>
         </li>
         <li>
           <a [routerLink]="['/activitylogs', userId, memRefNo,userType]" routerLinkActive="active">
-            <i class="material-icons">person</i>
+            &nbsp; <i class="fa-regular fa-file-lines fa-lg"></i> &nbsp; 
             <p>Activity Logs</p>
           </a>
         </li>
         <li>
-          <a [routerLink]="['/safilterssort', userId, memRefNo,userType]" routerLinkActive="active">
-            <i class="material-icons">person</i>
-            <p>SA FILTERS SORT</p>
+          <a [routerLink]="['/safilterssort', userId, memRefNo,userType]" [ngClass]="checkActiveClass('filtersorting')">
+            &nbsp; <i class="fa-solid fa-arrow-down-wide-short fa-lg"></i> &nbsp; 
+            <p>Filters Sortings</p>
           </a>
         </li>
         <li>
           <a [routerLink]="['/deletecacher', userId, memRefNo,userType]" routerLinkActive="active">
-            <i class="material-icons">person</i>
-            <p>Delete Cacher</p>
+            &nbsp; <i class="fa-solid fa-trash fa-lg"></i> &nbsp; 
+            <p>Delete Caching</p>
           </a>
 
         </li>
@@ -95,12 +98,12 @@
 
     <div class="example-sidenav-content">
       <button type="button" [disabled]="isDrawerDisabled" mat-button (click)="drawer.toggle()">
-        <i *ngIf="!drawer.opened" class="fa fa-chevron-right" aria-hidden="true"></i>
-        <i *ngIf="drawer.opened" class="fa fa-chevron-left" aria-hidden="true"></i>
+        <i *ngIf="!drawer.opened" class="fa fa-chevron-right" aria-hidden="true fa-lg"></i> &nbsp; 
+        <i *ngIf="drawer.opened" class="fa fa-chevron-left" aria-hidden="true fa-lg"></i> &nbsp; 
       </button>
     </div>
     <div [ngClass]="drawer.opened ? 'main-container with-sidebar' : 'main-container'">
-      <div class="col">
+      <div class="col fullheight-container">
         <router-outlet></router-outlet>
       </div>
     </div>

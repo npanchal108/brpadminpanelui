@@ -7,12 +7,6 @@
                         <small>Manage your Dynamic Pages</small>
                         <button class="header-button" (click)="onEditconf(0)">Add New</button>
                     </h5>
-                    <!-- <div class="record-count-section">
-                        <label>
-                            Search:
-                            <input type="text" (input)="applyFilter('blogs')" [(ngModel)]="searchPageNameQuery" />
-                        </label>
-                    </div> -->
                     <div class="col-md-12">
                         <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start"
                             (selectedTabChange)="tabChanged($event)">
@@ -62,8 +56,7 @@
                                 </div>
                             </mat-tab>
                             <mat-tab class="tab-border" label="Info">
-                                <div *ngIf="infoPageList != null && infoPageList != undefined"
-                                    class="card-content table-responsive table-mobile">
+                                <div *ngIf="infoPageList != null && infoPageList != undefined">
                                     <div class="record-count-section">
                                         <label>
                                             Search:
@@ -71,8 +64,8 @@
                                                 [(ngModel)]="searchPageNameQuery" />
                                         </label>
                                     </div>
-                                    <table class="table">
-                                        <thead class="text-info">
+                                    <table class="table table-striped table-bordered custom-table">
+                                        <thead>
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Title </th>
@@ -105,8 +98,7 @@
                                 </div>
                             </mat-tab>
                             <mat-tab class="tab-border" label="Our-Lines">
-                                <div *ngIf="ourlinesPageList != null && ourlinesPageList != undefined"
-                                    class="card-content table-responsive table-mobile">
+                                <div *ngIf="ourlinesPageList != null && ourlinesPageList != undefined">
                                     <div class="record-count-section">
                                         <label>
                                             Search:
@@ -114,8 +106,8 @@
                                                 [(ngModel)]="searchPageNameQuery" />
                                         </label>
                                     </div>
-                                    <table class="table">
-                                        <thead class="text-info">
+                                    <table class="table table-striped table-bordered custom-table">
+                                        <thead>
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Title </th>
@@ -148,8 +140,7 @@
                                 </div>
                             </mat-tab>
                             <mat-tab class="tab-border" label="Servies">
-                                <div *ngIf="servicesPageList != null && servicesPageList != undefined"
-                                    class="card-content table-responsive table-mobile">
+                                <div *ngIf="servicesPageList != null && servicesPageList != undefined">
                                     <div class="record-count-section">
                                         <label>
                                             Search:
@@ -157,8 +148,8 @@
                                                 [(ngModel)]="searchPageNameQuery" />
                                         </label>
                                     </div>
-                                    <table class="table">
-                                        <thead class="text-info">
+                                    <table class="table table-striped table-bordered custom-table">
+                                        <thead>
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Title </th>

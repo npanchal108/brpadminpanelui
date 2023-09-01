@@ -57,7 +57,7 @@ export class LogoUploadComponent implements OnInit {
     this.page = 1;
   }
   onEditconf(ConfigId) {
-    this.router.navigate(['/addcolorconfig', this.id, this.memRefNo, ConfigId]);
+    this.router.navigate(['/addwebdesign', this.id, this.memRefNo, ConfigId]);
   }
 
   onFileSelected(event) {

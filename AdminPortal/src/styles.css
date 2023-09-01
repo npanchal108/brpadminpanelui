@@ -18,26 +18,49 @@ body {
     height: 100%;
 }
 
-body {
+/* body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
-}
+} */
 
 body {
     font-family: 'Poppins', sans-serif !important;
 }
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #464741;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #fff;
+}
+
 
 .mat-mdc-button .mdc-button__label {
     position: fixed !important;
     top: 100px;
 }
 
-.custom-inner-container {
+.fullheight-container {
     border: 1px solid #c3c3c3;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 4px 4px 0px -1px #c3c3c3;
     background: #fff;
+    height: calc(100vh - 100px);
+    overflow-y: scroll;
 }
 
 .custom-inner-container h5 {
@@ -56,10 +79,12 @@ body {
     line-height: 1;
     color: #777;
 }
-.custom-btn:hover{
+
+.custom-btn:hover {
     background: #464741;
     border: 1px solid #464741;
 }
+
 .custom-btn {
     display: flex;
     float: right;
@@ -78,11 +103,13 @@ body {
     justify-content: center;
     align-items: center;
 }
-.custom-white-btn:hover{
+
+.custom-white-btn:hover {
     background: #464741;
     border: 1px solid #464741;
     color: #fff;
 }
+
 .custom-white-btn {
     display: flex;
     float: right;
@@ -106,9 +133,9 @@ body {
     float: right;
     position: relative;
     bottom: 50px;
-    background:  #31322D;
+    background: #31322D;
     margin: 0 10px 0 0;
-    border: 1px solid  #31322D;
+    border: 1px solid #31322D;
     border-radius: 5px;
     color: #fff;
     font-weight: 500;
@@ -117,11 +144,15 @@ body {
     padding: 7px;
     width: auto;
 }
+
 .custom-inner-container .header-button:hover {
     background: #464741;
     border: 1px solid #464741;
 }
 
+/* .custom-table{
+    margin-top: 10px;
+} */
 .custom-table thead th {
     font-weight: 500 !important;
     font-size: 15px !important;
@@ -229,4 +260,133 @@ body {
 .custom-checkbox {
     transform: scale(1.5);
     margin-right: 20px;
+}
+
+.mat-mdc-tab-group {
+    width: 100%;
+}
+
+.flex-single-row {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #c3c3c3;
+}
+
+.flex-single-row:last-child {
+    border: none !important;
+}
+
+.flex-single-row .flex-single-row-inner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.flex-single-row .flex-single-row-inner h4 {
+    width: 180px;
+}
+
+.custom-datepicker-mui {
+    width: 212px;
+    background: #f5f5f5ff;
+    padding: 15px;
+    margin-top: -20px;
+    border: 0;
+    border-bottom: 1px solid #cdcdcdff;
+    border-radius: 0;
+}
+
+.section-heading {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.section-heading p {
+    border-bottom: 1px solid;
+}
+
+.button-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-grid button {
+    margin: 0 10px !important;
+    width: auto !important;
+}
+
+.mat-mdc-tab-body.mat-mdc-tab-body-active {
+    border: 1px solid #cdcdcdff;
+    padding: 40px 10px;
+    margin: 0 0 20px 0;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+    height: auto !important;
+}
+
+.drop-container {
+    position: relative;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px dashed #555;
+    color: #444;
+    cursor: pointer;
+    transition: background .2s ease-in-out, border .2s ease-in-out;
+}
+
+.drop-container:hover {
+    background: #eee;
+    border-color: #111;
+}
+
+.drop-container:hover .drop-title {
+    color: #222;
+}
+
+.drop-title {
+    color: #444;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    transition: color .2s ease-in-out;
+}
+
+.custom-file-upload-section input[type=file]::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    background: #084cdf;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+}
+
+.custom-file-upload-section input[type=file]::file-selector-button:hover {
+    background: #0d45a5;
+}
+
+.full-width-button-container{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 20px;
 }
