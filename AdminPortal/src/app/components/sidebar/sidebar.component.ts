@@ -34,7 +34,7 @@ export class SidebarComponent implements OnInit {
     this.userId = parseInt(localStorage.getItem('UserId'));
     this.userType = localStorage.getItem('UserType');
     this.userroles = localStorage.getItem('Role');
-    this.memRefNo = localStorage.getItem('MemRefNo');
+    this.memRefNo = localStorage.getItem('memRefNo');
   }
 
   ngAfterContentChecked(): void {
@@ -52,14 +52,13 @@ export class SidebarComponent implements OnInit {
   }
 
   checkActiveClass(key) {
-    return key && this.activeMenus ? this.activeMenus.filter(x => x[key] && this.router.url.includes(x[key])).length == 1 ? 'active' : '' : ''
+    return this.activeMenus.map(element => {
+      if (element && element[key]) {
+        if(element[key].some(a => this.router.url.includes(a))){
+          return 'active'
+        }
+      }
+      return ''
+    });
   }
-  
-
-  // isMobileMenu() {
-  //   if ($(window).width() > 991) {
-  //     return false;
-  //   }
-  //   return true;
-  // };
 }

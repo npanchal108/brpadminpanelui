@@ -17,7 +17,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
-import { UserManagementComponent } from './user-management/user-management.component';
 import { MenuService } from './services/menu.service';
 import { CompanyProfileService } from './services/company-profile.service';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -67,7 +66,6 @@ import { MatMenuModule } from '@angular/material/menu';
     DashboardComponent,
     UserAddComponent,
     DialogOverviewExampleDialog,
-    UserManagementComponent,
     SidebarComponent,
     NavbarComponent,
     FooterComponent,
@@ -100,7 +98,11 @@ import { MatMenuModule } from '@angular/material/menu';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 3000, // Display time in milliseconds
+      positionClass: 'toast-top-right', // Position on the screen
+      preventDuplicates: true, // Prevent duplicate toasts
+    }),
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
     MatSelectModule,

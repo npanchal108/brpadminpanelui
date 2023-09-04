@@ -1,29 +1,41 @@
-.divlogo{
+.divlogo {
     background-color: black;
     padding: 30px;
 }
-.logo-img{
+
+.logo-img {
     padding-left: 190px;
 }
 
-.btn.btn-info{
+.btn.btn-info {
     background-color: black;
 }
 
-.form-group .form-control{
+.form-group .form-control {
     border-radius: 10px;
     text-indent: 20px;
     height: 50px;
 }
 
-.checkbox label, .radio label, label{
+.checkbox label,
+.radio label,
+label {
     font-size: 20px;
     line-height: 1.42857;
     color: black;
     font-weight: 500;
 }
 
-.btn.btn-info, .btn.btn-info:hover{
+.btn.btn-info,
+.btn.btn-info:hover {
     background-color: black;
     color: #FFFFFF;
+}
+
+.login-btn {
+    width: 100%;
+    background: #008B99 !important;
+    border: 1px solid #008B99 !important;
+    padding: 10px 0;
+    margin: 30px 0 0 0;
 }

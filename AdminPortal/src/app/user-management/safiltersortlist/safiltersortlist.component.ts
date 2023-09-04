@@ -44,7 +44,7 @@ export class safiltersortlistComponent implements OnInit {
     this.page = 1;
   }
 
-  onEditconf(ConfigId){
+  onEditconf(ConfigId : number){
     this.router.navigate(['/addsafiltersort',this.id,this.memRefNo, ConfigId]);
   }
 

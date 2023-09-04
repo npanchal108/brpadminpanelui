@@ -62,7 +62,7 @@ export class UserAddComponent implements OnInit {
     else {
       this.toastr.success("Web Site creation and Data Syncronization is in process please Wait...");
     }
-    //this.user.Password=Md5.hashStr(this.user.Password).toString();
+   
     this.userService.insertUser(this.user, this.userType).subscribe((data: any) => {
       if (data.Status == "Success") {
         //form.resetForm();

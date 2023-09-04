@@ -1,63 +1,40 @@
-<!-- <form #loginForm="ngForm" (ngSubmit)="OnSubmit(loginForm)">
-  <mat-card>
-    <mat-card-header>
-      <img src="assets/img/BRP-Logo-White.png" alt="Login Image">
-    </mat-card-header>
-    <mat-card-content>
-      <mat-form-field appearance="outline">
-        <mat-icon matSuffix>person</mat-icon>
-        <input matInput placeholder="Username" class="form-control" #UserName ngModel name="UserName" require>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-form-field>
-          <mat-label>Enter your password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" class="form-control" #Password ngModel name="Password" required>
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-        </mat-form-field>
-      </mat-form-field>
-    </mat-card-content>
-    <mat-card-actions>
-      <button type="submit" class="btn btn-info pull-right" [disabled]="!loginForm.valid">Login</button>
-    </mat-card-actions>
-  </mat-card>
-</form> -->
-<div class="main-content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-7">
-        <div class="card">
-          <div class="divlogo">
-            <img class="logo-img" src="assets/img/BRP-Logo-White.png" alt="Login Image">
+<div class="container-fluid  h-100" style="background: #002428; color: #002428;">
+  <div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+      <div class="col-md-6" style="border-right: 1px solid #61787A;">
+        <!-- Site Logo -->
+        <img class="logo-img" src="assets/img/BRP-Logo-White.png" alt="Login Image">
+      </div>
+      <div class="col-md-6">
+        <!-- Login Form -->
+        <form #loginForm="ngForm" (ngSubmit)="OnSubmit(loginForm)" class="col-md-10 offset-md-2" >
+          <div *ngIf="isLoginError" class="red-text center error-message">
+            <i class="material-icons">error</i> {{Errormsg}}
           </div>
-          <div class="card-content">
-            <form #loginForm="ngForm" (ngSubmit)="OnSubmit(loginForm)">
-              <div *ngIf="isLoginError" class="red-text center error-message">
-                <i class="material-icons">error</i> {{Errormsg}}
+          <div class="row">
+            <div class="col-md-12">
+              <label style="color: #DFE4E4;">User Name</label>
+              <div class="form-group form-black label-floating is-focused">
+                <input type="text" class="form-control" #UserName ngModel name="UserName" required>
               </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <label>User Name</label>
-                  <div class="form-group form-black label-floating is-focused">
-                    <input type="text" class="form-control" #UserName ngModel name="UserName" required>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <label>Password</label>
-                  <div class="form-group form-black label-floating is-focused">
-                    <input type="password" class="form-control" #Password ngModel name="Password" required>
-                  </div>
-                </div>
-              </div>
-              <button type="submit" class="btn btn-info pull-right" [disabled]="!loginForm.valid">Login</button>
-              <div class="clearfix"></div>
-            </form>
+            </div>
           </div>
-        </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label style="color: #DFE4E4;">Password</label>
+              <div class="form-group form-black label-floating is-focused">
+                <input type="password" class="form-control" #Password ngModel name="Password" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label style="color: #008B99;" *ngIf="isLoginError">{{Errormsg}}</label>
+            </div>
+          </div>
+          <button type="submit" class="btn  login-btn">Login</button>
+          <div class="clearfix"></div>
+        </form>
       </div>
     </div>
   </div>

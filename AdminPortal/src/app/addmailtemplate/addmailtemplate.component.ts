@@ -64,7 +64,7 @@ export class AddmailtemplateComponent implements OnInit ,PipeTransform {
       if (data == true || data == "true") {
         form.resetForm();
         this.toastr.success("Sucessfully Updated");
-        this.router.navigate(['/manageuser',this.uid ,this.memRefNo, 'Client']);
+        this.router.navigate(['/mailtemplate',this.uid ,this.memRefNo, 'Client']);
       }
       else {
         this.toastr.error("Error occured please try again");

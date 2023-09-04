@@ -9,7 +9,7 @@
             </a>
         </div>
 
-        <div class="collapse navbar-collapse" id="">
+        <div class="collapse navbar-collapse" *ngIf="isAdmin">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="menu-link" [routerLink]="['/userlist', 'Admin']" routerLinkActive="active">Users</a>
@@ -20,20 +20,7 @@
             </ul>
         </div>
         <div class="nav-right-section">
-            <span class="welcomtxt nav navbar-nav navbar-right"> Welcome Admin !</span>
-            <!-- <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="material-icons">person</i>
-                        <p class="hidden-lg hidden-md">Profile</p>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a (click)="Logout()">Log Out</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul> -->
+            <span class="welcomtxt nav navbar-nav navbar-right"> {{isAdmin == true ? 'Welcome Admin!' : 'Welcome ' + customerName }} </span>
         </div>
 
     </div>

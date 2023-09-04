@@ -3,7 +3,6 @@ import { AuthGuard } from './auth/auth.guard';
 import { UserListComponent } from './user-list/user-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserAddComponent } from './user-add/user-add.component';
-import { UserManagementComponent } from './user-management/user-management.component';
 import { LoginComponent } from './login/login.component';
 import { AddconfigComponent } from './addconfig/addconfig.component';
 import { addsafiltersortComponent } from './addsafiltersort/addsafiltersort.component';
@@ -49,7 +48,6 @@ export const appRoutes: Routes = [
     },
     {
         path: 'addwebdesign/:id/:memRefNo/:userType', component: AddColorConfigComponent, canActivate: [AuthGuard]
-        //path: 'addcolorconfig/:id/:memRefNo/:userType', component: AddColorConfigComponent, canActivate: [AuthGuard]
     },
     {
         path: 'websiteconfigurations/:id/:memRefNo/:userType', component: UserconfiglistComponent, canActivate: [AuthGuard]
@@ -95,22 +93,6 @@ export const appRoutes: Routes = [
     },
     {
         path: 'addsafiltersort/:id/:memRefNo/:itemId', component: addsafiltersortComponent, canActivate: [AuthGuard]
-    },
-    {
-        path: 'manageuser/:id/:memRefNo/:userType', component: UserManagementComponent, canActivate: [AuthGuard], children: [
-            
-            { path: 'logo-upload', component: LogoUploadComponent, canActivate:[AuthGuard] },
-            { path: 'mailbox-config', component: MailboxConfigComponent, canActivate:[AuthGuard] },
-            { path: 'process-config', component: ProcessConfigComponent, canActivate:[AuthGuard] },
-            { path: 'userconfiglist', component: UserconfiglistComponent, canActivate:[AuthGuard] },            
-            { path: 'safiltersortlist', component: safiltersortlistComponent, canActivate:[AuthGuard] },            
-            { path: 'mailtemplatelist', component: MailtemplatelistComponent, canActivate:[AuthGuard] },
-            { path: 'dynamicpagelist', component: dynamicpagelistComponent, canActivate:[AuthGuard] },
-            { path: 'headerlinks', component: HeaderlinksComponent, canActivate:[AuthGuard] },
-            { path: 'activitylog', component: ActivitylogComponent, canActivate:[AuthGuard] },
-            { path: 'productlist', component: productlistComponent, canActivate:[AuthGuard] },
-            
-        ]
     },
     {
         path: '', redirectTo: '/login', pathMatch: 'full'

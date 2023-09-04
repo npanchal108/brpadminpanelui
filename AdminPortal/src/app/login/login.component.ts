@@ -18,9 +18,9 @@ export class LoginComponent implements OnInit {
   isLoginError: boolean = false;
   Errormsg: string = '';
 
-  constructor(private userService: UserService,  private router: Router, private loadingService: LoadingService) {
+  constructor(private userService: UserService, private router: Router, private loadingService: LoadingService) {
     const md5 = new Md5();
-   }
+  }
 
   ngOnInit() {
     this.login = new Login();
@@ -43,14 +43,16 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('LoginUserID', data.UserID);
         localStorage.setItem('PrivateChannel', data.PrivateChannel);
         localStorage.setItem('Role', data.Role);
-        if (data.Role == "Admin")
+        if (data.Role == "Admin") {
           this.router.navigate(['/userlist/Admin']);
-          //this.router.navigate(['/dashboard']);
-        else
-          this.router.navigate(['/manageuser', data.UserID, data.MemRefNo, data.Role]);
-        this.sendMessage('stop');
+        }
+        else {
+          localStorage.setItem('UserId', data.UserID);
+          localStorage.setItem('UserType', data.Role);
+          localStorage.setItem('MemRefNo', data.MemRefNo);
+          this.router.navigate(['/useradd', data.UserID, data.Role]);
+        }
       }
-
     },
       (err: HttpErrorResponse) => {
         this.isLoginError = true;

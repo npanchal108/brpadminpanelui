@@ -56,9 +56,7 @@
                   <div class="col-md-4">
                     <div class="form-group form-black label-floating"
                       [ngClass]="{'is-empty': user.MemberRefNo=='','is-focused' :user.MemberRefNo!=''}">
-                      <label class="control-label" *ngIf="userType == 'Admin'">User ID</label>
-                      <label class="control-label" *ngIf="userType == 'Client'">Customer ID</label>
-
+                      <label class="control-label">{{userType == 'Admin' ? 'User ID' : 'Customer ID'}}</label>
                       <input type="text" name="MemberRefNo"  [(ngModel)]="user.MemberRefNo"
                         *ngIf="id == 0" class="validate" required class="form-control">
                       <input type="text" name="MemberRefNo"  [(ngModel)]="user.MemberRefNo"
@@ -68,7 +66,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-4">
-                    <label class="control-label" *ngIf="userType == 'Admin'">Project</label>
+                    <label class="control-label">Project</label>
                     <div class="form-group form-black label-floating">
                       <select *ngIf="id == 0" class="form-select" aria-label="Select Project"
                         [(ngModel)]="user.ProjectTypeID" name="ProjectTypeID" required>
@@ -158,7 +156,7 @@
                     </div>
                   </div>
                 </div>
-                <button (click)="back()" class="custom-white-btn">Back</button>
+                <button *ngIf="!isdesable" (click)="back()" class="custom-white-btn">Back</button>
                 <button class="custom-btn" type="submit">{{user.ButtenText}}</button>
                 <div class="clearfix"></div>
               </form>

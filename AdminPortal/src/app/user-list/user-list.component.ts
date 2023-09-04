@@ -71,7 +71,6 @@ export class UserListComponent implements OnInit {
   }
 
   onManageUser(useid, memRefNo) {
-    localStorage.setItem('TabIndex', '0');
     localStorage.setItem('UserId',useid );
     localStorage.setItem('UserType', this.userType);
     localStorage.setItem('MemRefNo', memRefNo);

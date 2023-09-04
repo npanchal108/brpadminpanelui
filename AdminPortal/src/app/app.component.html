@@ -1,22 +1,16 @@
-<div class="wrapper">
-  <app-navbar *ngIf="isLogin('login')"></app-navbar>
-  <div class="row" *ngIf="isLogin('login')">
-    <app-sidebar></app-sidebar>
-  </div>
-  <div *ngIf="!isLogin('login')" class="main-panel">
-    <router-outlet></router-outlet>
+<div *ngIf="isLogin('login');else login_content">
+  <div class="wrapper">
+    <ngx-toastr></ngx-toastr>
+    <app-navbar *ngIf="isLogin('login')"></app-navbar>
+    <div class="row" *ngIf="isLogin('login')">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div *ngIf="!isLogin('login')" class="main-panel">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>
 
-
-<!-- <div class="wrapper">
-  <div class="sidebar" data-color='blue' data-image="">
-    <app-sidebar *ngIf="isLogin('login')"></app-sidebar>
-    <div class="sidebar-background" style="background-image: url(../assets/img/sidebar-4.jpg)"></div>
-  </div>
-  <div class="main-panel">
-    <app-navbar *ngIf="isLogin('login')"></app-navbar>
-    <router-outlet></router-outlet>
-    <app-footer *ngIf="isLogin('login')"></app-footer>
-  </div>
-</div> -->
+<ng-template #login_content>
+  <app-login></app-login>
+</ng-template>

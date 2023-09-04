@@ -1,7 +1,7 @@
 <mat-drawer-container class="example-container" autosize>
   <!-- opened -->
   <mat-drawer #drawer class="example-sidenav" mode="side" [opened]="openSidebar">
-    <div class="nav-container" *ngIf="isAdmin">
+    <div class="nav-container">
       <ul class="nav sidebar-container">
         <li id="useradd">
           <a [routerLink]="['/useradd', userId, userType]" routerLinkActive="active">

@@ -11,12 +11,15 @@ declare var $:any;
 export class NavbarComponent implements OnInit {
 
   location: Location;
-
+  isAdmin: boolean = false;
+  customerName :string;
   constructor(location: Location, private router: Router) {
     this.location = location;
   }
 
   ngOnInit() {
+    localStorage.getItem("Role") == "Admin" ? this.isAdmin = true : this.isAdmin = false;
+    this.customerName = localStorage.getItem('MemberReferenceNo');
   }
 
   getTitle() {
@@ -38,6 +41,7 @@ export class NavbarComponent implements OnInit {
     localStorage.removeItem('Role');
     localStorage.removeItem('UserType');
     localStorage.removeItem('UserId');
+    localStorage.removeItem('MemRefNo');
     this.router.navigate(['/login']);
   }
   sidebarOpen() {

@@ -109,8 +109,6 @@ export class addproductComponent implements OnInit {
         console.log('item id', id);
     }
     OnSave() {
-        console.log('this.productPriceDetails', this.productPriceDetails);
-        console.log('form.value.ItemPrice', this.productPriceDetails.ItemPrice);
         this.MailConfigService.UpdateItemPrice(this.memRefNo, this.productPriceDetails.Item, this.productPriceDetails.ItemPrice, this.productPriceDetails.ItemIsActive).subscribe((data: any) => {
             if (data == true || data == "true") {
                 this.toastr.success("Sucessfully Updated");

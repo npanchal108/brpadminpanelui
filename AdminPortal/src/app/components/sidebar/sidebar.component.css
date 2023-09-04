@@ -13,7 +13,7 @@
 
 .example-sidenav {
     padding: 20px;
-    background: #31322D;
+    background: #002428;
 }
 
 .mat-drawer-content {
@@ -65,14 +65,14 @@
 }
 .mat-mdc-button.mat-mdc-button-base{
     height: 100%;
-    background: #31322D;
+    background: #002428;
     color: #FFF;
     border: 0;
     border-radius: 0;
     margin-left: -2px;    
 }
 .active{
-    background: #464741;
-    border: 1px solid #464741;
+    background: #008B99;
+    border: 1px solid #008B99;
     border-radius: 10px;
 }

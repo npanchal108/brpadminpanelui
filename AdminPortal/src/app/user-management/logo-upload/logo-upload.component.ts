@@ -39,7 +39,7 @@ export class LogoUploadComponent implements OnInit {
     }
     this.MailConfigService.getColorConfigList(this.memRefNo).subscribe(Reqs => {
       this.configlist = Reqs;
-      this.filteredConfigList = this.configlist;
+      this.filteredConfigList = this.configlist.filter(i => i.ColorConfigKey == "Logo");
       if (this.isdesable == true) {
         var getnewlist = [];
         getnewlist.push(this.configlist[0]);
