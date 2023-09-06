@@ -86,7 +86,7 @@ export const appRoutes: Routes = [
         path: 'addmailtemplate/:id/:memRefNo/:userType', component: AddmailtemplateComponent, canActivate: [AuthGuard]
     },
     {
-        path: 'adddynamicpage/:id/:memRefNo/:userType', component: adddynamicpageComponent, canActivate: [AuthGuard]
+        path: 'adddynamicpage/:id/:memRefNo/:userType/:activeTab', component: adddynamicpageComponent, canActivate: [AuthGuard]
     },
     {
         path: 'addproduct/:id/:memRefNo/:itemId', component: addproductComponent, canActivate: [AuthGuard]

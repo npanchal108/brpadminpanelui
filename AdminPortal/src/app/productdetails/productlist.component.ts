@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MailConfigService } from '../services/mailbox-config.service.';
 import { LoadingService } from '../services/loading.service';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-productlist',
@@ -21,17 +21,18 @@ export class productlistComponent implements OnInit {
   filteredProductlist: any[];
   searchText: string = '';
 
-  constructor(private route: ActivatedRoute, private MailConfigService: MailConfigService, private toastr: ToastrService, private router: Router, private loadingService: LoadingService, private changeDetectorRef: ChangeDetectorRef) { }
+  constructor(private spinner: NgxSpinnerService, private route: ActivatedRoute, private MailConfigService: MailConfigService, private toastr: ToastrService, private router: Router, private loadingService: LoadingService, private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.sendMessage('start');
     this.id = this.route.snapshot.paramMap.get('id');
     this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
     this.userType = this.route.snapshot.paramMap.get('userType');
     this.getProductList(this.page)
   }
-  getProductList(pageNo : number): number {
-    this.MailConfigService.Getproductlist(this.memRefNo,pageNo).subscribe((data: any) => {
+  getProductList(pageNo: number): number {
+    this.spinner.show();
+    this.MailConfigService.Getproductlist(this.memRefNo, pageNo).subscribe((data: any) => {
+      this.spinner.hide();
       this.productlist = data;
       this.filteredProductlist = this.productlist;
       try {
@@ -43,6 +44,26 @@ export class productlistComponent implements OnInit {
     });
     return this.page;
   }
+  applyFilter() {
+    if (this.searchText) {
+      this.spinner.show();
+      this.MailConfigService.GetFilteredproductlist(this.memRefNo, this.searchText, 1).subscribe((data: any) => {
+        this.productlist = data;
+        this.filteredProductlist = this.productlist;
+        try {
+          this.totalPage = data[0].TotalPage;
+        } catch (Ex) {
+          this.totalPage = 1;
+        }
+        this.spinner.hide();
+        this.page = 1;
+        return this.page;
+      });
+    }else{
+      this.getProductList(this.page);
+    }
+  }
+
   // GetProductByFilter(pageNo){
   //   this.MailConfigService.GetFilteredproductlist(this.memRefNo,this.searchQuery,pageNo).subscribe((data: any) => {
   //     this.productlist = data;
@@ -61,14 +82,14 @@ export class productlistComponent implements OnInit {
   //   this.page = 1;
   //   this.getProductList(this.page);
   // }
-  applyFilter() {
-    this.filteredProductlist = this.productlist.filter(item => {
-      return Object.values(item).some((value: any) =>
-        value && value.toString().toLowerCase().includes(this.searchText.toLowerCase())
-      );
-    });
-    //this.page = 1;
-  }
+  // applyFilter() {
+  //   this.filteredProductlist = this.productlist.filter(item => {
+  //     return Object.values(item).some((value: any) =>
+  //       value && value.toString().toLowerCase().includes(this.searchText.toLowerCase())
+  //     );
+  //   });
+  //   //this.page = 1;
+  // }
 
   onEditconf(itemDocID) {
     this.router.navigate(['/addproduct', this.id, this.memRefNo, itemDocID]);

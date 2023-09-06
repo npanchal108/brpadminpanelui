@@ -38,12 +38,18 @@ export class SidebarComponent implements OnInit {
   }
 
   ngAfterContentChecked(): void {
-    if(this.router.url != "/useradd/0/Client" && this.router.url != "/useradd/0/Admin" && this.router.url != "/userlist/Client" && this.router.url != "/userlist/Admin" && localStorage.getItem('UserType') == "Client" && localStorage.getItem('UserId')){
+    if (this.isAdmin == false && localStorage.getItem('UserId')) {
       this.isDrawerDisabled = false
       this.openSidebar = true;
-    } else {
-      this.isDrawerDisabled = true;
-      this.openSidebar = false;
+    }
+    else {
+      if (this.router.url != "/useradd/0/Client" && this.router.url != "/useradd/0/Admin" && this.router.url != "/userlist/Client" && this.router.url != "/userlist/Admin" && localStorage.getItem('UserType') == "Client" && localStorage.getItem('UserId')) {
+        this.isDrawerDisabled = false
+        this.openSidebar = true;
+      } else {
+        this.isDrawerDisabled = true;
+        this.openSidebar = false;
+      }
     }
     this.userId = parseInt(localStorage.getItem('UserId'));
     this.userType = localStorage.getItem('UserType');

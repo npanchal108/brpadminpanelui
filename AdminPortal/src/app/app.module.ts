@@ -55,10 +55,8 @@ import {NgIf} from '@angular/common';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule } from '@angular/material/menu';
-
-
-
-
+import { DatePipe } from '@angular/common';
+import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -115,9 +113,10 @@ import { MatMenuModule } from '@angular/material/menu';
     MatSlideToggleModule,
     MatSidenavModule, NgIf, MatButtonModule,
     MatMenuModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgxSpinnerModule
   ],
-  providers: [UserService, AuthGuard, MenuService, MailConfigService, LoadingService, CompanyProfileService, UserprocesstimeService,CsvGeneratorService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [DatePipe,UserService, AuthGuard, MenuService, MailConfigService, LoadingService, CompanyProfileService, UserprocesstimeService,CsvGeneratorService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
   // entryComponents: [
   //   DialogOverviewExampleDialog,

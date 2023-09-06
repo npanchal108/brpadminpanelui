@@ -6,7 +6,7 @@ import { MailConfigService } from '../../services/mailbox-config.service.';
 import { NgForm } from '@angular/forms';
 import { LoadingService } from '../../services/loading.service';
 import { UserprocesstimeService } from '../../shared/userprocesstime.service';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-mailbox-config',
   templateUrl: './mailbox-config.component.html',
@@ -23,7 +23,7 @@ export class MailboxConfigComponent implements OnInit {
   filteredMailConfigList: any[] = [];
   searchText: string = '';
   
-  constructor(private route: ActivatedRoute, private userprocesstimeService: UserprocesstimeService, private MailConfigService: MailConfigService, private toastr: ToastrService, private router: Router, private loadingService: LoadingService, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private spinner: NgxSpinnerService,private route: ActivatedRoute, private userprocesstimeService: UserprocesstimeService, private MailConfigService: MailConfigService, private toastr: ToastrService, private router: Router, private loadingService: LoadingService, private changeDetectorRef: ChangeDetectorRef) {
 
   }
 
@@ -36,6 +36,7 @@ export class MailboxConfigComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.spinner.show();
     this.flag = true;
     this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
     this.userType = this.route.snapshot.paramMap.get('userType');
@@ -48,6 +49,7 @@ export class MailboxConfigComponent implements OnInit {
     }
     
     this.MailConfigService.getMailConfig(this.memRefNo).subscribe((data: any) => {
+      this.spinner.hide();
       this.Mailconfiglist = data;
       this.filteredMailConfigList = this.Mailconfiglist;
     });

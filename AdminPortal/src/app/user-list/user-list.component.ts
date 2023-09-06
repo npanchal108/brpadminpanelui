@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { LoadingService } from '../services/loading.service';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -20,7 +20,7 @@ export class UserListComponent implements OnInit {
   filteredUserList: any[] = [];
   searchText: string = '';
 
-  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute, private dialog: MatDialog, private loadingService: LoadingService) {
+  constructor(private spinner: NgxSpinnerService,private userService: UserService, private router: Router, private route: ActivatedRoute, private dialog: MatDialog, private loadingService: LoadingService) {
 
     this.route.params.subscribe(params => {
       this.userType = this.route.snapshot.paramMap.get('userType');
@@ -38,7 +38,7 @@ export class UserListComponent implements OnInit {
   }
 
   getUserList(pageNo) {
-
+    this.spinner.show();
     this.userService.getUsers(this.userType, pageNo).subscribe(res => {
       this.userList = res;
       this.filteredUserList = this.userList;
@@ -47,6 +47,7 @@ export class UserListComponent implements OnInit {
       } catch (Ex) {
         this.totalPage = 1;
       }
+      this.spinner.hide();
     });
 
     return pageNo;

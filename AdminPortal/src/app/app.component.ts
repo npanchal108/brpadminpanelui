@@ -4,6 +4,8 @@ import { Subject } from 'rxjs';
 import { Subscription } from 'rxjs';
 import { LoadingService } from './services/loading.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { NgxSpinnerService } from 'ngx-spinner';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,7 +17,7 @@ export class AppComponent {
   public loading = false;
   subscription: Subscription;
 
-  constructor(public location: Location, private loadingService: LoadingService) {
+  constructor(private spinner: NgxSpinnerService,public location: Location, private loadingService: LoadingService) {
     this.subscription = this.loadingService.getMessage().subscribe(message => {
       if (message.text == 'start') {
         setTimeout(() => {
@@ -30,6 +32,13 @@ export class AppComponent {
     });
   }
 
+  ngOnInit() {
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 5000);
+  }
+  
   isLogin(path) {
     var titlee = this.location.prepareExternalUrl(this.location.path());
     titlee = titlee.slice(1);

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MailConfigService } from '../../services/mailbox-config.service.';
 import { LoadingService } from '../../services/loading.service';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-delete-cacher',
@@ -15,25 +15,27 @@ export class DeleteCacherComponent implements OnInit {
   memRefNo: string;
   userType: string;
   cacherlist: any;
-  constructor(private route: ActivatedRoute, private MailConfigService: MailConfigService, private toastr: ToastrService, private router: Router, private loadingService: LoadingService, private changeDetectorRef: ChangeDetectorRef) { }
+  constructor(private spinner: NgxSpinnerService,private route: ActivatedRoute, private MailConfigService: MailConfigService, private toastr: ToastrService, private router: Router, private loadingService: LoadingService, private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.sendMessage('start');
+    this.spinner.show();
     this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
     this.userType = this.route.snapshot.paramMap.get('userType');
     try {
       this.MailConfigService.GetAllMemoryCacher(this.memRefNo).subscribe((data: any) => {
         this.cacherlist = data;
-        this.sendMessage('stop');
+        this.spinner.hide();
       });
     }
     catch (e) {
-      this.sendMessage('stop');
+      this.spinner.hide();
     }
   }
 
   DeleteAllMemoryCacher() {
+    this.spinner.show();
     this.MailConfigService.AllDeleteMemoryCacher(this.memRefNo).subscribe((data: any) => {
+      this.spinner.hide();
       var getflag = data;
       if (getflag == true) {
         this.toastr.info("All memory Cacher Cleared...")
@@ -45,8 +47,10 @@ export class DeleteCacherComponent implements OnInit {
   }
 
   Deletecacher(keyname) {
+    this.spinner.show();
     this.MailConfigService.DeleteMemoryCacher(this.memRefNo, keyname).subscribe((data: any) => {
       this.MailConfigService.GetAllMemoryCacher(this.memRefNo).subscribe((data: any) => {
+        this.spinner.hide();
         this.cacherlist = data;
       });
     });

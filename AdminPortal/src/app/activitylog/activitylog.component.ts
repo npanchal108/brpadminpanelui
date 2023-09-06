@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UserprocesstimeService } from '../shared/userprocesstime.service';
 import { LoadingService } from '../services/loading.service';
 import * as XLSX from "xlsx"
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-activitylog',
@@ -20,7 +20,7 @@ export class ActivitylogComponent implements OnInit {
   memRefNo:any;
   userType:any;
   userroles:any;
-  constructor(private route: ActivatedRoute, private userprocesstimeService: UserprocesstimeService, private toastr: ToastrService, private router: Router, private loadingService: LoadingService, private changeDetectorRef: ChangeDetectorRef) { }
+  constructor(private spinner: NgxSpinnerService,private route: ActivatedRoute, private userprocesstimeService: UserprocesstimeService, private toastr: ToastrService, private router: Router, private loadingService: LoadingService, private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
@@ -29,6 +29,7 @@ export class ActivitylogComponent implements OnInit {
     this.clearactivitylog();
   }
   searchactivitylog(){
+    this.spinner.show();
     this.Activitylog.memRefNo=this.memRefNo;
     this.userprocesstimeService.GetActivitylogsearch(this.Activitylog).subscribe((data: any) => {
       this.Activitylogs = data;
@@ -46,6 +47,7 @@ export class ActivitylogComponent implements OnInit {
           this.ActivitylogsExport.push(getnewiem);
         } 
       }
+      this.spinner.hide();
     });
 
   }

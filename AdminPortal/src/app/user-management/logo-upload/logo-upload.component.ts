@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LoadingService } from '../../services/loading.service';
 import { MailConfigService } from '../../services/mailbox-config.service.';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-logo-upload',
   templateUrl: './logo-upload.component.html',
@@ -22,9 +22,10 @@ export class LogoUploadComponent implements OnInit {
   filteredConfigList: any[] = [];
   searchText: string = '';
 
-  constructor(private MailConfigService: MailConfigService, private userprocesstimeService: UserprocesstimeService, private route: ActivatedRoute, private toastr: ToastrService, private router: Router, private loadingService: LoadingService, private changeDetectorRef: ChangeDetectorRef) { }
+  constructor(private spinner: NgxSpinnerService,private MailConfigService: MailConfigService, private userprocesstimeService: UserprocesstimeService, private route: ActivatedRoute, private toastr: ToastrService, private router: Router, private loadingService: LoadingService, private changeDetectorRef: ChangeDetectorRef) { }
   SelectedFile: File = null;
   ngOnInit() {
+    this.spinner.show();
     this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
     this.userType = this.route.snapshot.paramMap.get('userType');
     this.id = this.route.snapshot.paramMap.get('id');
@@ -38,6 +39,7 @@ export class LogoUploadComponent implements OnInit {
       this.isdesable = true;
     }
     this.MailConfigService.getColorConfigList(this.memRefNo).subscribe(Reqs => {
+      this.spinner.hide();
       this.configlist = Reqs;
       this.filteredConfigList = this.configlist.filter(i => i.ColorConfigKey == "Logo");
       if (this.isdesable == true) {
@@ -64,10 +66,12 @@ export class LogoUploadComponent implements OnInit {
     this.SelectedFile = <File>event.target.files[0];
   }
   OnUpload() {
+    this.spinner.show();
     const fd = new FormData();
     fd.append('image', this.SelectedFile, this.SelectedFile.name);
     fd.append('memRefNo', this.memRefNo);
     this.userprocesstimeService.LogoUploadUser(fd).subscribe((data: any) => {
+      this.spinner.hide();
       this.toastr.success(data.Message);
     });
   }

@@ -6,7 +6,7 @@ import {MatDialog, MatDialogRef, MatDialogModule,MAT_DIALOG_DATA} from '@angular
 import { MailConfigService } from '../../services/mailbox-config.service.';
 import { LoadingService } from '../../services/loading.service';
 import { NgFor,NgIf } from '@angular/common';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-safiltersortlist',
   templateUrl: './safiltersortlist.component.html',
@@ -22,16 +22,17 @@ export class safiltersortlistComponent implements OnInit {
   filteredConfiglist: any[] = [];
   searchText: string = '';
   page:number = 1;
-  constructor(public dialog: MatDialog,private route: ActivatedRoute, private MailConfigService:MailConfigService,  private toastr: ToastrService,private router: Router, private loadingService: LoadingService, private changeDetectorRef:ChangeDetectorRef) { }
+  constructor(private spinner: NgxSpinnerService,public dialog: MatDialog,private route: ActivatedRoute, private MailConfigService:MailConfigService,  private toastr: ToastrService,private router: Router, private loadingService: LoadingService, private changeDetectorRef:ChangeDetectorRef) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
     this.userType = this.route.snapshot.paramMap.get('userType');
-    
+    this.spinner.show();
     this.MailConfigService.GetsafiltersortList(this.memRefNo).subscribe((data: any) => {
       this.configlist = data;
       this.filteredConfiglist = this.configlist;
+      this.spinner.hide();
     });
   }
 

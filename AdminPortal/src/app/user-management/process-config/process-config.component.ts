@@ -10,7 +10,7 @@ import { NgForm } from '@angular/forms';
 import { LoadingService } from '../../services/loading.service';
 import * as XLSX from "xlsx"
 import { MatTabChangeEvent } from '@angular/material/tabs';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-process-config',
   templateUrl: './process-config.component.html',
@@ -43,12 +43,12 @@ export class ProcessConfigComponent implements OnInit {
   }
   userroles:string;
   isdesable=false;
-  constructor(private route: ActivatedRoute, private userprocesstimeService: UserprocesstimeService, private toastr: ToastrService, private router: Router, private loadingService: LoadingService, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private spinner: NgxSpinnerService,private route: ActivatedRoute, private userprocesstimeService: UserprocesstimeService, private toastr: ToastrService, private router: Router, private loadingService: LoadingService, private changeDetectorRef: ChangeDetectorRef) {
     
   }
 
   ngOnInit() {
-    this.sendMessage('start');
+    this.spinner.show();
     this.getProcessTimeList();
     this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
     this.userType = this.route.snapshot.paramMap.get('userType');
@@ -81,7 +81,7 @@ export class ProcessConfigComponent implements OnInit {
       }
     });
     
-    this.sendMessage('stop');
+    this.spinner.hide();
   }
 
   
@@ -95,86 +95,82 @@ export class ProcessConfigComponent implements OnInit {
   }
 
   SyncNow() {
-    this.sendMessage('start');
+    this.spinner.show();
     var geturl = location.origin + '/' + this.memRefNo + 'Api/ecommerce/DataMigration';
     console.log(geturl);
     this.userprocesstimeService.SyncNow(geturl).subscribe((data: any) => {
-      this.sendMessage('stop');
+      this.spinner.hide();
       this.toastr.success(data);
     });
-    this.sendMessage('stop');
+    this.spinner.hide();
   }
 
   AllProductImages(){
-    this.sendMessage('start');
+    this.spinner.show();
     var geturl = location.origin + '/' + this.memRefNo + 'Api/ecommerce/SetAllProductImages';
     this.userprocesstimeService.setallimages(geturl).subscribe((data: any) => {
-      this.sendMessage('stop');
+      this.spinner.hide();
       this.toastr.success(data);
     });
-    this.sendMessage('stop');
+    this.spinner.hide();
   }
 
   ProductImages(){
-    this.sendMessage('start');
+    this.spinner.show();
     var geturl = location.origin + '/' + this.memRefNo + 'Api/ecommerce/SetProductImages';
     this.userprocesstimeService.setallimages(geturl).subscribe((data: any) => {
-      this.sendMessage('stop');
+      this.spinner.hide();
       this.toastr.success(data);
     });
-    this.sendMessage('stop');
+    this.spinner.hide();
   }
 
   AllTreeImages(){
-    this.sendMessage('start');
+    this.spinner.show();
     var geturl = location.origin + '/' + this.memRefNo + 'Api/ecommerce/SetAllTreeImages';
     this.userprocesstimeService.setallimages(geturl).subscribe((data: any) => {
-      this.sendMessage('stop');
+      this.spinner.hide();
       this.toastr.success(data);
     }); 
-    this.sendMessage('stop');
   }
   CompressAllImages(){
-    this.sendMessage('start');
+    this.spinner.show();
     var geturl = location.origin + '/' + this.memRefNo + 'Api/ecommerce/Compressallimages';
     this.userprocesstimeService.setallimages(geturl).subscribe((data: any) => {
-      this.sendMessage('stop');
+      this.spinner.hide();
       this.toastr.success(data);
     }); 
-    this.sendMessage('stop');
   }
   TreeImages(){
-    this.sendMessage('start');
+    this.spinner.show();
     var geturl = location.origin + '/' + this.memRefNo + 'Api/ecommerce/SetTreeImages';
     this.userprocesstimeService.setallimages(geturl).subscribe((data: any) => {
-      this.sendMessage('stop');
+      this.spinner.hide();
       this.toastr.success(data);
     });
-    this.sendMessage('stop');
   }
 
   ImageNow() {
-    this.sendMessage('start');
+    this.spinner.show();
     var geturl = location.origin + '/' + this.memRefNo + 'Api/ecommerce/Setallimages';
 
     this.userprocesstimeService.setallimages(geturl).subscribe((data: any) => {
-      this.sendMessage('stop');
+      this.spinner.hide();
       this.toastr.success(data);
     });
-    this.sendMessage('stop');
   }
   AllImageNow() {
-    this.sendMessage('start');
+    this.spinner.show();
     var geturl = location.origin + '/' + this.memRefNo + 'Api/ecommerce/SetallNewimages';
     this.userprocesstimeService.setallNewimages(geturl).subscribe((data: any) => {
-      this.sendMessage('stop');
+      this.spinner.hide();
       this.toastr.success(data);
     });
-    this.sendMessage('stop');
+    this.spinner.hide();
   }
 
   OnSubmit(form: NgForm) {
-    // this.sendMessage('start');
+    // this.spinner.show();
     // this.userprocesstimeService.insertUser(form.value).subscribe((data: any) => {
     //   if (data.Status == "Success") {
     //     form.resetForm();
@@ -184,7 +180,7 @@ export class ProcessConfigComponent implements OnInit {
     //   else {
     //     this.toastr.error(data.Message);
     //   }
-    //   this.sendMessage('stop');
+    //   this.spinner.hide();
     // });
 
     console.log()
@@ -252,7 +248,7 @@ export class ProcessConfigComponent implements OnInit {
   }
 
   syncTblNow() {
-    this.sendMessage('start');
+    this.spinner.show();
     var geturl = location.origin + '/' + this.memRefNo + 'Api/ecommerce/syncasperconfig';
     //var geturl = 'http://localhost:50144/DistOneApi/syncasperconfig'
     //geturl=geturl.replace('http://localhost:4200','https://localhost:44320');
@@ -265,10 +261,10 @@ export class ProcessConfigComponent implements OnInit {
     }
 
     this.userprocesstimeService.syncTblNow(model, geturl).subscribe((data: any) => {
-      this.sendMessage('stop');
+      this.spinner.hide();
       this.toastr.success(data);
     });
-    this.sendMessage('stop');
+    this.spinner.hide();
   }
 
   getdatetime(dt) {

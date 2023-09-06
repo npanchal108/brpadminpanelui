@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MailConfigService } from '../../services/mailbox-config.service.';
 import { LoadingService } from '../../services/loading.service';
 import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-headerlinks',
   templateUrl: './headerlinks.component.html',
@@ -26,15 +26,13 @@ export class HeaderlinksComponent implements OnInit {
   ismenu:any;
   filteredHeaderlinkList: any[] = [];
   searchText: string = '';
-  constructor(private dialog: MatDialog,private route: ActivatedRoute, private MailConfigService:MailConfigService,  private toastr: ToastrService,private router: Router, private loadingService: LoadingService, private changeDetectorRef:ChangeDetectorRef) { }
+  constructor(private spinner: NgxSpinnerService,private dialog: MatDialog,private route: ActivatedRoute, private MailConfigService:MailConfigService,  private toastr: ToastrService,private router: Router, private loadingService: LoadingService, private changeDetectorRef:ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.sendMessage('start');
     this.id = this.route.snapshot.paramMap.get('id');
     this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
     this.userType = this.route.snapshot.paramMap.get('userType');
-    this.sendMessage('stop');
-  this.getheaderlinks();  
+    this.getheaderlinks();  
   }
   OnAddheaderlink(){
     this.showtype=2;
@@ -49,11 +47,11 @@ export class HeaderlinksComponent implements OnInit {
 
   getheaderlinks(){
     this.showtype=1;
-    this.sendMessage('start');
+    this.spinner.show();
     this.MailConfigService.GetHeaderlinklist(this.memRefNo).subscribe((data: any) => {
       this.headerlinklist = data;
       this.filteredHeaderlinkList = this.headerlinklist;
-      this.sendMessage('stop');   
+      this.spinner.hide();  
     });
   }
   applyFilter() {
@@ -94,9 +92,9 @@ export class HeaderlinksComponent implements OnInit {
     });
   }
   DeleteHeaderlinkByID(linkid){    
-  this.sendMessage('start');
+    this.spinner.show();
     this.MailConfigService.DeleteHeaderlinkByID(this.memRefNo,linkid).subscribe((data: any) => {      
-      this.sendMessage('stop');   
+      this.spinner.hide(); 
     });
   }
   UpdateHeaderlinkByID(){

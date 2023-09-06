@@ -6,7 +6,7 @@ import { Toast, ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { LoadingService } from '../services/loading.service';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-user-add',
   templateUrl: './user-add.component.html',
@@ -21,7 +21,7 @@ export class UserAddComponent implements OnInit {
   userType: string;
   userroles: string;
   isdesable = false;
-  constructor(private userService: UserService, private toastr: ToastrService, private route: ActivatedRoute, private router: Router, private loadingService: LoadingService) { }
+  constructor(private spinner: NgxSpinnerService,private userService: UserService, private toastr: ToastrService, private route: ActivatedRoute, private router: Router, private loadingService: LoadingService) { }
 
 
   ngOnInit() {
@@ -62,8 +62,9 @@ export class UserAddComponent implements OnInit {
     else {
       this.toastr.success("Web Site creation and Data Syncronization is in process please Wait...");
     }
-   
+    this.spinner.show();
     this.userService.insertUser(this.user, this.userType).subscribe((data: any) => {
+      this.spinner.hide();
       if (data.Status == "Success") {
         //form.resetForm();
         this.toastr.success(data.Message);
@@ -82,10 +83,12 @@ export class UserAddComponent implements OnInit {
   }
 
   getUser(userId) {
+    this.spinner.show();
     this.userService.getUserById(userId).subscribe((res: User) => {
       this.user = res;
       this.user.Password = "";
       this.user.ButtenText = "Update";
+      this.spinner.hide();
     });
   }
 

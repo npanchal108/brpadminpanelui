@@ -4,7 +4,6 @@ import { MailConfigService } from '../services/mailbox-config.service.';
 import { ToastrService } from 'ngx-toastr';
 import { CsvGeneratorService } from '../services/csvgenerator.service';
 
-
 @Component({
     selector: 'app-productBulkUpload',
     templateUrl: './bulkproductlist.component.html',
@@ -62,7 +61,6 @@ export class productBulkUploadComponent implements OnInit {
                         fd.append('csv', this.selectedProductDocumentFile, this.selectedProductDocumentFile.name);
                     }
                     fd.append('memRefNo', this.memRefNo);
-            
                     this.MailConfigService.UpdateItemDocumentList(fd).subscribe((data: any) => {
                         if (data == true || data == "true") {
                             this.toastr.success("Sucessfully Updated");
@@ -103,7 +101,6 @@ export class productBulkUploadComponent implements OnInit {
                         fd.append('csv', this.selectedProductPriceFile, this.selectedProductPriceFile.name);
                     }
                     fd.append('memRefNo', this.memRefNo);
-            
                     this.MailConfigService.UpdateItemPriceBulk(fd).subscribe((data: any) => {
                         if (data == true || data == "true") {
                             this.toastr.success("Sucessfully Updated");

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MailConfigService } from '../../services/mailbox-config.service.';
 import { LoadingService } from '../../services/loading.service';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-userconfiglist',
@@ -20,14 +20,16 @@ export class UserconfiglistComponent implements OnInit {
   searchText: string = '';
   page: number = 1;
   totalPage: number;
-  constructor(private route: ActivatedRoute, private MailConfigService:MailConfigService,  private toastr: ToastrService,private router: Router, private loadingService: LoadingService, private changeDetectorRef:ChangeDetectorRef) { }
+  constructor(private spinner: NgxSpinnerService,private route: ActivatedRoute, private MailConfigService:MailConfigService,  private toastr: ToastrService,private router: Router, private loadingService: LoadingService, private changeDetectorRef:ChangeDetectorRef) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.id = this.route.snapshot.paramMap.get('id');
     this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
     this.userType = this.route.snapshot.paramMap.get('userType');
     
     this.MailConfigService.getConfigList(this.memRefNo).subscribe((data: any) => {
+      this.spinner.hide();
       this.configlist = data;
       this.filteredConfigList = this.configlist;
     });

@@ -112,6 +112,7 @@ export class addproductComponent implements OnInit {
         this.MailConfigService.UpdateItemPrice(this.memRefNo, this.productPriceDetails.Item, this.productPriceDetails.ItemPrice, this.productPriceDetails.ItemIsActive).subscribe((data: any) => {
             if (data == true || data == "true") {
                 this.toastr.success("Sucessfully Updated");
+                this.router.navigate(['/productlist', this.uid, this.memRefNo, 'Client']);
             }
             else {
                 this.toastr.error("Error occured please try again");

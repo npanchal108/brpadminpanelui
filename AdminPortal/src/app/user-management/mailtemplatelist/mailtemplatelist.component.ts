@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MailConfigService } from '../../services/mailbox-config.service.';
 import { NgForm } from '@angular/forms';
 import { LoadingService } from '../../services/loading.service';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-mailtemplatelist',
@@ -21,17 +21,17 @@ export class MailtemplatelistComponent implements OnInit {
   searchText: string = '';
   page: number = 1;
   totalPage: number;
-  constructor(private route: ActivatedRoute, private MailConfigService:MailConfigService,  private toastr: ToastrService,private router: Router, private loadingService: LoadingService, private changeDetectorRef:ChangeDetectorRef) { }
+  constructor(private spinner: NgxSpinnerService,private route: ActivatedRoute, private MailConfigService:MailConfigService,  private toastr: ToastrService,private router: Router, private loadingService: LoadingService, private changeDetectorRef:ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.sendMessage('start');
+    this.spinner.show();
     this.id = this.route.snapshot.paramMap.get('id');
     this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
     this.userType = this.route.snapshot.paramMap.get('userType');    
     this.MailConfigService.getMailtemplateList(this.memRefNo).subscribe((data: any) => {
       this.mailconfiglist = data;
       this.filteredMailConfigList = this.mailconfiglist;
-      this.sendMessage('stop');   
+      this.spinner.hide();
     });
   }
   onEditconf(ConfigId){
