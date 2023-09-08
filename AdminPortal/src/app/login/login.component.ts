@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
     },
       (err: HttpErrorResponse) => {
         this.isLoginError = true;
+        this.Errormsg = 'Something went wrong.Please contact your Administrator.';
         this.sendMessage('stop');
       });
   }

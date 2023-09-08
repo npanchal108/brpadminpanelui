@@ -33,7 +33,9 @@ export class adddynamicpageComponent implements OnInit, PipeTransform {
     { key: 'services', value: 'services' }
   ];
   companyDomainValue: string;
-  
+  searchPageNameQuery:string;
+  selectedTabName:string;
+
   constructor(private datePipe: DatePipe, private sanitizer: DomSanitizer, private route: ActivatedRoute, private MailConfigService: MailConfigService, private toastr: ToastrService, private router: Router, private loadingService: LoadingService, private changeDetectorRef: ChangeDetectorRef) { }
   cleanURL(oldURL: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(oldURL);
@@ -59,7 +61,10 @@ export class adddynamicpageComponent implements OnInit, PipeTransform {
   }
 
   ngOnInit() {
-
+    this.route.queryParams.subscribe(params => {
+      this.searchPageNameQuery = params['searchPageNameQuery'];
+      this.selectedTabName = params['selectedTabName'];
+    });
     this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
     this.cid = parseInt(this.route.snapshot.paramMap.get('userType'));
     this.uid = parseInt(this.route.snapshot.paramMap.get('id'));
@@ -72,6 +77,7 @@ export class adddynamicpageComponent implements OnInit, PipeTransform {
     if (this.cid > 0) {
       this.MailConfigService.GetdynamicpageByID(this.memRefNo, this.cid).subscribe((data: any) => {
         this.Mailtemplate = data;
+        this.Mailtemplate.Sequence = this.Mailtemplate.Sequence === null ? 999 : this.Mailtemplate.Sequence;
         this.Mailtemplate.createDate = this.datePipe.transform(this.Mailtemplate.createDate, 'dd-MM-yyyy');
       });
     }
@@ -82,7 +88,7 @@ export class adddynamicpageComponent implements OnInit, PipeTransform {
       this.Mailtemplate.PageDescription = '';
       this.Mailtemplate.PageKeywords = '';
       this.Mailtemplate.PageContent = '';
-      this.Mailtemplate.Sequence = '';
+      this.Mailtemplate.Sequence = 999;
       this.Mailtemplate.createDate = this.datePipe.transform(currentDate, 'dd-MM-yyyy').toString();
     }
   }
@@ -112,7 +118,8 @@ export class adddynamicpageComponent implements OnInit, PipeTransform {
       if (data == true || data == "true") {
         form.resetForm();
         this.toastr.success("Sucessfully Updated");
-        this.router.navigate(['/dynamicpages', this.uid, this.memRefNo, this.cid]);
+        this.router.navigate(['/dynamicpages', this.uid, this.memRefNo, this.cid], { queryParams: { searchPageNameQuery: this.searchPageNameQuery,selectedTabName : this.selectedTabName } });
+       // this.router.navigate(['/dynamicpages', this.uid, this.memRefNo, this.cid]);
       }
       else {
         this.toastr.error("Error occured please try again");
@@ -120,7 +127,7 @@ export class adddynamicpageComponent implements OnInit, PipeTransform {
     });
   }
   back() {
-    this.router.navigate(['/dynamicpages', this.uid, this.memRefNo, this.cid]);
+    this.router.navigate(['/dynamicpages', this.uid, this.memRefNo, this.cid], { queryParams: { searchPageNameQuery: this.searchPageNameQuery,selectedTabName : this.selectedTabName } });
   }
 
 }

@@ -24,14 +24,19 @@ export class UserconfiglistComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
+    this.route.queryParams.subscribe(params => {
+      this.searchText = params['searchText'];
+    });
     this.id = this.route.snapshot.paramMap.get('id');
     this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
     this.userType = this.route.snapshot.paramMap.get('userType');
-    
+    this.getConfigList();
+  }
+  getConfigList(){
     this.MailConfigService.getConfigList(this.memRefNo).subscribe((data: any) => {
       this.spinner.hide();
       this.configlist = data;
-      this.filteredConfigList = this.configlist;
+      this.applyFilter();
     });
   }
   applyFilter() {
@@ -42,8 +47,13 @@ export class UserconfiglistComponent implements OnInit {
     });
     this.page = 1;
   }
+  onReset(){
+    this.searchText = '';
+    this.getConfigList();
+  }
   onEditconf(ConfigId){
-    this.router.navigate(['/addconfig',this.id,this.memRefNo, ConfigId]);
+    this.router.navigate(['/addconfig',this.id,this.memRefNo, ConfigId], { queryParams: { searchText: this.searchText } });
+    //this.router.navigate(['/addconfig',this.id,this.memRefNo, ConfigId]);
   }
   pageChanged(event: any): void {
     this.page = event;

@@ -1,24 +1,8 @@
-/* .custom-table{
-    width: 100%;
-    text-align: center;
-    border-collapse: separate;
-    border-spacing: 0 10px;
+.refresh-btn{
+    border: none;
+    background: none;
 }
-.custom-table th{
-    text-align: center;
-    margin: 10px;
+.refresh-icon-clr{
+    color: #008B99;
 }
-.custom-table tr{
-    margin: 10px;
-}
-.mat-checkbox-layout{
-    padding: 10px !important;
-}  
-.bulk-file-input{
-    margin-top: 20px;
-    margin-left: 35px;
-}
-.bulk-file-btn{
-    width: 230px;
-} */
 

@@ -8,9 +8,9 @@
       <div class="col-md-6">
         <!-- Login Form -->
         <form #loginForm="ngForm" (ngSubmit)="OnSubmit(loginForm)" class="col-md-10 offset-md-2" >
-          <div *ngIf="isLoginError" class="red-text center error-message">
+          <!-- <div *ngIf="isLoginError" class="red-text center error-message">
             <i class="material-icons">error</i> {{Errormsg}}
-          </div>
+          </div> -->
           <div class="row">
             <div class="col-md-12">
               <label style="color: #DFE4E4;">User Name</label>
@@ -29,7 +29,7 @@
           </div>
           <div class="row">
             <div class="col-md-12">
-              <label style="color: #008B99;" *ngIf="isLoginError">{{Errormsg}}</label>
+              <label class="login-err-msg" *ngIf="isLoginError">*{{Errormsg}}</label>
             </div>
           </div>
           <button type="submit" class="btn  login-btn">Login</button>

@@ -34,7 +34,7 @@ export class addproductComponent implements OnInit {
     uid: any;
     selectedProductPriceFile: File | undefined;
     selectedProductDocumentFile: File | undefined;
-
+    searchText:string;
     itemType: ItemType[] = [
         { key: 'doc', value: 'doc' },
         { key: 'text', value: 'text' },
@@ -47,7 +47,9 @@ export class addproductComponent implements OnInit {
         return this.sanitizer.bypassSecurityTrustResourceUrl(oldURL);
     }
     ngOnInit() {
-        console.log('this.route.snapshot.paramMap.get', this.route.snapshot.paramMap);
+        this.route.queryParams.subscribe(params => {
+            this.searchText = params['searchText'];
+        });
         this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
         this.itemId = this.route.snapshot.paramMap.get('itemId');
         this.uid = parseInt(this.route.snapshot.paramMap.get('id'));
@@ -72,7 +74,7 @@ export class addproductComponent implements OnInit {
     }
    
     back() {
-        this.router.navigate(['/productlist', this.uid, this.memRefNo, 'Client']);
+        this.router.navigate(['/productlist', this.uid, this.memRefNo, 'Client'], { queryParams: { searchText: this.searchText } });
     }
 
     openDialog(MemRefNo, ItemDocId, Item, DocType, DocTypeName, DocTypeTextUrl): void {
@@ -112,7 +114,8 @@ export class addproductComponent implements OnInit {
         this.MailConfigService.UpdateItemPrice(this.memRefNo, this.productPriceDetails.Item, this.productPriceDetails.ItemPrice, this.productPriceDetails.ItemIsActive).subscribe((data: any) => {
             if (data == true || data == "true") {
                 this.toastr.success("Sucessfully Updated");
-                this.router.navigate(['/productlist', this.uid, this.memRefNo, 'Client']);
+                this.router.navigate(['/productlist', this.uid, this.memRefNo, 'Client'], { queryParams: { searchText: this.searchText } });
+                //this.router.navigate(['/productlist', this.uid, this.memRefNo, 'Client']);
             }
             else {
                 this.toastr.error("Error occured please try again");

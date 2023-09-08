@@ -5,6 +5,13 @@ a {
     border : 1px solid grey !important;
     margin-top: 12px !important;
 }
+.refresh-btn{
+    border: none;
+    background: none;
+}
+.refresh-icon-clr{
+    color: #008B99;
+}
 
 @media (max-width: 767px) {
     .table-mobile table thead {

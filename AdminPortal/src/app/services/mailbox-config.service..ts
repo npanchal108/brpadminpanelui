@@ -82,9 +82,9 @@ export class MailConfigService {
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
     return this.http.get(this.common.RootUrl + '/CompanyProfile/Getproductlist?UserMemRefNo=' + memRefNo + '&pageno=' + pageNo, { headers: reqHeader });
   }
-  GetFilteredproductlist(memRefNo: string, filterQuery:string ,pageNo: number) {
+  GetFilteredproductlist(memRefNo: string, filterQuery:string,activeFlag : number ,pageNo: number) {
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
-    return this.http.get(this.common.RootUrl + '/CompanyProfile/GetFilteredproductlist?UserMemRefNo=' + memRefNo + '&filterQuery=' + filterQuery +  '&pageno=' + pageNo, { headers: reqHeader });
+    return this.http.get(this.common.RootUrl + '/CompanyProfile/GetFilteredproductlist?UserMemRefNo=' + memRefNo + '&filterQuery=' + filterQuery + '&activeFlag=' + activeFlag +'&pageno=' + pageNo, { headers: reqHeader });
   }
   GetproductDocBYId(memRefNo: string,item: string) {
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
@@ -104,6 +104,10 @@ export class MailConfigService {
   UpdateItemPrice(memRefNo: string, item: string, price: number, ItemIsActive : boolean) {
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
     return this.http.get(this.common.RootUrl + '/CompanyProfile/UpdateItemPrice?memRefNo=' + memRefNo + '&item=' + item + '&price=' + price + '&isItemActive=' + ItemIsActive , { headers: reqHeader });
+  }
+  UpdateBulkActiveInActive(updateActiveInActiveViewModel) {
+    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
+    return this.http.post(this.common.RootUrl + '/CompanyProfile/UpdateBulkActiveInActive', updateActiveInActiveViewModel, { headers: reqHeader });
   }
   UpdateItemPriceBulk(itemsPriceListModel) {
     return this.http.post(this.common.RootUrl + '/CompanyProfile/UpdateItemPriceList',itemsPriceListModel);

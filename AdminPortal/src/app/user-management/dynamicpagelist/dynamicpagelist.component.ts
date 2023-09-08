@@ -47,7 +47,6 @@ export class dynamicpagelistComponent implements OnInit {
   constructor(private spinner: NgxSpinnerService, private dialog: MatDialog, private route: ActivatedRoute, private MailConfigService: MailConfigService, private toastr: ToastrService, private router: Router, private loadingService: LoadingService, private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
-
     this.id = this.route.snapshot.paramMap.get('id');
     this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
     this.userType = this.route.snapshot.paramMap.get('userType');
@@ -56,52 +55,83 @@ export class dynamicpagelistComponent implements OnInit {
       const companyDomainConfig = data.filter(i => i.ConfigKey == 'CompanyDomain');
       this.companyDomainValue = companyDomainConfig.length > 0 ? companyDomainConfig[0].ConfigValue : '';
     });
+    this.getDynamicPageData();
+  }
+  getDynamicPageData() {
     this.spinner.show();
     this.MailConfigService.Getdynamicpagelist(this.memRefNo).subscribe((data: any) => {
       this.mailconfiglist = data;
       this.getDynamicPageList();
+      this.applyFilter(this.selectedTabName.toLowerCase());
       setTimeout(() => {
         this.spinner.hide();
       }, 5000);
     });
-
   }
+  getTabIndexByName(tabName: string): number {
+    const tabs = this.tabGroup._tabs; // Get the tab labels
+    for (let i = 0; i <= tabs.length; i++) {
+      if (tabs._results[i].textLabel === tabName) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
   ngAfterViewInit() {
+    this.route.queryParams.subscribe(params => {
+      this.searchPageNameQuery = params['searchPageNameQuery'];
+      this.selectedTabName = params['selectedTabName'];
+    });
+    if (this.selectedTabName) {
+      let tabIndex = this.getTabIndexByName(this.selectedTabName);
+      this.tabGroup.selectedIndex = tabIndex;
+    } else {
+      this.tabGroup.selectedIndex = 0;
+    }
     const selectedIndex = this.tabGroup.selectedIndex;
     this.selectedTabName = this.tabGroup._tabs._results[selectedIndex].textLabel;
+    this.getDynamicPageData();
   }
 
+  onReset(selectedTab) {
+    this.searchPageNameQuery = '';
+    this.selectedTabName = selectedTab;
+    this.getDynamicPageData();
+  }
   getDynamicPageList() {
     this.spinner.show();
-    this.blogPageList = this.mailconfiglist.filter((i) => i.ptype == 'blogs');
-    this.infoPageList = this.mailconfiglist.filter((i) => i.ptype == 'info');
-    this.ourlinesPageList = this.mailconfiglist.filter((i) => i.ptype == 'our-lines');
-    this.servicesPageList = this.mailconfiglist.filter((i) => i.ptype == 'services');
+    this.blogPageList = this.mailconfiglist?.filter((i) => i.ptype == 'blogs');
+    this.infoPageList = this.mailconfiglist?.filter((i) => i.ptype == 'info');
+    this.ourlinesPageList = this.mailconfiglist?.filter((i) => i.ptype == 'our-lines');
+    this.servicesPageList = this.mailconfiglist?.filter((i) => i.ptype == 'services');
     this.spinner.hide();
   }
   tabChanged(event: MatTabChangeEvent) {
     this.spinner.show();
     const selectedIndex = this.tabGroup.selectedIndex;
     this.selectedTabName = this.tabGroup._tabs._results[selectedIndex].textLabel;
-    this.searchPageNameQuery = ''
-    this.getDynamicPageList();
-    this.spinner.hide();
+    this.searchPageNameQuery = this.searchPageNameQuery;
+    this.getDynamicPageData()
+    if(this.mailconfiglist && this.mailconfiglist.length > 0){
+      this.applyFilter(this.selectedTabName.toLowerCase());
+      this.spinner.hide();
+    }
   }
-
   applyFilter(pType) {
     const lowerCasePageNameQuery = this.searchPageNameQuery ? this.searchPageNameQuery.toLowerCase().trim() : '';
     switch (pType) {
       case 'blogs':
-        this.blogPageList = this.mailconfiglist.filter(o => o.PageName.includes(lowerCasePageNameQuery) && o.ptype == pType);
+        this.blogPageList = this.mailconfiglist?.filter(o => o.PageName.includes(lowerCasePageNameQuery) && o.ptype == pType);
         break;
       case 'info':
-        this.infoPageList = this.mailconfiglist.filter(o => o.PageName.includes(lowerCasePageNameQuery) && o.ptype == pType);
+        this.infoPageList = this.mailconfiglist?.filter(o => o.PageName.includes(lowerCasePageNameQuery) && o.ptype == pType);
         break;
       case 'services':
-        this.servicesPageList = this.mailconfiglist.filter(o => o.PageName.includes(lowerCasePageNameQuery) && o.ptype == pType);
+        this.servicesPageList = this.mailconfiglist?.filter(o => o.PageName.includes(lowerCasePageNameQuery) && o.ptype == pType);
         break;
       case 'our-lines':
-        this.ourlinesPageList = this.mailconfiglist.filter(o => o.PageName.includes(lowerCasePageNameQuery) && o.ptype == pType);
+        this.ourlinesPageList = this.mailconfiglist?.filter(o => o.PageName.includes(lowerCasePageNameQuery) && o.ptype == pType);
         break;
       default:
         console.log('Unknown Status');
@@ -123,8 +153,7 @@ export class dynamicpagelistComponent implements OnInit {
   }
 
   onEditconf(ConfigId) {
-    console.log('this.selectedTablName', this.selectedTabName);
-    this.router.navigate(['/adddynamicpage', this.id, this.memRefNo, ConfigId, this.selectedTabName]);
+    this.router.navigate(['/adddynamicpage', this.id, this.memRefNo, ConfigId, this.selectedTabName], { queryParams: { searchPageNameQuery: this.searchPageNameQuery, selectedTabName: this.selectedTabName } });
   }
   sendMessage(message): void {
     this.loadingService.LoadingMessage(message);

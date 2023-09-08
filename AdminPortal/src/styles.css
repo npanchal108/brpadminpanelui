@@ -395,3 +395,57 @@ body {
     top: 92px !important;
     right: 58px !important;
 }
+
+
+label.badge {
+    padding: 8px 18px;
+    margin: 0 5px;
+    border-radius: 10px;
+    border: 1px solid #008B99;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+label.badge.active{
+    background: #008B99;
+    color: #FFF;
+} 
+
+.actions-section.hidden {
+    height: 0px;
+    overflow: hidden;
+    -webkit-transition: height 0.3s linear;
+       -moz-transition: height 0.3s linear;
+        -ms-transition: height 0.3s linear;
+         -o-transition: height 0.3s linear;
+            transition: height 0.3s linear;
+}
+.actions-section.hidden.open {
+    height: 50px;
+    -webkit-transition: height 0.3s linear;
+       -moz-transition: height 0.3s linear;
+        -ms-transition: height 0.3s linear;
+         -o-transition: height 0.3s linear;
+            transition: height 0.3s linear;
+}
+
+.actions-section button {
+    color: #fff;
+    padding: 8px;
+    margin: 0 10px 0 0;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+}
+.actions-section button.btn-success {
+    background: #27AE60;
+    color: #fff;
+    border: 1px solid #27AE60;
+}
+.actions-section button.btn-fail {
+    background: #D74F4F;
+    color: #fff;
+    border: 1px solid #D74F4F;
+}

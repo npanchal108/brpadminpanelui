@@ -10,6 +10,7 @@
                         <label>
                             Search:
                             <input type="text" (input)="applyFilter()" [(ngModel)]="searchText" />
+                            <button class="refresh-btn" (click)="onReset()"><i class="fa fa-refresh refresh-icon-clr" aria-hidden="true"></i></button>
                         </label>
                     </div>
                     <div *ngIf="configlist!=null && configlist!=undefined">
@@ -23,7 +24,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let conf of filteredConfigList | paginate : { itemsPerPage:12, currentPage:page,totalItems:totalPage, id:'first' }">
+                                <tr *ngFor="let conf of filteredConfigList | paginate : { itemsPerPage:50, currentPage:page,totalItems:totalPage, id:'first' }">
                                     <td>{{conf.ConfigKey}}</td>
                                     <td>{{conf.ConfigValue}}</td>
                                     <td>{{conf.descr}}</td>

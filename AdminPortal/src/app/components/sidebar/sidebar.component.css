@@ -22,7 +22,10 @@
     justify-content: start;
     background: #fff;
 }
-
+.mat-drawer-content-no-scroll {
+    height: 100%;
+    overflow-y: hidden;
+}
 .sidebar-container {
     display: flex;
     flex-direction: column;

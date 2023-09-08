@@ -1,6 +1,13 @@
 a {
     cursor: pointer;
 }
+.refresh-btn{
+    border: none;
+    background: none;
+}
+.refresh-icon-clr{
+    color: #008B99;
+}
 
 @media (max-width: 767px) {
     .table-mobile table thead {
