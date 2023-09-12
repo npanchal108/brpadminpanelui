@@ -28,8 +28,9 @@
                                             <tr>
                                                 <th style="width: 10%;">Title </th>
                                                 <th style="width: 40%;">Description</th>
-                                                <th style="width: 20%;">Posted Date</th>
-                                                <th style="width: 30%;">URL</th>
+                                                <th style="width: 30%;">Posted Date</th>
+                                                <th style="width: 5%;">Active</th>
+                                                <th style="width: 15%;">URL</th>
                                                 <th style="text-align: center;">Action</th>
                                             </tr>
                                         </thead>
@@ -39,6 +40,7 @@
                                                 <td>{{mails.PageTitle}}</td>
                                                 <td>{{mails.PageDescription}}</td>
                                                 <td>{{mails.CreatedDate | date:'dd-MM-yyyy' }}</td>
+                                                <td>{{mails.IsActive}}</td>
                                                 <td>
                                                     <ng-container *ngIf="companyDomainValue">
                                                         <a [href]="companyDomainValue + '/' +mails.ptype + '/' + mails.PageName"
@@ -79,6 +81,7 @@
                                             <tr>
                                                 <th>Title </th>
                                                 <th>Description </th>
+                                                <th style="width: 5%;">Active</th>
                                                 <th>URL </th>
                                                 <th style="text-align: center;">Action</th>
                                             </tr>
@@ -88,6 +91,7 @@
                                                 *ngFor="let mails of infoPageList  | paginate : { itemsPerPage:10, currentPage:page,totalItems:totalPage, id:'first' }">
                                                 <td data-title="Subject">{{mails.PageTitle}}</td>
                                                 <td data-title="Subject">{{mails.PageDescription}}</td>
+                                                <td data-title="Subject">{{mails.IsActive}}</td>
                                                 <td>
                                                     <ng-container *ngIf="companyDomainValue">
                                                         <a [href]="companyDomainValue + '/' +mails.ptype + '/' + mails.PageName"
@@ -128,6 +132,7 @@
                                             <tr>
                                                 <th>Title </th>
                                                 <th>Description </th>
+                                                <th style="width: 5%;">Active</th>
                                                 <th>URL </th>
                                                 <th style="text-align: center;">Action</th>
                                             </tr>
@@ -137,6 +142,7 @@
                                                 *ngFor="let mails of ourlinesPageList  | paginate : { itemsPerPage:10, currentPage:page,totalItems:totalPage, id:'first' }">
                                                 <td data-title="Subject">{{mails.PageTitle}}</td>
                                                 <td data-title="Subject">{{mails.PageDescription}}</td>
+                                                <td data-title="Subject">{{mails.IsActive}}</td>
                                                 <td>
                                                     <ng-container *ngIf="companyDomainValue">
                                                         <a [href]="companyDomainValue + '/' +mails.ptype + '/' + mails.PageName"
@@ -177,6 +183,7 @@
                                             <tr>
                                                 <th>Title </th>
                                                 <th>Description </th>
+                                                <th style="width: 5%;">Active</th>
                                                 <th>URL </th>
                                                 <th style="text-align: center;">Action</th>
                                             </tr>
@@ -186,6 +193,7 @@
                                                 *ngFor="let mails of servicesPageList  | paginate : { itemsPerPage:10, currentPage:page,totalItems:totalPage, id:'first' }">
                                                 <td data-title="Subject">{{mails.PageTitle}}</td>
                                                 <td data-title="Subject">{{mails.PageDescription}}</td>
+                                                <td data-title="Subject">{{mails.IsActive}}</td>
                                                 <td>
                                                     <ng-container *ngIf="companyDomainValue">
                                                         <a [href]="companyDomainValue + '/' +mails.ptype + '/' + mails.PageName"

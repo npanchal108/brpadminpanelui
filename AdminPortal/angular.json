@@ -32,6 +32,8 @@
               "node_modules/ngx-spinner/animations/ball-beat.css",
               "node_modules/ngx-spinner/animations/ball-spin-clockwise-fade-rotating.css",
               "node_modules/ngx-toastr/toastr.css",
+              "node_modules/froala-editor/css/froala_editor.pkgd.min.css",
+              "node_modules/froala-editor/css/froala_style.min.css",
               "src/styles.css"
             ],
             "scripts": [

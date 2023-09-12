@@ -35,7 +35,10 @@ export class adddynamicpageComponent implements OnInit, PipeTransform {
   companyDomainValue: string;
   searchPageNameQuery:string;
   selectedTabName:string;
-
+  editorConfig = {
+    placeholder: 'Enter your text here',
+    height: '300px',
+  };
   constructor(private datePipe: DatePipe, private sanitizer: DomSanitizer, private route: ActivatedRoute, private MailConfigService: MailConfigService, private toastr: ToastrService, private router: Router, private loadingService: LoadingService, private changeDetectorRef: ChangeDetectorRef) { }
   cleanURL(oldURL: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(oldURL);
@@ -89,6 +92,7 @@ export class adddynamicpageComponent implements OnInit, PipeTransform {
       this.Mailtemplate.PageKeywords = '';
       this.Mailtemplate.PageContent = '';
       this.Mailtemplate.Sequence = 999;
+      this.Mailtemplate.IsActive = 1;
       this.Mailtemplate.createDate = this.datePipe.transform(currentDate, 'dd-MM-yyyy').toString();
     }
   }
@@ -113,7 +117,7 @@ export class adddynamicpageComponent implements OnInit, PipeTransform {
     fd.append('PageContent', form.value.PageContent);
     fd.append('PageType',this.pageType.toLocaleLowerCase());
     fd.append('Sequence', form.value.Sequence);
-
+    fd.append('IsActive', form.value.IsActive);
     this.MailConfigService.Updatedynamicpage(fd).subscribe((data: any) => {
       if (data == true || data == "true") {
         form.resetForm();

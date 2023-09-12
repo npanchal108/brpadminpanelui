@@ -119,10 +119,12 @@ export class dynamicpagelistComponent implements OnInit {
     }
   }
   applyFilter(pType) {
+    console.log('this.mailconfiglist===>',this.mailconfiglist);
     const lowerCasePageNameQuery = this.searchPageNameQuery ? this.searchPageNameQuery.toLowerCase().trim() : '';
     switch (pType) {
       case 'blogs':
         this.blogPageList = this.mailconfiglist?.filter(o => o.PageName.includes(lowerCasePageNameQuery) && o.ptype == pType);
+        console.log('this.blogPageList===>',this.blogPageList);
         break;
       case 'info':
         this.infoPageList = this.mailconfiglist?.filter(o => o.PageName.includes(lowerCasePageNameQuery) && o.ptype == pType);
