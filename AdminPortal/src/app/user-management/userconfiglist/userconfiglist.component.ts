@@ -40,12 +40,16 @@ export class UserconfiglistComponent implements OnInit {
     });
   }
   applyFilter() {
-    this.filteredConfigList = this.configlist.filter(item => {
-      return Object.values(item).some((value: any) =>
-        value && value.toString().toLowerCase().includes(this.searchText.toLowerCase())
-      );
-    });
-    this.page = 1;
+    if(this.searchText){
+      this.filteredConfigList = this.configlist?.filter(item => {
+        return Object.values(item).some((value: any) =>
+          value && value.toString().toLowerCase().includes(this.searchText.toLowerCase())
+        );
+      });
+      this.page = 1;
+    }else{
+      this.filteredConfigList = this.configlist;
+    }
   }
   onReset(){
     this.searchText = '';

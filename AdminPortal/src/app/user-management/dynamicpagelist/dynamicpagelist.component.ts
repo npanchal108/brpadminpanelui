@@ -27,16 +27,25 @@ export class dynamicpagelistComponent implements OnInit {
   id: string;
   page: number = 1;
   totalPage: number;
+  totalServicesPages: number;
+  totalBlogPages: number;
+  totalInfoPages: number;
+  totalOurlinePages: number;
   blogPageList: any[];
   infoPageList: any[];
   servicesPageList: any[];
   ourlinesPageList: any[];
   companyDomainValue: string;
   searchPageNameQuery: string = '';
+  searchBlogPageNameQuery: string = '';
+  searchinfoPageNameQuery: string = '';
+  searchOutlinesPageNameQuery: string = '';
+  searchServicesPageNameQuery: string = '';
   searchPageTypeQuery: string = '';
   @ViewChild('tabGroup') tabGroup: any;
   selectedTabName: string;
-
+  currentTab: number = -1
+  searchText: string;
   pageType: PageType[] = [
     { key: 'blogs', value: 'blogs' },
     { key: 'info', value: 'info' },
@@ -62,7 +71,6 @@ export class dynamicpagelistComponent implements OnInit {
     this.MailConfigService.Getdynamicpagelist(this.memRefNo).subscribe((data: any) => {
       this.mailconfiglist = data;
       this.getDynamicPageList();
-      this.applyFilter(this.selectedTabName.toLowerCase());
       setTimeout(() => {
         this.spinner.hide();
       }, 5000);
@@ -80,60 +88,138 @@ export class dynamicpagelistComponent implements OnInit {
 
   ngAfterViewInit() {
     this.route.queryParams.subscribe(params => {
-      this.searchPageNameQuery = params['searchPageNameQuery'];
+      this.searchPageNameQuery = params['searchText'];
       this.selectedTabName = params['selectedTabName'];
     });
-    if (this.selectedTabName) {
-      let tabIndex = this.getTabIndexByName(this.selectedTabName);
-      this.tabGroup.selectedIndex = tabIndex;
-    } else {
-      this.tabGroup.selectedIndex = 0;
-    }
-    const selectedIndex = this.tabGroup.selectedIndex;
-    this.selectedTabName = this.tabGroup._tabs._results[selectedIndex].textLabel;
-    this.getDynamicPageData();
+    this.currentTab = this.tabGroup.selectedIndex;
+    this.selectedTabName = this.tabGroup._tabs._results[this.currentTab].textLabel;
   }
 
   onReset(selectedTab) {
-    this.searchPageNameQuery = '';
-    this.selectedTabName = selectedTab;
-    this.getDynamicPageData();
+    switch (this.currentTab) {
+      case 0:
+        this.searchBlogPageNameQuery = ""
+        this.applyFilter("blogs")
+        break;
+      case 1:
+        this.searchinfoPageNameQuery = "";
+        this.applyFilter("info")
+        break;
+      case 2:
+        this.searchOutlinesPageNameQuery = "";
+        this.applyFilter("our-lines")
+        break;
+      case 3:
+        this.searchServicesPageNameQuery = "";
+        this.applyFilter("services")
+        break;
+      default:
+        this.searchPageNameQuery = ""
+    }
   }
   getDynamicPageList() {
     this.spinner.show();
     this.blogPageList = this.mailconfiglist?.filter((i) => i.ptype == 'blogs');
+    this.totalBlogPages = this.blogPageList.length
+
     this.infoPageList = this.mailconfiglist?.filter((i) => i.ptype == 'info');
+    this.totalInfoPages = this.infoPageList.length
+
     this.ourlinesPageList = this.mailconfiglist?.filter((i) => i.ptype == 'our-lines');
+    this.totalOurlinePages = this.ourlinesPageList.length;
+
     this.servicesPageList = this.mailconfiglist?.filter((i) => i.ptype == 'services');
+    this.totalServicesPages = this.servicesPageList.length
+
+    this.setTotalPages()
     this.spinner.hide();
   }
-  tabChanged(event: MatTabChangeEvent) {
-    this.spinner.show();
-    const selectedIndex = this.tabGroup.selectedIndex;
-    this.selectedTabName = this.tabGroup._tabs._results[selectedIndex].textLabel;
-    this.searchPageNameQuery = this.searchPageNameQuery;
-    this.getDynamicPageData()
-    if(this.mailconfiglist && this.mailconfiglist.length > 0){
-      this.applyFilter(this.selectedTabName.toLowerCase());
-      this.spinner.hide();
+
+  setTotalPages() {
+    switch (this.currentTab) {
+      case 0:
+        this.totalPage = this.blogPageList.length;
+        break;
+
+      case 1:
+        this.totalInfoPages = this.infoPageList.length;
+        break;
+
+      case 2:
+        this.totalOurlinePages = this.ourlinesPageList.length;
+        break;
+
+      case 3:
+        this.totalServicesPages = this.servicesPageList.length;
+        break;
+      
+      default:
+        this.totalPage = 0
     }
   }
+  setSearchText(){
+    switch (this.currentTab) {
+      case 0:
+        this.searchText = this.searchBlogPageNameQuery;
+        break;
+      case 1:
+        this.searchText = this.searchinfoPageNameQuery;
+        break;
+      case 2:
+        this.searchText = this.searchOutlinesPageNameQuery;
+        break;
+      case 3:
+        this.searchText = this.searchServicesPageNameQuery;
+        break;
+      default:
+        this.searchText = '';
+    }
+  }
+
+  tabChanged(event: MatTabChangeEvent) {
+    console.log(event)
+    this.currentTab = event.index
+    this.selectedTabName = this.tabGroup._tabs._results[this.currentTab].textLabel;
+  }
   applyFilter(pType) {
-    console.log('this.mailconfiglist===>',this.mailconfiglist);
-    const lowerCasePageNameQuery = this.searchPageNameQuery ? this.searchPageNameQuery.toLowerCase().trim() : '';
+    let lowerCasePageNameQuery = ''
     switch (pType) {
       case 'blogs':
-        this.blogPageList = this.mailconfiglist?.filter(o => o.PageName.includes(lowerCasePageNameQuery) && o.ptype == pType);
-        console.log('this.blogPageList===>',this.blogPageList);
+        lowerCasePageNameQuery = this.searchBlogPageNameQuery ? this.searchBlogPageNameQuery.toLowerCase().trim() : '';
+        if (lowerCasePageNameQuery != '') {
+          this.blogPageList = this.mailconfiglist.filter(i => i.PageTitle.toLowerCase().includes(lowerCasePageNameQuery) && i.ptype == pType);
+        } else {
+          this.blogPageList = this.mailconfiglist?.filter((i) => i.ptype == pType);
+        }
+        this.setTotalPages()
         break;
       case 'info':
-        this.infoPageList = this.mailconfiglist?.filter(o => o.PageName.includes(lowerCasePageNameQuery) && o.ptype == pType);
+        lowerCasePageNameQuery = this.searchinfoPageNameQuery ? this.searchinfoPageNameQuery.toLowerCase().trim() : '';
+        if (lowerCasePageNameQuery != '') {
+          this.infoPageList = this.mailconfiglist.filter(i => i.PageTitle.toLowerCase().includes(lowerCasePageNameQuery) && i.ptype == pType);
+        } else {
+          this.infoPageList = this.mailconfiglist?.filter((i) => i.ptype == pType);
+        }
+        this.setTotalPages()
         break;
       case 'services':
-        this.servicesPageList = this.mailconfiglist?.filter(o => o.PageName.includes(lowerCasePageNameQuery) && o.ptype == pType);
+        
+        lowerCasePageNameQuery = this.searchServicesPageNameQuery ? this.searchServicesPageNameQuery.toLowerCase().trim() : '';
+        if (lowerCasePageNameQuery != '') {
+          this.servicesPageList = this.mailconfiglist.filter(i => i.PageTitle.toLowerCase().includes(lowerCasePageNameQuery) && i.ptype == pType);
+        } else {
+          this.servicesPageList = this.mailconfiglist?.filter((i) => i.ptype == pType);
+        }
+        this.setTotalPages()
         break;
       case 'our-lines':
-        this.ourlinesPageList = this.mailconfiglist?.filter(o => o.PageName.includes(lowerCasePageNameQuery) && o.ptype == pType);
+        lowerCasePageNameQuery = this.searchOutlinesPageNameQuery ? this.searchOutlinesPageNameQuery.toLowerCase().trim() : '';
+        if (lowerCasePageNameQuery != '') {
+          this.ourlinesPageList = this.mailconfiglist.filter(i => i.PageTitle.toLowerCase().includes(lowerCasePageNameQuery) && i.ptype == pType);
+        } else {
+          this.ourlinesPageList = this.mailconfiglist?.filter((i) => i.ptype == pType);
+        }
+        this.setTotalPages()
         break;
       default:
         console.log('Unknown Status');
@@ -155,7 +241,10 @@ export class dynamicpagelistComponent implements OnInit {
   }
 
   onEditconf(ConfigId) {
-    this.router.navigate(['/adddynamicpage', this.id, this.memRefNo, ConfigId, this.selectedTabName], { queryParams: { searchPageNameQuery: this.searchPageNameQuery, selectedTabName: this.selectedTabName } });
+    this.setSearchText();
+    console.log('this.selectedTabName',this.selectedTabName);
+    console.log('this.searchText',this.searchText);
+    this.router.navigate(['/adddynamicpage', this.id, this.memRefNo, ConfigId, this.selectedTabName], { queryParams: { searchPageNameQuery: this.searchText, selectedTabName: this.selectedTabName } });
   }
   sendMessage(message): void {
     this.loadingService.LoadingMessage(message);

@@ -65,7 +65,7 @@ export class adddynamicpageComponent implements OnInit, PipeTransform {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.searchPageNameQuery = params['searchPageNameQuery'];
+      this.searchPageNameQuery = params['searchText'];
       this.selectedTabName = params['selectedTabName'];
     });
     this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
