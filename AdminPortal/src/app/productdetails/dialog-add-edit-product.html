@@ -33,11 +33,11 @@
                                 </div>
                                 <div *ngIf="selectedfileType === 'doc' || selectedfileType === 'image'"
                                     class="col-md-12">
-                                    <!-- <label>{{selectedfileType == 'doc' ? "Document" : "Image"}}</label> -->
+                                    <label>{{selectedfileType == 'doc' ? "Document" : "Image"}}</label>
                                     <div class="form-group form-black label-floating">
                                         <img *ngIf="selectedfileType == 'image' && itemContent != undefined && itemContent != ''" src="{{itemContent}}"
                                         style="height: 100px;width: 200px;"> <br />
-                                        <input type="file" style="position: relative;opacity: inherit;" (change)="onFileSelected($event)">
+                                        <input type="file" style="position: relative;opacity: inherit;margin-top: 20px;" (change)="onFileSelected($event)" >
                                     </div>
                                 </div>
                                 <div *ngIf="selectedfileType === 'video'" class="col-md-12">
@@ -63,6 +63,14 @@
                                             <div style="height: 150px;border: 1px solid #D2D2D2;margin-top:10px;"
                                                 *ngIf="itemContent != '' && itemContent != null && itemContent != undefined  && itemContent != 'undefined'"
                                                 [innerHTML]="transform(itemContent,'html')" class="list-d"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="selectedfileType === 'image'">
+                                    <div class="col-md-12" style="padding-left: 0;">
+                                        <label>Item Sequence</label>
+                                        <div class="form-group form-black label-floating">
+                                            <input type="text" name="itemSequence" [(ngModel)]="itemSequence" required>
                                         </div>
                                     </div>
                                 </div>

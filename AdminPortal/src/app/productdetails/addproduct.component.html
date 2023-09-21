@@ -41,7 +41,7 @@
                 </mat-tab>
                 <mat-tab label="Item Doc Details">
                   <div>
-                    <button (click)="openDialog(memRefNo,0,itemId,'','','')" class="custom-btn">Add New</button>
+                    <button (click)="openDialog(memRefNo,0,itemId,'','','','')" class="custom-btn">Add New</button>
                     <div *ngIf="productDetails != null && productDetails != 'undefined' &&  productDetails.length > 0">
                       <table class="table table-striped table-bordered custom-table">
                         <thead>
@@ -49,6 +49,7 @@
                             <th>Doc Type</th>
                             <th>Name</th>
                             <th>Detatils/Url</th>
+                            <th>Sequence</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -58,9 +59,11 @@
                             <td data-title="DocTypeName" style="text-align: left;">{{product.DocTypeName}}</td>
                             <td data-title="ItemTextUrl" class="detailurl" style="width: 50px;text-align: left;">
                               {{product.DocTypeTextUrl}}</td>
+                            <td data-title="itemSequence" class="detailurl">
+                                {{product.Sequence == 0 ? '' : product.Sequence}}</td>
                             <td style="text-align: center;" class="btnalign">
                               <button class="btn-icon"
-                                (click)="openDialog(memRefNo,product.Id,itemId,product.DocType,product.DocTypeName,product.DocTypeTextUrl)">
+                                (click)="openDialog(memRefNo,product.Id,itemId,product.DocType,product.DocTypeName,product.DocTypeTextUrl,product.Sequence)">
                                 <i class="fa fa-pencil"></i>
                               </button>
                               <button (click)="openDeleteDialog(product.Id)" class="btn-icon">

@@ -34,7 +34,7 @@ export class addproductComponent implements OnInit {
     uid: any;
     selectedProductPriceFile: File | undefined;
     selectedProductDocumentFile: File | undefined;
-    searchText:string;
+    searchText: string;
     itemType: ItemType[] = [
         { key: 'doc', value: 'doc' },
         { key: 'text', value: 'text' },
@@ -56,7 +56,7 @@ export class addproductComponent implements OnInit {
         this.getItemList();
         this.getItemPrice();
     }
-    
+
     getItemList() {
         if (this.itemId != null && this.itemId != undefined && this.itemId != '') {
             this.MailConfigService.GetproductDocBYId(this.memRefNo, this.itemId).subscribe((data: any) => {
@@ -72,12 +72,12 @@ export class addproductComponent implements OnInit {
             });
         }
     }
-   
+
     back() {
         this.router.navigate(['/productlist', this.uid, this.memRefNo, 'Client'], { queryParams: { searchText: this.searchText } });
     }
 
-    openDialog(MemRefNo, ItemDocId, Item, DocType, DocTypeName, DocTypeTextUrl): void {
+    openDialog(MemRefNo, ItemDocId, Item, DocType, DocTypeName, DocTypeTextUrl, Sequence): void {
         let dialogRef = this.dialog.open(DialogAddEditProduct, {
             width: '700px',
             data: {
@@ -87,6 +87,7 @@ export class addproductComponent implements OnInit {
                 docType: DocType,
                 docTypeName: DocTypeName,
                 docTypeTextUrl: DocTypeTextUrl,
+                sequence: Sequence
             }
         });
 
@@ -147,6 +148,7 @@ export class DialogAddEditProduct {
     memRefNo: string;
     itemDocId: number;
     item: string;
+    itemSequence: number;
 
     ngOnInit() {
         console.log('data====>', this.data);
@@ -156,10 +158,12 @@ export class DialogAddEditProduct {
         this.selectedfileType = this.data.docType;
         this.itemContent = this.data.docTypeTextUrl;
         this.docTypeName = this.data.docTypeName;
-        if(this.selectedfileType == "doc"){
+        if (this.selectedfileType == "doc") {
             this.selectedDocName = this.data.docTypeName;
         }
         this.itemDocId = this.data.itemDocId;
+        this.itemSequence = this.data.sequence == null ? 999 : this.data.sequence;
+        console.log('this.itemSequence',this.itemSequence);
     }
 
     fileType: ItemType[] = [
@@ -177,7 +181,7 @@ export class DialogAddEditProduct {
 
     onFileSelected(event) {
         this.SelectedFile = <File>event.target.files[0];
-        console.log('selected file',this.SelectedFile);
+        console.log('selected file', this.SelectedFile);
     }
 
     onCancel(): void {
@@ -185,38 +189,56 @@ export class DialogAddEditProduct {
     }
 
     onSave() {
-
-        if (this.selectedfileType == "doc" || this.selectedfileType == "image") {
-            if ((this.itemContent == undefined || this.itemContent == ' ' || this.itemContent == null) && (this.SelectedFile == undefined || this.SelectedFile == null)) {
-                this.toastr.error('Please Select The Image/Doc File');
-                return;
-            }
-        }
+        // console.log('this.itemSequence', this.itemSequence);
+        // if (this.selectedfileType == "doc" || this.selectedfileType == "image") {
+        //     if ((this.itemContent == undefined || this.itemContent == ' ' || this.itemContent == null) && (this.SelectedFile == undefined || this.SelectedFile == null)) {
+        //         this.toastr.error('Please Select The Image/Doc File');
+        //         return;
+        //     }
+        // }
 
         const fd = new FormData();
+        
         if (this.selectedfileType == "doc" || this.selectedfileType == "image") {
-            if (this.SelectedFile != undefined && this.SelectedFile != null) {
+            if(this.itemDocId > 0 && this.SelectedFile != undefined && this.SelectedFile != null){
                 fd.append('FileName', this.SelectedFile.name);
                 fd.append('image', this.SelectedFile, this.SelectedFile.name);
             }
-        } else {
-            fd.append('DocDetailsUrl', this.itemContent);
+            else if(this.itemDocId == 0 && (this.SelectedFile == undefined || this.SelectedFile == null)){
+                this.toastr.error('Please Select The Image/Doc File');
+                return;
+            }else if(this.itemDocId == 0 && (this.SelectedFile != undefined || this.SelectedFile != null)){
+                fd.append('FileName', this.SelectedFile.name);
+                fd.append('image', this.SelectedFile, this.SelectedFile.name);
+            }
+            else {
+                 fd.append('DocDetailsUrl', this.itemContent);
+            }
+        } 
+
+        if (this.selectedfileType == "doc") {
+            fd.append('DocName', this.selectedDocName);
+        } else if (this.selectedfileType == "image") {
+            if (this.itemDocId > 0) {
+                fd.append('DocName', this.docTypeName);
+            } else {
+                fd.append('DocName', this.SelectedFile.name);
+            }
+            if(this.itemSequence == undefined || this.itemSequence == null || this.itemSequence == 0){
+                this.toastr.error('Please Enter Sequence of an Image');
+                return;
+            }
+            fd.append('Sequence', this.itemSequence.toString());
+        } else if (this.selectedfileType == "video") {
+            fd.append('DocName', "video");
+        } else if (this.selectedfileType == "text") {
+            fd.append('DocName', "details");
         }
         fd.append('memRefNo', this.memRefNo);
         fd.append('ItemDocId', this.itemDocId.toString());
         fd.append('DocType', this.selectedfileType);
-        if(this.selectedfileType == "doc"){
-            fd.append('DocName', this.selectedDocName);
-        }else if(this.selectedfileType == "image"){
-            fd.append('DocName', this.SelectedFile.name);
-        }else if(this.selectedfileType == "video"){
-            fd.append('DocName', "video");
-        }else if(this.selectedfileType == "text"){
-            fd.append('DocName', "details");
-        }
-       
         fd.append('Item', this.item);
-        console.log('this.memRefNo===>', this.memRefNo)
+        
         this.MailConfigService.UpdateImageDocument(fd).subscribe((data: any) => {
             console.log(data);
             if (data == true || data == "true") {
