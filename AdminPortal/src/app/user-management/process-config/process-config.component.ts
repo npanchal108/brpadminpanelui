@@ -25,7 +25,8 @@ export class ProcessConfigComponent implements OnInit {
   processtimes: any;
   foods: string[] = ['Daily', 'Weekly', 'Monthly'];  
   foods1: string[] = ['Hourly', 'Daily'];
-  foods2: string[] = ['5 Mins', '15 Mins', '30 Mins'];
+  foods2: string[] = ['5 Mins', '15 Mins', '30 Mins',];
+  reportTiming: string[] = ['Daily', 'Weekly', 'Monthly','Hourly', 'Daily','5 Mins', '15 Mins', '30 Mins'];
   toppingList: string[] =['it_compl','it_majcls','it_prodline',
   'it_tree_link','it_tree_node','oe_totcodes','salesman',
   'states','sy_codes','sy_company','sy_contact','sy_country',
@@ -77,6 +78,12 @@ export class ProcessConfigComponent implements OnInit {
         if(this.userSchedulerConfig[i].SchedulerName=='Scheduler3'){
           this.schedulerData.SchedulerTime3=this.userSchedulerConfig[i].SchedulerTime;
           this.schedulerData.Table3=JSON.parse(this.userSchedulerConfig[i].SchedulerTables);
+        }
+        if(this.userSchedulerConfig[i].SchedulerName=='SchedulerInactiveSubUsers'){
+          this.schedulerData.SchedulerInactiveSubUsers=this.userSchedulerConfig[i].SchedulerTime;
+        }
+        if(this.userSchedulerConfig[i].SchedulerName=='SchedulerInvalidItems'){
+          this.schedulerData.SchedulerInvalidItems=this.userSchedulerConfig[i].SchedulerTime;
         }
       }
     });
@@ -185,7 +192,43 @@ export class ProcessConfigComponent implements OnInit {
 
     console.log()
   }
-
+  addSchedulerInactiveSubUsers(form: NgForm) {
+    var data = form.value;
+    var model = {
+      "MemRefNo": this.memRefNo,
+      "SchedulerName": "SchedulerInactiveSubUsers",
+      "SchedulerTime": data.SchedulerInactiveSubUsers,
+      "SchedulerTables": null
+    };
+    this.userprocesstimeService.insertScheduler1(model).subscribe((data: any) => {
+      if (data.Status == "Success") {
+        this.toastr.success("Scheduler inserted successfully.");
+        this.ngOnInit();
+      }
+      else {
+        this.toastr.success("Something went wrong. Please try again later.");
+      }
+    });
+  }
+  addSchedulerInvalidItems(form: NgForm) {
+    var data = form.value;
+    console.log('addSchedulerInvalidItems',data)
+    var model = {
+      "MemRefNo": this.memRefNo,
+      "SchedulerName": "SchedulerInvalidItems",
+      "SchedulerTime": data.SchedulerInvalidItems,
+      "SchedulerTables": null
+    };
+    this.userprocesstimeService.insertScheduler1(model).subscribe((data: any) => {
+      if (data.Status == "Success") {
+        this.toastr.success("Scheduler inserted successfully.");
+        this.ngOnInit();
+      }
+      else {
+        this.toastr.success("Something went wrong. Please try again later.");
+      }
+    });
+  }
   addScheduler1Config(form: NgForm) {
     var data = form.value;
     var model = {

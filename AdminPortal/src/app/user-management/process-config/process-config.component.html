@@ -85,6 +85,40 @@
                                                     [disabled]=isdesable
                                                     (click)="addScheduler3Config(userRegistrationForm)">Submit</button>
                                             </div>
+                                            <div class="col-md-12 flex-single-row">
+                                                <div class="flex-single-row-inner">
+                                                    <h4>Inactive Sub-Users Report</h4>
+                                                    <mat-form-field style="">
+                                                        <mat-label>Select Time</mat-label>
+                                                        <mat-select name="SchedulerInactiveSubUsers" [disabled]=isdesable
+                                                            [(ngModel)]="schedulerData.SchedulerInactiveSubUsers">
+                                                            <mat-option *ngFor="let time of reportTiming" [value]="time">
+                                                                {{time}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                                <button class="custom-btn" style="margin-right: 110px;" type="submit"
+                                                    [disabled]=isdesable
+                                                    (click)="addSchedulerInactiveSubUsers(userRegistrationForm)">Submit</button>
+                                            </div>
+                                            <div class="col-md-12 flex-single-row">
+                                                <div class="flex-single-row-inner">
+                                                    <h4>Invalid Items Report</h4>
+                                                    <mat-form-field style="">
+                                                        <mat-label>Select Time</mat-label>
+                                                        <mat-select name="SchedulerInvalidItems" [disabled]=isdesable
+                                                            [(ngModel)]="schedulerData.SchedulerInvalidItemsTime">
+                                                            <mat-option *ngFor="let time of reportTiming" [value]="time">
+                                                                {{time}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                                <button class="custom-btn" style="margin-right: 110px;" type="submit"
+                                                    [disabled]=isdesable
+                                                    (click)="addSchedulerInvalidItems(userRegistrationForm)">Submit</button>
+                                            </div>
                                         </mat-tab>
                                         <mat-tab class="tab-border" label="Sync Now">
 
