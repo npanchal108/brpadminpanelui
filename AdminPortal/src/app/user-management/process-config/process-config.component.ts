@@ -250,10 +250,6 @@ export class ProcessConfigComponent implements OnInit {
   syncTblNow() {
     this.spinner.show();
     var geturl = location.origin + '/' + this.memRefNo + 'Api/ecommerce/syncasperconfig';
-    //var geturl = 'http://localhost:50144/DistOneApi/syncasperconfig'
-    //geturl=geturl.replace('http://localhost:4200','https://localhost:44320');
-    //geturl=geturl.replace('EcomDemoApi/','');
-    //console.log(geturl);
 
     var model = {
       "LastSync": this.getdatetime(new Date(this.date)),

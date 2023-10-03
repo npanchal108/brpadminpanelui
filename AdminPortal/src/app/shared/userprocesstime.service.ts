@@ -74,12 +74,12 @@ export class UserprocesstimeService {
   }
 
   LogoUploadUser(dorms) {
-    return this.http.post(this.common.RootUrl + '/DistOneAPi/PostUserImage', dorms);
+    return this.http.post(this.common.RootUrl + '/ecommerce/PostUserImage', dorms);
   }
 
   insertScheduler1(data) {
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
-    return this.http.post(this.common.RootUrl + '/DistOneAPi/AddSchedulerConfig', data, { headers: reqHeader });
+    return this.http.post(this.common.RootUrl + '/ecommerce/AddSchedulerConfig', data, { headers: reqHeader });
   }
 
   syncTblNow(data, url) {
