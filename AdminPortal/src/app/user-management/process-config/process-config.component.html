@@ -108,7 +108,7 @@
                                                     <mat-form-field style="">
                                                         <mat-label>Select Time</mat-label>
                                                         <mat-select name="SchedulerInvalidItems" [disabled]=isdesable
-                                                            [(ngModel)]="schedulerData.SchedulerInvalidItemsTime">
+                                                            [(ngModel)]="schedulerData.SchedulerInvalidItems">
                                                             <mat-option *ngFor="let time of reportTiming" [value]="time">
                                                                 {{time}}
                                                             </mat-option>
