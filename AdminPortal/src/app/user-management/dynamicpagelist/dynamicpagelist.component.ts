@@ -52,6 +52,8 @@ export class dynamicpagelistComponent implements OnInit {
     { key: 'our-lines', value: 'our-lines' },
     { key: 'services', value: 'services' }
   ];
+  sortedColumn:string = '';
+  ascending = true;
 
   constructor(private spinner: NgxSpinnerService, private dialog: MatDialog, private route: ActivatedRoute, private MailConfigService: MailConfigService, private toastr: ToastrService, private router: Router, private loadingService: LoadingService, private changeDetectorRef: ChangeDetectorRef) { }
 
@@ -180,6 +182,8 @@ export class dynamicpagelistComponent implements OnInit {
     console.log(event)
     this.currentTab = event.index
     this.selectedTabName = this.tabGroup._tabs._results[this.currentTab].textLabel;
+    this.sortedColumn = '';
+    this.ascending = true;
   }
   applyFilter(pType) {
     let lowerCasePageNameQuery = ''
@@ -252,6 +256,16 @@ export class dynamicpagelistComponent implements OnInit {
   pageChanged(event: any): void {
     this.page = event;
   }
+
+  toggleSort(column: string) {
+    if (this.sortedColumn === column) {
+      this.ascending = !this.ascending;
+    } else {
+      this.sortedColumn = column;
+      this.ascending = true;
+    }
+  }
+
 }
 
 
@@ -288,4 +302,7 @@ export class Deletedynamicpagedialog {
     });
     this.dialogRef.close();
   }
+
+  
+
 }

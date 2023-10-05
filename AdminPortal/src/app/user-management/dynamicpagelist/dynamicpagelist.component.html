@@ -26,16 +26,36 @@
                                     <table class="table table-striped table-bordered custom-table">
                                         <thead class="text-info">
                                             <tr>
-                                                <th style="width: 20%;">Title </th>
-                                                <th style="width: 40%;">Description</th>
-                                                <th style="width: 10%;">Posted Date</th>
-                                                <th style="width: 5%;">Active</th>
-                                                <th style="width: 15%;">URL</th>
+                                                <th style="width: 20%;"  (click)="toggleSort('PageTitle')">
+                                                    Title
+                                                    <span  [ngClass]="{ 'disabled-icon': sortedColumn != 'PageTitle' }">
+                                                        <i  [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                      </span> 
+                                                </th>
+                                                <th style="width: 40%;" (click)="toggleSort('PageDescription')">
+                                                    Description
+                                                    <span  [ngClass]="{ 'disabled-icon': sortedColumn != 'PageDescription' }">
+                                                        <i  [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                      </span>
+                                                </th>
+                                                <th style="width: 10%;"  (click)="toggleSort('CreatedDate')">
+                                                    Posted Date
+                                                    <span  [ngClass]="{ 'disabled-icon': sortedColumn != 'CreatedDate' }">
+                                                        <i  [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                      </span>
+                                                </th>
+                                                <th style="width: 8%;" (click)="toggleSort('IsActive')">
+                                                    Active
+                                                    <span  [ngClass]="{ 'disabled-icon': sortedColumn != 'IsActive' }">
+                                                        <i  [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                      </span>
+                                                </th>
+                                                <th style="width: 12%;">URL</th>
                                                 <th style="width: 10%;"style="text-align: center;">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let mails of blogPageList | paginate : { itemsPerPage:50, currentPage:page,totalItems:totalPage, id:'first' }">
+                                            <tr *ngFor="let mails of blogPageList | paginate : { itemsPerPage:50, currentPage:page,totalItems:totalPage, id:'first' } | orderBy: sortedColumn: ascending">
                                                 <td>{{mails.PageTitle}}</td>
                                                 <td>{{mails.PageDescription}}</td>
                                                 <td>{{mails.CreatedDate | date:'dd-MM-yyyy' }}</td>
@@ -78,16 +98,31 @@
                                     <table class="table table-striped table-bordered custom-table">
                                         <thead>
                                             <tr>
-                                                <th>Title </th>
-                                                <th>Description </th>
-                                                <th style="width: 5%;">Active</th>
+                                                <th (click)="toggleSort('PageTitle')">
+                                                    Title
+                                                    <span  [ngClass]="{ 'disabled-icon': sortedColumn != 'PageTitle' }">
+                                                        <i  [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                      </span>
+                                                 </th>
+                                                <th  (click)="toggleSort('PageDescription')">
+                                                    Description
+                                                    <span  [ngClass]="{ 'disabled-icon': sortedColumn != 'PageDescription' }">
+                                                        <i  [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                      </span>
+                                                 </th>
+                                                <th style="width: 10%;" (click)="toggleSort('IsActive')">
+                                                    Active
+                                                    <span  [ngClass]="{ 'disabled-icon': sortedColumn != 'IsActive' }">
+                                                        <i  [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                      </span>
+                                                </th>
                                                 <th>URL </th>
                                                 <th style="text-align: center;">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr
-                                                *ngFor="let mails of infoPageList  | paginate : { itemsPerPage:50, currentPage:page,totalItems:totalInfoPages, id:'first' }">
+                                                *ngFor="let mails of infoPageList  | paginate : { itemsPerPage:50, currentPage:page,totalItems:totalInfoPages, id:'first' } | orderBy: sortedColumn: ascending">
                                                 <td data-title="Subject">{{mails.PageTitle}}</td>
                                                 <td data-title="Subject">{{mails.PageDescription}}</td>
                                                 <td data-title="Subject">{{mails.IsActive}}</td>
@@ -129,8 +164,18 @@
                                     <table class="table table-striped table-bordered custom-table">
                                         <thead>
                                             <tr>
-                                                <th>Title </th>
-                                                <th>Description </th>
+                                                <th  (click)="toggleSort('PageTitle')">
+                                                    Title
+                                                    <span  [ngClass]="{ 'disabled-icon': sortedColumn != 'PageTitle' }">
+                                                        <i  [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                      </span>
+                                                 </th>
+                                                <th  (click)="toggleSort('PageDescription')">
+                                                    Description
+                                                    <span  [ngClass]="{ 'disabled-icon': sortedColumn != 'PageDescription' }">
+                                                        <i  [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                      </span>
+                                                 </th>
                                                 <th style="width: 5%;">Active</th>
                                                 <th>URL </th>
                                                 <th style="text-align: center;">Action</th>
@@ -138,7 +183,7 @@
                                         </thead>
                                         <tbody>
                                             <tr
-                                                *ngFor="let mails of ourlinesPageList  | paginate : { itemsPerPage:50, currentPage:page,totalItems:totalOurlinePages, id:'first' }">
+                                                *ngFor="let mails of ourlinesPageList  | paginate : { itemsPerPage:50, currentPage:page,totalItems:totalOurlinePages, id:'first' } | orderBy: sortedColumn: ascending">
                                                 <td data-title="Subject">{{mails.PageTitle}}</td>
                                                 <td data-title="Subject">{{mails.PageDescription}}</td>
                                                 <td data-title="Subject">{{mails.IsActive}}</td>
@@ -180,8 +225,16 @@
                                     <table class="table table-striped table-bordered custom-table">
                                         <thead>
                                             <tr>
-                                                <th>Title </th>
-                                                <th>Description </th>
+                                                <th  (click)="toggleSort('PageTitle')">Title
+                                                    <span  [ngClass]="{ 'disabled-icon': sortedColumn != 'PageTitle' }">
+                                                        <i  [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                      </span>
+                                                     </th>
+                                                <th   (click)="toggleSort('PageDescription')">Description
+                                                    <span  [ngClass]="{ 'disabled-icon': sortedColumn != 'PageDescription' }">
+                                                        <i  [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                      </span>
+                                                     </th>
                                                 <th style="width: 5%;">Active</th>
                                                 <th>URL </th>
                                                 <th style="text-align: center;">Action</th>
@@ -189,7 +242,7 @@
                                         </thead>
                                         <tbody>
                                             <tr
-                                                *ngFor="let mails of servicesPageList  | paginate : { itemsPerPage:50, currentPage:page,totalItems:totalServicesPages, id:'first' }">
+                                                *ngFor="let mails of servicesPageList  | paginate : { itemsPerPage:50, currentPage:page,totalItems:totalServicesPages, id:'first' }  | orderBy: sortedColumn: ascending">
                                                 <td data-title="Subject">{{mails.PageTitle}}</td>
                                                 <td data-title="Subject">{{mails.PageDescription}}</td>
                                                 <td data-title="Subject">{{mails.IsActive}}</td>

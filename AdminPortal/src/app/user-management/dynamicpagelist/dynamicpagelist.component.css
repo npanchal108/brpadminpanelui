@@ -13,6 +13,20 @@ a {
     color: #008B99;
 }
 
+.sort-icon {
+    float: right;
+}
+
+.disabled-icon i{
+    color: #d1d5dc;
+}
+th {
+    cursor: pointer;
+}
+th span{
+    float: right;
+}
+
 @media (max-width: 767px) {
     .table-mobile table thead {
         display: none;

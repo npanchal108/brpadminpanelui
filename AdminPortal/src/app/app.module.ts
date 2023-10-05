@@ -58,6 +58,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { DatePipe } from '@angular/common';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { OrderByPipe } from './user-management/dynamicpagelist/orderBy.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -91,6 +92,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
     DialogAddEditProduct,
     DeleteItemDocdialog,
     productBulkUploadComponent,
+    OrderByPipe,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA] ,
   imports: [
