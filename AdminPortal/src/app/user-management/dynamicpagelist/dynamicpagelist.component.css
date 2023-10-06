@@ -1,15 +1,18 @@
 a {
     cursor: pointer;
 }
+
 .mat-tab-label {
-    border : 1px solid grey !important;
+    border: 1px solid grey !important;
     margin-top: 12px !important;
 }
-.refresh-btn{
+
+.refresh-btn {
     border: none;
     background: none;
 }
-.refresh-icon-clr{
+
+.refresh-icon-clr {
     color: #008B99;
 }
 
@@ -17,20 +20,31 @@ a {
     float: right;
 }
 
-.disabled-icon i{
+.disabled-icon i {
     color: #d1d5dc;
 }
+
 th {
     cursor: pointer;
 }
-th span{
+
+th span {
     float: right;
+}
+
+.truncate-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+    /* Adjust this width as needed */
 }
 
 @media (max-width: 767px) {
     .table-mobile table thead {
         display: none;
     }
+
     .table-mobile table td {
         white-space: normal !important;
         word-break: break-all;
@@ -43,14 +57,17 @@ th span{
         text-align: left !important;
         border-top: 1px solid #e3e3e3 !important;
     }
+
     .table-panel table td {
         padding-top: 10px !important;
         padding-bottom: 10px !important;
         padding-right: 10px !important;
     }
+
     .table-mobile table td::before {
         left: 15px;
     }
+
     .table-mobile table td::before {
         content: attr(data-title);
         position: absolute;
@@ -62,7 +79,8 @@ th span{
         text-align: left;
         font-weight: bold;
     }
+
     .table-mobile table td.btnalign {
-        padding-left: 0px!important;
+        padding-left: 0px !important;
     }
 }
