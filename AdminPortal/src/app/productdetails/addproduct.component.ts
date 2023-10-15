@@ -176,7 +176,6 @@ export class DialogAddEditProduct {
     docName: DocName[] = [
         { key: 'tds', value: 'tds' },
         { key: 'liturature', value: 'liturature' },
-        { key: 'sds', value: 'sds' }
     ];
 
     onFileSelected(event) {

@@ -117,7 +117,11 @@ export class adddynamicpageComponent implements OnInit, PipeTransform {
     fd.append('PageContent', form.value.PageContent);
     fd.append('PageType',this.pageType.toLocaleLowerCase());
     fd.append('Sequence', form.value.Sequence);
-    fd.append('IsActive', form.value.IsActive);
+    if(form.value.IsActive == 1){
+      fd.append('IsActive', 'true');
+    }else{
+      fd.append('IsActive', 'false');
+    }
     fd.append('ImageUrl', this.Mailtemplate.imageurl);
     this.MailConfigService.Updatedynamicpage(fd).subscribe((data: any) => {
       if (data == true || data == "true") {
