@@ -5,4 +5,9 @@
 .refresh-icon-clr{
     color: #008B99;
 }
-
+.truncate-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 575px;
+}

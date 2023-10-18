@@ -149,6 +149,7 @@ export class DialogAddEditProduct {
     itemDocId: number;
     item: string;
     itemSequence: number;
+    pdfFileName:string;
 
     ngOnInit() {
         console.log('data====>', this.data);
@@ -163,7 +164,11 @@ export class DialogAddEditProduct {
         }
         this.itemDocId = this.data.itemDocId;
         this.itemSequence = this.data.sequence == null ? 999 : this.data.sequence;
-        console.log('this.itemSequence',this.itemSequence);
+        if(this.selectedfileType == 'doc' && this.itemContent != undefined && this.itemContent != '' && this.itemContent != null){
+            const url = new URL(this.itemContent);
+            const pathname = url.pathname;
+            this.pdfFileName = pathname.substring(pathname.lastIndexOf('/') + 1);
+        }
     }
 
     fileType: ItemType[] = [
@@ -179,41 +184,54 @@ export class DialogAddEditProduct {
     ];
 
     onFileSelected(event) {
-        this.SelectedFile = <File>event.target.files[0];
-        console.log('selected file', this.SelectedFile);
+        //this.SelectedFile = <File>event.target.files[0];
+        const inputElement = event.target as HTMLInputElement;
+        this.SelectedFile = inputElement.files[0];
+        if (!this.SelectedFile) {
+            return;
+        }
+
+        const fileType = this.SelectedFile.type;
+        console.log('fileType====>', fileType)
+        if (this.selectedfileType == "doc" && fileType != 'application/pdf') {
+            this.toastr.error('Please select valid pdf file');
+            inputElement.value = '';
+            return;
+        } else if (this.selectedfileType == "image" && fileType.split('/')[0] != 'image') {
+            this.toastr.error('Please select valid image file');
+            inputElement.value = '';
+            return;
+        }
     }
 
     onCancel(): void {
         this.dialogRef.close();
     }
-
+   
     onSave() {
-        // console.log('this.itemSequence', this.itemSequence);
-        // if (this.selectedfileType == "doc" || this.selectedfileType == "image") {
-        //     if ((this.itemContent == undefined || this.itemContent == ' ' || this.itemContent == null) && (this.SelectedFile == undefined || this.SelectedFile == null)) {
-        //         this.toastr.error('Please Select The Image/Doc File');
-        //         return;
-        //     }
-        // }
-
         const fd = new FormData();
-        
+
         if (this.selectedfileType == "doc" || this.selectedfileType == "image") {
-            if(this.itemDocId > 0 && this.SelectedFile != undefined && this.SelectedFile != null){
+            if (this.itemDocId > 0 && this.SelectedFile != undefined && this.SelectedFile != null) {
                 fd.append('FileName', this.SelectedFile.name);
                 fd.append('image', this.SelectedFile, this.SelectedFile.name);
             }
-            else if(this.itemDocId == 0 && (this.SelectedFile == undefined || this.SelectedFile == null)){
-                this.toastr.error('Please Select The Image/Doc File');
-                return;
-            }else if(this.itemDocId == 0 && (this.SelectedFile != undefined || this.SelectedFile != null)){
+            else if (this.itemDocId == 0 && (this.SelectedFile == undefined || this.SelectedFile == null)) {
+                if (this.selectedfileType == "doc") {
+                    this.toastr.error('Please select valid pdf file');
+                    return;
+                } else if (this.selectedfileType == "image") {
+                    this.toastr.error('Please select valid image file');
+                    return;
+                }
+            } else if (this.itemDocId == 0 && (this.SelectedFile != undefined || this.SelectedFile != null)) {
                 fd.append('FileName', this.SelectedFile.name);
                 fd.append('image', this.SelectedFile, this.SelectedFile.name);
             }
-            else {
-                 fd.append('DocDetailsUrl', this.itemContent);
-            }
-        } 
+        }
+        else {
+            fd.append('DocDetailsUrl', this.itemContent);
+        }
 
         if (this.selectedfileType == "doc") {
             fd.append('DocName', this.selectedDocName);
@@ -223,7 +241,7 @@ export class DialogAddEditProduct {
             } else {
                 fd.append('DocName', this.SelectedFile.name);
             }
-            if(this.itemSequence == undefined || this.itemSequence == null || this.itemSequence == 0){
+            if (this.itemSequence == undefined || this.itemSequence == null || this.itemSequence == 0) {
                 this.toastr.error('Please Enter Sequence of an Image');
                 return;
             }
@@ -237,7 +255,7 @@ export class DialogAddEditProduct {
         fd.append('ItemDocId', this.itemDocId.toString());
         fd.append('DocType', this.selectedfileType);
         fd.append('Item', this.item);
-        
+
         this.MailConfigService.UpdateImageDocument(fd).subscribe((data: any) => {
             console.log(data);
             if (data == true || data == "true") {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
 import { MailConfig } from '../../model/mail-config.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -11,7 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   templateUrl: './userconfiglist.component.html',
   styleUrls: ['./userconfiglist.component.css']
 })
-export class UserconfiglistComponent implements OnInit {
+export class UserconfiglistComponent implements OnInit  {
   memRefNo: string;
   configlist:any;
   userType: string;
@@ -24,9 +24,7 @@ export class UserconfiglistComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
-    this.route.queryParams.subscribe(params => {
-      this.searchText = params['searchText'];
-    });
+    this.searchText = localStorage.getItem('configSearchText');
     this.id = this.route.snapshot.paramMap.get('id');
     this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
     this.userType = this.route.snapshot.paramMap.get('userType');
@@ -41,6 +39,7 @@ export class UserconfiglistComponent implements OnInit {
   }
   applyFilter() {
     if(this.searchText){
+      localStorage.setItem('configSearchText', this.searchText);
       this.filteredConfigList = this.configlist?.filter(item => {
         return Object.values(item).some((value: any) =>
           value && value.toString().toLowerCase().includes(this.searchText.toLowerCase())
@@ -53,13 +52,15 @@ export class UserconfiglistComponent implements OnInit {
   }
   onReset(){
     this.searchText = '';
+    localStorage.setItem('configSearchText', this.searchText);
     this.getConfigList();
   }
   onEditconf(ConfigId){
-    this.router.navigate(['/addconfig',this.id,this.memRefNo, ConfigId], { queryParams: { searchText: this.searchText } });
-    //this.router.navigate(['/addconfig',this.id,this.memRefNo, ConfigId]);
+    //this.router.navigate(['/addconfig',this.id,this.memRefNo, ConfigId], { queryParams: { searchText: this.searchText } });
+    this.router.navigate(['/addconfig',this.id,this.memRefNo, ConfigId]);
   }
   pageChanged(event: any): void {
     this.page = event;
   }
+ 
 }

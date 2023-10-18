@@ -11,7 +11,7 @@
                                     <label>Doc Type</label>
                                     <div class="form-group form-black label-floating">
                                         <mat-form-field>
-                                            <mat-select [(ngModel)]="selectedfileType" name="selectedfileType" required>
+                                            <mat-select [(ngModel)]="selectedfileType" name="selectedfileType" [disabled]="itemDocId > 0" required>
                                                 <mat-option *ngFor="let type of fileType" [value]="type.value">
                                                     {{type.key}}
                                                 </mat-option>
@@ -35,9 +35,14 @@
                                     class="col-md-12">
                                     <label>{{selectedfileType == 'doc' ? "Document" : "Image"}}</label>
                                     <div class="form-group form-black label-floating">
+                                        <ng-container *ngIf="selectedfileType == 'doc'">
+                                            <a [title]="itemContent" [href]="itemContent"
+                                                target="_blank">
+                                                {{pdfFileName}}</a>
+                                        </ng-container>
                                         <img *ngIf="selectedfileType == 'image' && itemContent != undefined && itemContent != ''" src="{{itemContent}}"
                                         style="height: 100px;width: 200px;"> <br />
-                                        <input type="file" style="position: relative;opacity: inherit;margin-top: 20px;" (change)="onFileSelected($event)" >
+                                        <input type="file" style="position: relative;opacity: inherit;margin-top: 20px;" (change)="onFileSelected($event)">
                                     </div>
                                 </div>
                                 <div *ngIf="selectedfileType === 'video'" class="col-md-12">

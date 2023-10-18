@@ -88,6 +88,9 @@ export class ProcessConfigComponent implements OnInit {
         if(this.userSchedulerConfig[i].SchedulerName=='SchedulerInactiveSubUsersForAdmin'){
           this.schedulerData.SchedulerInactiveSubUsersForAdmin=this.userSchedulerConfig[i].SchedulerTime;
         }
+        if(this.userSchedulerConfig[i].SchedulerName=='SchedulerPOReport'){
+          this.schedulerData.SchedulerPOReport=this.userSchedulerConfig[i].SchedulerTime;
+        }
       }
     });
     
@@ -213,6 +216,25 @@ export class ProcessConfigComponent implements OnInit {
       }
     });
   }
+  addSchedulerPOReport(form: NgForm) {
+    var data = form.value;
+    var model = {
+      "MemRefNo": this.memRefNo,
+      "SchedulerName": "SchedulerPOReport",
+      "SchedulerTime": data.SchedulerPOReport,
+      "SchedulerTables": null
+    };
+    this.userprocesstimeService.insertScheduler1(model).subscribe((data: any) => {
+      if (data.Status == "Success") {
+        this.toastr.success("Scheduler inserted successfully.");
+        this.ngOnInit();
+      }
+      else {
+        this.toastr.success("Something went wrong. Please try again later.");
+      }
+    });
+  }
+  
   addSchedulerInactiveSubUsersForAdmin(form: NgForm) {
     var data = form.value;
     var model = {

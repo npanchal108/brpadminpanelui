@@ -48,8 +48,8 @@
                           <tr>
                             <th>Doc Type</th>
                             <th>Name</th>
-                            <th>Detatils/Url</th>
                             <th>Sequence</th>
+                            <th>Detatils/Url</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -57,10 +57,10 @@
                           <tr *ngFor="let product of productDetails">
                             <td data-title="DocType" style="text-align: left;">{{product.DocType}}</td>
                             <td data-title="DocTypeName" style="text-align: left;">{{product.DocTypeName}}</td>
-                            <td data-title="ItemTextUrl" class="detailurl" style="width: 50px;text-align: left;">
+                            <td data-title="itemSequence">
+                              {{product.Sequence == 0 ? '' : product.Sequence}}</td>
+                            <td data-title="ItemTextUrl" class="truncate-text" style="width: 50px;text-align: left;">
                               {{product.DocTypeTextUrl}}</td>
-                            <td data-title="itemSequence" class="detailurl">
-                                {{product.Sequence == 0 ? '' : product.Sequence}}</td>
                             <td style="text-align: center;" class="btnalign">
                               <button class="btn-icon"
                                 (click)="openDialog(memRefNo,product.Id,itemId,product.DocType,product.DocTypeName,product.DocTypeTextUrl,product.Sequence)">
