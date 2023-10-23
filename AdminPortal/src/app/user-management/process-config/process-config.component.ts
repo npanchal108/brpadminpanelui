@@ -70,26 +70,33 @@ export class ProcessConfigComponent implements OnInit {
       for(var i=0;i<this.userSchedulerConfig.length;i++){
         if(this.userSchedulerConfig[i].SchedulerName=='Scheduler1'){
           this.schedulerData.SchedulerTime1=this.userSchedulerConfig[i].SchedulerTime;
+          this.schedulerData.Scheduler1Active = this.userSchedulerConfig[i].Active;
         }
         if(this.userSchedulerConfig[i].SchedulerName=='Scheduler2'){
           this.schedulerData.SchedulerTime2=this.userSchedulerConfig[i].SchedulerTime;
           this.schedulerData.Table2=JSON.parse(this.userSchedulerConfig[i].SchedulerTables);
+          this.schedulerData.Scheduler2Active = this.userSchedulerConfig[i].Active;
         }
         if(this.userSchedulerConfig[i].SchedulerName=='Scheduler3'){
           this.schedulerData.SchedulerTime3=this.userSchedulerConfig[i].SchedulerTime;
           this.schedulerData.Table3=JSON.parse(this.userSchedulerConfig[i].SchedulerTables);
+          this.schedulerData.Scheduler3Active = this.userSchedulerConfig[i].Active;
         }
         if(this.userSchedulerConfig[i].SchedulerName=='SchedulerInactiveSubUsers'){
           this.schedulerData.SchedulerInactiveSubUsers=this.userSchedulerConfig[i].SchedulerTime;
+          this.schedulerData.SchedulerInactiveSubUsersActive = this.userSchedulerConfig[i].Active;
         }
         if(this.userSchedulerConfig[i].SchedulerName=='SchedulerInvalidItems'){
           this.schedulerData.SchedulerInvalidItems=this.userSchedulerConfig[i].SchedulerTime;
+          this.schedulerData.SchedulerInvalidItemsActive = this.userSchedulerConfig[i].Active;
         }
         if(this.userSchedulerConfig[i].SchedulerName=='SchedulerInactiveSubUsersForAdmin'){
           this.schedulerData.SchedulerInactiveSubUsersForAdmin=this.userSchedulerConfig[i].SchedulerTime;
+          this.schedulerData.SchedulerInactiveSubUsersForAdminActive = this.userSchedulerConfig[i].Active;
         }
         if(this.userSchedulerConfig[i].SchedulerName=='SchedulerPOReport'){
           this.schedulerData.SchedulerPOReport=this.userSchedulerConfig[i].SchedulerTime;
+          this.schedulerData.SchedulerPOReportActive = this.userSchedulerConfig[i].Active;
         }
       }
     });
@@ -204,7 +211,8 @@ export class ProcessConfigComponent implements OnInit {
       "MemRefNo": this.memRefNo,
       "SchedulerName": "SchedulerInactiveSubUsers",
       "SchedulerTime": data.SchedulerInactiveSubUsers,
-      "SchedulerTables": null
+      "SchedulerTables": null,
+      "Active": data.SchedulerInactiveSubUsersActive
     };
     this.userprocesstimeService.insertScheduler1(model).subscribe((data: any) => {
       if (data.Status == "Success") {
@@ -222,7 +230,8 @@ export class ProcessConfigComponent implements OnInit {
       "MemRefNo": this.memRefNo,
       "SchedulerName": "SchedulerPOReport",
       "SchedulerTime": data.SchedulerPOReport,
-      "SchedulerTables": null
+      "SchedulerTables": null,
+      "Active": data.SchedulerPOReportActive
     };
     this.userprocesstimeService.insertScheduler1(model).subscribe((data: any) => {
       if (data.Status == "Success") {
@@ -241,7 +250,8 @@ export class ProcessConfigComponent implements OnInit {
       "MemRefNo": this.memRefNo,
       "SchedulerName": "SchedulerInactiveSubUsersForAdmin",
       "SchedulerTime": data.SchedulerInactiveSubUsersForAdmin,
-      "SchedulerTables": null
+      "SchedulerTables": null,
+      "Active": data.SchedulerInactiveSubUsersForAdminActive
     };
     this.userprocesstimeService.insertScheduler1(model).subscribe((data: any) => {
       if (data.Status == "Success") {
@@ -255,12 +265,12 @@ export class ProcessConfigComponent implements OnInit {
   }
   addSchedulerInvalidItems(form: NgForm) {
     var data = form.value;
-    console.log('addSchedulerInvalidItems',data)
     var model = {
       "MemRefNo": this.memRefNo,
       "SchedulerName": "SchedulerInvalidItems",
       "SchedulerTime": data.SchedulerInvalidItems,
-      "SchedulerTables": null
+      "SchedulerTables": null,
+      "Active": data.SchedulerInvalidItemsActive
     };
     this.userprocesstimeService.insertScheduler1(model).subscribe((data: any) => {
       if (data.Status == "Success") {
@@ -278,7 +288,8 @@ export class ProcessConfigComponent implements OnInit {
       "MemRefNo": this.memRefNo,
       "SchedulerName": "Scheduler1",
       "SchedulerTime": data.SchedulerTime1,
-      "SchedulerTables": JSON.stringify(data.Table1)
+      "SchedulerTables": JSON.stringify(data.Table1),
+      "Active": data.Scheduler1Active
     };
     this.userprocesstimeService.insertScheduler1(model).subscribe((data: any) => {
       if (data.Status == "Success") {
@@ -297,7 +308,8 @@ export class ProcessConfigComponent implements OnInit {
       "MemRefNo": this.memRefNo,
       "SchedulerName": "Scheduler2",
       "SchedulerTime": data.SchedulerTime2,
-      "SchedulerTables": JSON.stringify(data.Table2)
+      "SchedulerTables": JSON.stringify(data.Table2),
+      "Active": data.Scheduler2Active
     };
     this.userprocesstimeService.insertScheduler1(model).subscribe((data: any) => {
       if (data.Status == "Success") {
@@ -316,7 +328,8 @@ export class ProcessConfigComponent implements OnInit {
       "MemRefNo": this.memRefNo,
       "SchedulerName": "Scheduler3",
       "SchedulerTime": data.SchedulerTime3,
-      "SchedulerTables": JSON.stringify(data.Table3)
+      "SchedulerTables": JSON.stringify(data.Table3),
+      "Active": data.Scheduler3Active
     };
     this.userprocesstimeService.insertScheduler1(model).subscribe((data: any) => {
       if (data.Status == "Success") {

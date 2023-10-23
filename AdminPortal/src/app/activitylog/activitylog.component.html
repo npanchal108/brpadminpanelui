@@ -61,21 +61,56 @@
                                 </div>
 
                             </div>
-                            <div class="row table-responsive table-mobile">
+                            <div class="row table-mobile custome-table">
                                 <table class="table table-striped table-bordered custom-table" width=100%;>
                                     <thead class="text-info">
                                         <tr>
-                                            <th style="width:10%">Logtype</th>
-                                            <th style="width:30%">Description </th>
-                                            <th style="width:20%">Search Keyword</th>
-                                            <th style="width:10%">Customer</th>
-                                            <th style="width:10%">Sub User</th>
-                                            <th style="width:10%">Ip Address</th>
-                                            <th style="width:10%">LogDate</th>
+                                            <th  style="cursor: pointer;" (click)="toggleSort('LogType')">Logtype
+                                                <span [ngClass]="{ 'disabled-icon': sortedColumn != 'LogType' }">
+                                                    <i
+                                                        [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                </span>
+                                            </th>
+                                            <th style="cursor: pointer;" (click)="toggleSort('Description')">Description 
+                                                <span [ngClass]="{ 'disabled-icon': sortedColumn != 'Description' }">
+                                                    <i
+                                                        [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                </span>
+                                            </th>
+                                            <th style="cursor: pointer;" (click)="toggleSort('SearchKeyword')">Search Keyword
+                                                <span [ngClass]="{ 'disabled-icon': sortedColumn != 'SearchKeyword' }">
+                                                    <i
+                                                        [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                </span>
+                                            </th>
+                                            <th style="cursor: pointer;" (click)="toggleSort('CustID')">Customer
+                                                <span [ngClass]="{ 'disabled-icon': sortedColumn != 'CustID' }">
+                                                    <i
+                                                        [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                </span>
+                                            </th>
+                                            <th style="cursor: pointer;" (click)="toggleSort('UserId')">Sub User
+                                                <span [ngClass]="{ 'disabled-icon': sortedColumn != 'UserId' }">
+                                                    <i
+                                                        [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                </span>
+                                            </th>
+                                            <th style="cursor: pointer;" (click)="toggleSort('ClientIP')">Ip Address
+                                                <span [ngClass]="{ 'disabled-icon': sortedColumn != 'ClientIP' }">
+                                                    <i
+                                                        [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                </span>
+                                            </th>
+                                            <th style="cursor: pointer;" (click)="toggleSort('LogDate')">LogDate
+                                                <span [ngClass]="{ 'disabled-icon': sortedColumn != 'LogDate' }">
+                                                    <i
+                                                        [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                </span>
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let conf of Activitylogs">
+                                        <tr *ngFor="let conf of Activitylogs | orderBy: sortedColumn: ascending">
                                             <td data-title="Logtype">{{conf.LogType}}</td>
                                             <td data-title="Description">{{conf.Description}}</td>
                                             <td data-title="Search Keyword">{{conf.SearchKeyword}}</td>

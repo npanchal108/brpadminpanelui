@@ -179,8 +179,8 @@ export class DialogAddEditProduct {
     ];
 
     docName: DocName[] = [
-        { key: 'tds', value: 'tds' },
-        { key: 'liturature', value: 'liturature' },
+        { key: 'TDS', value: 'tds' },
+        { key: 'Liturature', value: 'liturature' },
     ];
 
     onFileSelected(event) {
@@ -228,6 +228,9 @@ export class DialogAddEditProduct {
                 fd.append('FileName', this.SelectedFile.name);
                 fd.append('image', this.SelectedFile, this.SelectedFile.name);
             }
+            else {
+                fd.append('DocDetailsUrl', this.itemContent);
+            }
         }
         else {
             fd.append('DocDetailsUrl', this.itemContent);
@@ -249,7 +252,7 @@ export class DialogAddEditProduct {
         } else if (this.selectedfileType == "video") {
             fd.append('DocName', "video");
         } else if (this.selectedfileType == "text") {
-            fd.append('DocName', "details");
+            fd.append('DocName', "Description");
         }
         fd.append('memRefNo', this.memRefNo);
         fd.append('ItemDocId', this.itemDocId.toString());

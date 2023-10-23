@@ -30,8 +30,12 @@
                                                         </mat-select>
                                                     </mat-form-field>
                                                 </div>
-
-                                                <button class="custom-btn" style="margin-right: 110px;" type="submit"
+                                                <div class="col-md-4">
+                                                    <div class="form-group form-black label-floating mt-4">
+                                                        <mat-checkbox [(ngModel)]="schedulerData.Scheduler1Active" name="Scheduler1Active">Active</mat-checkbox>
+                                                    </div>
+                                                </div>
+                                                <button class="custom-btn"  type="submit"
                                                     [disabled]=isdesable
                                                     (click)="addScheduler1Config(userRegistrationForm)">Submit</button>
                                             </div>
@@ -56,7 +60,12 @@
                                                         </mat-select>
                                                     </mat-form-field>
                                                 </div>
-                                                <button class="custom-btn" style="margin-right: 110px;" type="submit"
+                                                <div class="col-md-1">
+                                                    <div class="form-group form-black label-floating mt-4">
+                                                        <mat-checkbox [(ngModel)]="schedulerData.Scheduler2Active" name="Scheduler2Active">Active</mat-checkbox>
+                                                    </div>
+                                                </div>
+                                                <button class="custom-btn"  type="submit"
                                                     [disabled]=isdesable
                                                     (click)="addScheduler2Config(userRegistrationForm)">Submit</button>
                                             </div>
@@ -81,7 +90,12 @@
                                                         </mat-select>
                                                     </mat-form-field>
                                                 </div>
-                                                <button class="custom-btn" style="margin-right: 110px;" type="submit"
+                                                <div class="col-md-1">
+                                                    <div class="form-group form-black label-floating mt-4">
+                                                      <mat-checkbox [(ngModel)]="schedulerData.Scheduler3Active" name="Scheduler3Active">Active</mat-checkbox>
+                                                    </div>
+                                                </div>
+                                                <button class="custom-btn"  type="submit"
                                                     [disabled]=isdesable
                                                     (click)="addScheduler3Config(userRegistrationForm)">Submit</button>
                                             </div>
@@ -98,7 +112,12 @@
                                                         </mat-select>
                                                     </mat-form-field>
                                                 </div>
-                                                <button class="custom-btn" style="margin-right: 110px;" type="submit"
+                                                <div class="col-md-4">
+                                                    <div class="form-group form-black label-floating mt-4">
+                                                      <mat-checkbox [(ngModel)]="schedulerData.SchedulerInactiveSubUsersActive" name="SchedulerInactiveSubUsersActive">Active</mat-checkbox>
+                                                    </div>
+                                                </div>
+                                                <button class="custom-btn"  type="submit"
                                                     [disabled]=isdesable
                                                     (click)="addSchedulerInactiveSubUsers(userRegistrationForm)">Submit</button>
                                             </div>
@@ -115,7 +134,12 @@
                                                         </mat-select>
                                                     </mat-form-field>
                                                 </div>
-                                                <button class="custom-btn" style="margin-right: 110px;" type="submit"
+                                                <div class="col-md-4">
+                                                    <div class="form-group form-black label-floating mt-4">
+                                                      <mat-checkbox  [(ngModel)]="schedulerData.SchedulerInvalidItemsActive" name="SchedulerInvalidItemsActive">Active</mat-checkbox>
+                                                    </div>
+                                                </div>
+                                                <button class="custom-btn"  type="submit"
                                                     [disabled]=isdesable
                                                     (click)="addSchedulerInvalidItems(userRegistrationForm)">Submit</button>
                                             </div>
@@ -132,7 +156,12 @@
                                                         </mat-select>
                                                     </mat-form-field>
                                                 </div>
-                                                <button class="custom-btn" style="margin-right: 110px;" type="submit"
+                                                <div class="col-md-4">
+                                                    <div class="form-group form-black label-floating mt-4">
+                                                      <mat-checkbox  [(ngModel)]="schedulerData.SchedulerInactiveSubUsersForAdminActive" name="SchedulerInactiveSubUsersForAdminActive">Active</mat-checkbox>
+                                                    </div>
+                                                </div>
+                                                <button class="custom-btn"  type="submit"
                                                     [disabled]=isdesable
                                                     (click)="addSchedulerInactiveSubUsersForAdmin(userRegistrationForm)">Submit</button>
                                             </div>
@@ -149,7 +178,12 @@
                                                         </mat-select>
                                                     </mat-form-field>
                                                 </div>
-                                                <button class="custom-btn" style="margin-right: 110px;" type="submit"
+                                                <div class="col-md-4">
+                                                    <div class="form-group form-black label-floating mt-4">
+                                                      <mat-checkbox  [(ngModel)]="schedulerData.SchedulerPOReportActive" name="SchedulerPOReportActive">Active</mat-checkbox>
+                                                    </div>
+                                                </div>
+                                                <button class="custom-btn"  type="submit"
                                                     [disabled]=isdesable
                                                     (click)="addSchedulerPOReport(userRegistrationForm)">Submit</button>
                                             </div>
@@ -172,7 +206,12 @@
                                                         </mat-select>
                                                     </mat-form-field>
                                                 </div>
-                                                <button class="custom-btn" style="margin-right: 110px;" type="submit"
+                                                <!-- <div class="col-md-1">
+                                                    <div class="form-group form-black label-floating mt-4">
+                                                      <mat-checkbox name="IsActive">Active</mat-checkbox>
+                                                    </div>
+                                                </div> -->
+                                                <button class="custom-btn" type="submit"
                                                     (click)="syncTblNow()">Submit</button>
                                             </div>
                                         </mat-tab>

@@ -1,7 +1,23 @@
 a {
     cursor: pointer;
 }
+.truncate-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
+}
+thead {
+    position: sticky;
+    top: 0;
+    background-color: #fff; /* Set the background color as needed */
+    z-index: 1; /* Ensures the header remains on top of other content */
+  }
 
+  .custome-table{
+    height: calc(100vh - 460px);
+    overflow: scroll;
+  }
 @media (max-width: 767px) {
     .table-mobile table thead {
         display: none;

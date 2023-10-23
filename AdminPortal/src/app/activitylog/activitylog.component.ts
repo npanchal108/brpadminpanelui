@@ -20,6 +20,8 @@ export class ActivitylogComponent implements OnInit {
   memRefNo:any;
   userType:any;
   userroles:any;
+  sortedColumn:string = '';
+  ascending = true;
   constructor(private spinner: NgxSpinnerService,private route: ActivatedRoute, private userprocesstimeService: UserprocesstimeService, private toastr: ToastrService, private router: Router, private loadingService: LoadingService, private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -28,6 +30,16 @@ export class ActivitylogComponent implements OnInit {
     this.userroles = localStorage.getItem('Role');
     this.clearactivitylog();
   }
+
+  toggleSort(column: string) {
+    if (this.sortedColumn === column) {
+      this.ascending = !this.ascending;
+    } else {
+      this.sortedColumn = column;
+      this.ascending = true;
+    }
+  }
+
   searchactivitylog(){
     this.spinner.show();
     this.Activitylog.memRefNo=this.memRefNo;

@@ -28,7 +28,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 10px;
 }
 
 /* Track */
@@ -44,9 +44,10 @@ body {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #fff;
+    background: #008B99;
 }
 
+  
 
 .mat-mdc-button .mdc-button__label {
     position: fixed !important;
