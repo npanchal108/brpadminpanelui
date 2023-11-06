@@ -23,6 +23,7 @@ import { addproductComponent } from './productdetails/addproduct.component';
 import { productBulkUploadComponent } from './productdetails/bulkproductlist.component';
 import { AddBannersComponent } from './user-management/Add-Banners/Add-Banners.component';
 import { DeleteCacherComponent } from './user-management/delete-cacher/delete-cacher.component';
+import { ManufacturerlistComponent } from './manufacturerlist/manufacturerlist.component';
 export const appRoutes: Routes = [
     // { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     {
@@ -60,6 +61,9 @@ export const appRoutes: Routes = [
     },
     {
         path: 'productlist/:id/:memRefNo/:userType', component: productlistComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'manufacturerlist/:id/:memRefNo/:userType', component: ManufacturerlistComponent, canActivate: [AuthGuard]
     },
     {
         path: 'productbulkupload/:id/:memRefNo/:userType', component: productBulkUploadComponent, canActivate: [AuthGuard]

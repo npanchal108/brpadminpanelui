@@ -1,0 +1,58 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="custom-container">
+                <div class="custom-inner-container">
+                    <h5> Manufracturer List
+                        <small>Manage your Manufracturer Items</small>
+                        <button class="header-button" (click)="OnAddManufracturerItemDoc(memRefNo,0,'','','','')">Add New</button>
+                    </h5>
+                    <div class="record-count-section" style="justify-content: start; gap: 10%; align-items: center;">
+                        <label>
+                            Search:
+                            <input type="text" (input)="applyFilter()" [(ngModel)]="searchText" />
+                            <button class="refresh-btn" (click)="onReset()"><i class="fa fa-refresh refresh-icon-clr" aria-hidden="true"></i></button>
+                        </label>
+                    </div>
+                    <div *ngIf="filteredmanufracturelistlist != null && filteredmanufracturelistlist != undefined">
+                        <table class="table table-striped table-bordered custom-table">
+                            <thead>
+                                <tr>
+                                    <th>Manufraturer</th>
+                                    <th>Doc Type</th>
+                                    <th>DocName</th>
+                                    <th>DocDetailsUrl</th>
+                                    <th style="text-align: center;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody
+                                *ngIf="filteredmanufracturelistlist != null && filteredmanufracturelistlist != undefined && filteredmanufracturelistlist.length > 0">
+                                <tr
+                                    *ngFor="let product of filteredmanufracturelistlist | paginate : { itemsPerPage:50, currentPage:page,totalItems:totalPage, id:'first' }">
+                                    <td>{{product.Item}}</td>
+                                    <td>{{product.DocType}}</td>
+                                    <td>{{product.DocName}}</td>
+                                    <td class="truncate-text" style="width: 50px;text-align: left;">{{product.DocDetailsUrl}}</td>
+                                    <td class="font-20" align="center">
+                                        <button  class="btn-icon"
+                                            (click)="OnAddManufracturerItemDoc(memRefNo,product.ItemDocId,product.Item,product.DocType,product.DocName,product.DocDetailsUrl)">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <div *ngIf="filteredmanufracturelistlist.length === 0" class="no-records">
+                                No records found.
+                            </div>
+                        </table>
+                        <div *ngIf="filteredmanufracturelistlist != null && filteredmanufracturelistlist != undefined && filteredmanufracturelistlist.length > 0"
+                            style="text-align:center">
+                            <pagination-controls (pageChange)="pageChanged($event)" id="first">
+                            </pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

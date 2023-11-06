@@ -23,7 +23,22 @@
                                             Document</button>
                                     </div>
                                 </div>
-
+                            </mat-tab>
+                            <mat-tab class="tab-border" label="Manufacturer Document">
+                                <div class="custom-file-upload-section">
+                                    <label for="images" class="drop-container" id="dropcontainer">
+                                        <span class="drop-title">Drag & Drop upload or browse to choose a file</span>
+                                        Supported formats: CSV, XLSX
+                                        <input type="file" #fileManuDocListInput class="bulk-file-input"
+                                            (change)="handleManufDocumentFileInput($event)">
+                                        <span>You can download sample file <a href="javascript:void(0)"
+                                                (click)="generateManufacturerDocCsv()">here</a></span>
+                                    </label>
+                                    <div class="full-width-button-container">
+                                        <button style="width: auto;margin-top: 20px;float: none;" class="custom-btn" (click)="OnManufacturerDocumentBulkUpload()">Upload Manufacturer
+                                            Document</button>
+                                    </div>
+                                </div>
                             </mat-tab>
                             <mat-tab class="tab-border" label="Product Price">
                                 <div class="custom-file-upload-section">

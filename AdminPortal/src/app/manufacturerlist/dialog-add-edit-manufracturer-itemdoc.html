@@ -1,0 +1,74 @@
+<h1 mat-dialog-title> {{ (itemDocId > 0) ? 'Edit Document' : 'Add Document' }}</h1>
+<div mat-dialog-content>
+    <div class="main-content" style="margin-top:0">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-content">
+                        <form #productForm="ngForm">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>Manufacturer</label>
+                                    <div class="form-group form-black label-floating">
+                                        <div class="form-group form-black label-floating">
+                                            <input type="text" name="item" [(ngModel)]="item" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Doc Type</label>
+                                    <div class="form-group form-black label-floating">
+                                        <mat-form-field>
+                                            <mat-select [(ngModel)]="selectedfileType" name="selectedfileType"
+                                                [disabled]="itemDocId > 0" required>
+                                                <mat-option *ngFor="let type of fileType" [value]="type.value">
+                                                    {{type.key}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div *ngIf="selectedfileType === 'doc'" class="col-md-12">
+                                    <label>Doc Name</label>
+                                    <div class="form-group form-black label-floating">
+                                        <mat-form-field>
+                                            <mat-select [(ngModel)]="selectedDocName" name="selectedDocName"  required>
+                                                <mat-option *ngFor="let type of docName" [value]="type.value">
+                                                    {{type.key}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div *ngIf="selectedfileType === 'doc'" class="col-md-12">
+                                    <label>Document</label>
+                                    <div class="form-group form-black label-floating">
+                                        <ng-container *ngIf="selectedfileType == 'doc'">
+                                            <a [title]="itemContent" [href]="itemContent" target="_blank">
+                                                {{pdfFileName}}</a>
+                                        </ng-container><br />
+                                        <input type="file" style="position: relative;opacity: inherit;margin-top: 20px;"
+                                            (change)="onFileSelected($event)">
+                                    </div>
+                                </div>
+                                <div *ngIf="selectedfileType === 'video'" class="col-md-12">
+                                    <label>Video Content</label>
+                                    <div class="form-group form-black label-floating">
+                                        <textarea class="validate" [(ngModel)]="itemContent"
+                                            style="height: 300px;border: 1px solid #D2D2D2" name="itemContent"
+                                            class="form-control"> </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <button class="custom-white-btn" (click)="onCancel()" style="margin-left:10px">Cancel</button>
+    <button class="custom-btn" (click)="onSave()">Save</button>
+</div>

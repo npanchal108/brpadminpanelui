@@ -46,7 +46,16 @@ export class CompanyProfileService {
     return this.http.get(this.common.RootUrl + '/CompanyProfile/GetCompanyProfileDataByID?CompanyProfileID=' + companyId + '&UserMemRefNo=' + memRefNo, { headers: reqHeader });
   }
 
+  GetManufracturerItemDocList(memRefNo: string, pageNo: number) {
+    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
+    return this.http.get(this.common.RootUrl + '/CompanyProfile/GetManufracturerItemDocList?memRefNo=' + memRefNo + '&pageno=' + pageNo, { headers: reqHeader });
+  }
 
+  GetFilteredManufracturerItemDocList(memRefNo: string, filterQuery:string, pageNo: number) {
+    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
+    return this.http.get(this.common.RootUrl + '/CompanyProfile/GetFilteredManufracturerItemDocList?memRefNo=' + memRefNo + '&filterQuery=' + filterQuery + '&pageno=' + pageNo, { headers: reqHeader });
+  }
+  
   //Add delete call here
   deleteCompanyProfile(memRefNo: string) {
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });

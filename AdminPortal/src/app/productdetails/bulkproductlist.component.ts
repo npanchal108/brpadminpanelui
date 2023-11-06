@@ -12,10 +12,12 @@ import { CsvGeneratorService } from '../services/csvgenerator.service';
 export class productBulkUploadComponent implements OnInit {
     @ViewChild('filePriceListInput') filePriceListInput: any;
     @ViewChild('fileDocListInput') fileDocListInput: any;
+    @ViewChild('fileManuDocListInput') fileManuDocListInput: any;
 
     memRefNo: string;
     selectedProductPriceFile: File | undefined;
     selectedProductDocumentFile: File | undefined;
+    selectedManufDocumentFile: File | undefined;
 
     constructor(private csvGeneratorService: CsvGeneratorService, private route: ActivatedRoute, private toastr: ToastrService, private MailConfigService: MailConfigService) { }
 
@@ -42,6 +44,54 @@ export class productBulkUploadComponent implements OnInit {
         const filename = 'SampleProductDoc.csv';
         this.csvGeneratorService.generateCsv(data, filename);
     }
+    generateManufacturerDocCsv(){
+        const data = [
+            { Manufacturer: 'Manufacturer1', Type: 'Doc',Name :'TDS/Litrature',DocDetailsUrl:'loaction/path of  pdf document' },
+            { Manufacturer: 'Manufacturer2', Type: 'video',Name :'name you want',DocDetailsUrl:'video embeded html content' }
+          ];
+          const filename = 'SampleManufacturerDoc.csv';
+          this.csvGeneratorService.generateCsv(data, filename);
+    }
+    OnManufacturerDocumentBulkUpload(){
+        if ((this.selectedManufDocumentFile == undefined || this.selectedManufDocumentFile == null)) {
+            this.toastr.error('Please Select The CSV File');
+            return;
+        }
+        else {
+            const fileReader = new FileReader();
+            fileReader.onload = (e) => {
+                const contents = fileReader.result as string;
+                const lines = contents.split('\n');
+                const firstLine = lines[0].trim();
+                const expectedHeader = 'Manufacturer,Type,Name,DocDetailsUrl'; 
+                if (firstLine === expectedHeader) {
+                    const fd = new FormData();
+                    if (this.selectedManufDocumentFile != undefined && this.selectedManufDocumentFile != null) {
+                        fd.append('FileName', this.selectedManufDocumentFile.name);
+                        fd.append('csv', this.selectedManufDocumentFile, this.selectedManufDocumentFile.name);
+                    }
+                    fd.append('memRefNo', this.memRefNo);
+                    fd.append('IMType', 'True');
+                    this.MailConfigService.UpdateItemDocumentList(fd).subscribe((data: any) => {
+                        if (data == true || data == "true") {
+                            this.toastr.success("Sucessfully Updated");
+                        }
+                        else {
+                            this.toastr.error("Error occured please try again");
+                        }
+                        this.selectedManufDocumentFile = undefined;
+                        this.fileManuDocListInput.nativeElement.value = '';
+                    });
+                } else{
+                    this.toastr.error('Invalid column names in the CSV file.');
+                    this.selectedManufDocumentFile = undefined;
+                    this.fileManuDocListInput.nativeElement.value = '';
+                    return;
+                }
+            };
+            fileReader.readAsText(this.selectedManufDocumentFile);
+        }
+    }
     OnItemDocumentBulkUpload() {
         if ((this.selectedProductDocumentFile == undefined || this.selectedProductDocumentFile == null)) {
             this.toastr.error('Please Select The CSV File');
@@ -61,6 +111,7 @@ export class productBulkUploadComponent implements OnInit {
                         fd.append('csv', this.selectedProductDocumentFile, this.selectedProductDocumentFile.name);
                     }
                     fd.append('memRefNo', this.memRefNo);
+                    fd.append('IMType', 'False');
                     this.MailConfigService.UpdateItemDocumentList(fd).subscribe((data: any) => {
                         if (data == true || data == "true") {
                             this.toastr.success("Sucessfully Updated");
@@ -126,5 +177,8 @@ export class productBulkUploadComponent implements OnInit {
     }
     handleItemDocumentFileInput(event) {
         this.selectedProductDocumentFile = <File>event.target.files[0];
+    }
+    handleManufDocumentFileInput(event) {
+        this.selectedManufDocumentFile = <File>event.target.files[0];
     }
 }

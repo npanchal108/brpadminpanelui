@@ -77,7 +77,7 @@ export class addproductComponent implements OnInit {
         this.router.navigate(['/productlist', this.uid, this.memRefNo, 'Client'], { queryParams: { searchText: this.searchText } });
     }
 
-    openDialog(MemRefNo, ItemDocId, Item, DocType, DocTypeName, DocTypeTextUrl, Sequence): void {
+    openDialog(MemRefNo,ItemDocId, Item, DocType, DocTypeName, DocTypeTextUrl, Sequence): void {
         let dialogRef = this.dialog.open(DialogAddEditProduct, {
             width: '700px',
             data: {
@@ -150,9 +150,7 @@ export class DialogAddEditProduct {
     item: string;
     itemSequence: number;
     pdfFileName:string;
-
     ngOnInit() {
-        console.log('data====>', this.data);
         this.memRefNo = this.data.memRefNo;
         this.docTypeId = this.data.itemId;
         this.item = this.data.item;
@@ -179,8 +177,8 @@ export class DialogAddEditProduct {
     ];
 
     docName: DocName[] = [
-        { key: 'TDS', value: 'tds' },
-        { key: 'Liturature', value: 'liturature' },
+        { key: 'TDS', value: 'TDS' },
+        { key: 'Liturature', value: 'Liturature' },
     ];
 
     onFileSelected(event) {
@@ -258,7 +256,7 @@ export class DialogAddEditProduct {
         fd.append('ItemDocId', this.itemDocId.toString());
         fd.append('DocType', this.selectedfileType);
         fd.append('Item', this.item);
-
+        fd.append('IMType', 'False');
         this.MailConfigService.UpdateImageDocument(fd).subscribe((data: any) => {
             console.log(data);
             if (data == true || data == "true") {

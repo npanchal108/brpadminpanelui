@@ -49,6 +49,12 @@
           </a>
         </li>
         <li>
+          <a [routerLink]="['/manufacturerlist', userId, memRefNo,userType]" [ngClass]="checkActiveClass('manufacturer')">
+            &nbsp; <i class="fas fa-industry fa-lg"></i> &nbsp; 
+            <p>Manufracturer</p>
+          </a>
+        </li>
+        <li>
           <a [routerLink]="['/productlist', userId, memRefNo,userType]" [ngClass]="checkActiveClass('products')">
             &nbsp; <i class="fa-solid fa-table-list fa-lg"></i> &nbsp; 
             <p>Products</p>
