@@ -53,7 +53,6 @@ export class ManufacturerlistComponent implements OnInit {
     this.CompanyProfileService.GetManufracturerItemDocList(this.memRefNo, this.page).subscribe((data: any) => {
       this.spinner.hide();
       this.manufracturelist = data;
-      console.log('this.manufracturelist===>',this.manufracturelist);
       this.filteredmanufracturelistlist = this.manufracturelist;
       try {
         this.totalPage = data[0].TotalPage;
@@ -74,6 +73,7 @@ export class ManufacturerlistComponent implements OnInit {
           this.totalPage = data[0].TotalPage;
         } catch (Ex) {
           this.totalPage = 1;
+          this.spinner.hide();
         }
         this.spinner.hide();
         this.page = 1;
@@ -103,6 +103,18 @@ export class ManufacturerlistComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.getManufracturerList(1);
     });
+}
+
+openDeleteDialog(itemDocId): void {
+  let dialogRef = this.dialog.open(DeleteManufItemDocdialog, {
+      width: '400px',
+      height: '400px',
+      data: { memRefNo: this.memRefNo, itemDocId: itemDocId }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    this.getManufracturerList(1);
+  });
 }
 }
 
@@ -234,5 +246,37 @@ export class DialogAddEditManufracturerItemDoc {
               this.dialogRef.close();
           }
       });
+  }
+}
+
+@Component({
+  selector: 'DeleteManufItemDocdialog',
+  templateUrl: 'deletemanufitemdocdialog.html',
+})
+export class DeleteManufItemDocdialog {
+
+  constructor(
+      private MailConfigService: MailConfigService,
+      private toastr: ToastrService,
+      private router: Router,
+      public dialogRef: MatDialogRef<DeleteManufItemDocdialog>,
+      @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+      this.dialogRef.close();
+  }
+
+  onYesClick(memRefNo, itemDocId): void {
+
+      this.MailConfigService.DeleteItemDocByID(memRefNo, itemDocId).subscribe(res => {
+          if (res) {
+              this.toastr.success("Record deleted successfully");
+          }
+          else {
+              this.toastr.error("Something went wrong. Please try again.");
+          }
+
+      });
+      this.dialogRef.close();
   }
 }

@@ -38,6 +38,9 @@
                                             (click)="OnAddManufracturerItemDoc(memRefNo,product.ItemDocId,product.Item,product.DocType,product.DocName,product.DocDetailsUrl)">
                                             <i class="fa fa-pencil"></i>
                                         </button>
+                                        <button (click)="openDeleteDialog(product.ItemDocId)" class="btn-icon">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>

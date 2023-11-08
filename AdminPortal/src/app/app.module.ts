@@ -61,6 +61,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { OrderByPipe } from './user-management/dynamicpagelist/orderBy.pipe';
 import { ManufacturerlistComponent } from './manufacturerlist/manufacturerlist.component';
 import { DialogAddEditManufracturerItemDoc } from './manufacturerlist/manufacturerlist.component';
+import { DeleteManufItemDocdialog } from './manufacturerlist/manufacturerlist.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,8 @@ import { DialogAddEditManufracturerItemDoc } from './manufacturerlist/manufactur
     productBulkUploadComponent,
     OrderByPipe,
     ManufacturerlistComponent,
-    DialogAddEditManufracturerItemDoc
+    DialogAddEditManufracturerItemDoc,
+    DeleteManufItemDocdialog
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA] ,
   imports: [
