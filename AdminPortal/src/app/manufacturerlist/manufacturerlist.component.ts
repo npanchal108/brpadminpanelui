@@ -49,7 +49,6 @@ export class ManufacturerlistComponent implements OnInit {
   }
   getManufracturerList(pageNo: number): number {
     this.spinner.show();
-    //this.MailConfigService.Getproductlist(this.memRefNo, pageNo).subscribe((data: any) => {
     this.CompanyProfileService.GetManufracturerItemDocList(this.memRefNo, this.page).subscribe((data: any) => {
       this.spinner.hide();
       this.manufracturelist = data;
