@@ -60,6 +60,17 @@ export class UserprocesstimeService {
     // return this.http.post(this.common.RootUrl + '/CompanyProfile/GetActivitylogsearch',activitylogview, { headers: reqHeader });
     return this.http.post(this.common.RootUrl + '/CompanyProfile/GetActivitylogsearch', activitylogviewmodel);
   }
+  GetUserCartItemDetails(cartItemParam) {
+    console.log('cartItemParam ',cartItemParam);
+    var cartItemParamviewmodel={
+      memRefNo:cartItemParam.memRefNo,
+      ItemName:cartItemParam.SearchItem,
+      UserId:cartItemParam.SearchUser,
+      FromDate:cartItemParam.FromDate,
+      ToDate:cartItemParam.ToDate
+    }
+    return this.http.post(this.common.RootUrl + '/CompanyProfile/GetUserCartItemDetails', cartItemParamviewmodel);
+  }
   SyncNow(geturl) {
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
     return this.http.get(geturl, { headers: reqHeader });

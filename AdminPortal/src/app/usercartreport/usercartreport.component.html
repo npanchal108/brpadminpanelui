@@ -1,0 +1,119 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="custom-container">
+                <div class="custom-inner-container">
+                    <h5> User Cart Report
+                        <small>Export Report Data</small>
+                    </h5>
+                    <div class="col-md-12">
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="control-label">User</label>
+                                    <input type="text" name="SearchUser" #SearchKeyword="ngModel"
+                                        [(ngModel)]="cartItemParam.SearchUser" class="validate" 
+                                        class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="control-label">Item</label>
+                                    <input type="text" name="SearchItem" #SearchKeyword="ngModel"
+                                        [(ngModel)]="cartItemParam.SearchItem" class="validate" 
+                                        class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="control-label">From Date</label>
+                                    <input type="date" name="FromDate" #FromDate="ngModel"
+                                        [(ngModel)]="cartItemParam.FromDate" class="validate" required
+                                        class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="control-label">To Date</label>
+                                    <input type="date" name="ToDate" #ToDate="ngModel" [(ngModel)]="cartItemParam.ToDate"
+                                        class="validate" required class="form-control">
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12 text-center">
+                                        <button (click)="clearSearch()" class="custom-white-btn">Clear</button>
+                                        <button (click)="ExportToExcell()" class="custom-btn">Export</button>
+                                        <button (click)="ApplyFilter()" class="custom-btn">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- row table-mobile custome-table -->
+                            <!-- table table-striped table-bordered custom-table -->
+                            <div class="row table-mobile custome-table">
+                                <table class="table table-striped table-bordered " width=100%;>
+                                    <thead class="text-info table-title-with-filters">
+                                        <tr>
+                                            <th style="cursor: pointer;" (click)="toggleSort('Customer')">Customer
+                                                <span [ngClass]="{ 'disabled-icon': sortedColumn != 'Customer' }">
+                                                    <i
+                                                        [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                </span>
+                                            </th>
+                                            <th style="cursor: pointer;" (click)="toggleSort('UserName')">UserName
+                                                <span [ngClass]="{ 'disabled-icon': sortedColumn != 'UserName' }">
+                                                    <i
+                                                        [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                </span>
+                                            </th>
+                                            <th style="cursor: pointer;width: 150px;" (click)="toggleSort('FirstName')">FirstName
+                                                <span [ngClass]="{ 'disabled-icon': sortedColumn != 'FirstName' }">
+                                                    <i
+                                                        [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                </span>
+                                            </th>
+                                            <th style="cursor: pointer;" (click)="toggleSort('LastName')">LastName
+                                                <span [ngClass]="{ 'disabled-icon': sortedColumn != 'LastName' }">
+                                                    <i
+                                                        [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                </span>
+                                            </th>
+                                            <th style="cursor: pointer;" (click)="toggleSort('Item')">Item
+                                                <span [ngClass]="{ 'disabled-icon': sortedColumn != 'Item' }">
+                                                    <i
+                                                        [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                </span>
+                                            </th>
+                                            <th style="cursor: pointer;" (click)="toggleSort('Quantity')">Quantity
+                                                <span [ngClass]="{ 'disabled-icon': sortedColumn != 'Quantity' }">
+                                                    <i
+                                                        [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                </span>
+                                            </th>
+                                            <th style="cursor: pointer;" (click)="toggleSort('Price')">Price
+                                                <span [ngClass]="{ 'disabled-icon': sortedColumn != 'Price' }">
+                                                    <i
+                                                        [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                </span>
+                                            </th>
+                                            <th style="cursor: pointer;" (click)="toggleSort('DayDate')">Date
+                                                <span [ngClass]="{ 'disabled-icon': sortedColumn != 'DayDate' }">
+                                                    <i
+                                                        [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                </span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let crt of cartItems | orderBy: sortedColumn: ascending">
+                                            <td data-title="Customer">{{crt.Customer}}</td>
+                                            <td data-title="UserName">{{crt.UserName}}</td>
+                                            <td data-title="FirstName">{{crt.FirstName}}</td>
+                                            <td data-title="LastName">{{crt.LastName}}</td>
+                                            <td data-title="Item">{{crt.Item}}</td>
+                                            <td data-title="Quantity">{{crt.Quantity}}</td>
+                                            <td data-title="Price">{{crt.Price}}</td>
+                                            <td data-title="DayDate">{{crt.Date}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

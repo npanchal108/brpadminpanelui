@@ -24,6 +24,7 @@ import { productBulkUploadComponent } from './productdetails/bulkproductlist.com
 import { AddBannersComponent } from './user-management/Add-Banners/Add-Banners.component';
 import { DeleteCacherComponent } from './user-management/delete-cacher/delete-cacher.component';
 import { ManufacturerlistComponent } from './manufacturerlist/manufacturerlist.component';
+import { UsercartreportComponent } from './usercartreport/usercartreport.component';
 export const appRoutes: Routes = [
     // { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     {
@@ -73,6 +74,9 @@ export const appRoutes: Routes = [
     },
     {
         path: 'homebanners/:id/:memRefNo/:userType', component: AddBannersComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'Usercartreport/:id/:memRefNo/:userType', component: UsercartreportComponent, canActivate: [AuthGuard]
     },
     {
         path: 'activitylogs/:id/:memRefNo/:userType', component: ActivitylogComponent, canActivate: [AuthGuard]

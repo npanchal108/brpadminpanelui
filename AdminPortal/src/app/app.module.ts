@@ -62,6 +62,7 @@ import { OrderByPipe } from './user-management/dynamicpagelist/orderBy.pipe';
 import { ManufacturerlistComponent } from './manufacturerlist/manufacturerlist.component';
 import { DialogAddEditManufracturerItemDoc } from './manufacturerlist/manufacturerlist.component';
 import { DeleteManufItemDocdialog } from './manufacturerlist/manufacturerlist.component';
+import { UsercartreportComponent } from './usercartreport/usercartreport.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +100,8 @@ import { DeleteManufItemDocdialog } from './manufacturerlist/manufacturerlist.co
     OrderByPipe,
     ManufacturerlistComponent,
     DialogAddEditManufracturerItemDoc,
-    DeleteManufItemDocdialog
+    DeleteManufItemDocdialog,
+    UsercartreportComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA] ,
   imports: [
