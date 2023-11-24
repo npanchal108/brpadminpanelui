@@ -40,11 +40,29 @@ export class UsercartreportComponent implements OnInit {
   }
 
   ExportToExcell(){
-
+    if(this.cartExport!=undefined && this.cartExport!=null && this.cartExport.length>0){
+      //let element = document.getElementById("excel-table");
+      const WS: XLSX.WorkSheet=XLSX.utils.json_to_sheet(this.cartExport);
+      //const WS: XLSX.WorkSheet=XLSX.utils.table_to_book(element);
+      const wb: XLSX.WorkBook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb,WS,"userCartItem");
+      XLSX.writeFile(wb,"userCartItem.xlsx");
+      }
+      else{
+        this.toastr.info("There is nothing to export");
+      }
+      this.cartExport = [];
   }
 
   clearSearch(){
-
+    this.cartItemParam.SearchUser=null;
+    this.cartItemParam.SearchCustomer=null;
+    this.cartItemParam.SearchItem=null;
+    this.cartItemParam.FromDate=null;
+    this.cartItemParam.ToDate=null;
+    this.cartItemParam.memRefNo=this.memRefNo;
+    this.cartExport=[];
+    this.cartItems=[];
   }
 
   ApplyFilter(){
@@ -64,7 +82,7 @@ export class UsercartreportComponent implements OnInit {
             Item:this.cartItems[i].Item,
             Quantity:this.cartItems[i].Quantity,
             Price:this.cartItems[i].Price,
-            DayDate:this.cartItems[i].DayDate
+            DayDate:this.cartItems[i].Date
           }
           this.cartExport.push(getnewiem);
         } 

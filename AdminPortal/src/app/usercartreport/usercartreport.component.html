@@ -16,6 +16,12 @@
                                         class="form-control">
                                 </div>
                                 <div class="col-md-3">
+                                    <label class="control-label">Customer</label>
+                                    <input type="text" name="SearchCustomer" #SearchKeyword="ngModel"
+                                        [(ngModel)]="cartItemParam.SearchCustomer" class="validate" 
+                                        class="form-control">
+                                </div>
+                                <div class="col-md-3">
                                     <label class="control-label">Item</label>
                                     <input type="text" name="SearchItem" #SearchKeyword="ngModel"
                                         [(ngModel)]="cartItemParam.SearchItem" class="validate" 

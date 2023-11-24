@@ -61,11 +61,11 @@ export class UserprocesstimeService {
     return this.http.post(this.common.RootUrl + '/CompanyProfile/GetActivitylogsearch', activitylogviewmodel);
   }
   GetUserCartItemDetails(cartItemParam) {
-    console.log('cartItemParam ',cartItemParam);
     var cartItemParamviewmodel={
       memRefNo:cartItemParam.memRefNo,
-      ItemName:cartItemParam.SearchItem,
-      UserId:cartItemParam.SearchUser,
+      ItemName: cartItemParam.SearchItem ? cartItemParam.SearchItem.trim() : null,
+      UserId:cartItemParam.SearchUser ? cartItemParam.SearchUser.trim() : null,
+      Customer:cartItemParam.SearchCustomer ? cartItemParam.SearchCustomer.trim() : null,
       FromDate:cartItemParam.FromDate,
       ToDate:cartItemParam.ToDate
     }
