@@ -26,6 +26,7 @@ import { LoginComponent } from './login/login.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { MailboxConfigComponent } from './user-management/mailbox-config/mailbox-config.component';
 import { MailConfigService } from './services/mailbox-config.service.';
+import { SeomanagementService } from './services/seomanagement.service';
 import { LoadingService } from './services/loading.service';
 import { ProcessConfigComponent } from './user-management/process-config/process-config.component';
 import { UserprocesstimeService } from '../app/shared/userprocesstime.service';
@@ -63,6 +64,8 @@ import { ManufacturerlistComponent } from './manufacturerlist/manufacturerlist.c
 import { DialogAddEditManufracturerItemDoc } from './manufacturerlist/manufacturerlist.component';
 import { DeleteManufItemDocdialog } from './manufacturerlist/manufacturerlist.component';
 import { UsercartreportComponent } from './usercartreport/usercartreport.component';
+import { SeomanagementComponent } from './seomanagement/seomanagement.component';
+import { AddmetaComponent } from './seomanagement/addmeta.component';
 
 @NgModule({
   declarations: [
@@ -101,7 +104,9 @@ import { UsercartreportComponent } from './usercartreport/usercartreport.compone
     ManufacturerlistComponent,
     DialogAddEditManufracturerItemDoc,
     DeleteManufItemDocdialog,
-    UsercartreportComponent
+    UsercartreportComponent,
+    SeomanagementComponent,
+    AddmetaComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA] ,
   imports: [
@@ -130,7 +135,7 @@ import { UsercartreportComponent } from './usercartreport/usercartreport.compone
     FroalaEditorModule.forRoot(), 
     FroalaViewModule.forRoot()
   ],
-  providers: [DatePipe,UserService, AuthGuard, MenuService, MailConfigService, LoadingService, CompanyProfileService, UserprocesstimeService,CsvGeneratorService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [SeomanagementService,DatePipe,UserService, AuthGuard, MenuService, MailConfigService, LoadingService, CompanyProfileService, UserprocesstimeService,CsvGeneratorService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
   // entryComponents: [
   //   DialogOverviewExampleDialog,

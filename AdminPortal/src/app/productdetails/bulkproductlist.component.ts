@@ -3,6 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MailConfigService } from '../services/mailbox-config.service.';
 import { ToastrService } from 'ngx-toastr';
 import { CsvGeneratorService } from '../services/csvgenerator.service';
+import { UserprocesstimeService } from '../../../src/app/shared/userprocesstime.service';
+import { saveAs } from 'file-saver';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-productBulkUpload',
@@ -18,8 +21,10 @@ export class productBulkUploadComponent implements OnInit {
     selectedProductPriceFile: File | undefined;
     selectedProductDocumentFile: File | undefined;
     selectedManufDocumentFile: File | undefined;
-
-    constructor(private csvGeneratorService: CsvGeneratorService, private route: ActivatedRoute, private toastr: ToastrService, private MailConfigService: MailConfigService) { }
+    selectedUploadFolder: File | undefined;
+    SelectedFile: File | undefined;
+    fileDetails = [];
+    constructor(private spinner: NgxSpinnerService, private userprocesstimeService: UserprocesstimeService, private csvGeneratorService: CsvGeneratorService, private route: ActivatedRoute, private toastr: ToastrService, private MailConfigService: MailConfigService) { }
 
     ngOnInit() {
         this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
@@ -27,34 +32,36 @@ export class productBulkUploadComponent implements OnInit {
 
     generateProductPriceCsv() {
         const data = [
-          { Item: 'Item1', Price: 28 },
-          { Item: 'Item2', Price: 24 },
+            { Item: 'Item1', Price: 28 },
+            { Item: 'Item2', Price: 24 },
         ];
         const filename = 'SampleProductPrice.csv';
         this.csvGeneratorService.generateCsv(data, filename);
     }
-    
+
     generateProductDocCsv() {
         const data = [
-          { Item: 'Item1', Type: 'Doc',Name :'Name of document',DocDetailsUrl:'loaction/path of  pdf document' },
-          { Item: 'Item1', Type: 'text',Name :'name you want',DocDetailsUrl:'your text content' },
-          { Item: 'Item1', Type: 'video',Name :'name you want',DocDetailsUrl:'video embeded html content' },
-          { Item: 'Item1', Type: 'image',Name :'name of your image',DocDetailsUrl:'loaction/path of image' },
+            { Item: 'Item1', Type: 'Doc', Name: 'Name of document', DocDetailsUrl: 'loaction/path of  pdf document' },
+            { Item: 'Item1', Type: 'text', Name: 'name you want', DocDetailsUrl: 'your text content' },
+            { Item: 'Item1', Type: 'video', Name: 'name you want', DocDetailsUrl: 'video embeded html content' },
+            { Item: 'Item1', Type: 'image', Name: 'name of your image', DocDetailsUrl: 'loaction/path of image' },
         ];
         const filename = 'SampleProductDoc.csv';
         this.csvGeneratorService.generateCsv(data, filename);
     }
-    generateManufacturerDocCsv(){
+    generateManufacturerDocCsv() {
         const data = [
-            { Manufacturer: 'Manufacturer1', Type: 'Doc',Name :'TDS/Litrature',DocDetailsUrl:'loaction/path of  pdf document' },
-            { Manufacturer: 'Manufacturer2', Type: 'video',Name :'name you want',DocDetailsUrl:'video embeded html content' }
-          ];
-          const filename = 'SampleManufacturerDoc.csv';
-          this.csvGeneratorService.generateCsv(data, filename);
+            { Manufacturer: 'Manufacturer1', Type: 'Doc', Name: 'TDS/Litrature', DocDetailsUrl: 'loaction/path of  pdf document' },
+            { Manufacturer: 'Manufacturer2', Type: 'video', Name: 'name you want', DocDetailsUrl: 'video embeded html content' }
+        ];
+        const filename = 'SampleManufacturerDoc.csv';
+        this.csvGeneratorService.generateCsv(data, filename);
     }
-    OnManufacturerDocumentBulkUpload(){
+    OnManufacturerDocumentBulkUpload() {
+        this.spinner.show();
         if ((this.selectedManufDocumentFile == undefined || this.selectedManufDocumentFile == null)) {
             this.toastr.error('Please Select The CSV File');
+            this.spinner.hide();
             return;
         }
         else {
@@ -63,7 +70,7 @@ export class productBulkUploadComponent implements OnInit {
                 const contents = fileReader.result as string;
                 const lines = contents.split('\n');
                 const firstLine = lines[0].trim();
-                const expectedHeader = 'Manufacturer,Type,Name,DocDetailsUrl'; 
+                const expectedHeader = 'Manufacturer,Type,Name,DocDetailsUrl';
                 if (firstLine === expectedHeader) {
                     const fd = new FormData();
                     if (this.selectedManufDocumentFile != undefined && this.selectedManufDocumentFile != null) {
@@ -82,7 +89,7 @@ export class productBulkUploadComponent implements OnInit {
                         this.selectedManufDocumentFile = undefined;
                         this.fileManuDocListInput.nativeElement.value = '';
                     });
-                } else{
+                } else {
                     this.toastr.error('Invalid column names in the CSV file.');
                     this.selectedManufDocumentFile = undefined;
                     this.fileManuDocListInput.nativeElement.value = '';
@@ -90,11 +97,14 @@ export class productBulkUploadComponent implements OnInit {
                 }
             };
             fileReader.readAsText(this.selectedManufDocumentFile);
+            this.spinner.hide();
         }
     }
     OnItemDocumentBulkUpload() {
+        this.spinner.show();
         if ((this.selectedProductDocumentFile == undefined || this.selectedProductDocumentFile == null)) {
             this.toastr.error('Please Select The CSV File');
+            this.spinner.hide();
             return;
         }
         else {
@@ -103,7 +113,7 @@ export class productBulkUploadComponent implements OnInit {
                 const contents = fileReader.result as string;
                 const lines = contents.split('\n');
                 const firstLine = lines[0].trim();
-                const expectedHeader = 'Item,Type,Name,DocDetailsUrl'; 
+                const expectedHeader = 'Item,Type,Name,DocDetailsUrl';
                 if (firstLine === expectedHeader) {
                     const fd = new FormData();
                     if (this.selectedProductDocumentFile != undefined && this.selectedProductDocumentFile != null) {
@@ -122,7 +132,7 @@ export class productBulkUploadComponent implements OnInit {
                         this.selectedProductDocumentFile = undefined;
                         this.fileDocListInput.nativeElement.value = '';
                     });
-                } else{
+                } else {
                     this.toastr.error('Invalid column names in the CSV file.');
                     this.selectedProductDocumentFile = undefined;
                     this.fileDocListInput.nativeElement.value = '';
@@ -130,11 +140,69 @@ export class productBulkUploadComponent implements OnInit {
                 }
             };
             fileReader.readAsText(this.selectedProductDocumentFile);
+            this.spinner.hide();
         }
     }
+    handleUploadFolderInput(event: any) {
+        const files: FileList = event.target.files;
+        if (files.length > 0) {
+            const selectedFile: File = files[0];
+            if (!selectedFile.name.endsWith('.zip')) {
+                this.toastr.error('Please Select The zip File');
+                event.target.value = '';
+                return;
+            }
+            this.selectedUploadFolder = event.target.files[0];
+        }
+
+    }
+    OnFolderUpload() {
+        this.spinner.show();
+        if ((this.selectedUploadFolder == undefined || this.selectedUploadFolder == null)) {
+            this.toastr.error('Please Select The zip File');
+            this.spinner.hide();
+            return;
+        } else {
+            const fd = new FormData();
+            if (this.selectedUploadFolder != undefined && this.selectedUploadFolder != null) {
+                fd.append('FolderName', this.selectedUploadFolder.name);
+                fd.append('file', this.selectedUploadFolder);
+            }
+            fd.append('memRefNo', this.memRefNo);
+
+            this.userprocesstimeService.UploadFolder(fd).subscribe((data: any) => {
+                this.toastr.success(data.Message);
+                if (data.FileNames && data.FileNames.length > 0) {
+                    console.log("File Names:", data.FileNames);
+                    console.log("FolderPath:", data.FolderPath);
+                    const csvContent = this.generateCsvContent(data.FileNames, data.FolderPath);
+                    this.saveCsvFile(csvContent);
+
+                    this.fileDetails = data.FileNames.map(fileName => ({
+                        fileName: fileName,
+                        filePath: `${data.FolderPath}/${fileName}`
+                    }));
+                }
+            });
+            this.spinner.hide();
+        }
+    }
+    private generateCsvContent(fileNames: string[], folderPath: string): string {
+        const header = 'File Name,URL\n';
+        const rows = fileNames.map(fileName => `${fileName},${folderPath}/${fileName}\n`);
+        return header + rows.join('');
+    }
+
+    private saveCsvFile(csvContent: string): void {
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
+        saveAs(blob, 'fileList.csv');
+    }
+
     OnItemPriceListBulkUpload() {
+        this.spinner.show();
         if ((this.selectedProductPriceFile == undefined || this.selectedProductPriceFile == null)) {
             this.toastr.error('Please Select The CSV File');
+            this.spinner.hide();
             return;
         }
         else {
@@ -143,7 +211,7 @@ export class productBulkUploadComponent implements OnInit {
                 const contents = fileReader.result as string;
                 const lines = contents.split('\n');
                 const firstLine = lines[0].trim();
-                const expectedHeader = 'Item,Price'; 
+                const expectedHeader = 'Item,Price';
 
                 if (firstLine === expectedHeader) {
                     const fd = new FormData();
@@ -162,7 +230,7 @@ export class productBulkUploadComponent implements OnInit {
                         this.selectedProductPriceFile = undefined;
                         this.filePriceListInput.nativeElement.value = '';
                     });
-                } else{
+                } else {
                     this.toastr.error('Invalid column names in the CSV file.');
                     this.selectedProductPriceFile = undefined;
                     this.filePriceListInput.nativeElement.value = '';
@@ -170,15 +238,39 @@ export class productBulkUploadComponent implements OnInit {
                 }
             };
             fileReader.readAsText(this.selectedProductPriceFile);
+            this.spinner.hide();
         }
     }
     handleItemPriceListFileInput(event) {
         this.selectedProductPriceFile = <File>event.target.files[0];
+        if (this.selectedProductPriceFile) {
+            if (!this.isCsvOrExcel(this.selectedProductPriceFile)) {
+                this.toastr.error('Please select a valid CSV or Excel file.');
+                return;
+            } 
+        }
     }
     handleItemDocumentFileInput(event) {
         this.selectedProductDocumentFile = <File>event.target.files[0];
+        if (this.selectedProductDocumentFile) {
+            if (!this.isCsvOrExcel(this.selectedProductDocumentFile)) {
+                this.toastr.error('Please select a valid CSV or Excel file.');
+                return;
+            } 
+        }
     }
     handleManufDocumentFileInput(event) {
         this.selectedManufDocumentFile = <File>event.target.files[0];
+        if (this.selectedManufDocumentFile) {
+            if (!this.isCsvOrExcel(this.selectedManufDocumentFile)) {
+                this.toastr.error('Please select a valid CSV or Excel file.');
+                return;
+            } 
+        }
+    }
+
+    isCsvOrExcel(file: File): boolean {
+        const allowedTypes = ['text/csv', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+        return allowedTypes.includes(file.type);
     }
 }

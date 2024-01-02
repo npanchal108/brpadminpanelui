@@ -97,11 +97,16 @@
           </a>
         </li>
         <li>
+          <a [routerLink]="['/seolist', userId, memRefNo,userType]" routerLinkActive="active">
+            &nbsp; <i class="fa fa-cogs"></i> &nbsp; 
+            <p>SEO Management</p>
+          </a>
+        </li>
+        <li>
           <a [routerLink]="['/deletecacher', userId, memRefNo,userType]" routerLinkActive="active">
             &nbsp; <i class="fa-solid fa-trash fa-lg"></i> &nbsp; 
             <p>Delete Caching</p>
           </a>
-
         </li>
       </ul>
     </div>

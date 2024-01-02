@@ -11,3 +11,6 @@
     text-overflow: ellipsis;
     max-width: 575px;
 }
+.hidden{
+    display: none !important;
+}

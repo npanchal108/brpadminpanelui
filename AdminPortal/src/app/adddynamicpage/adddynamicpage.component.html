@@ -82,6 +82,7 @@
                     </div>
                   </div>
                   <div class="row">
+                    <span  style="color:red">Note : Please choose an image file that will be shown on your blog page.</span>
                     <div class="col-md-12">
                       <div class="form-group form-black label-floating">
                         <input type="file" style="position: relative;opacity: inherit;"
@@ -98,7 +99,7 @@
                   <div class="col-md-12">
                     <div class="form-group form-black label-floating"
                       [ngClass]="{'is-empty': Mailtemplate.PageContent=='','is-focused' : Mailtemplate.PageContent!=''}">
-                      <label class="control-label">Page Content</label>
+                      <label class="control-label">Page Content <span style="color:red">Note : Enter your blogs contents in HTML format.</span></label>
                       <textarea class="validate" style="height: 500px;" name="PageContent" #PageContent="ngModel"
                         [(ngModel)]="Mailtemplate.PageContent" class="form-control" required> </textarea>
                     </div>

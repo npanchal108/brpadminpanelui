@@ -49,6 +49,10 @@ export class adddynamicpageComponent implements OnInit, PipeTransform {
   }
   onFileSelected(event) {
     this.SelectedFile = <File>event.target.files[0];
+    if (!this.SelectedFile.type.startsWith('image/')) {
+      this.toastr.error('Please select a valid image file (JPEG, PNG, GIF, etc.).');
+      return;
+    }
   }
 
 

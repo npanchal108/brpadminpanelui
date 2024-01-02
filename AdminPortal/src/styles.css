@@ -329,7 +329,7 @@ body {
 
 .mat-mdc-tab-body.mat-mdc-tab-body-active {
     border: 1px solid #cdcdcdff;
-    padding: 40px 10px;
+    padding: 10px 10px;
     margin: 0 0 20px 0;
 }
 
@@ -344,7 +344,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 200px;
     padding: 20px;
     border-radius: 10px;
     border: 2px dashed #555;
@@ -389,7 +388,6 @@ body {
     display: flex;
     width: 100%;
     justify-content: center;
-    margin-top: 20px;
 }
 
 .toast-top-right {

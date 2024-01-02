@@ -25,6 +25,7 @@ import { AddBannersComponent } from './user-management/Add-Banners/Add-Banners.c
 import { DeleteCacherComponent } from './user-management/delete-cacher/delete-cacher.component';
 import { ManufacturerlistComponent } from './manufacturerlist/manufacturerlist.component';
 import { UsercartreportComponent } from './usercartreport/usercartreport.component';
+import { SeomanagementComponent } from './seomanagement/seomanagement.component';
 export const appRoutes: Routes = [
     // { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     {
@@ -62,6 +63,9 @@ export const appRoutes: Routes = [
     },
     {
         path: 'productlist/:id/:memRefNo/:userType', component: productlistComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'seolist/:id/:memRefNo/:userType', component: SeomanagementComponent, canActivate: [AuthGuard]
     },
     {
         path: 'manufacturerlist/:id/:memRefNo/:userType', component: ManufacturerlistComponent, canActivate: [AuthGuard]

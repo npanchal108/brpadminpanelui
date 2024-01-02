@@ -1,0 +1,399 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="custom-container">
+                <div class="custom-inner-container">
+                    <h5>SEO Management
+                        <small>Manage your SEO Meta</small>
+                    </h5>
+                    <div class="col-md-12">
+                        <div [ngClass]="{'hidden': showtype === 2}">
+                            <mat-tab-group #tabGroup mat-stretch-tabs="false" mat-align-tabs="start"
+                                (selectedTabChange)="tabChanged($event)">
+                                <mat-tab class="tab-border" label="It Tree Node">
+                                    <div *ngIf="currentTab > -1 && currentTab == 0 && filteredTreeNodeMetaList != null && filteredTreeNodeMetaList != undefined"
+                                        class="card-content table-responsive table-mobile">
+                                        <div class="record-count-section">
+                                            <label>
+                                                Search:
+                                                <input type="text" (input)="applyTreeNodeFilter()"
+                                                    [(ngModel)]="searchTreeNodeQuery" />
+                                                <button class="refresh-btn" (click)="onTreeNodeReset()"><i
+                                                        class="fa fa-refresh refresh-icon-clr"
+                                                        aria-hidden="true"></i></button>
+                                                <button (click)="ExportToExcell('treenode')"
+                                                    class="custom-btn">Export</button>
+                                                <input #treeNodeFileInput type="file"
+                                                    (change)="onTreeNodeFileSelected($event)" style="display: none"
+                                                    accept=".csv" />
+                                                <button (click)="openTreeNodeFileInput()"
+                                                    class="custom-btn">Import</button>
+                                            </label>
+                                        </div>
+                                        <table class="table table-striped table-bordered custom-table">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 5%;" (click)="toggleSort('TreeNode')">
+                                                        Tree Node
+                                                        <span
+                                                            [ngClass]="{ 'disabled-icon': sortedColumn != 'TreeNode' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
+                                                    <th style="width: 8%;" (click)="toggleSort('Description')">
+                                                        Description
+                                                        <span
+                                                            [ngClass]="{ 'disabled-icon': sortedColumn != 'Description' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
+                                                    <th style="width: 15%;" (click)="toggleSort('Meta')">
+                                                        Meta
+                                                        <span [ngClass]="{ 'disabled-icon': sortedColumn != 'Meta' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
+                                                    <th style="width: 15%;" (click)="toggleSort('TitleTag')">
+                                                        TitleTag
+                                                        <span
+                                                            [ngClass]="{ 'disabled-icon': sortedColumn != 'TitleTag' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
+                                                    <th style="width: 10%;" (click)="toggleSort('MetaDescription')">
+                                                        MetaDescription
+                                                        <span
+                                                            [ngClass]="{ 'disabled-icon': sortedColumn != 'MetaDescription' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
+                                                    <th style="width: 5%;" style="text-align: center;">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    *ngFor="let itm of filteredTreeNodeMetaList | paginate : { itemsPerPage:50, currentPage:treeNodePage,totalItems:treeNodeTotalPage, id:'first' } | orderBy: sortedColumn: ascending">
+                                                    <td>{{itm.TreeNode}}</td>
+                                                    <td>{{itm.Description}}</td>
+                                                    <td>{{itm.Meta}}</td>
+                                                    <td>{{itm.TitleTag}}</td>
+                                                    <td>{{itm.MetaDescription}}</td>
+                                                    <td class="font-20" align="center">
+                                                        <button (click)="onEditMeta('treenode',itm)" class="btn-icon"><i
+                                                                class="fa fa-pencil"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div style="text-align:center">
+                                            <pagination-controls (pageChange)="treeNodePageChanged($event)" id="first">
+                                            </pagination-controls>
+                                        </div>
+                                    </div>
+                                </mat-tab>
+                                <mat-tab class="tab-border" label="Item">
+                                    <div
+                                        *ngIf="currentTab > -1 && currentTab == 1 && filteredItemMetaList != null && filteredItemMetaList != undefined">
+                                        <div class="record-count-section">
+                                            <label>
+                                                Search:
+                                                <input type="text" (input)="applyItemFilter()"
+                                                    [(ngModel)]="searchItemQuery" />
+                                                <button class="refresh-btn" (click)="onItemReset()"><i
+                                                        class="fa fa-refresh refresh-icon-clr"
+                                                        aria-hidden="true"></i></button>
+                                                <button (click)="ExportToExcell('item')"
+                                                    class="custom-btn">Export</button>
+                                                <input #itemFileInput type="file" (change)="onItemFileSelected($event)"
+                                                    style="display: none" accept=".csv" />
+                                                <button (click)="openItemFileInput()" class="custom-btn">Import</button>
+                                            </label>
+                                        </div>
+                                        <table class="table table-striped table-bordered custom-table">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 15%;" (click)="toggleSort('Item')">
+                                                        Item
+                                                        <span [ngClass]="{ 'disabled-icon': sortedColumn != 'Item' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
+                                                    <th (click)="toggleSort('Description')">
+                                                        Description
+                                                        <span
+                                                            [ngClass]="{ 'disabled-icon': sortedColumn != 'Description' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
+                                                    <th style="width: 20%;" (click)="toggleSort('Meta')">
+                                                        Meta
+                                                        <span [ngClass]="{ 'disabled-icon': sortedColumn != 'Meta' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
+                                                    <th style="width: 10%;" (click)="toggleSort('TitleTag')">
+                                                        Title Tag
+                                                        <span
+                                                            [ngClass]="{ 'disabled-icon': sortedColumn != 'TitleTag' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
+                                                    <th style="width: 14%;" (click)="toggleSort('MetaDescription')">
+                                                        Meta Description
+                                                        <span
+                                                            [ngClass]="{ 'disabled-icon': sortedColumn != 'MetaDescription' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
+                                                    <th style="text-align: center;">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    *ngFor="let itm of filteredItemMetaList  | paginate : { itemsPerPage:50, currentPage:itemPage,totalItems:itemTotalPage, id:'first' } | orderBy: sortedColumn: ascending">
+                                                    <td>{{itm.Item}}</td>
+                                                    <td>{{itm.Description}}</td>
+                                                    <td>{{itm.Meta}}</td>
+                                                    <td>{{itm.TitleTag}}</td>
+                                                    <td>{{itm.MetaDescription}}</td>
+                                                    <td class="font-20" align="center">
+                                                        <button (click)="onEditMeta('item',itm)" class="btn-icon"><i
+                                                                class="fa fa-pencil"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div style="text-align:center">
+                                            <pagination-controls (pageChange)="itemPageChanged($event)" id="first">
+                                            </pagination-controls>
+                                        </div>
+                                    </div>
+                                </mat-tab>
+                                <mat-tab class="tab-border" label="It Prod Line">
+                                    <div
+                                        *ngIf="currentTab > -1 && currentTab == 2 && filteredProdLineMetaList != null && filteredProdLineMetaList != undefined">
+                                        <div class="record-count-section">
+                                            <label>
+                                                Search:
+                                                <input type="text" (input)="applyProdLineFilter()"
+                                                    [(ngModel)]="searchProdLineQuery" />
+                                                <button class="refresh-btn" (click)="onProdLineReset()"><i
+                                                        class="fa fa-refresh refresh-icon-clr"
+                                                        aria-hidden="true"></i></button>
+                                                <button (click)="ExportToExcell('prodline')"
+                                                    class="custom-btn">Export</button>
+                                                <input #prodLineFileInput type="file"
+                                                    (change)="onProdLineFileSelected($event)" style="display: none"
+                                                    accept=".csv" />
+                                                <button (click)="openProdLineInput()" class="custom-btn">Import</button>
+                                            </label>
+                                        </div>
+                                        <table class="table table-striped table-bordered custom-table">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 10%;" (click)="toggleSort('ProductLine')">
+                                                        ProductLine
+                                                        <span
+                                                            [ngClass]="{ 'disabled-icon': sortedColumn != 'ProductLine' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
+                                                    <th (click)="toggleSort('Description')">
+                                                        Description
+                                                        <span
+                                                            [ngClass]="{ 'disabled-icon': sortedColumn != 'Description' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
+                                                    <th style="width: 15%;" (click)="toggleSort('Meta')">
+                                                        Meta
+                                                        <span [ngClass]="{ 'disabled-icon': sortedColumn != 'Meta' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
+                                                    <th style="width: 10%;" (click)="toggleSort('TitleTag')">
+                                                        TitleTag
+                                                        <span
+                                                            [ngClass]="{ 'disabled-icon': sortedColumn != 'TitleTag' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
+                                                    <th style="width: 15%;" (click)="toggleSort('MetaDescription')">
+                                                        MetaDescription
+                                                        <span
+                                                            [ngClass]="{ 'disabled-icon': sortedColumn != 'MetaDescription' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
+                                                    <th style="text-align: center;">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    *ngFor="let itm of filteredProdLineMetaList  | paginate : { itemsPerPage:50, currentPage:prodLinePage,totalItems:prodLineTotalPage, id:'first' } | orderBy: sortedColumn: ascending">
+                                                    <td>{{itm.ProductLine}}</td>
+                                                    <td>{{itm.Description}}</td>
+                                                    <td>{{itm.Meta}}</td>
+                                                    <td>{{itm.TitleTag}}</td>
+                                                    <td>{{itm.MetaDescription}}</td>
+                                                    <td class="font-20" align="center">
+                                                        <button (click)="onEditMeta('prodline',itm)" class="btn-icon"><i
+                                                                class="fa fa-pencil"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div style="text-align:center">
+                                            <pagination-controls (pageChange)="prodLinePageChanged($event)" id="first">
+                                            </pagination-controls>
+                                        </div>
+                                    </div>
+                                </mat-tab>
+                                <mat-tab class="tab-border" label="IT Majcls">
+                                    <div
+                                        *ngIf="currentTab > -1 && currentTab == 3 && filteredMajclsetaList != null && filteredMajclsetaList != undefined">
+                                        <div class="record-count-section">
+                                            <label>
+                                                Search:
+                                                <input type="text" (input)="applyMajclsFilter()"
+                                                    [(ngModel)]="searchMajclsQuery" />
+                                                <button class="refresh-btn" (click)="onMajclsReset()"><i
+                                                        class="fa fa-refresh refresh-icon-clr"
+                                                        aria-hidden="true"></i></button>
+                                                <button (click)="ExportToExcell('majcls')"
+                                                    class="custom-btn">Export</button>
+                                                <input #majClsFileInput type="file"
+                                                    (change)="onMajClsFileSelected($event)" style="display: none"
+                                                    accept=".csv" />
+                                                <button (click)="openMajClsFileInput()" class="custom-btn">Import</button>
+                                            </label>
+                                        </div>
+                                        <table class="table table-striped table-bordered custom-table">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 10%;" (click)="toggleSort('ItMajClass')">
+                                                        It Maj Class
+                                                        <span
+                                                            [ngClass]="{ 'disabled-icon': sortedColumn != 'ItMajClass' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
+                                                    <th (click)="toggleSort('Description')">Description
+                                                        <span
+                                                            [ngClass]="{ 'disabled-icon': sortedColumn != 'Description' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
+                                                    <th style="width: 15%;" (click)="toggleSort('Meta')">
+                                                        Meta
+                                                        <span [ngClass]="{ 'disabled-icon': sortedColumn != 'Meta' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
+                                                    <th style="width: 10%;" (click)="toggleSort('TitleTag')">
+                                                        TitleTag
+                                                        <span
+                                                            [ngClass]="{ 'disabled-icon': sortedColumn != 'TitleTag' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
+                                                    <th style="width: 15%;" (click)="toggleSort('MetaDescription')">
+                                                        Meta Description
+                                                        <span
+                                                            [ngClass]="{ 'disabled-icon': sortedColumn != 'MetaDescription' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
+                                                    <th style="text-align: center;">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    *ngFor="let itm of filteredMajclsetaList  | paginate : { itemsPerPage:50, currentPage:majclsPage,totalItems:majclsTotalPage, id:'first' }  | orderBy: sortedColumn: ascending">
+                                                    <td>{{itm.ItMajClass}}</td>
+                                                    <td>{{itm.Description}}</td>
+                                                    <td>{{itm.Meta}}</td>
+                                                    <td>{{itm.TitleTag}}</td>
+                                                    <td>{{itm.MetaDescription}}</td>
+                                                    <td class="font-20" align="center">
+                                                        <button (click)="onEditMeta('majcls',itm)" class="btn-icon"><i
+                                                                class="fa fa-pencil"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div style="text-align:center">
+                                            <pagination-controls (pageChange)="majclsPageChanged($event)" id="first">
+                                            </pagination-controls>
+                                        </div>
+                                    </div>
+                                </mat-tab>
+                            </mat-tab-group>
+                        </div>
+                        <div class="card-content" [ngClass]="{'hidden': showtype === 1}">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group form-black label-floating"
+                                        [ngClass]="{'is-empty': TitleTag=='','is-focused' : TitleTag!=''}">
+                                        <label class="control-label">Title</label>
+                                        <input type="text" [(ngModel)]="TitleTag" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group form-black label-floating"
+                                        [ngClass]="{'is-empty': Meta=='','is-focused' : Meta!=''}">
+                                        <label class="control-label">Meta</label>
+                                        <input type="text" [(ngModel)]="Meta" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group form-black label-floating"
+                                        [ngClass]="{'is-empty': MetaDescription=='','is-focused' : MetaDescription!=''}">
+                                        <label class="control-label">Meta Description</label>
+                                        <input type="text" [(ngModel)]="MetaDescription" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group form-black label-floating"
+                                        [ngClass]="{'is-empty': Description=='','is-focused' : Description!=''}">
+                                        <label class="control-label">Description</label>
+                                        <input type="text" [(ngModel)]="Description" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <button (click)="GoToBack()" class="custom-white-btn">Back</button>
+                            <button class="custom-btn" (click)="onUpdateMeta()">Submit</button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -27,7 +27,10 @@ export class UserprocesstimeService {
     // return this.http.post('http://localhost:38051' + '/Banners/PostBannerImage',imagemodel);
     return this.http.post(this.common.RootUrl + '/Banners/PostBannerImage',imagemodel);
   }
-
+  UploadFolder(modelparam) {
+    this.common.RootUrl
+    return this.http.post(this.common.RootUrl + '/Banners/UploadFolder',modelparam);
+  }
   insertUser(userProcessTimes: UserProcessTimes) {
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
     return this.http.post(this.common.RootUrl + '/UserMailBox/InsertUserProcessTimes', userProcessTimes, { headers: reqHeader });
