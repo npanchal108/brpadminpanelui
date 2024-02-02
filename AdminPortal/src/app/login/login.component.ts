@@ -37,14 +37,32 @@ export class LoginComponent implements OnInit {
         this.isLoginError = true;
         this.sendMessage('stop');
       }
+      else if(data.Status == "Activation"){
+        this.Errormsg = 'User Activation Required';
+        this.isLoginError = true;
+        this.sendMessage('stop');
+      }
       else {
         localStorage.setItem('AuthenticationToken', data.AuthenticationToken);
         localStorage.setItem('MemberReferenceNo', data.MemRefNo);
         localStorage.setItem('LoginUserID', data.UserID);
         localStorage.setItem('PrivateChannel', data.PrivateChannel);
         localStorage.setItem('Role', data.Role);
+        localStorage.setItem('TabAccess', data.TabAccess);
+        localStorage.setItem('UserParent', data.UserParent);
+        console.log('data==>',data);
         if (data.Role == "Admin") {
           this.router.navigate(['/userlist/Admin']);
+        }
+        else if(data.Role == "Subuser"){
+          // console.log('UserParent',data.UserParent);
+          // console.log('UserType',data.Role);
+          // console.log('MemRefNo',data.UserParentMemberRefNo);
+          // console.log('UserID',data.UserID);
+          localStorage.setItem('UserId', data.UserParent);
+          localStorage.setItem('UserType', "Client");
+          localStorage.setItem('MemRefNo', data.UserParentMemberRefNo);
+          this.router.navigate(['/useradd', data.UserID, data.Role]);
         }
         else {
           localStorage.setItem('UserId', data.UserID);

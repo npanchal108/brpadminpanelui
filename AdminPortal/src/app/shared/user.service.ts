@@ -53,12 +53,14 @@ export class UserService {
       CompanyID: user.CompanyID,
       ApiEndPoint: user.ApiEndPoint,
       NotificationEmails: user.NotificationEmails,
+      UserParent:0,
+      TabAccess:null
     }
     console.log(body);
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
     return this.http.post(this.common.RootUrl + '/Account/InsertNewUser', body, { headers: reqHeader });
   }
-
+ 
   getUsers(type: string, pageNo: number) {
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
     return this.http.get(this.common.RootUrl + '/Account/GetUserListToDisplay?type=' + type + '&Email=&Mobile=0&MemberRefNo=&HostName=&pageno=' + pageNo, { headers: reqHeader });

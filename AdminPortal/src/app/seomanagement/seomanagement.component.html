@@ -10,7 +10,7 @@
                         <div [ngClass]="{'hidden': showtype === 2}">
                             <mat-tab-group #tabGroup mat-stretch-tabs="false" mat-align-tabs="start"
                                 (selectedTabChange)="tabChanged($event)">
-                                <mat-tab class="tab-border" label="It Tree Node">
+                                <mat-tab class="tab-border" label="Category">
                                     <div *ngIf="currentTab > -1 && currentTab == 0 && filteredTreeNodeMetaList != null && filteredTreeNodeMetaList != undefined"
                                         class="card-content table-responsive table-mobile">
                                         <div class="record-count-section">
@@ -34,7 +34,7 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width: 5%;" (click)="toggleSort('TreeNode')">
-                                                        Tree Node
+                                                        Name
                                                         <span
                                                             [ngClass]="{ 'disabled-icon': sortedColumn != 'TreeNode' }">
                                                             <i
@@ -50,7 +50,7 @@
                                                         </span>
                                                     </th>
                                                     <th style="width: 15%;" (click)="toggleSort('Meta')">
-                                                        Meta
+                                                        Meta Keyword
                                                         <span [ngClass]="{ 'disabled-icon': sortedColumn != 'Meta' }">
                                                             <i
                                                                 [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
@@ -72,17 +72,30 @@
                                                                 [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
                                                         </span>
                                                     </th>
+                                                    <th style="width: 10%;" (click)="toggleSort('Urls')">
+                                                        Url
+                                                        <span
+                                                            [ngClass]="{ 'disabled-icon': sortedColumn != 'MetaDescription' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
                                                     <th style="width: 5%;" style="text-align: center;">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr
                                                     *ngFor="let itm of filteredTreeNodeMetaList | paginate : { itemsPerPage:50, currentPage:treeNodePage,totalItems:treeNodeTotalPage, id:'first' } | orderBy: sortedColumn: ascending">
-                                                    <td>{{itm.TreeNode}}</td>
+                                                    <td>{{itm.Name}}</td>
                                                     <td>{{itm.Description}}</td>
                                                     <td>{{itm.Meta}}</td>
                                                     <td>{{itm.TitleTag}}</td>
                                                     <td>{{itm.MetaDescription}}</td>
+                                                    <td>
+                                                        <a [title]="itm.Urls" [href]="itm.Urls"
+                                                            target="_blank">
+                                                            {{itm.Urls}}</a>
+                                                    </td>
                                                     <td class="font-20" align="center">
                                                         <button (click)="onEditMeta('treenode',itm)" class="btn-icon"><i
                                                                 class="fa fa-pencil"></i></button>
@@ -96,7 +109,7 @@
                                         </div>
                                     </div>
                                 </mat-tab>
-                                <mat-tab class="tab-border" label="Item">
+                                <mat-tab class="tab-border" label="Products">
                                     <div
                                         *ngIf="currentTab > -1 && currentTab == 1 && filteredItemMetaList != null && filteredItemMetaList != undefined">
                                         <div class="record-count-section">
@@ -133,7 +146,7 @@
                                                         </span>
                                                     </th>
                                                     <th style="width: 20%;" (click)="toggleSort('Meta')">
-                                                        Meta
+                                                        Meta Keyword
                                                         <span [ngClass]="{ 'disabled-icon': sortedColumn != 'Meta' }">
                                                             <i
                                                                 [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
@@ -155,6 +168,14 @@
                                                                 [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
                                                         </span>
                                                     </th>
+                                                    <th style="width: 15%;" (click)="toggleSort('Urls')">
+                                                        Url
+                                                        <span
+                                                            [ngClass]="{ 'disabled-icon': sortedColumn != 'MetaDescription' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
                                                     <th style="text-align: center;">Action</th>
                                                 </tr>
                                             </thead>
@@ -166,6 +187,11 @@
                                                     <td>{{itm.Meta}}</td>
                                                     <td>{{itm.TitleTag}}</td>
                                                     <td>{{itm.MetaDescription}}</td>
+                                                    <td>
+                                                        <a [title]="itm.Urls" [href]="itm.Urls"
+                                                            target="_blank">
+                                                            {{itm.Urls}}</a>
+                                                    </td>
                                                     <td class="font-20" align="center">
                                                         <button (click)="onEditMeta('item',itm)" class="btn-icon"><i
                                                                 class="fa fa-pencil"></i></button>
@@ -179,7 +205,7 @@
                                         </div>
                                     </div>
                                 </mat-tab>
-                                <mat-tab class="tab-border" label="It Prod Line">
+                                <mat-tab class="tab-border" label="ProdLines">
                                     <div
                                         *ngIf="currentTab > -1 && currentTab == 2 && filteredProdLineMetaList != null && filteredProdLineMetaList != undefined">
                                         <div class="record-count-section">
@@ -202,7 +228,7 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width: 10%;" (click)="toggleSort('ProductLine')">
-                                                        ProductLine
+                                                        Name
                                                         <span
                                                             [ngClass]="{ 'disabled-icon': sortedColumn != 'ProductLine' }">
                                                             <i
@@ -218,7 +244,7 @@
                                                         </span>
                                                     </th>
                                                     <th style="width: 15%;" (click)="toggleSort('Meta')">
-                                                        Meta
+                                                        Meta Keyword
                                                         <span [ngClass]="{ 'disabled-icon': sortedColumn != 'Meta' }">
                                                             <i
                                                                 [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
@@ -240,17 +266,30 @@
                                                                 [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
                                                         </span>
                                                     </th>
+                                                    <th style="width: 15%;" (click)="toggleSort('Urls')">
+                                                        Url
+                                                        <span
+                                                            [ngClass]="{ 'disabled-icon': sortedColumn != 'MetaDescription' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
                                                     <th style="text-align: center;">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr
                                                     *ngFor="let itm of filteredProdLineMetaList  | paginate : { itemsPerPage:50, currentPage:prodLinePage,totalItems:prodLineTotalPage, id:'first' } | orderBy: sortedColumn: ascending">
-                                                    <td>{{itm.ProductLine}}</td>
+                                                    <td>{{itm.Name}}</td>
                                                     <td>{{itm.Description}}</td>
                                                     <td>{{itm.Meta}}</td>
                                                     <td>{{itm.TitleTag}}</td>
                                                     <td>{{itm.MetaDescription}}</td>
+                                                    <td>
+                                                        <a [title]="itm.Urls" [href]="itm.Urls"
+                                                            target="_blank">
+                                                            {{itm.Urls}}</a>
+                                                    </td>
                                                     <td class="font-20" align="center">
                                                         <button (click)="onEditMeta('prodline',itm)" class="btn-icon"><i
                                                                 class="fa fa-pencil"></i></button>
@@ -264,7 +303,7 @@
                                         </div>
                                     </div>
                                 </mat-tab>
-                                <mat-tab class="tab-border" label="IT Majcls">
+                                <mat-tab class="tab-border" label="Product Line Parent">
                                     <div
                                         *ngIf="currentTab > -1 && currentTab == 3 && filteredMajclsetaList != null && filteredMajclsetaList != undefined">
                                         <div class="record-count-section">
@@ -287,7 +326,7 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width: 10%;" (click)="toggleSort('ItMajClass')">
-                                                        It Maj Class
+                                                        Name
                                                         <span
                                                             [ngClass]="{ 'disabled-icon': sortedColumn != 'ItMajClass' }">
                                                             <i
@@ -302,7 +341,7 @@
                                                         </span>
                                                     </th>
                                                     <th style="width: 15%;" (click)="toggleSort('Meta')">
-                                                        Meta
+                                                        Meta Keyword
                                                         <span [ngClass]="{ 'disabled-icon': sortedColumn != 'Meta' }">
                                                             <i
                                                                 [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
@@ -324,17 +363,30 @@
                                                                 [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
                                                         </span>
                                                     </th>
+                                                    <th style="width: 15%;" (click)="toggleSort('Urls')">
+                                                        Url
+                                                        <span
+                                                            [ngClass]="{ 'disabled-icon': sortedColumn != 'MetaDescription' }">
+                                                            <i
+                                                                [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+                                                        </span>
+                                                    </th>
                                                     <th style="text-align: center;">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr
                                                     *ngFor="let itm of filteredMajclsetaList  | paginate : { itemsPerPage:50, currentPage:majclsPage,totalItems:majclsTotalPage, id:'first' }  | orderBy: sortedColumn: ascending">
-                                                    <td>{{itm.ItMajClass}}</td>
+                                                    <td>{{itm.Name}}</td>
                                                     <td>{{itm.Description}}</td>
                                                     <td>{{itm.Meta}}</td>
                                                     <td>{{itm.TitleTag}}</td>
                                                     <td>{{itm.MetaDescription}}</td>
+                                                    <td>
+                                                        <a [title]="itm.Urls" [href]="itm.Urls"
+                                                            target="_blank">
+                                                            {{itm.Urls}}</a>
+                                                    </td>
                                                     <td class="font-20" align="center">
                                                         <button (click)="onEditMeta('majcls',itm)" class="btn-icon"><i
                                                                 class="fa fa-pencil"></i></button>

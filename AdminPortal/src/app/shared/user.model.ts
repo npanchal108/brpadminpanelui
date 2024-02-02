@@ -18,4 +18,6 @@ export class User {
     CompanyID:string;
     ApiEndPoint:string;
     NotificationEmails:string;
+    UserParent:number;
+    TabAccess:string;
 }

@@ -3,43 +3,49 @@
   <mat-drawer #drawer class="example-sidenav" mode="side" [opened]="openSidebar">
     <div class="nav-container">
       <ul class="nav sidebar-container">
-        <li id="useradd">
+        <li id="useradd"  *ngIf="canShowThisMenu('User Profile')">
           <a [routerLink]="['/useradd', userId, userType]" routerLinkActive="active">
             &nbsp;<i class="fa-solid fa-id-card fa-lg"></i> &nbsp; 
             <p>User Profile</p>
           </a>
         </li>
-        <li>
+        <li id="subuserlist" *ngIf="canShowThisMenu('Sub Users')">
+          <a [routerLink]="['/subuserlist', userId, memRefNo,userType]" routerLinkActive="active">
+            &nbsp;<i class="fa-solid fa-id-card fa-lg"></i> &nbsp; 
+            <p>Sub Users</p>
+          </a>
+        </li>
+        <li *ngIf="canShowThisMenu('Mail Settings')">
           <a [routerLink]="['/mailboxconfig', userId, memRefNo,userType]" routerLinkActive="active">
             &nbsp; <i class="fa-solid fa-envelope  fa-lg"></i> &nbsp; 
             <p>Mail Settings</p>
           </a>
         </li>
-        <li>
+        <li  *ngIf="canShowThisMenu('Data Sync Settings')">
           <a [routerLink]="['/processconfig', userId, memRefNo,userType]" routerLinkActive="active">
             &nbsp; <i class="fa-solid fa-chalkboard-user   fa-lg"></i> &nbsp; 
             <p>Data Sync Settings</p>
           </a>
         </li>
-        <li>
+        <li *ngIf="canShowThisMenu('Logo Settings')">
           <a [routerLink]="['/webdesign', userId, memRefNo,userType]" [ngClass]="checkActiveClass('logosettings')">
             &nbsp; <i class="fa-solid fa-cubes fa-lg"></i> &nbsp; 
             <p>Logo Settings</p>
           </a>
         </li>
-        <li>
+        <li *ngIf="canShowThisMenu('Website Settings')">
           <a [routerLink]="['/websiteconfigurations', userId, memRefNo,userType]" [ngClass]="checkActiveClass('websettings')">
             &nbsp; <i class="fa-regular fa-window-maximize fa-lg"></i> &nbsp; 
             <p>Website Settings</p>
           </a>
         </li>
-        <li>
+        <li *ngIf="canShowThisMenu('E-Mail Template')">
           <a [routerLink]="['/mailtemplate', userId, memRefNo,userType]" [ngClass]="checkActiveClass('mailsettings')">
             &nbsp; <i class="fa-solid fa-envelopes-bulk fa-lg"></i> &nbsp; 
             <p>E-Mail Template</p>
           </a>
         </li>
-        <li>
+        <li *ngIf="canShowThisMenu('Page Management')">
           <a [routerLink]="['/dynamicpages', userId, memRefNo,userType]" 
             [ngClass]="checkActiveClass('dynamic-pages')">
             <!-- &nbsp; <i class="fa fa-trash fa-lg" aria-hidden="true fa-lg"></i> &nbsp;  &nbsp; -->
@@ -48,61 +54,61 @@
             <p>Page Management</p>
           </a>
         </li>
-        <li>
+        <li *ngIf="canShowThisMenu('Manufracturer')">
           <a [routerLink]="['/manufacturerlist', userId, memRefNo,userType]" [ngClass]="checkActiveClass('manufacturer')">
             &nbsp; <i class="fas fa-industry fa-lg"></i> &nbsp; 
             <p>Manufracturer</p>
           </a>
         </li>
-        <li>
+        <li *ngIf="canShowThisMenu('Products')">
           <a [routerLink]="['/productlist', userId, memRefNo,userType]" [ngClass]="checkActiveClass('products')">
             &nbsp; <i class="fa-solid fa-table-list fa-lg"></i> &nbsp; 
             <p>Products</p>
           </a>
         </li>
-        <li>
+        <li *ngIf="canShowThisMenu('Bulk Upload')">
           <a [routerLink]="['/productbulkupload', userId, memRefNo,userType]" routerLinkActive="active">
             &nbsp; <i class="fa-solid fa-cloud-arrow-up fa-lg"></i> &nbsp; 
             <p>Bulk Upload</p>
           </a>
         </li>
-        <li>
+        <li *ngIf="canShowThisMenu('Navigation Settings')">
           <a [routerLink]="['/headerlinks', userId, memRefNo,userType]" routerLinkActive="active">
             &nbsp; <i class="fa-solid fa-link fa-lg"></i> &nbsp; 
             <p>Navigation Settings</p>
           </a>
         </li>
-        <li>
+        <li *ngIf="canShowThisMenu('Banners Settings')">
           <a [routerLink]="['/homebanners', userId, memRefNo,userType]" routerLinkActive="active">
             &nbsp; <i class="fa-solid fa-house-laptop fa-lg"></i> &nbsp; 
             <p>Banners Settings</p>
           </a>
         </li>
-        <li>
+        <li *ngIf="canShowThisMenu('User Cart Report')">
           <a [routerLink]="['/Usercartreport', userId, memRefNo,userType]" routerLinkActive="active">
             &nbsp; <i class="fa-regular fa-file-lines fa-lg"></i> &nbsp; 
             <p>User Cart Report</p>
           </a>
         </li>
-        <li>
+        <li *ngIf="canShowThisMenu('Activity Logs')">
           <a [routerLink]="['/activitylogs', userId, memRefNo,userType]" routerLinkActive="active">
             &nbsp; <i class="fa-regular fa-file-lines fa-lg"></i> &nbsp; 
             <p>Activity Logs</p>
           </a>
         </li>
-        <li>
+        <li *ngIf="canShowThisMenu('Filters Sortings')">
           <a [routerLink]="['/safilterssort', userId, memRefNo,userType]" [ngClass]="checkActiveClass('filtersorting')">
             &nbsp; <i class="fa-solid fa-arrow-down-wide-short fa-lg"></i> &nbsp; 
             <p>Filters Sortings</p>
           </a>
         </li>
-        <li>
+        <li *ngIf="canShowThisMenu('SEO Management')">
           <a [routerLink]="['/seolist', userId, memRefNo,userType]" routerLinkActive="active">
             &nbsp; <i class="fa fa-cogs"></i> &nbsp; 
             <p>SEO Management</p>
           </a>
         </li>
-        <li>
+        <li *ngIf="canShowThisMenu('Delete Caching')">
           <a [routerLink]="['/deletecacher', userId, memRefNo,userType]" routerLinkActive="active">
             &nbsp; <i class="fa-solid fa-trash fa-lg"></i> &nbsp; 
             <p>Delete Caching</p>

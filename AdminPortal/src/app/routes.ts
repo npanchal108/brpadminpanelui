@@ -26,6 +26,7 @@ import { DeleteCacherComponent } from './user-management/delete-cacher/delete-ca
 import { ManufacturerlistComponent } from './manufacturerlist/manufacturerlist.component';
 import { UsercartreportComponent } from './usercartreport/usercartreport.component';
 import { SeomanagementComponent } from './seomanagement/seomanagement.component';
+import { SubuserlistComponent } from './subuser/subuserlist/subuserlist.component';
 export const appRoutes: Routes = [
     // { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     {
@@ -36,6 +37,9 @@ export const appRoutes: Routes = [
     },
     {
         path: 'userlist/:userType', component: UserListComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'subuserlist/:id/:memRefNo/:userType', component: SubuserlistComponent, canActivate: [AuthGuard]
     },
     {
         path: 'useradd/:id/:userType', component: UserAddComponent, canActivate: [AuthGuard]

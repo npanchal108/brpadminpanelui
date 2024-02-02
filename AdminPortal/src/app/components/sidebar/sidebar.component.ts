@@ -16,6 +16,8 @@ export class SidebarComponent implements OnInit {
   isDrawerDisabled: boolean = true;
   openSidebar: boolean = false;
   ignoreUrlList = ['/userlist/Client', '/userlist/Admin', '/useradd/0/Client'];
+  currentUserRole:string 
+  currentUserAccesses :any
 
   activeMenus = [
     {'dynamic-pages' : ['dynamicpages', 'adddynamicpage']},
@@ -30,11 +32,13 @@ export class SidebarComponent implements OnInit {
 
   
   ngOnInit() {
-    localStorage.getItem("Role") == "Admin" ? this.isAdmin = true : this.isAdmin = false;
+    this.currentUserRole = localStorage.getItem("Role")
+    this.isAdmin = localStorage.getItem("Role") == "Admin" ? true : false;
     this.userId = parseInt(localStorage.getItem('UserId'));
     this.userType = localStorage.getItem('UserType');
     this.userroles = localStorage.getItem('Role');
     this.memRefNo = localStorage.getItem('memRefNo');
+    this.currentUserAccesses = JSON.parse(localStorage.getItem('TabAccess'))
   }
 
   ngAfterContentChecked(): void {
@@ -66,5 +70,12 @@ export class SidebarComponent implements OnInit {
       }
       return ''
     });
+  }
+
+  canShowThisMenu(key: string): boolean {
+    if(this.currentUserRole != 'Subuser') return true;
+    const lowerCaseArray = this.currentUserAccesses.map(item => item.toLowerCase());
+    const lowerCaseValue = key.toLowerCase();
+    return lowerCaseArray.includes(lowerCaseValue);
   }
 }

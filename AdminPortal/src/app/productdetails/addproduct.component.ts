@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer, SafeHtml, SafeStyle, SafeScript, SafeUrl, SafeResourceUrl } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 interface ItemType {
     key: string;
@@ -42,7 +43,7 @@ export class addproductComponent implements OnInit {
         { key: 'image', value: 'image' }
     ];
 
-    constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute, private toastr: ToastrService, private MailConfigService: MailConfigService, private dialog: MatDialog, private router: Router) { }
+    constructor(private spinner: NgxSpinnerService,private sanitizer: DomSanitizer, private route: ActivatedRoute, private toastr: ToastrService, private MailConfigService: MailConfigService, private dialog: MatDialog, private router: Router) { }
     cleanURL(oldURL: string): SafeResourceUrl {
         return this.sanitizer.bypassSecurityTrustResourceUrl(oldURL);
     }
@@ -59,15 +60,19 @@ export class addproductComponent implements OnInit {
 
     getItemList() {
         if (this.itemId != null && this.itemId != undefined && this.itemId != '') {
+            this.spinner.show();
             this.MailConfigService.GetproductDocBYId(this.memRefNo, this.itemId).subscribe((data: any) => {
                 this.productDetails = data;
+                this.spinner.hide();
             });
         }
     }
     getItemPrice() {
         if (this.itemId != null && this.itemId != undefined && this.itemId != '') {
+            this.spinner.show();
             this.MailConfigService.GetItemPriceByItem(this.memRefNo, this.itemId).subscribe((data: any) => {
                 this.productPriceDetails = data;
+                this.spinner.hide();
                 console.log('this.productPriceDetails', data)
             });
         }
@@ -77,7 +82,7 @@ export class addproductComponent implements OnInit {
         this.router.navigate(['/productlist', this.uid, this.memRefNo, 'Client'], { queryParams: { searchText: this.searchText } });
     }
 
-    openDialog(MemRefNo,ItemDocId, Item, DocType, DocTypeName, DocTypeTextUrl, Sequence): void {
+    openDialog(MemRefNo, ItemDocId, Item, DocType, DocTypeName, DocTypeTextUrl, Sequence): void {
         let dialogRef = this.dialog.open(DialogAddEditProduct, {
             width: '700px',
             data: {
@@ -112,13 +117,16 @@ export class addproductComponent implements OnInit {
         console.log('item id', id);
     }
     OnSave() {
+        this.spinner.show();
         this.MailConfigService.UpdateItemPrice(this.memRefNo, this.productPriceDetails.Item, this.productPriceDetails.ItemPrice, this.productPriceDetails.ItemIsActive).subscribe((data: any) => {
             if (data == true || data == "true") {
+                this.spinner.hide();
                 this.toastr.success("Sucessfully Updated");
                 this.router.navigate(['/productlist', this.uid, this.memRefNo, 'Client'], { queryParams: { searchText: this.searchText } });
                 //this.router.navigate(['/productlist', this.uid, this.memRefNo, 'Client']);
             }
             else {
+                this.spinner.hide();
                 this.toastr.error("Error occured please try again");
             }
         });
@@ -132,6 +140,7 @@ export class addproductComponent implements OnInit {
 export class DialogAddEditProduct {
 
     constructor(
+        private spinner: NgxSpinnerService,
         private sanitizer: DomSanitizer,
         private MailConfigService: MailConfigService,
         private toastr: ToastrService,
@@ -149,36 +158,41 @@ export class DialogAddEditProduct {
     itemDocId: number;
     item: string;
     itemSequence: number;
-    pdfFileName:string;
+    pdfFileName: string;
+    docName: DocName[] = [];
+
     ngOnInit() {
         this.memRefNo = this.data.memRefNo;
-        this.docTypeId = this.data.itemId;
-        this.item = this.data.item;
-        this.selectedfileType = this.data.docType;
-        this.itemContent = this.data.docTypeTextUrl;
-        this.docTypeName = this.data.docTypeName;
-        if (this.selectedfileType == "doc") {
-            this.selectedDocName = this.data.docTypeName;
-        }
-        this.itemDocId = this.data.itemDocId;
-        this.itemSequence = this.data.sequence == null ? 999 : this.data.sequence;
-        if(this.selectedfileType == 'doc' && this.itemContent != undefined && this.itemContent != '' && this.itemContent != null){
-            const url = new URL(this.itemContent);
-            const pathname = url.pathname;
-            this.pdfFileName = pathname.substring(pathname.lastIndexOf('/') + 1);
-        }
+        this.getDocumentTypes();
     }
-
+    getDocumentTypes() {
+        this.MailConfigService.GetDocumentTypeConfigValue(this.memRefNo).subscribe((data: any) => {
+            this.docName = JSON.parse(data);
+            this.docTypeId = this.data.itemId;
+            this.item = this.data.item;
+            this.selectedfileType = this.data.docType;
+            this.itemContent = this.data.docTypeTextUrl;
+            this.docTypeName = this.data.docTypeName;
+            if (this.selectedfileType == "doc") {
+                console.log('docName',this.docName);
+                console.log('this.selectedfileType',this.selectedfileType);
+                this.selectedDocName = this.data.docTypeName;
+                console.log('this.selectedDocName',this.selectedDocName);
+            }
+            this.itemDocId = this.data.itemDocId;
+            this.itemSequence = this.data.sequence == null ? 999 : this.data.sequence;
+            if (this.selectedfileType == 'doc' && this.itemContent != undefined && this.itemContent != '' && this.itemContent != null) {
+                const url = new URL(this.itemContent);
+                const pathname = url.pathname;
+                this.pdfFileName = pathname.substring(pathname.lastIndexOf('/') + 1);
+            }
+        });
+    }
     fileType: ItemType[] = [
         { key: 'doc', value: 'doc' },
         { key: 'text', value: 'text' },
         { key: 'video', value: 'video' },
         { key: 'image', value: 'image' }
-    ];
-
-    docName: DocName[] = [
-        { key: 'TDS', value: 'TDS' },
-        { key: 'Liturature', value: 'Liturature' },
     ];
 
     onFileSelected(event) {
@@ -188,25 +202,32 @@ export class DialogAddEditProduct {
         if (!this.SelectedFile) {
             return;
         }
-
-        const fileType = this.SelectedFile.type;
-        console.log('fileType====>', fileType)
-        if (this.selectedfileType == "doc" && fileType != 'application/pdf') {
-            this.toastr.error('Please select valid pdf file');
-            inputElement.value = '';
-            return;
-        } else if (this.selectedfileType == "image" && fileType.split('/')[0] != 'image') {
-            this.toastr.error('Please select valid image file');
-            inputElement.value = '';
-            return;
-        }
+        // console.log('this.selectedfile',this.SelectedFile);
+        // console.log('this.selectedDocName',this.selectedDocName);
+        
+        // const fileType = this.SelectedFile.type;
+        // console.log('fileType====>', fileType)
+        // if(this.selectedfileType == "doc" && this.selectedDocName != "CAD"){
+        //     if (this.selectedfileType == "doc" && fileType != 'application/pdf') {
+        //         this.toastr.error('Please select valid pdf file');
+        //         inputElement.value = '';
+        //         return;
+        //     } 
+        // }else if (this.selectedfileType == "image" && fileType.split('/')[0] != 'image') {
+        //     this.toastr.error('Please select valid image file');
+        //     inputElement.value = '';
+        //     return;
+        // }
+        
     }
 
     onCancel(): void {
         this.dialogRef.close();
     }
-   
+
     onSave() {
+        console.log('this.selectedDocName',this.selectedDocName);
+
         const fd = new FormData();
 
         if (this.selectedfileType == "doc" || this.selectedfileType == "image") {
@@ -216,7 +237,7 @@ export class DialogAddEditProduct {
             }
             else if (this.itemDocId == 0 && (this.SelectedFile == undefined || this.SelectedFile == null)) {
                 if (this.selectedfileType == "doc") {
-                    this.toastr.error('Please select valid pdf file');
+                    this.toastr.error('Please select valid file');
                     return;
                 } else if (this.selectedfileType == "image") {
                     this.toastr.error('Please select valid image file');
@@ -236,6 +257,12 @@ export class DialogAddEditProduct {
 
         if (this.selectedfileType == "doc") {
             fd.append('DocName', this.selectedDocName);
+            if (this.selectedDocName) {
+                this.itemSequence = Number(this.docName.find(item => item.key === this.selectedDocName)?.value) || null;
+            } else {
+                this.itemSequence = null;
+            }
+            fd.append('Sequence', this.itemSequence.toString());
         } else if (this.selectedfileType == "image") {
             if (this.itemDocId > 0) {
                 fd.append('DocName', this.docTypeName);
@@ -257,7 +284,9 @@ export class DialogAddEditProduct {
         fd.append('DocType', this.selectedfileType);
         fd.append('Item', this.item);
         fd.append('IMType', 'False');
+        this.spinner.show();
         this.MailConfigService.UpdateImageDocument(fd).subscribe((data: any) => {
+            this.spinner.hide();
             console.log(data);
             if (data == true || data == "true") {
                 this.toastr.success("Sucessfully Updated");
@@ -288,6 +317,7 @@ export class DialogAddEditProduct {
 export class DeleteItemDocdialog {
 
     constructor(
+        private spinner: NgxSpinnerService,
         private MailConfigService: MailConfigService,
         private toastr: ToastrService,
         private router: Router,
@@ -299,7 +329,7 @@ export class DeleteItemDocdialog {
     }
 
     onYesClick(memRefNo, itemDocId): void {
-
+        this.spinner.show();
         this.MailConfigService.DeleteItemDocByID(memRefNo, itemDocId).subscribe(res => {
             if (res) {
                 this.toastr.success("Record deleted successfully");
@@ -307,7 +337,7 @@ export class DeleteItemDocdialog {
             else {
                 this.toastr.error("Something went wrong. Please try again.");
             }
-
+            this.spinner.hide();
         });
         this.dialogRef.close();
     }

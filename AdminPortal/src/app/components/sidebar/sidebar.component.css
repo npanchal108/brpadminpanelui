@@ -17,7 +17,7 @@
 }
 
 .mat-drawer-content {
-    width: 100%;
+    /* width: 100%; */
     display: flex;
     justify-content: start;
     background: #fff;
@@ -63,9 +63,9 @@
     width: 100%;
 }
 
-.main-container.with-sidebar {
+/* .main-container.with-sidebar {
     width: calc(100% - 370px);
-}
+} */
 .mat-mdc-button.mat-mdc-button-base{
     height: 100%;
     background: #002428;

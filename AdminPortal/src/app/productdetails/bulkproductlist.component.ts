@@ -41,18 +41,18 @@ export class productBulkUploadComponent implements OnInit {
 
     generateProductDocCsv() {
         const data = [
-            { Item: 'Item1', Type: 'Doc', Name: 'Name of document', DocDetailsUrl: 'loaction/path of  pdf document' },
-            { Item: 'Item1', Type: 'text', Name: 'name you want', DocDetailsUrl: 'your text content' },
-            { Item: 'Item1', Type: 'video', Name: 'name you want', DocDetailsUrl: 'video embeded html content' },
-            { Item: 'Item1', Type: 'image', Name: 'name of your image', DocDetailsUrl: 'loaction/path of image' },
+            { Item: 'Item1', Type: 'doc', Name: 'Name of document', DocDetailsUrl: 'loaction/path of  pdf document',Sequence : 1},
+            { Item: 'Item1', Type: 'text', Name: 'name you want', DocDetailsUrl: 'your text content',Sequence: 0},
+            { Item: 'Item1', Type: 'video', Name: 'name you want', DocDetailsUrl: 'video embeded html content',Sequence: 0},
+            { Item: 'Item1', Type: 'image', Name: 'name of your image', DocDetailsUrl: 'loaction/path of image',Sequence: 1},
         ];
         const filename = 'SampleProductDoc.csv';
         this.csvGeneratorService.generateCsv(data, filename);
     }
     generateManufacturerDocCsv() {
         const data = [
-            { Manufacturer: 'Manufacturer1', Type: 'Doc', Name: 'TDS/Litrature', DocDetailsUrl: 'loaction/path of  pdf document' },
-            { Manufacturer: 'Manufacturer2', Type: 'video', Name: 'name you want', DocDetailsUrl: 'video embeded html content' }
+            { Manufacturer: 'Manufacturer1', Type: 'doc', Name: 'TDS/Literature', DocDetailsUrl: 'loaction/path of  pdf document',Sequence : 1 },
+            { Manufacturer: 'Manufacturer2', Type: 'video', Name: 'name you want', DocDetailsUrl: 'video embeded html content',Sequence : 0 }
         ];
         const filename = 'SampleManufacturerDoc.csv';
         this.csvGeneratorService.generateCsv(data, filename);
@@ -70,7 +70,7 @@ export class productBulkUploadComponent implements OnInit {
                 const contents = fileReader.result as string;
                 const lines = contents.split('\n');
                 const firstLine = lines[0].trim();
-                const expectedHeader = 'Manufacturer,Type,Name,DocDetailsUrl';
+                const expectedHeader = 'Manufacturer,Type,Name,DocDetailsUrl,Sequence';
                 if (firstLine === expectedHeader) {
                     const fd = new FormData();
                     if (this.selectedManufDocumentFile != undefined && this.selectedManufDocumentFile != null) {
@@ -113,7 +113,7 @@ export class productBulkUploadComponent implements OnInit {
                 const contents = fileReader.result as string;
                 const lines = contents.split('\n');
                 const firstLine = lines[0].trim();
-                const expectedHeader = 'Item,Type,Name,DocDetailsUrl';
+                const expectedHeader = 'Item,Type,Name,DocDetailsUrl,Sequence';
                 if (firstLine === expectedHeader) {
                     const fd = new FormData();
                     if (this.selectedProductDocumentFile != undefined && this.selectedProductDocumentFile != null) {

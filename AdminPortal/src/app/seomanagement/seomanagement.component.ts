@@ -145,7 +145,7 @@ export class SeomanagementComponent {
         this.SeomanagementService.GetAllItNodeTreeMetaList(this.memRefNo).subscribe((data: any) => {
           this.allTreeNodeMetaList = data;
           if (this.allTreeNodeMetaList != undefined && this.allTreeNodeMetaList != null && this.allTreeNodeMetaList.length > 0) {
-            this.CreateAndDownloadCsvFile(this.allTreeNodeMetaList, 'ItTreeNodeMeta.csv');
+            this.CreateAndDownloadCsvFile(this.allTreeNodeMetaList, 'CategoryMeta.csv');
             this.spinner.hide();
           }
           else {
@@ -158,7 +158,7 @@ export class SeomanagementComponent {
         this.SeomanagementService.GetAllItemMetaList(this.memRefNo).subscribe((data: any) => {
           this.allItemMetaList = data;
           if (this.allItemMetaList != undefined && this.allItemMetaList != null && this.allItemMetaList.length > 0) {
-            this.CreateAndDownloadCsvFile(this.allItemMetaList, 'itemMeta.csv');
+            this.CreateAndDownloadCsvFile(this.allItemMetaList, 'ProductsMeta.csv');
             this.spinner.hide();
           }
           else {
@@ -171,7 +171,7 @@ export class SeomanagementComponent {
         this.SeomanagementService.GetAllProdLineMetaList(this.memRefNo).subscribe((data: any) => {
           this.allProdLineMetaList = data;
           if (this.allProdLineMetaList != undefined && this.allProdLineMetaList != null && this.allProdLineMetaList.length > 0) {
-            this.CreateAndDownloadCsvFile(this.allProdLineMetaList, 'prodLineMeta.csv');
+            this.CreateAndDownloadCsvFile(this.allProdLineMetaList, 'ProdLinesMeta.csv');
             this.spinner.hide();
           }
           else {
@@ -184,12 +184,12 @@ export class SeomanagementComponent {
         this.SeomanagementService.GetAllMajClsMetaList(this.memRefNo).subscribe((data: any) => {
           this.allMajclsMetaList = data;
           if (this.allMajclsMetaList != undefined && this.allMajclsMetaList != null && this.allMajclsMetaList.length > 0) {
-            this.CreateAndDownloadCsvFile(this.allMajclsMetaList, 'majclsMeta.csv');
-            this.spinner.hide();
+            this.CreateAndDownloadCsvFile(this.allMajclsMetaList, 'ProductlineParentMeta.csv');
           }
           else {
             this.toastr.info("There is nothing to export");
           }
+          this.spinner.hide();
         });
         break;
     }
@@ -325,7 +325,7 @@ export class SeomanagementComponent {
         const contents = fileReader.result as string;
         const lines = contents.split('\n');
         const firstLine = lines[0].trim();
-        const expectedHeader = 'Seq,TreeNode,Description,Meta,TitleTag,MetaDescription';
+        const expectedHeader = 'Seq,Name,Description,Meta,TitleTag,MetaDescription,Urls';
 
         if (firstLine === expectedHeader) {
           const fd = new FormData();
@@ -450,7 +450,7 @@ export class SeomanagementComponent {
         const contents = fileReader.result as string;
         const lines = contents.split('\n');
         const firstLine = lines[0].trim();
-        const expectedHeader = 'Seq,Item,Description,Meta,TitleTag,MetaDescription';
+        const expectedHeader = 'Seq,Item,Description,Meta,TitleTag,MetaDescription,Urls';
 
         if (firstLine === expectedHeader) {
           const fd = new FormData();
@@ -570,7 +570,7 @@ export class SeomanagementComponent {
         const contents = fileReader.result as string;
         const lines = contents.split('\n');
         const firstLine = lines[0].trim();
-        const expectedHeader = 'Seq,ProductLine,Description,Meta,TitleTag,MetaDescription';
+        const expectedHeader = 'Seq,Name,Description,Meta,TitleTag,MetaDescription,Urls';
 
         if (firstLine === expectedHeader) {
           const fd = new FormData();
@@ -681,7 +681,7 @@ export class SeomanagementComponent {
         const contents = fileReader.result as string;
         const lines = contents.split('\n');
         const firstLine = lines[0].trim();
-        const expectedHeader = 'Seq,ItMajClass,Description,Meta,TitleTag,MetaDescription';
+        const expectedHeader = 'Seq,Name,Description,Meta,TitleTag,MetaDescription,Urls';
 
         if (firstLine === expectedHeader) {
           const fd = new FormData();

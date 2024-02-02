@@ -66,7 +66,9 @@ import { DeleteManufItemDocdialog } from './manufacturerlist/manufacturerlist.co
 import { UsercartreportComponent } from './usercartreport/usercartreport.component';
 import { SeomanagementComponent } from './seomanagement/seomanagement.component';
 import { AddmetaComponent } from './seomanagement/addmeta.component';
-
+import { SubuserlistComponent } from './subuser/subuserlist/subuserlist.component';
+import { SubuserService } from './services/subuser.service';
+import { PickListModule } from 'primeng/picklist';
 @NgModule({
   declarations: [
     AppComponent,
@@ -106,7 +108,8 @@ import { AddmetaComponent } from './seomanagement/addmeta.component';
     DeleteManufItemDocdialog,
     UsercartreportComponent,
     SeomanagementComponent,
-    AddmetaComponent
+    AddmetaComponent,
+    SubuserlistComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA] ,
   imports: [
@@ -133,9 +136,10 @@ import { AddmetaComponent } from './seomanagement/addmeta.component';
     FlexLayoutModule,
     NgxSpinnerModule,
     FroalaEditorModule.forRoot(), 
-    FroalaViewModule.forRoot()
+    FroalaViewModule.forRoot(),
+    PickListModule
   ],
-  providers: [SeomanagementService,DatePipe,UserService, AuthGuard, MenuService, MailConfigService, LoadingService, CompanyProfileService, UserprocesstimeService,CsvGeneratorService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [SubuserService,SeomanagementService,DatePipe,UserService, AuthGuard, MenuService, MailConfigService, LoadingService, CompanyProfileService, UserprocesstimeService,CsvGeneratorService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
   // entryComponents: [
   //   DialogOverviewExampleDialog,

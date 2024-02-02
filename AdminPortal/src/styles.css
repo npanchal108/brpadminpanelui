@@ -1,4 +1,6 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import "../node_modules/primeicons/primeicons.css";
+@import "../node_modules/primeng//resources/primeng.min.css";
 
 .mat-mdc-button .mdc-button__label {
     border: 1px solid;
@@ -47,11 +49,11 @@ body {
     background: #008B99;
 }
 
-  
+
 
 .mat-mdc-button .mdc-button__label {
     position: fixed !important;
-    top: 100px;
+    top: 130px;
 }
 
 .fullheight-container {
@@ -197,6 +199,9 @@ body {
     color: #1B212D;
     font-weight: 400;
     letter-spacing: 0.8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .record-count-section select,
@@ -205,6 +210,11 @@ body {
     padding: 5px;
     border: 1px solid #c3c3c3;
     border-radius: 5px;
+    height: 46px;
+}
+
+.table>thead {
+    vertical-align: middle !important;
 }
 
 .ngx-pagination {
@@ -254,9 +264,9 @@ body {
     transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
 }
 
-[class*="col-md"] {
+/* [class*="col-md"] {
     padding: 10px;
-}
+} */
 
 .custom-checkbox {
     transform: scale(1.5);
@@ -330,7 +340,7 @@ body {
 .mat-mdc-tab-body.mat-mdc-tab-body-active {
     border: 1px solid #cdcdcdff;
     padding: 10px 10px;
-    margin: 0 0 20px 0;
+    margin: 28px 14px 28px 14px;
 }
 
 .mat-mdc-dialog-container .mdc-dialog__surface {
@@ -384,7 +394,7 @@ body {
     background: #0d45a5;
 }
 
-.full-width-button-container{
+.full-width-button-container {
     display: flex;
     width: 100%;
     justify-content: center;
@@ -406,27 +416,29 @@ label.badge {
     text-transform: uppercase;
     cursor: pointer;
 }
-label.badge.active{
+
+label.badge.active {
     background: #008B99;
     color: #FFF;
-} 
+}
 
 .actions-section.hidden {
     height: 0px;
     overflow: hidden;
     -webkit-transition: height 0.3s linear;
-       -moz-transition: height 0.3s linear;
-        -ms-transition: height 0.3s linear;
-         -o-transition: height 0.3s linear;
-            transition: height 0.3s linear;
+    -moz-transition: height 0.3s linear;
+    -ms-transition: height 0.3s linear;
+    -o-transition: height 0.3s linear;
+    transition: height 0.3s linear;
 }
+
 .actions-section.hidden.open {
     height: 50px;
     -webkit-transition: height 0.3s linear;
-       -moz-transition: height 0.3s linear;
-        -ms-transition: height 0.3s linear;
-         -o-transition: height 0.3s linear;
-            transition: height 0.3s linear;
+    -moz-transition: height 0.3s linear;
+    -ms-transition: height 0.3s linear;
+    -o-transition: height 0.3s linear;
+    transition: height 0.3s linear;
 }
 
 .actions-section button {
@@ -438,13 +450,88 @@ label.badge.active{
     cursor: pointer;
     letter-spacing: 0.5px;
 }
+
 .actions-section button.btn-success {
     background: #27AE60;
     color: #fff;
     border: 1px solid #27AE60;
 }
+
 .actions-section button.btn-fail {
     background: #D74F4F;
     color: #fff;
     border: 1px solid #D74F4F;
+}
+
+.mat-mdc-tab-body-content {
+    overflow: hidden !important;
+}
+.p-picklist .p-picklist-header {
+    background: #f9fafb;
+    color: #374151;
+    border: 1px solid #e5e7eb;
+    padding: 1.25rem;
+    border-bottom: 0 none;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+}
+.p-picklist .p-picklist-list {
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: #4b5563;
+    padding: 15px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    outline: 0 none;
+}
+.p-picklist .p-picklist-list .p-picklist-item.p-highlight {
+    color: #4338CA;
+    background: #EEF2FF;
+}
+.p-picklist .p-picklist-list:not(.cdk-drop-list-dragging) .p-picklist-item:not(.p-highlight):hover {
+    background: #f3f4f6;
+    color: #4b5563;
+}   
+.p-picklist .p-picklist-list .p-picklist-item {
+    padding: 0.75rem 1.25rem;
+    margin: 0;
+    border: 0 none;
+    color: #4b5563;
+    background: transparent;
+    transition: box-shadow 0.2s;
+}
+.p-picklist-item:not(.cdk-drag-disabled) {
+    cursor: move;
+}
+
+.p-picklist .p-picklist-buttons {
+    padding: 1.25rem;
+}
+.p-picklist .p-picklist-buttons .p-button {
+    margin-bottom: 0.5rem;
+}
+.p-picklist-buttons .p-button, .p-orderlist-controls .p-button {
+    transition: opacity 0.2s, background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.p-button.p-button-icon-only {
+    width: 3rem;
+    padding: 0.75rem 0;
+}
+.p-button:not(:disabled):hover {
+    background: #4F46E5;
+    color: #ffffff;
+    border-color: #4F46E5;
+}
+
+
+@media only screen and (min-width: 992px) {
+    .mat-mdc-button .mdc-button__label{
+        top:110px;
+    }
+}
+
+@media only screen and (max-width: 1020px) {
+    .col-12.col-sm-12.col-md-12.col-lg-6.grid-w-100 {
+        width: 100%;
+    }
 }

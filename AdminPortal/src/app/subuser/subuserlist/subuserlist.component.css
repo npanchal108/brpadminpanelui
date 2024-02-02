@@ -1,0 +1,46 @@
+.refresh-btn {
+    border: none;
+    background: none;
+}
+
+.refresh-icon-clr {
+    color: #008B99;
+}
+
+.truncate-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 575px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.picklist-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.picklist-buttons {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+}
+.p-picklist-buttons {
+    padding: 1.25rem;
+}
+p-picklist-buttons .p-button {
+    margin-bottom: 0.5rem;
+}
+::ng-deep .p-picklist-source-controls {
+    display: none !important;
+}
+::ng-deep .p-picklist-target-controls {
+    display: none !important;
+}
+.error{
+    color: red;
+}
