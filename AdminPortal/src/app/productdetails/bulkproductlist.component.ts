@@ -16,20 +16,38 @@ export class productBulkUploadComponent implements OnInit {
     @ViewChild('filePriceListInput') filePriceListInput: any;
     @ViewChild('fileDocListInput') fileDocListInput: any;
     @ViewChild('fileManuDocListInput') fileManuDocListInput: any;
-
+    @ViewChild('uploadExternalDocInput') uploadExternalDocInput: any;
+    
     memRefNo: string;
     selectedProductPriceFile: File | undefined;
     selectedProductDocumentFile: File | undefined;
     selectedManufDocumentFile: File | undefined;
     selectedUploadFolder: File | undefined;
+    selectedExternalDocUploadFile: File | undefined;
     SelectedFile: File | undefined;
+
     fileDetails = [];
+
+    csvFiles: string[];
     constructor(private spinner: NgxSpinnerService, private userprocesstimeService: UserprocesstimeService, private csvGeneratorService: CsvGeneratorService, private route: ActivatedRoute, private toastr: ToastrService, private MailConfigService: MailConfigService) { }
 
     ngOnInit() {
         this.memRefNo = this.route.snapshot.paramMap.get('memRefNo');
+        this.GetExternalItemDocFiles();
     }
-
+    GetExternalItemDocFiles(){
+        this.MailConfigService.GetExternalItemDocFiles(this.memRefNo).subscribe((data: any) => {
+            if (data) {
+               console.log('data',data);
+               this.csvFiles = data;
+               console.log('this.csvFiles',this.csvFiles);
+            }
+            else {
+                this.toastr.error("Error occured please try again");
+            }
+        });
+    }
+    
     generateProductPriceCsv() {
         const data = [
             { Item: 'Item1', Price: 28 },
@@ -143,12 +161,70 @@ export class productBulkUploadComponent implements OnInit {
             this.spinner.hide();
         }
     }
+    handleUploadExternalDocInput(event: any){
+        const files: FileList = event.target.files;
+        if (files.length > 0) {
+            const selectedFile: File = files[0];
+            if (!selectedFile.name.endsWith('.csv')) {
+                this.toastr.error('Please Select csv File');
+                event.target.value = '';
+                return;
+            }
+            this.selectedExternalDocUploadFile = event.target.files[0];
+        }
+    }
+    OnUploadExternalDoc(){
+        this.spinner.show();
+        if ((this.selectedExternalDocUploadFile == undefined || this.selectedExternalDocUploadFile == null)) {
+            this.toastr.error('Please Select The CSV File');
+            this.spinner.hide();
+            return;
+        }
+        else {
+            const fileReader = new FileReader();
+            fileReader.onload = (e) => {
+                const contents = fileReader.result as string;
+                const lines = contents.split('\n');
+                const firstLine = lines[0].trim();
+                const expectedHeader = 'Item,Type,Name,DocDetailsUrl';
+                console.log('firstLine',firstLine);
+                console.log('expectedHeader',expectedHeader);
+                if (firstLine === expectedHeader) {
+                    const fd = new FormData();
+                    if (this.selectedExternalDocUploadFile != undefined && this.selectedExternalDocUploadFile != null) {
+                        fd.append('FileName', this.selectedExternalDocUploadFile.name);
+                        fd.append('csv', this.selectedExternalDocUploadFile, this.selectedExternalDocUploadFile.name);
+                    }
+                    fd.append('memRefNo', this.memRefNo);
+                    fd.append('IMType', 'False');
+                    this.MailConfigService.UpdateExternalItemDocument(fd).subscribe((data: any) => {
+                        if (data == true || data == "true") {
+                            this.toastr.success("Sucessfully Updated");
+                        }
+                        else {
+                            this.toastr.error("Error occured please try again");
+                        }
+                        this.selectedExternalDocUploadFile = undefined;
+                        this.uploadExternalDocInput.nativeElement.value = '';
+                    });
+                } else {
+                    this.toastr.error('Invalid column names in the CSV file.');
+                    this.selectedExternalDocUploadFile = undefined;
+                    this.uploadExternalDocInput.nativeElement.value = '';
+                    return;
+                }
+            };
+            fileReader.readAsText(this.selectedExternalDocUploadFile);
+            this.spinner.hide();
+            this.GetExternalItemDocFiles();
+        }
+    }
     handleUploadFolderInput(event: any) {
         const files: FileList = event.target.files;
         if (files.length > 0) {
             const selectedFile: File = files[0];
             if (!selectedFile.name.endsWith('.zip')) {
-                this.toastr.error('Please Select The zip File');
+                this.toastr.error('Please Select zip File');
                 event.target.value = '';
                 return;
             }

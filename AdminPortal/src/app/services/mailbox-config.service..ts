@@ -105,6 +105,10 @@ export class MailConfigService {
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
     return this.http.get(this.common.RootUrl + '/CompanyProfile/GetDocumentTypeConfigValue?memRefNo=' + memRefNo, { headers: reqHeader });
   }
+  GetExternalItemDocFiles(memRefNo: string,) {
+    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
+    return this.http.get(this.common.RootUrl + '/CompanyProfile/GetExternalItemDocFiles?memRefNo=' + memRefNo, { headers: reqHeader });
+  }
   UpdateItemPrice(memRefNo: string, item: string, price: number, ItemIsActive : boolean) {
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
     return this.http.get(this.common.RootUrl + '/CompanyProfile/UpdateItemPrice?memRefNo=' + memRefNo + '&item=' + item + '&price=' + price + '&isItemActive=' + ItemIsActive , { headers: reqHeader });
@@ -119,6 +123,9 @@ export class MailConfigService {
   UpdateItemDocumentList(itemsDocumentListModel) {
      return this.http.post(this.common.RootUrl + '/CompanyProfile/UpdateItemDocumentList',itemsDocumentListModel);
    }
+   UpdateExternalItemDocument(itemsDocumentListModel) {
+    return this.http.post(this.common.RootUrl + '/CompanyProfile/UpdateExternalItemDocumentList',itemsDocumentListModel);
+  }
   Updatedynamicpage(pagemodels) {
     //var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'AuthenticationToken': localStorage.getItem('AuthenticationToken'), 'MemberReferenceNo': localStorage.getItem('MemberReferenceNo') });
     //return this.http.post(this.common.RootUrl + '/CompanyProfile/Updatedynamicpage',pagemodels, { headers: reqHeader });

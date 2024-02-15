@@ -41,7 +41,7 @@
                                                             Update the file with valid data.
                                                         </li>
                                                         <li>
-                                                            Drag and drop the valid csv/xlsx file Or browse file manually
+                                                            Drag and drop the valid csv file Or browse file manually
                                                             using "Choose File" button.
                                                         </li>
                                                         <li>
@@ -88,7 +88,7 @@
                                                             Update the file with valid data.
                                                         </li>
                                                         <li>
-                                                            Drag and drop the valid csv/xlsx file Or Or browse file manually
+                                                            Drag and drop the valid csv file Or Or browse file manually
                                                             using "Choose File" button.
                                                         </li>
                                                         <li>
@@ -132,7 +132,7 @@
                                                             Update the file with valid data.
                                                         </li>
                                                         <li>
-                                                            Drag and drop the valid csv/xlsx file Or Or browse file manually
+                                                            Drag and drop the valid csv file Or Or browse file manually
                                                             using "Choose File" button.
                                                         </li>
                                                         <li>
@@ -212,6 +212,65 @@
                                                 <tr *ngFor="let fd of fileDetails">
                                                     <td data-title="FileName">{{fd.fileName}}</td>
                                                     <td data-title="URL">{{fd.filePath}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </mat-tab>
+                            <mat-tab class="tab-border" label="Upload External Item Doc">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="custom-file-upload-section">
+                                            <label for="uploadfolder" class="drop-container" id="dropcontainer">
+                                                <span class="drop-title">Drag & Drop upload or browse to choose a
+                                                    file</span>
+                                                Supported formats: CSV
+                                                <input type="file" #uploadExternalDocInput class="bulk-file-input"
+                                                    (change)="handleUploadExternalDocInput($event)">
+                                            </label>
+                                            <div class="full-width-button-container">
+                                                <button style="width: auto;margin-top: 20px;float: none;"
+                                                    class="custom-btn" (click)="OnUploadExternalDoc()">Upload External Item Doc</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 grid-w-100">
+                                        <div class="form-group form-black label-floating">
+                                            <span style="display: inline-block;">
+                                                <span style="font-weight: bold;">Steps</span>
+                                                <ol style="list-style-type: none; padding: 0; margin: 0;">
+                                                    <ul>
+                                                        <li>
+                                                            Drag and drop the valid csv file Or browse file manually
+                                                            using "Choose File" button.
+                                                        </li>
+                                                        <li>
+                                                            Click on "Upload External Item Doc" Button.
+                                                        </li>
+                                                        <li>
+                                                           you will get the status of your uploaded files in below table.
+                                                        </li>
+                                                    </ul>
+                                                </ol>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div *ngIf="csvFiles != null && csvFiles != undefined">
+                                        <table class="table">
+                                            <thead class="text-info">
+                                                <tr>
+                                                    <th>File Name</th>
+                                                    <th>URL</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let filename of csvFiles">
+                                                    <td data-title="FileName">{{filename}}</td>
+                                                    <td data-title="URL"><a href="https://admin.brpdevelopment.com/adminapi/Content/krayden/ExternalItemDocFiles/{{ filename }}" target="_blank">{{ filename }}</a></td>
+                                                    <!-- <td data-title="URL">https://admin.brpdevelopment.com/adminapi/Content/Krayden/ExternalItemDocFiles/{{filename}}</td> -->
                                                 </tr>
                                             </tbody>
                                         </table>
