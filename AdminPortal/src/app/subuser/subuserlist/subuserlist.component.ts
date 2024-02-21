@@ -36,7 +36,6 @@ export class SubuserlistComponent {
     'Mail Settings',
     'Data Sync Settings',
     'Logo Settings',
-    'Website Settings',
     'E-Mail Template',
     'Page Management',
     'Manufracturer',

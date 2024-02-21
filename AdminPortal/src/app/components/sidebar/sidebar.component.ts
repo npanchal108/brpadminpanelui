@@ -38,7 +38,7 @@ export class SidebarComponent implements OnInit {
     this.userType = localStorage.getItem('UserType');
     this.userroles = localStorage.getItem('Role');
     this.memRefNo = localStorage.getItem('memRefNo');
-    this.currentUserAccesses = JSON.parse(localStorage.getItem('TabAccess'))
+    this.currentUserAccesses = JSON.parse(localStorage.getItem('TabAccess'));
   }
 
   ngAfterContentChecked(): void {
@@ -73,6 +73,9 @@ export class SidebarComponent implements OnInit {
   }
 
   canShowThisMenu(key: string): boolean {
+    if(key == "Website Settings" && this.currentUserRole != 'Admin'){
+      return false;
+    }
     if(this.currentUserRole != 'Subuser') return true;
     const lowerCaseArray = this.currentUserAccesses.map(item => item.toLowerCase());
     const lowerCaseValue = key.toLowerCase();

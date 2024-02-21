@@ -68,7 +68,9 @@ export class UserAddComponent implements OnInit {
       if (data.Status == "Success") {
         //form.resetForm();
         this.toastr.success(data.Message);
-        this.router.navigate(['/userlist', this.userType]);
+        if (this.userroles == 'Admin'){
+          this.router.navigate(['/userlist', this.userType]);
+        }
       }
       else {
         this.toastr.error(data.Message);
