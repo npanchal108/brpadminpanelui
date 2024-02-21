@@ -1,12 +1,20 @@
 <div class="main-content">
-    <div class="container-fluid">
+    <div class="container-fluid admin-table manufcature">
         <div class="row">
             <div class="custom-container">
                 <div class="custom-inner-container">
-                    <h5> Manufracturer List
-                        <small>Manage your Manufracturer Items</small>
-                        <button class="header-button" (click)="OnAddManufracturerItemDoc(memRefNo,0,'','','','')">Add New</button>
-                    </h5>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h5> Manufracturer List
+                                <small>Manage your Manufracturer Items</small>                                
+                            </h5>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="header-button" (click)="OnAddManufracturerItemDoc(memRefNo,0,'','','','')">Add New</button>
+                        </div>
+                    </div>
+                    
+                    
                     <div class="record-count-section" style="justify-content: start; gap: 10%; align-items: center;">
                         <label>
                             Search:
@@ -15,7 +23,7 @@
                         </label>
                     </div>
                     <div *ngIf="filteredmanufracturelistlist != null && filteredmanufracturelistlist != undefined">
-                        <table class="table table-striped table-bordered custom-table">
+                        <table class="table table-bordered table-hover" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>Manufraturer</th>

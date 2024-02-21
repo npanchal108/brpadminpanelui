@@ -1,12 +1,18 @@
 <div class="main-content">
-    <div class="container-fluid">
+    <div class="container-fluid admin-table bannersetting">
         <div class="row">
             <div class="custom-container">
                 <div class="custom-inner-container">
-                    <h5> Home Page Banners List
-                        <small>Manage your Home Page Banners</small>
-                        <button *ngIf="showtype==1" class="header-button" (click)="OnAddheaderlink()">Add New</button>
-                    </h5>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h5> Home Page Banners List
+                                <small>Manage your Home Page Banners</small>                            
+                            </h5>        
+                        </div>
+                        <div class="col-md-8">
+                            <button *ngIf="showtype==1" class="header-button" (click)="OnAddheaderlink()">Add New</button>
+                        </div>
+                    </div>
                     <div *ngIf="showtype==1" class="record-count-section">
                         <label>
                             Search:
@@ -15,7 +21,7 @@
                     </div>
                     <div class="col-md-12">
                         <div *ngIf="Bannerlist!=null && Bannerlist!=undefined && showtype==1">
-                            <table class="table">
+                            <table class="table table-bordered table-hover" cellspacing="0" width="100%">
                                 <thead class="text-info">
                                     <tr>
                                         <th>Title</th>
@@ -30,7 +36,7 @@
                                         <td data-title="Title">{{headlink.Title}}</td>
                                         <td data-title="Description">{{headlink.Description}}</td>
                                         <td data-title="Image"> <img src="{{headlink.ImageUrl}}"
-                                                style="height: 100px;width: 200px;"> </td>
+                                                style="height: 100%;width: 100%;"> </td>
                                         <td data-title="IsActive">{{headlink.IsActive}}</td>
                                         <td class="font-20" align="center">
                                             <button (click)="getBannerDetails(headlink.BannerId)"

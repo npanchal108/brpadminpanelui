@@ -1,5 +1,5 @@
 <div class="main-content">
-    <div class="container-fluid">
+    <div class="container-fluid admin-table activitylogs">
         <div class="row">
             <div class="custom-container">
                 <div class="custom-inner-container">
@@ -54,30 +54,33 @@
 
                                 <div class="row">
                                     <div class="col-sm-12 col-md-12 text-center">
-                                        <button (click)="clearactivitylog()" class="custom-white-btn">Clear</button>
-                                        <button (click)="exporttoxlsx()" class="custom-btn">Export</button>
-                                        <button (click)="searchactivitylog()" class="custom-btn">Search</button>
+                                        <div class="align-flex">
+                                            <button (click)="clearactivitylog()" class="custom-white-btn mb-3">Clear</button>
+                                            <button (click)="exporttoxlsx()" class="custom-btn mb-3">Export</button>
+                                            <button (click)="searchactivitylog()" class="custom-btn mb-3">Search</button>
+                                        </div>
                                     </div>
                                 </div>
 
                             </div>
                             <div class="row table-mobile custome-table">
-                                <table class="table table-striped table-bordered custom-table" width=100%;>
+                                <table class="table table-bordered table-hover" cellspacing="0" width=100%;>
                                     <thead class="text-info">
                                         <tr>
-                                            <th  style="cursor: pointer;" (click)="toggleSort('LogType')">Logtype
+                                            <th style="cursor: pointer;" (click)="toggleSort('LogType')">Logtype
                                                 <span [ngClass]="{ 'disabled-icon': sortedColumn != 'LogType' }">
                                                     <i
                                                         [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
                                                 </span>
                                             </th>
-                                            <th style="cursor: pointer;" (click)="toggleSort('Description')">Description 
+                                            <th style="cursor: pointer;" (click)="toggleSort('Description')">Description
                                                 <span [ngClass]="{ 'disabled-icon': sortedColumn != 'Description' }">
                                                     <i
                                                         [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
                                                 </span>
                                             </th>
-                                            <th style="cursor: pointer;" (click)="toggleSort('SearchKeyword')">Search Keyword
+                                            <th style="cursor: pointer;" (click)="toggleSort('SearchKeyword')">Search
+                                                Keyword
                                                 <span [ngClass]="{ 'disabled-icon': sortedColumn != 'SearchKeyword' }">
                                                     <i
                                                         [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>

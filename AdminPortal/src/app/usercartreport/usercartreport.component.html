@@ -1,5 +1,5 @@
 <div class="main-content">
-    <div class="container-fluid">
+    <div class="container-fluid admin-table usercartreport">
         <div class="row">
             <div class="custom-container">
                 <div class="custom-inner-container">
@@ -12,20 +12,18 @@
                                 <div class="col-md-3">
                                     <label class="control-label">User</label>
                                     <input type="text" name="SearchUser" #SearchKeyword="ngModel"
-                                        [(ngModel)]="cartItemParam.SearchUser" class="validate" 
-                                        class="form-control">
+                                        [(ngModel)]="cartItemParam.SearchUser" class="validate" class="form-control">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="control-label">Customer</label>
                                     <input type="text" name="SearchCustomer" #SearchKeyword="ngModel"
-                                        [(ngModel)]="cartItemParam.SearchCustomer" class="validate" 
+                                        [(ngModel)]="cartItemParam.SearchCustomer" class="validate"
                                         class="form-control">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="control-label">Item</label>
                                     <input type="text" name="SearchItem" #SearchKeyword="ngModel"
-                                        [(ngModel)]="cartItemParam.SearchItem" class="validate" 
-                                        class="form-control">
+                                        [(ngModel)]="cartItemParam.SearchItem" class="validate" class="form-control">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="control-label">From Date</label>
@@ -35,14 +33,17 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label class="control-label">To Date</label>
-                                    <input type="date" name="ToDate" #ToDate="ngModel" [(ngModel)]="cartItemParam.ToDate"
-                                        class="validate" required class="form-control">
+                                    <input type="date" name="ToDate" #ToDate="ngModel"
+                                        [(ngModel)]="cartItemParam.ToDate" class="validate" required
+                                        class="form-control">
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12 col-md-12 text-center">
-                                        <button (click)="clearSearch()" class="custom-white-btn">Clear</button>
-                                        <button (click)="ExportToExcell()" class="custom-btn">Export</button>
-                                        <button (click)="ApplyFilter()" class="custom-btn">Search</button>
+                                        <div class="align-flex">
+                                            <button (click)="clearSearch()" class="custom-white-btn mb-3">Clear</button>
+                                            <button (click)="ExportToExcell()" class="custom-btn mb-3">Export</button>
+                                            <button (click)="ApplyFilter()" class="custom-btn mb-3">Search</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +65,8 @@
                                                         [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
                                                 </span>
                                             </th>
-                                            <th style="cursor: pointer;width: 150px;" (click)="toggleSort('FirstName')">FirstName
+                                            <th style="cursor: pointer;width: 150px;" (click)="toggleSort('FirstName')">
+                                                FirstName
                                                 <span [ngClass]="{ 'disabled-icon': sortedColumn != 'FirstName' }">
                                                     <i
                                                         [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>

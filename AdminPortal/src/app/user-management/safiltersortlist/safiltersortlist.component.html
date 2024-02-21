@@ -1,12 +1,20 @@
 <div class="main-content">
-    <div class="container-fluid">
+    <div class="container-fluid admin-table salesfilter">
         <div class="row">
             <div class="custom-container">
                 <div class="custom-inner-container">
-                    <h5>Sorting List
-                        <small>Manage your Sorting List</small>
-                        <button class="header-button" (click)="onEditconf(0)">Add New</button>
-                    </h5>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h5>Sorting List
+                                <small>Manage your Sorting List</small>
+        
+                            </h5>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="header-button" (click)="onEditconf(0)">Add New</button>
+                        </div>
+                    </div>
+
                     <!-- <div class="record-count-section">
                         <label>
                             Search: 
@@ -17,7 +25,7 @@
                         <div class="card">
                             <div *ngIf="configlist!=null && configlist!=undefined"
                                 class="card-content table-responsive table-mobile">
-                                <table class="table" width=100%;>
+                                <table class="table table-bordered table-hover" cellspacing="0" width=100%;>
                                     <thead class="text-info">
                                         <tr>
                                             <th>Name</th>

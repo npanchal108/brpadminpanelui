@@ -14,8 +14,8 @@
                     <div class="form-group form-black label-floating is-focused"
                       [ngClass]="{'is-empty': user.FirstName=='','is-focused' : user.FirstName!=''}">
                       <label class="control-label">First Name</label>
-                      <input type="text" name="FirstName" [(ngModel)]="user.FirstName"
-                        class="validate" [disabled]=isdesable class="form-control" required>
+                      <input type="text" name="FirstName" [(ngModel)]="user.FirstName" class="validate"
+                        [disabled]=isdesable class="form-control" required>
                       <input type="text" name="UserID" [(ngModel)]="user.UserID" style="display:none">
                     </div>
                   </div>
@@ -23,16 +23,16 @@
                     <div class="form-group form-black label-floating"
                       [ngClass]="{'is-empty': user.LastName=='','is-focused' : user.LastName!=''}">
                       <label class="control-label">Last Name</label>
-                      <input type="text" name="LastName"  [(ngModel)]="user.LastName"
-                        [disabled]=isdesable class="form-control">
+                      <input type="text" name="LastName" [(ngModel)]="user.LastName" [disabled]=isdesable
+                        class="form-control">
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group form-black label-floating"
                       [ngClass]="{'is-empty': user.Mobile=='','is-focused' : user.Mobile!=''}">
                       <label class="control-label">Mobile</label>
-                      <input class="validate" type="text" name="Mobile" [disabled]=isdesable
-                        [(ngModel)]="user.Mobile" required class="form-control">
+                      <input class="validate" type="text" name="Mobile" [disabled]=isdesable [(ngModel)]="user.Mobile"
+                        required class="form-control">
                     </div>
                   </div>
                 </div>
@@ -41,26 +41,26 @@
                     <div class="form-group form-black label-floating"
                       [ngClass]="{'is-empty': user.Password=='','is-focused' : user.Password!=''}">
                       <label class="control-label">Password</label>
-                      <input type="password" name="Password"  [(ngModel)]="user.Password"
-                        [disabled]=isdesable required minlength="3" class="validate" class="form-control">
+                      <input type="password" name="Password" [(ngModel)]="user.Password" [disabled]=isdesable required
+                        minlength="3" class="validate" class="form-control">
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group form-black label-floating"
                       [ngClass]="{'is-empty': user.Email=='','is-focused' : user.Email!=''}">
                       <label class="control-label">Email</label>
-                      <input type="text" name="Email" [(ngModel)]="user.Email" [disabled]=isdesable
-                        class="validate" class="form-control" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                      <input type="text" name="Email" [(ngModel)]="user.Email" [disabled]=isdesable class="validate"
+                        class="form-control" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group form-black label-floating"
                       [ngClass]="{'is-empty': user.MemberRefNo=='','is-focused' :user.MemberRefNo!=''}">
                       <label class="control-label">{{userType == 'Admin' ? 'User ID' : 'Customer ID'}}</label>
-                      <input type="text" name="MemberRefNo"  [(ngModel)]="user.MemberRefNo"
-                        *ngIf="id == 0" class="validate" required class="form-control">
-                      <input type="text" name="MemberRefNo"  [(ngModel)]="user.MemberRefNo"
-                        [disabled]="true" *ngIf="id > 0" class="validate" required class="form-control">
+                      <input type="text" name="MemberRefNo" [(ngModel)]="user.MemberRefNo" *ngIf="id == 0"
+                        class="validate" required class="form-control">
+                      <input type="text" name="MemberRefNo" [(ngModel)]="user.MemberRefNo" [disabled]="true"
+                        *ngIf="id > 0" class="validate" required class="form-control">
                     </div>
                   </div>
                 </div>
@@ -86,20 +86,20 @@
                     <div class="form-group form-black label-floating"
                       [ngClass]="{'is-empty': user.HostName=='','is-focused' : user.HostName!=''}">
                       <label class="control-label">Host Name</label>
-                      <input type="text" name="HostName"  [(ngModel)]="user.HostName"
-                        [disabled]=isdesable *ngIf="id == 0" class="validate" required class="form-control">
-                      <input type="text" name="HostName" [(ngModel)]="user.HostName" [disabled]=true
-                        class="validate" *ngIf="id > 0" required class="form-control">
+                      <input type="text" name="HostName" [(ngModel)]="user.HostName" [disabled]=isdesable
+                        *ngIf="id == 0" class="validate" required class="form-control">
+                      <input type="text" name="HostName" [(ngModel)]="user.HostName" [disabled]=true class="validate"
+                        *ngIf="id > 0" required class="form-control">
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group form-black label-floating"
                       [ngClass]="{'is-empty': user.CompanyID=='','is-focused' :user.CompanyID!=''}">
                       <label class="control-label">CompanyID</label>
-                      <input type="text" name="CompanyID" [(ngModel)]="user.CompanyID"
-                        class="validate" *ngIf="id == 0" [disabled]=isdesable required class="form-control">
-                      <input type="text" name="CompanyID" [(ngModel)]="user.CompanyID"
-                        [disabled]="true" *ngIf="id > 0" class="validate" required class="form-control">
+                      <input type="text" name="CompanyID" [(ngModel)]="user.CompanyID" class="validate" *ngIf="id == 0"
+                        [disabled]=isdesable required class="form-control">
+                      <input type="text" name="CompanyID" [(ngModel)]="user.CompanyID" [disabled]="true" *ngIf="id > 0"
+                        class="validate" required class="form-control">
                     </div>
                   </div>
                 </div>
@@ -108,30 +108,30 @@
                     <div class="form-group form-black label-floating"
                       [ngClass]="{'is-empty': user.ApiEndPoint=='','is-focused' :user.ApiEndPoint!=''}">
                       <label class="control-label">API End Point</label>
-                      <input type="text" name="ApiEndPoint" [(ngModel)]="user.ApiEndPoint"
-                        class="validate" *ngIf="id == 0" [disabled]=isdesable required class="form-control">
-                      <input type="text" name="ApiEndPoint" [(ngModel)]="user.ApiEndPoint"
-                        [disabled]="true" *ngIf="id > 0" class="validate" required class="form-control">
+                      <input type="text" name="ApiEndPoint" [(ngModel)]="user.ApiEndPoint" class="validate"
+                        *ngIf="id == 0" [disabled]=isdesable required class="form-control">
+                      <input type="text" name="ApiEndPoint" [(ngModel)]="user.ApiEndPoint" [disabled]="true"
+                        *ngIf="id > 0" class="validate" required class="form-control">
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group form-black label-floating"
                       [ngClass]="{'is-empty': user.ApiUserName=='','is-focused' :user.ApiUserName!=''}">
                       <label class="control-label">API User Name</label>
-                      <input type="text" name="ApiUserName" [(ngModel)]="user.ApiUserName"
-                        [disabled]=isdesable *ngIf="id == 0" class="validate" required class="form-control">
-                      <input type="text" name="ApiUserName" [(ngModel)]="user.ApiUserName"
-                        [disabled]="true" *ngIf="id > 0" class="validate" required class="form-control">
+                      <input type="text" name="ApiUserName" [(ngModel)]="user.ApiUserName" [disabled]=isdesable
+                        *ngIf="id == 0" class="validate" required class="form-control">
+                      <input type="text" name="ApiUserName" [(ngModel)]="user.ApiUserName" [disabled]="true"
+                        *ngIf="id > 0" class="validate" required class="form-control">
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group form-black label-floating"
                       [ngClass]="{'is-empty': user.ApiPassword=='','is-focused' : user.ApiPassword!=''}">
                       <label class="control-label">API Password</label>
-                      <input type="password" name="ApiPassword"  [(ngModel)]="user.ApiPassword"
-                        [disabled]=isdesable *ngIf="id == 0" class="validate" required class="form-control">
-                      <input type="password" name="ApiPassword" [(ngModel)]="user.ApiPassword"
-                        [disabled]="true" *ngIf="id > 0" class="validate" required class="form-control">
+                      <input type="password" name="ApiPassword" [(ngModel)]="user.ApiPassword" [disabled]=isdesable
+                        *ngIf="id == 0" class="validate" required class="form-control">
+                      <input type="password" name="ApiPassword" [(ngModel)]="user.ApiPassword" [disabled]="true"
+                        *ngIf="id > 0" class="validate" required class="form-control">
                     </div>
                   </div>
                 </div>
@@ -140,24 +140,26 @@
                     <div class="form-group form-black label-floating"
                       [ngClass]="{'is-empty': user.NotificationEmails=='','is-focused' : user.NotificationEmails!=''}">
                       <label class="control-label">Notification Emails</label>
-                      <input type="text" name="NotificationEmails" 
-                        [(ngModel)]="user.NotificationEmails" class="form-control">
+                      <input type="text" name="NotificationEmails" [(ngModel)]="user.NotificationEmails"
+                        class="form-control">
                     </div>
                   </div>
-                  <div class="col-md-4">
-                    <div class="form-group form-black label-floating mt-4">
+                  <div class="col-md-4 d-flex align-items-center">
+                    <div class="form-group form-black label-floating">
                       <mat-checkbox [(ngModel)]="user.IsActive" [disabled]=isdesable
                         name="IsActive">Active</mat-checkbox>
                     </div>
                   </div>
-                  <div class="col-md-4">
-                    <div class="form-group form-black label-floating mt-4">
+                  <div class="col-md-4 d-flex align-items-center">
+                    <div class="form-group form-black label-floating">
                       <mat-checkbox [(ngModel)]="user.IsLocked" [disabled]=isdesable name="IsLocked">Lock</mat-checkbox>
                     </div>
                   </div>
                 </div>
-                <button *ngIf="!isdesable" (click)="back()" class="custom-white-btn">Back</button>
-                <button class="custom-btn" type="submit">{{user.ButtenText}}</button>
+                <div class="align-flex my-4">
+                  <button *ngIf="!isdesable" (click)="back()" class="custom-white-btn">Back</button>
+                  <button class="custom-btn" type="submit">{{user.ButtenText}}</button>
+                </div>
                 <div class="clearfix"></div>
               </form>
             </div>

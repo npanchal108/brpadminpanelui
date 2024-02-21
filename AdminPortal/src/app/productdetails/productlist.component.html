@@ -1,5 +1,5 @@
 <div class="main-content">
-    <div class="container-fluid">
+    <div class="container-fluid admin-table productlist">
         <div class="row">
             <div class="custom-container">
                 <div class="custom-inner-container">
@@ -12,7 +12,7 @@
                             <input type="text" (input)="applyFilter()" [(ngModel)]="searchText" />
                             <button class="refresh-btn" (click)="onReset()"><i class="fa fa-refresh refresh-icon-clr" aria-hidden="true"></i></button>
                         </label>
-                        <div>
+                        <div class="d-flex">
                             <label [ngClass]="filterActive == -1 ?  'badge active' : 'badge'"
                                 (click)="onFilterActiveChange(-1)"> All</label>
                             <label [ngClass]="filterActive == 0 ?  'badge  active' : 'badge'"
@@ -30,7 +30,7 @@
                     </div>
 
                     <div *ngIf="filteredProductlist != null && filteredProductlist != undefined">
-                        <table class="table table-striped table-bordered custom-table">
+                        <table class="table table-bordered table-hover" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>

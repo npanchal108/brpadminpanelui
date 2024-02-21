@@ -1,19 +1,26 @@
 <div class="main-content">
-    <div class="container-fluid">
+    <div class="container-fluid admin-table admin-main-user">
         <div class="row">
             <div class="custom-container">
-                <div class="custom-inner-container">
-                    <h5> {{userType == 'Admin' ? 'Admin List' : 'Customer List'}}
-                        <small>{{userType == 'Admin' ? 'Manage admin users' : 'Manage customer users'}}</small>
+                <div class="custom-inner-container admin-pannel-head">
+                    <div class="col-md-9">
+                        <h5> {{userType == 'Admin' ? 'Admin List' : 'Customer List'}}
+                            <small>{{userType == 'Admin' ? 'Manage admin users' : 'Manage customer users'}}</small>
+                        </h5>
+                    </div>
+                    <div class="col-md-3">
                         <button class="header-button" (click)="OnAddUser(0)">Add User</button>
-                    </h5>
+                    </div>
+                </div>
+                <div class="custom-inner-container">
+
                     <div class="record-count-section">
                         <label>
-                            Search: 
-                            <input type="text" (input)="applyFilter()" [(ngModel)]="searchText"/>
+                            Search:
+                            <input type="text" (input)="applyFilter()" [(ngModel)]="searchText" />
                         </label>
                     </div>
-                    <table class="table table-striped table-bordered custom-table">
+                    <table  class="table table-bordered table-hover" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>First Name</th>

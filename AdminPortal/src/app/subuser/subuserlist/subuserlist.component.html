@@ -1,145 +1,162 @@
 <div class="main-content">
-    <div class="container-fluid">
+    <div class="container-fluid admin-table">
         <div class="row">
             <div class="custom-container">
                 <div class="custom-inner-container">
-                    <h5>Sub Users
-                        <small>Manage Sub User</small>
-                        <button [ngClass]="{'hidden': showtype === 2}" class="header-button" (click)="OnAddUser(0)">Add User</button>
-                    </h5>
-                    <div class="col-md-12">
-                        <div [ngClass]="{'hidden': showtype === 2}">
-                            <div class="record-count-section">
-                                <label>
-                                    Search:
-                                    <input type="text" />
-                                    <button class="refresh-btn"><i class="fa fa-refresh refresh-icon-clr"
-                                            aria-hidden="true"></i></button>
-                                </label>
-                            </div>
-                            <table class="table table-striped table-bordered custom-table">
-                                <thead>
-                                    <tr>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>User Id </th>
-                                        <th>Email</th>
-                                        <th>Mobile</th>
-                                        <th>Status</th>
-                                        <th style="text-align: center;">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr
-                                        *ngFor="let user of filteredSubUserList | paginate : { itemsPerPage:15, currentPage:page,totalItems:totalPage, id:'first' }">
-                                        <td data-title="First Name">{{user.FirstName}}</td>
-                                        <td data-title="Last Name">{{user.LastName}}</td>
-                                        <td data-title="User Id">{{user.MemberRefNo}}</td>
-                                        <td data-title="Email">{{user.Email}}</td>
-                                        <td data-title="Mobile">{{user.Mobile}}</td>
-                                        <td data-title="IsActive">{{ user.IsActive ? 'Active' : 'Inactive' }}</td>
-                                        <td class="font-20" align="center">
-                                            <button class="btn-icon" (click)="OnAddUser(user.UserID)">
-                                                <i class="fa fa-pencil"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div style="text-align:center">
-                                <pagination-controls (pageChange)="getSubUserList($event)" id="first">
-                                </pagination-controls>
-                            </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h5>Sub Users
+                                <small>Manage Sub User</small>
+                            </h5>
                         </div>
-                        <div class="card-content" [ngClass]="{'hidden': showtype === 1}">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group form-black label-floating is-focused"
-                                                [ngClass]="{'is-empty': FirstName=='','is-focused' : FirstName!=''}">
-                                                <label class="control-label">First Name<span class="error">*</span></label>
-                                                <input type="text" name="FirstName" [(ngModel)]="FirstName"
-                                                    class="validate" class="form-control" required>
-                                                <input type="text" name="UserID" [(ngModel)]="UserID"
-                                                    style="display:none">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group form-black label-floating"
-                                                [ngClass]="{'is-empty': LastName=='','is-focused' : LastName!=''}">
-                                                <label class="control-label">Last Name<span class="error">*</span></label>
-                                                <input type="text" name="LastName" [(ngModel)]="LastName"
-                                                    class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group form-black label-floating"
-                                                [ngClass]="{'is-empty': Mobile=='','is-focused' : Mobile!=''}">
-                                                <label class="control-label">Mobile<span class="error">*</span></label>
-                                                <input class="validate" type="number" name="Mobile" [(ngModel)]="Mobile"
-                                                    required class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group form-black label-floating"
-                                                [ngClass]="{'is-empty': MemberRefNo=='','is-focused' :MemberRefNo!=''}">
-                                                <label class="control-label">User ID<span class="error">*</span></label>
-                                                <input type="text" name="MemberRefNo" [(ngModel)]="MemberRefNo"
-                                                    [attr.disabled]="UserID > 0 ? true : null" class="validate" required
-                                                    class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group form-black label-floating"
-                                                [ngClass]="{'is-empty': Password=='','is-focused' : Password!=''}">
-                                                <label class="control-label">Password<span class="error">*</span></label>
-                                                <input type="password" name="Password" [(ngModel)]="Password" required
-                                                    [attr.disabled]="UserID > 0 ? true : null" minlength="3"
-                                                    class="validate" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group form-black label-floating"
-                                                [ngClass]="{'is-empty': Email=='','is-focused' : Email!=''}">
-                                                <label class="control-label">Email<span class="error">*</span></label>
-                                                <input type="text" name="Email" [(ngModel)]="Email" class="validate"
-                                                    class="form-control"
-                                                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group form-black label-floating mt-4">
-                                                <mat-checkbox [(ngModel)]="IsActive"
-                                                    name="IsActive">Active</mat-checkbox>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- <div class="clearfix"></div> -->
+                        <div class="col-md-4">
+                            <button [ngClass]="{'hidden': showtype === 2}" class="header-button"
+                                (click)="OnAddUser(0)">Add
+                                User</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div [ngClass]="{'hidden': showtype === 2}">
+                                <div class="record-count-section">
+                                    <label>
+                                        Search:
+                                        <input type="text" />
+                                        <button class="refresh-btn"><i class="fa fa-refresh refresh-icon-clr"
+                                                aria-hidden="true"></i></button>
+                                    </label>
+                                </div>
+                                <table class="table table-bordered table-hover" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>User Id </th>
+                                            <th>Email</th>
+                                            <th>Mobile</th>
+                                            <th>Status</th>
+                                            <th style="text-align: center;">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr
+                                            *ngFor="let user of filteredSubUserList | paginate : { itemsPerPage:15, currentPage:page,totalItems:totalPage, id:'first' }">
+                                            <td data-title="First Name">{{user.FirstName}}</td>
+                                            <td data-title="Last Name">{{user.LastName}}</td>
+                                            <td data-title="User Id">{{user.MemberRefNo}}</td>
+                                            <td data-title="Email">{{user.Email}}</td>
+                                            <td data-title="Mobile">{{user.Mobile}}</td>
+                                            <td data-title="IsActive">{{ user.IsActive ? 'Active' : 'Inactive' }}</td>
+                                            <td class="font-20" align="center">
+                                                <button class="btn-icon" (click)="OnAddUser(user.UserID)">
+                                                    <i class="fa fa-pencil"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div style="text-align:center">
+                                    <pagination-controls (pageChange)="getSubUserList($event)" id="first">
+                                    </pagination-controls>
                                 </div>
                             </div>
-                            <hr />
-                            <div class="row">
-                                <div class="col-md-12">
-                                <p-pickList [source]="roles" [target]="targetRoles"
-                                    (onMoveToTarget)="onMoveToTarget($event)" 
-                                    (onMoveToSource)="onMoveToSource($event)"
-                                    sourceHeader="Role List"
-                                    targetHeader="Assigned Role List" [dragdrop]="true" [responsive]="true"
-                                    [sourceStyle]="{'height':'250px'}" [targetStyle]="{'height':'250px'}">
-                                    <ng-template let-role pTemplate="item">
-                                        <div>{{role}}</div>
-                                    </ng-template>
-                                </p-pickList>
+                            <div class="card-content" [ngClass]="{'hidden': showtype === 1}">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group form-black label-floating is-focused"
+                                                    [ngClass]="{'is-empty': FirstName=='','is-focused' : FirstName!=''}">
+                                                    <label class="control-label">First Name<span
+                                                            class="error">*</span></label>
+                                                    <input type="text" name="FirstName" [(ngModel)]="FirstName"
+                                                        class="validate" class="form-control" required>
+                                                    <input type="text" name="UserID" [(ngModel)]="UserID"
+                                                        style="display:none">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group form-black label-floating"
+                                                    [ngClass]="{'is-empty': LastName=='','is-focused' : LastName!=''}">
+                                                    <label class="control-label">Last Name<span
+                                                            class="error">*</span></label>
+                                                    <input type="text" name="LastName" [(ngModel)]="LastName"
+                                                        class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group form-black label-floating"
+                                                    [ngClass]="{'is-empty': Mobile=='','is-focused' : Mobile!=''}">
+                                                    <label class="control-label">Mobile<span
+                                                            class="error">*</span></label>
+                                                    <input class="validate" type="number" name="Mobile"
+                                                        [(ngModel)]="Mobile" required class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group form-black label-floating"
+                                                    [ngClass]="{'is-empty': MemberRefNo=='','is-focused' :MemberRefNo!=''}">
+                                                    <label class="control-label">User ID<span
+                                                            class="error">*</span></label>
+                                                    <input type="text" name="MemberRefNo" [(ngModel)]="MemberRefNo"
+                                                        [attr.disabled]="UserID > 0 ? true : null" class="validate"
+                                                        required class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group form-black label-floating"
+                                                    [ngClass]="{'is-empty': Password=='','is-focused' : Password!=''}">
+                                                    <label class="control-label">Password<span
+                                                            class="error">*</span></label>
+                                                    <input type="password" name="Password" [(ngModel)]="Password"
+                                                        required [attr.disabled]="UserID > 0 ? true : null"
+                                                        minlength="3" class="validate" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group form-black label-floating"
+                                                    [ngClass]="{'is-empty': Email=='','is-focused' : Email!=''}">
+                                                    <label class="control-label">Email<span
+                                                            class="error">*</span></label>
+                                                    <input type="text" name="Email" [(ngModel)]="Email" class="validate"
+                                                        class="form-control"
+                                                        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex align-items-center">
+                                                <div class="form-group form-black label-floating">
+                                                    <mat-checkbox [(ngModel)]="IsActive"
+                                                        name="IsActive">Active</mat-checkbox>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="clearfix"></div> -->
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p-pickList [source]="roles" [target]="targetRoles"
+                                            (onMoveToTarget)="onMoveToTarget($event)"
+                                            (onMoveToSource)="onMoveToSource($event)" sourceHeader="Role List"
+                                            targetHeader="Assigned Role List" [dragdrop]="true" [responsive]="true"
+                                            [sourceStyle]="{'height':'250px'}" [targetStyle]="{'height':'250px'}">
+                                            <ng-template let-role pTemplate="item">
+                                                <div>{{role}}</div>
+                                            </ng-template>
+                                        </p-pickList>
+                                    </div>
+                                </div>
+                                <div class="align-flex mt-4 mb-4">
+                                    <button (click)="back()" class="custom-white-btn">Back</button>
+                                    <button class="custom-btn" (click)="SaveSubuser()">Save</button>
+                                </div>
                             </div>
-                            </div>
-                            <button (click)="back()" class="custom-white-btn">Back</button>
-                            <button class="custom-btn" (click)="SaveSubuser()">Save</button>
                         </div>
                     </div>
                 </div>
@@ -147,3 +164,4 @@
         </div>
     </div>
 </div>
+

@@ -18,7 +18,7 @@ thead {
     height: calc(100vh - 460px);
     overflow: scroll;
   }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .table-mobile table thead {
         display: none;
     }

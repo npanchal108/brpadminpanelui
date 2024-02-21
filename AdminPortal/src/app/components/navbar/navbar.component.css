@@ -1,7 +1,7 @@
 /* styles.css or your component's CSS file */
 .navbar {
     background: #002428;
-    padding: 5px 10px;
+    padding: 10px 10px;
 }
 
 .navbar .logo img {
@@ -13,15 +13,18 @@
     justify-content: start;
     align-items: center;
     gap: 10px;
+    flex-wrap:wrap;
 }
-
+.logo-img {
+    display: flex;
+    align-items: center;
+}
 .navbar .sidebar-admin-txt {
     text-transform: capitalize;
-    margin-left: 40px;
     color: #fff;
     font-weight: 600;
     letter-spacing: 1.2px;
-    font-size: 28px;
+    font-size: 22px;
 }
 
 .navbar .navbar-collapse {
@@ -34,6 +37,7 @@
     display: flex;
     align-items: center;
     gap: 40px;
+    flex-wrap:wrap;
 }
 
 .navbar a {
@@ -45,11 +49,13 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .navbar .nav-bar-menu-items {
     display: flex;
-    width: 70%;
+    /* width: 70%; */
     justify-content: center;
     margin-bottom: 5px;
 }
@@ -90,5 +96,14 @@ a.menu-link.active {
     /* Adjust styles for smaller screens */
     .spacer {
         display: none;
+    }
+    .navbar .logo-section{
+        justify-content: center;
+    }
+    .navbar .sidebar-admin-txt{
+        margin-left: 0px;
+    }
+    .navbar .nav-right-section {
+    margin: 0 auto;
     }
 }

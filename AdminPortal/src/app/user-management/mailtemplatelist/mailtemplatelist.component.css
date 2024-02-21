@@ -2,7 +2,7 @@ a {
     cursor: pointer;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .table-mobile table thead {
         display: none;
     }

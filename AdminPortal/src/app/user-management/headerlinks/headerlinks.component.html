@@ -1,12 +1,19 @@
 <div class="main-content">
-    <div class="container-fluid">
+    <div class="container-fluid admin-table headerlinks">
         <div class="row">
             <div class="custom-container">
                 <div class="custom-inner-container">
-                    <h5> Header Link List
-                        <small>Manage your Header Links</small>
-                        <button *ngIf="showtype==1" class="header-button" (click)="OnAddheaderlink()">Add New</button>
-                    </h5>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h5> Header Link List
+                                <small>Manage your Header Links</small>
+                            </h5>
+                        </div>
+                        <div class="col-md-3">
+                            <button *ngIf="showtype==1" class="header-button" (click)="OnAddheaderlink()">Add
+                                New</button>
+                        </div>
+                    </div>
                     <div *ngIf="showtype==1" class="record-count-section">
                         <label>
                             Search:
@@ -14,7 +21,7 @@
                         </label>
                     </div>
                     <div *ngIf="filteredHeaderlinkList!=null && filteredHeaderlinkList!=undefined && showtype==1">
-                        <table class="table table-striped table-bordered custom-table">
+                        <table class="table table-bordered table-hover" cellspacing="0" width="100%">
                             <thead class="text-info">
                                 <tr>
                                     <th>Link Name</th>
@@ -74,8 +81,8 @@
                                 <div class="col-md-3">
                                     <label class="control-label">Types</label>
                                     <div class="form-group form-black label-floating">
-                                        <select class="form-select" aria-label="Select Types"
-                                            [(ngModel)]="types" name="types" required>
+                                        <select class="form-select" aria-label="Select Types" [(ngModel)]="types"
+                                            name="types" required>
                                             <option value="header">Header</option>
                                             <option value="footer">Footer</option>
                                             <option value="dashboard">Dashboard</option>
@@ -97,7 +104,8 @@
                                         <select class="form-select" aria-label="Select Parent Sequence"
                                             [(ngModel)]="parentseq" name="parentLinkSequence" required>
                                             <option selected>Select Sequence</option>
-                                            <option *ngFor="let link of headerlinklist" [value]="link.seq">{{ link.linkname }}
+                                            <option *ngFor="let link of headerlinklist" [value]="link.seq">{{
+                                                link.linkname }}
                                             </option>
                                         </select>
                                     </div>
@@ -108,8 +116,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <button (click)="getheaderlinks()" class="custom-white-btn">Back</button>
-                            <button class="custom-btn" (click)="UpdateHeaderlinkByID()">Submit</button>
+                            <div class="align-flex">
+                                <button (click)="getheaderlinks()" class="custom-white-btn mb-3">Back</button>
+                                <button class="custom-btn mb-3" (click)="UpdateHeaderlinkByID()">Submit</button>
+                            </div>
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -118,3 +128,5 @@
         </div>
     </div>
 </div>
+
+

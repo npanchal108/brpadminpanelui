@@ -1,12 +1,19 @@
 <div class="main-content">
-    <div class="container-fluid">
+    <div class="container-fluid admin-table dynamicpage">
         <div class="row">
             <div class="custom-container">
                 <div class="custom-inner-container">
-                    <h5> Dynamic Page List
-                        <small>Manage your Dynamic Pages</small>
-                        <button class="header-button" (click)="onEditconf(0)">Add New</button>
-                    </h5>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h5> Dynamic Page List
+                                <small>Manage your Dynamic Pages</small>
+
+                            </h5>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="header-button" (click)="onEditconf(0)">Add New</button>
+                        </div>
+                    </div>
                     <div class="col-md-12">
                         <mat-tab-group #tabGroup mat-stretch-tabs="false" mat-align-tabs="start"
                             (selectedTabChange)="tabChanged($event)">
@@ -23,24 +30,24 @@
                                                     aria-hidden="true"></i></button>
                                         </label>
                                     </div>
-                                    <table class="table table-striped table-bordered custom-table">
+                                    <table class="table table-bordered table-hover" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th style="width: 5%;" (click)="toggleSort('PageID')">
+                                                <th (click)="toggleSort('PageID')">
                                                     ID
                                                     <span [ngClass]="{ 'disabled-icon': sortedColumn != 'PageID' }">
                                                         <i
                                                             [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
                                                     </span>
                                                 </th>
-                                                <th style="width: 8%;" (click)="toggleSort('PageTitle')">
+                                                <th (click)="toggleSort('PageTitle')">
                                                     Title
                                                     <span [ngClass]="{ 'disabled-icon': sortedColumn != 'PageTitle' }">
                                                         <i
                                                             [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
                                                     </span>
                                                 </th>
-                                                <th style="width: 15%;" (click)="toggleSort('PageDescription')">
+                                                <th (click)="toggleSort('PageDescription')">
                                                     Description
                                                     <span
                                                         [ngClass]="{ 'disabled-icon': sortedColumn != 'PageDescription' }">
@@ -48,7 +55,7 @@
                                                             [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
                                                     </span>
                                                 </th>
-                                                <th style="width: 15%;" (click)="toggleSort('CreatedDate')">
+                                                <th (click)="toggleSort('CreatedDate')">
                                                     Posted Date
                                                     <span
                                                         [ngClass]="{ 'disabled-icon': sortedColumn != 'CreatedDate' }">
@@ -56,22 +63,22 @@
                                                             [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
                                                     </span>
                                                 </th>
-                                                <th style="width: 10%;" (click)="toggleSort('IsActive')">
+                                                <th (click)="toggleSort('IsActive')">
                                                     Active
                                                     <span [ngClass]="{ 'disabled-icon': sortedColumn != 'IsActive' }">
                                                         <i
                                                             [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
                                                     </span>
                                                 </th>
-                                                <th style="width: 15%;" (click)="toggleSort('Sequence')">
+                                                <th (click)="toggleSort('Sequence')">
                                                     Sequence
                                                     <span [ngClass]="{ 'disabled-icon': sortedColumn != 'Sequence' }">
                                                         <i
                                                             [ngClass]="ascending ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
                                                     </span>
                                                 </th>
-                                                <th style="width: 8%;">URL </th>
-                                                <th style="width: 5%;" style="text-align: center;">Action</th>
+                                                <th>URL </th>
+                                                <th style="text-align: center;">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -85,7 +92,8 @@
                                                 <td>{{mails.Sequence}}</td>
                                                 <td class="truncate-text">
                                                     <ng-container *ngIf="companyDomainValue">
-                                                        <a [title]="companyDomainValue + '/' +mails.ptype + '/' + mails.PageName" [href]="companyDomainValue + '/' +mails.ptype + '/' + mails.PageName"
+                                                        <a [title]="companyDomainValue + '/' +mails.ptype + '/' + mails.PageName"
+                                                            [href]="companyDomainValue + '/' +mails.ptype + '/' + mails.PageName"
                                                             target="_blank">
                                                             {{companyDomainValue}}/{{mails.ptype}}/{{mails.PageName}}</a>
                                                     </ng-container>
@@ -100,10 +108,10 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <div style="text-align:center">
-                                        <pagination-controls (pageChange)="pageChanged($event)" id="first">
-                                        </pagination-controls>
-                                    </div>
+                                </div>
+                                <div style="text-align:center">
+                                    <pagination-controls (pageChange)="pageChanged($event)" id="first">
+                                    </pagination-controls>
                                 </div>
                             </mat-tab>
                             <mat-tab class="tab-border" label="Info">
@@ -119,7 +127,7 @@
                                                     aria-hidden="true"></i></button>
                                         </label>
                                     </div>
-                                    <table class="table table-striped table-bordered custom-table">
+                                    <table class="table table-bordered table-hover" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th style="width: 15%;" (click)="toggleSort('PageID')">
@@ -205,7 +213,7 @@
                                                     aria-hidden="true"></i></button>
                                         </label>
                                     </div>
-                                    <table class="table table-striped table-bordered custom-table">
+                                    <table class="table table-bordered table-hover" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th style="width: 10%;" (click)="toggleSort('PageID')">
@@ -291,7 +299,7 @@
                                                     aria-hidden="true"></i></button>
                                         </label>
                                     </div>
-                                    <table class="table table-striped table-bordered custom-table">
+                                    <table class="table table-bordered table-hover" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th style="width: 10%;" (click)="toggleSort('PageID')">

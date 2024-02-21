@@ -88,8 +88,11 @@
                 <div class="col-md-12">
                   <input type="file" (change)="onFileSelected($event)">
                 </div>
-                <button (click)="back()" class="custom-white-btn">Back</button>
-                <button type="button" class="custom-btn" (click)="OnUpload()">Upload</button>
+                <div class="align-flex mb-4 mt-5">
+                  <button (click)="back()" class="custom-white-btn mb-3">Back</button>
+                  <button type="button" class="custom-btn mb-3" (click)="OnUpload()">Upload</button>
+                </div>
+
                 <div class="col-md-12" *ngIf="config.ColorConfigKey!='Logo'">
                   <div class="row">
                     <button (click)="back()" class="custom-white-btn">Back</button>

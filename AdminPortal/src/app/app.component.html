@@ -1,5 +1,5 @@
 <div *ngIf="isLogin('login');else login_content">
-  <div class="wrapper">
+  <div class="wrapper" id="wrapper">
     <ngx-toastr></ngx-toastr>
     <app-navbar *ngIf="isLogin('login')"></app-navbar>
     <div class="row" *ngIf="isLogin('login')">

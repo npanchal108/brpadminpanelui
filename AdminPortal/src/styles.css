@@ -8,7 +8,7 @@
     border-radius: 50%;
     /* margin: 10px 0 0 0; */
     text-align: center;
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
     height: 40px;
@@ -53,7 +53,7 @@ body {
 
 .mat-mdc-button .mdc-button__label {
     position: fixed !important;
-    top: 130px;
+    top: 140px;
 }
 
 .fullheight-container {
@@ -69,10 +69,9 @@ body {
 .custom-inner-container h5 {
     font-weight: 600;
     font-size: 16px;
-    margin: 0 0 20px 0;
     padding: 0;
-    border-bottom: 1px solid #c3c3c3;
     letter-spacing: 0.8px;
+    margin: 0 !important;
 }
 
 .custom-inner-container h5 small {
@@ -99,8 +98,8 @@ body {
     font-size: 14px;
     letter-spacing: 1.6px;
     padding: 7px;
-    margin: 0 5px 18px 10px;
-    width: 150px;
+    /* margin: 0 5px 18px 10px; */
+    min-width: 120px;
     word-wrap: break-word;
     height: 40px;
     justify-content: center;
@@ -124,8 +123,8 @@ body {
     font-size: 14px;
     letter-spacing: 1.6px;
     padding: 7px;
-    margin: 0 15px 18px 10px;
-    width: 150px;
+    /* margin: 0 15px 18px 10px; */
+    min-width: 120px;
     height: 40px;
     justify-content: center;
     align-items: center;
@@ -134,8 +133,6 @@ body {
 .custom-inner-container .header-button {
     display: flex;
     float: right;
-    position: relative;
-    bottom: 50px;
     background: #002428;
     margin: 0 10px 0 0;
     border: 1px solid #002428;
@@ -201,7 +198,8 @@ body {
     letter-spacing: 0.8px;
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 3px;
+    align-items: center;
 }
 
 .record-count-section select,
@@ -209,8 +207,8 @@ body {
     background: #fff;
     padding: 5px;
     border: 1px solid #c3c3c3;
-    border-radius: 5px;
-    height: 46px;
+    border-radius: 4px;
+    height: 38px;
 }
 
 .table>thead {
@@ -463,9 +461,9 @@ label.badge.active {
     border: 1px solid #D74F4F;
 }
 
-.mat-mdc-tab-body-content {
+/* .mat-mdc-tab-body-content {
     overflow: hidden !important;
-}
+} */
 .p-picklist .p-picklist-header {
     background: #f9fafb;
     color: #374151;
@@ -474,7 +472,9 @@ label.badge.active {
     border-bottom: 0 none;
     border-top-right-radius: 6px;
     border-top-left-radius: 6px;
+    margin-top: 20px;
 }
+
 .p-picklist .p-picklist-list {
     border: 1px solid #e5e7eb;
     background: #ffffff;
@@ -484,14 +484,17 @@ label.badge.active {
     border-bottom-left-radius: 6px;
     outline: 0 none;
 }
+
 .p-picklist .p-picklist-list .p-picklist-item.p-highlight {
     color: #4338CA;
     background: #EEF2FF;
 }
+
 .p-picklist .p-picklist-list:not(.cdk-drop-list-dragging) .p-picklist-item:not(.p-highlight):hover {
     background: #f3f4f6;
     color: #4b5563;
-}   
+}
+
 .p-picklist .p-picklist-list .p-picklist-item {
     padding: 0.75rem 1.25rem;
     margin: 0;
@@ -500,6 +503,7 @@ label.badge.active {
     background: transparent;
     transition: box-shadow 0.2s;
 }
+
 .p-picklist-item:not(.cdk-drag-disabled) {
     cursor: move;
 }
@@ -507,31 +511,567 @@ label.badge.active {
 .p-picklist .p-picklist-buttons {
     padding: 1.25rem;
 }
+
 .p-picklist .p-picklist-buttons .p-button {
     margin-bottom: 0.5rem;
 }
-.p-picklist-buttons .p-button, .p-orderlist-controls .p-button {
+
+.p-picklist-buttons .p-button,
+.p-orderlist-controls .p-button {
     transition: opacity 0.2s, background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
+
 .p-button.p-button-icon-only {
     width: 3rem;
     padding: 0.75rem 0;
 }
+
 .p-button:not(:disabled):hover {
     background: #4F46E5;
     color: #ffffff;
     border-color: #4F46E5;
 }
 
+.admin-pannel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #646464;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    gap: 8px;
+}
 
-@media only screen and (min-width: 992px) {
-    .mat-mdc-button .mdc-button__label{
-        top:110px;
+/* .form-group.form-black {
+    margin-bottom: 15px;
+} */
+
+.custom-inner-container h5 {
+    margin-bottom: 15px !important;
+}
+
+.align-flex {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.card-content input {
+    margin-bottom: 15px;
+}
+
+@media (min-width: 992px) {
+    .mat-mdc-button .mdc-button__label {
+        top: 110px;
     }
 }
 
-@media only screen and (max-width: 1020px) {
+@media (max-width: 1020px) {
     .col-12.col-sm-12.col-md-12.col-lg-6.grid-w-100 {
         width: 100%;
     }
+}
+
+@media (max-width: 768px) {
+    .mdc-button {
+        padding: 0 18px 0 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-pannel-head {
+        flex-wrap: wrap;
+    }
+}
+
+/* New Table CSS */
+
+.admin-table .dataTables_filter {
+    float: right;
+}
+
+.admin-table .table-hover>tbody>tr:hover {
+    background-color: #002428;
+    color: #fff;
+}
+
+@media (min-width: 768px) {
+    .admin-table .table {
+        /* table-layout: fixed;
+        max-width: 100% !important; */
+        font-size: 14px;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .admin-table table td,
+    .admin-table table th {
+        word-wrap: break-word;
+    }
+}
+
+.admin-table thead {
+    background: #ddd;
+}
+
+.admin-table .table td:nth-child(2) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.admin-table table.dataTable thead .sorting:after,
+.admin-table table.dataTable thead .sorting_asc:after,
+.admin-table table.dataTable thead .sorting_desc:after,
+.admin-table table.dataTable thead .sorting_asc_disabled:after,
+.admin-table table.dataTable thead .sorting_desc_disabled:after {
+    opacity: 1;
+}
+
+.admin-table .pagination>.active>a,
+.admin-table .pagination>.active>a:focus,
+.admin-table .pagination>.active>a:hover,
+.admin-table .pagination>.active>span,
+.admin-table .pagination>.active>span:focus,
+.admin-table .pagination>.active>span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #002428;
+    border-color: #002428;
+}
+
+.admin-table .pagination>li>a,
+.admin-table .pagination>li>span {
+    color: #002428;
+}
+
+.admin-table table.table-bordered.dataTable th,
+.admin-table table.table-bordered.dataTable td {
+    overflow-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+    .fullheight-container{
+        padding: 10px 8px;
+    }
+    /* Force table to not be like tables anymore */
+    .admin-table table,
+    .admin-table thead,
+    .admin-table tbody,
+    .admin-table th,
+    .admin-table td,
+    .admin-table tr {
+        display: block;
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    .admin-table thead tr,
+    .admin-table tfoot tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .admin-table td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50% !important;
+        word-wrap: break-word;
+        min-height: 46px;
+    }
+
+    .admin-table td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        /* white-space: nowrap; */
+    }
+
+    .admin-table .table td:nth-child(1) {
+        background: #ccc;
+        height: 100%;
+        top: 0;
+        left: 0;
+        font-weight: bold;
+    }
+
+    /*
+Label the data
+*/
+    .admin-table td:nth-of-type(1):before {
+        content: "First Name";
+    }
+
+    .admin-table td:nth-of-type(2):before {
+        content: "Last Name";
+    }
+
+    .admin-table td:nth-of-type(3):before {
+        content: "User Id";
+    }
+
+    .admin-table td:nth-of-type(4):before {
+        content: "Email";
+    }
+
+    .admin-table td:nth-of-type(5):before {
+        content: "Mobile";
+    }
+
+    .admin-table td:nth-of-type(6):before {
+        content: "Status";
+    }
+
+    .admin-table td:nth-of-type(7):before {
+        content: "Action";
+        text-align: left;
+        font-size: 14px;
+    }
+
+    .admin-table .dataTables_length {
+        display: none;
+    }
+
+    /* Mail Box Config */
+    .admin-table.webconfig td:nth-of-type(1):before {
+        content: "Name";
+    }
+
+    .admin-table.webconfig td:nth-of-type(2):before {
+        content: "User Name";
+    }
+
+    .admin-table.webconfig td:nth-of-type(3):before {
+        content: "Display Name";
+    }
+
+    .admin-table.webconfig td:nth-of-type(4):before {
+        content: "Company";
+    }
+
+    .admin-table.webconfig td:nth-of-type(5):before {
+        content: "Actions";
+        text-align: left;
+        font-size: 14px;
+    }
+
+/* Admin Main UserList */
+.admin-table.admin-main-user td:nth-of-type(1):before {
+    content: "First Name";
+}
+
+.admin-table.admin-main-user td:nth-of-type(2):before {
+    content: "Last Name";
+}
+
+.admin-table.admin-main-user td:nth-of-type(3):before {
+    content: "Customer Id";
+}
+
+.admin-table.admin-main-user td:nth-of-type(4):before {
+    content: "Actions";
+    text-align: left;
+    font-size: 14px;
+}
+
+    /* Logo Upload */
+    .admin-table.logoupload td:nth-of-type(1):before {
+        content: "Key";
+    }
+
+    .admin-table.logoupload td:nth-of-type(2):before {
+        content: "Value";
+    }
+
+    .admin-table.logoupload td:nth-of-type(3):before {
+        content: "Details";
+    }
+
+    .admin-table.logoupload td:nth-of-type(4):before {
+        content: "Actions";
+        text-align: left;
+        font-size: 14px;
+    }
+
+    /* Website Configuration */
+    .admin-table.websiteconfig td:nth-of-type(1):before {
+        content: "Key";
+    }
+
+    .admin-table.websiteconfig td:nth-of-type(2):before {
+        content: "Value";
+    }
+
+    .admin-table.websiteconfig td:nth-of-type(3):before {
+        content: "Details";
+    }
+
+    .admin-table.websiteconfig td:nth-of-type(4):before {
+        content: "Actions";
+        text-align: left;
+        font-size: 14px;
+    }
+
+    /* Email Template */
+    .admin-table.mailtemplate td:nth-of-type(1):before {
+        content: "Name";
+    }
+
+    .admin-table.mailtemplate td:nth-of-type(2):before {
+        content: "Subject";
+    }
+
+    .admin-table.mailtemplate td:nth-of-type(3):before {
+        content: "Active";
+    }
+
+    .admin-table.mailtemplate td:nth-of-type(4):before {
+        content: "Mail Type";
+    }
+
+    .admin-table.mailtemplate td:nth-of-type(5):before {
+        content: "Actions";
+        text-align: left;
+        font-size: 14px;
+    }
+
+    /* Dynamic Pages - Blog Tab */
+    .admin-table.dynamicpage td:nth-of-type(1):before {
+        content: "Id";
+    }
+
+    .admin-table.dynamicpage td:nth-of-type(2):before {
+        content: "Title";
+    }
+
+    .admin-table.dynamicpage td:nth-of-type(3):before {
+        content: "Description";
+    }
+
+    .admin-table.dynamicpage td:nth-of-type(4):before {
+        content: "Posted Date";
+    }
+
+    .admin-table.dynamicpage td:nth-of-type(5):before {
+        content: "Active";
+    }
+
+    .admin-table.dynamicpage td:nth-of-type(6):before {
+        content: "Sequence";
+    }
+
+    .admin-table.dynamicpage td:nth-of-type(7):before {
+        content: "URl";
+    }
+
+    .admin-table.dynamicpage td:nth-of-type(8):before {
+        content: "Actions";
+        text-align: left;
+        font-size: 14px;
+    }
+
+    /* Manufacture List */
+    .admin-table.manufcature td:nth-of-type(1):before {
+        content: "Manufacture";
+    }
+
+    .admin-table.manufcature td:nth-of-type(2):before {
+        content: "Doc Type";
+    }
+
+    .admin-table.manufcature td:nth-of-type(3):before {
+        content: "Doc Name";
+    }
+
+    .admin-table.manufcature td:nth-of-type(4):before {
+        content: "Doc Details URl";
+    }
+
+    .admin-table.manufcature td:nth-of-type(5):before {
+        content: "Actions";
+        text-align: left;
+        font-size: 14px;
+    }
+
+    /* Product List */
+    .admin-table.productlist td:nth-of-type(1):before {
+        content: "Select";
+    }
+
+    .admin-table.productlist td:nth-of-type(2):before {
+        content: "Product Name";
+    }
+
+    .admin-table.productlist td:nth-of-type(3):before {
+        content: "Status";
+    }
+
+    .admin-table.productlist td:nth-of-type(4):before {
+        content: "Actions";
+        text-align: left;
+        font-size: 14px;
+    }
+
+    /* Navigation Setting */
+    .admin-table.headerlinks td:nth-of-type(1):before {
+        content: "Link Name";
+    }
+
+    .admin-table.headerlinks td:nth-of-type(2):before {
+        content: "Link URL";
+    }
+
+    .admin-table.headerlinks td:nth-of-type(3):before {
+        content: "Sequence";
+    }
+
+    .admin-table.headerlinks td:nth-of-type(4):before {
+        content: "Popover";
+    }
+
+    .admin-table.headerlinks td:nth-of-type(5):before {
+        content: "Type";
+    }
+
+    .admin-table.headerlinks td:nth-of-type(6):before {
+        content: "Actions";
+        text-align: left;
+        font-size: 14px;
+    }
+
+    /* Banner Settings */
+    .admin-table.bannersetting td:nth-of-type(1):before {
+        content: "Title";
+    }
+
+    .admin-table.bannersetting td:nth-of-type(2):before {
+        content: "Description";
+    }
+
+    .admin-table.bannersetting td:nth-of-type(3):before {
+        content: "Image";
+    }
+
+    .admin-table.bannersetting td:nth-of-type(4):before {
+        content: "Is Active";
+    }
+
+    .admin-table.bannersetting td:nth-of-type(5):before {
+        content: "Actions";
+        text-align: left;
+        font-size: 14px;
+    }
+
+    /* User Cart Report */
+    .admin-table.usercartreport td:nth-of-type(1):before {
+        content: "Customer";
+    }
+
+    .admin-table.usercartreport td:nth-of-type(2):before {
+        content: "User Name";
+    }
+
+    .admin-table.usercartreport td:nth-of-type(3):before {
+        content: "First Name";
+    }
+
+    .admin-table.usercartreport td:nth-of-type(4):before {
+        content: "Last Name";
+    }
+
+    .admin-table.usercartreport td:nth-of-type(5):before {
+        content: "Item";
+    }
+
+    .admin-table.usercartreport td:nth-of-type(6):before {
+        content: "Quantity";
+    }
+
+    .admin-table.usercartreport td:nth-of-type(7):before {
+        content: "Price";
+    }
+
+    .admin-table.usercartreport td:nth-of-type(8):before {
+        content: "Date";
+    }
+
+    /* Activity Log Types */
+    .admin-table.activitylogs td:nth-of-type(1):before {
+        content: "Log Type";
+    }
+
+    .admin-table.activitylogs td:nth-of-type(2):before {
+        content: "Description";
+    }
+
+    .admin-table.activitylogs td:nth-of-type(3):before {
+        content: "Search Keyword";
+    }
+
+    .admin-table.activitylogs td:nth-of-type(4):before {
+        content: "Customer";
+    }
+
+    .admin-table.activitylogs td:nth-of-type(5):before {
+        content: "Sub User";
+    }
+
+    .admin-table.activitylogs td:nth-of-type(6):before {
+        content: "Ip Address";
+    }
+
+    .admin-table.activitylogs td:nth-of-type(7):before {
+        content: "Log Date";
+    }
+
+
+    /* Sales Filter */
+    .admin-table.salesfilter td:nth-of-type(1):before {
+        content: "Name";
+    }
+
+    .admin-table.salesfilter td:nth-of-type(2):before {
+        content: "Type";
+    }
+
+    .admin-table.salesfilter td:nth-of-type(3):before {
+        content: "Order";
+    }
+
+    .admin-table.salesfilter td:nth-of-type(4):before {
+        content: "Actions";
+        text-align: left;
+        font-size: 14px;
+    }
+}
+
+.admin-btn {
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin-btn .btn {
+    display: flex;
+    float: right;
+    background: #002428;
+    border: 1px solid #002428;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1.6px;
+    padding: 7px;
+    margin: 15px 0px;
+    width: 150px;
+    word-wrap: break-word;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
 }

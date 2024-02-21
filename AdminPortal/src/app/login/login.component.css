@@ -4,7 +4,9 @@
 }
 
 .logo-img {
-    padding-left: 190px;
+    display:block;
+    margin: 0 auto;
+    max-width: 100%;
 }
 
 .btn.btn-info {
@@ -12,15 +14,16 @@
 }
 
 .form-group .form-control {
-    border-radius: 10px;
-    text-indent: 20px;
-    height: 50px;
+    border-radius: 6px;
+    text-indent: 10px;
+    height: 46px;
+    margin-bottom: 18px;
 }
 
 .checkbox label,
 .radio label,
 label {
-    font-size: 20px;
+    font-size: 16px;
     line-height: 1.42857;
     color: black;
     font-weight: 500;
@@ -38,9 +41,15 @@ label {
     border: 1px solid #008B99 !important;
     padding: 10px 0;
     margin: 30px 0 0 0;
+    font-weight: bold;
+    color: #fff;
 }
 .login-err-msg{
     color: red;
     font-size: 12px;
     font-weight: 400;
+}
+
+@media screen and (max-width: 576px){
+
 }

@@ -33,20 +33,20 @@ th span {
 }
 
 .truncate-text {
-    white-space: nowrap;
+    /* white-space: nowrap; */
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 150px;
     /* Adjust this width as needed */
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .table-mobile table thead {
         display: none;
     }
 
     .table-mobile table td {
-        white-space: normal !important;
+        /* white-space: normal !important; */
         word-break: break-all;
         position: relative;
         padding-left: 53.7% !important;
@@ -69,7 +69,7 @@ th span {
     }
 
     .table-mobile table td::before {
-        content: attr(data-title);
+        /* content: attr(data-title); */
         position: absolute;
         top: 11px;
         left: 6px;

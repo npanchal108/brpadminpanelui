@@ -3,7 +3,7 @@
     width: 100%;
     /* Set the sidebar to full page height */
     position: fixed;
-    top: 59px;
+    top: 110px;
     left: 0;
     z-index: 1;
     overflow-x: hidden;
@@ -12,8 +12,9 @@
 }
 
 .example-sidenav {
-    padding: 20px;
+    padding: 16px 0px 0px 15px;
     background: #002428;
+    margin-top: 18px;
 }
 
 .mat-drawer-content {
@@ -72,10 +73,27 @@
     color: #FFF;
     border: 0;
     border-radius: 0;
-    margin-left: -2px;    
+    /* margin-left: -2px;     */
 }
 .active{
     background: #008B99;
     border: 1px solid #008B99;
     border-radius: 10px;
+}
+@media (max-width:768px) and (min-width:518px){
+    .example-container{
+        top:40px;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .example-container{
+        top : 69px;
+    }
+}
+
+@media (max-width:768px){
+    .main-container{
+        padding: 40px 20px;
+    }
 }
