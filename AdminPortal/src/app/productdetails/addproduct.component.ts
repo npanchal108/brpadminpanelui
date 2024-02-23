@@ -36,6 +36,8 @@ export class addproductComponent implements OnInit {
     selectedProductPriceFile: File | undefined;
     selectedProductDocumentFile: File | undefined;
     searchText: string;
+    sequenceArr : [] = [];
+
     itemType: ItemType[] = [
         { key: 'doc', value: 'doc' },
         { key: 'text', value: 'text' },
@@ -63,6 +65,9 @@ export class addproductComponent implements OnInit {
             this.spinner.show();
             this.MailConfigService.GetproductDocBYId(this.memRefNo, this.itemId).subscribe((data: any) => {
                 this.productDetails = data;
+                console.log('this.productDetails',this.productDetails);
+                this.sequenceArr = this.productDetails.filter(i => i.DocType === 'image').map(i => i.Sequence);
+                console.log('this.sequenceArr',this.sequenceArr);
                 this.spinner.hide();
             });
         }
@@ -73,7 +78,6 @@ export class addproductComponent implements OnInit {
             this.MailConfigService.GetItemPriceByItem(this.memRefNo, this.itemId).subscribe((data: any) => {
                 this.productPriceDetails = data;
                 this.spinner.hide();
-                console.log('this.productPriceDetails', data)
             });
         }
     }
@@ -92,7 +96,8 @@ export class addproductComponent implements OnInit {
                 docType: DocType,
                 docTypeName: DocTypeName,
                 docTypeTextUrl: DocTypeTextUrl,
-                sequence: Sequence
+                sequence: Sequence,
+                sequenceArr: this.sequenceArr
             }
         });
 
@@ -273,6 +278,13 @@ export class DialogAddEditProduct {
                 this.toastr.error('Please Enter Sequence of an Image');
                 return;
             }
+            if(this.data.sequenceArr  && this.data.sequenceArr != undefined && this.data.sequenceArr.length > 0){
+                let exists = this.data.sequenceArr.includes(Number(this.itemSequence));
+                if(exists){
+                    this.toastr.error('Image Sequence Already Exists');
+                    return;
+                }
+            }
             fd.append('Sequence', this.itemSequence.toString());
         } else if (this.selectedfileType == "video") {
             fd.append('DocName', "video");
@@ -286,15 +298,16 @@ export class DialogAddEditProduct {
         fd.append('IMType', 'False');
         this.spinner.show();
         this.MailConfigService.UpdateImageDocument(fd).subscribe((data: any) => {
-            this.spinner.hide();
             console.log(data);
             if (data == true || data == "true") {
                 this.toastr.success("Sucessfully Updated");
                 this.dialogRef.close();
+                this.spinner.hide();
             }
             else {
                 this.toastr.error("Error occured please try again");
                 this.dialogRef.close();
+                this.spinner.hide();
             }
         });
     }
