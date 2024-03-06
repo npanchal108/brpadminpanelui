@@ -2,6 +2,11 @@
 @import "../node_modules/primeicons/primeicons.css";
 @import "../node_modules/primeng//resources/primeng.min.css";
 
+.mat-drawer.mat-drawer-side {
+    z-index: 2;
+    height: auto !important;
+}
+
 .mat-mdc-button .mdc-button__label {
     border: 1px solid;
     padding: 10px;

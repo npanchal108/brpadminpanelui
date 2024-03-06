@@ -38,9 +38,7 @@ export class productBulkUploadComponent implements OnInit {
     GetExternalItemDocFiles(){
         this.MailConfigService.GetExternalItemDocFiles(this.memRefNo).subscribe((data: any) => {
             if (data) {
-               console.log('data',data);
                this.csvFiles = data;
-               console.log('this.csvFiles',this.csvFiles);
             }
             else {
                 this.toastr.error("Error occured please try again");
@@ -248,6 +246,7 @@ export class productBulkUploadComponent implements OnInit {
 
             this.userprocesstimeService.UploadFolder(fd).subscribe((data: any) => {
                 this.toastr.success(data.Message);
+                console.log('data.FileNames',data.FileNames)
                 if (data.FileNames && data.FileNames.length > 0) {
                     console.log("File Names:", data.FileNames);
                     console.log("FolderPath:", data.FolderPath);
