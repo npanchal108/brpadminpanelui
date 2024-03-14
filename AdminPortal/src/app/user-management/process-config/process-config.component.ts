@@ -95,7 +95,7 @@ export class ProcessConfigComponent implements OnInit {
 
   SyncNow() {
     this.sendMessage('start');
-    var geturl = location.origin + '/' + this.memRefNo + 'Api/DistOneApi/DataMigration';
+    var geturl = location.origin + '/' + this.memRefNo + 'Api/ecommerce/DataMigration';
     console.log(geturl);
     this.userprocesstimeService.SyncNow(geturl).subscribe((data: any) => {
       this.sendMessage('stop');
@@ -106,7 +106,7 @@ export class ProcessConfigComponent implements OnInit {
 
   AllProductImages(){
     this.sendMessage('start');
-    var geturl = location.origin + '/' + this.memRefNo + 'Api/DistOneApi/SetAllProductImages';
+    var geturl = location.origin + '/' + this.memRefNo + 'Api/ecommerce/SetAllProductImages';
     this.userprocesstimeService.setallimages(geturl).subscribe((data: any) => {
       this.sendMessage('stop');
       this.toastr.success(data);
@@ -116,7 +116,7 @@ export class ProcessConfigComponent implements OnInit {
 
   ProductImages(){
     this.sendMessage('start');
-    var geturl = location.origin + '/' + this.memRefNo + 'Api/DistOneApi/SetProductImages';
+    var geturl = location.origin + '/' + this.memRefNo + 'Api/ecommerce/SetProductImages';
     this.userprocesstimeService.setallimages(geturl).subscribe((data: any) => {
       this.sendMessage('stop');
       this.toastr.success(data);
@@ -126,7 +126,7 @@ export class ProcessConfigComponent implements OnInit {
 
   AllTreeImages(){
     this.sendMessage('start');
-    var geturl = location.origin + '/' + this.memRefNo + 'Api/DistOneApi/SetAllTreeImages';
+    var geturl = location.origin + '/' + this.memRefNo + 'Api/ecommerce/SetAllTreeImages';
     this.userprocesstimeService.setallimages(geturl).subscribe((data: any) => {
       this.sendMessage('stop');
       this.toastr.success(data);
@@ -135,7 +135,7 @@ export class ProcessConfigComponent implements OnInit {
   }
   CompressAllImages(){
     this.sendMessage('start');
-    var geturl = location.origin + '/' + this.memRefNo + 'Api/DistOneApi/Compressallimages';
+    var geturl = location.origin + '/' + this.memRefNo + 'Api/ecommerce/Compressallimages';
     this.userprocesstimeService.setallimages(geturl).subscribe((data: any) => {
       this.sendMessage('stop');
       this.toastr.success(data);
@@ -144,7 +144,7 @@ export class ProcessConfigComponent implements OnInit {
   }
   TreeImages(){
     this.sendMessage('start');
-    var geturl = location.origin + '/' + this.memRefNo + 'Api/DistOneApi/SetTreeImages';
+    var geturl = location.origin + '/' + this.memRefNo + 'Api/ecommerce/SetTreeImages';
     this.userprocesstimeService.setallimages(geturl).subscribe((data: any) => {
       this.sendMessage('stop');
       this.toastr.success(data);
@@ -154,7 +154,7 @@ export class ProcessConfigComponent implements OnInit {
 
   ImageNow() {
     this.sendMessage('start');
-    var geturl = location.origin + '/' + this.memRefNo + 'Api/DistOneApi/Setallimages';
+    var geturl = location.origin + '/' + this.memRefNo + 'Api/ecommerce/Setallimages';
 
     this.userprocesstimeService.setallimages(geturl).subscribe((data: any) => {
       this.sendMessage('stop');
@@ -164,7 +164,7 @@ export class ProcessConfigComponent implements OnInit {
   }
   AllImageNow() {
     this.sendMessage('start');
-    var geturl = location.origin + '/' + this.memRefNo + 'Api/DistOneApi/SetallNewimages';
+    var geturl = location.origin + '/' + this.memRefNo + 'Api/ecommerce/SetallNewimages';
     this.userprocesstimeService.setallNewimages(geturl).subscribe((data: any) => {
       this.sendMessage('stop');
       this.toastr.success(data);
@@ -252,7 +252,7 @@ export class ProcessConfigComponent implements OnInit {
 
   syncTblNow() {
     this.sendMessage('start');
-    var geturl = location.origin + '/' + this.memRefNo + 'Api/DistOneApi/syncasperconfig';
+    var geturl = location.origin + '/' + this.memRefNo + 'Api/ecommerce/syncasperconfig';
     //var geturl = 'http://localhost:50144/DistOneApi/syncasperconfig'
     //geturl=geturl.replace('http://localhost:4200','https://localhost:44320');
     //geturl=geturl.replace('EcomDemoApi/','');

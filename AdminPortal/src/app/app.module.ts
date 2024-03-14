@@ -47,7 +47,12 @@ import { addsafiltersortComponent } from './addsafiltersort/addsafiltersort.comp
 import { ActivitylogComponent } from './activitylog/activitylog.component';
 import { adddynamicpageComponent } from './adddynamicpage/adddynamicpage.component';
 import { Deletedynamicpagedialog, dynamicpagelistComponent } from './user-management/dynamicpagelist/dynamicpagelist.component';
-
+import { productlistComponent } from './productdetails/productlist.component';
+import { addproductComponent,DialogAddEditProduct,DeleteItemDocdialog } from './productdetails/addproduct.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { productBulkUploadComponent } from './productdetails/bulkproductlist.component';
+import { CsvGeneratorService } from './services/csvgenerator.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,7 +83,12 @@ import { Deletedynamicpagedialog, dynamicpagelistComponent } from './user-manage
     ActivitylogComponent,
     adddynamicpageComponent,
     dynamicpagelistComponent,
-    Deletedynamicpagedialog
+    Deletedynamicpagedialog,
+    productlistComponent,
+    addproductComponent,
+    DialogAddEditProduct,
+    DeleteItemDocdialog,
+    productBulkUploadComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,15 +104,19 @@ import { Deletedynamicpagedialog, dynamicpagelistComponent } from './user-manage
     LoadingModule,
     NgxPaginationModule,
     RecaptchaModule.forRoot(),
-    AngularDateTimePickerModule
+    AngularDateTimePickerModule,
+    MatInputModule,
+    MatIconModule
   ],
-  providers: [UserService, AuthGuard, MenuService, MailConfigService, LoadingService, CompanyProfileService, UserprocesstimeService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [UserService, AuthGuard, MenuService, MailConfigService, LoadingService, CompanyProfileService, UserprocesstimeService,CsvGeneratorService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
   entryComponents: [
     DialogOverviewExampleDialog,
     Deleteheaderlinkdialog,
     Deletesafiltersort,
-    Deletedynamicpagedialog
+    Deletedynamicpagedialog,
+    DialogAddEditProduct,
+    DeleteItemDocdialog
   ]
 })
 export class AppModule { }
