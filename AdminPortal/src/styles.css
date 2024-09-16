@@ -38,13 +38,13 @@ div.error-message i{
 
 /************* Added for new theme ******************/
 
-.card [data-background-color="darkblue"]{
+.card [data-background-color="black"]{
     background: linear-gradient(60deg, #005faa, #005faa);
     box-shadow: 0 12px 20px -10px rgba(0, 188, 212, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 188, 212, 0.2);
 }
 
 .sidebar[data-color="blue"] .moving-tab, .off-canvas-sidebar[data-color="blue"] .moving-tab{
-    background-color: #389af3;
+    background-color: #00203FFF !important;
     box-shadow: 0 12px 20px -10px rgba(0, 188, 212, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 188, 212, 0.2);
 }
 
@@ -59,15 +59,14 @@ div.error-message i{
 }
 
 .text-info{
-    color:#389af3;
+    color:black;
 }
 
 a{
-    color:#389af3;
+    color:black;
 }
 
 a:hover, a:focus{
-    color: #F55E25;
     text-decoration: none;
 }
 

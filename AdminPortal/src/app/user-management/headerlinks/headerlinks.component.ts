@@ -23,6 +23,8 @@ export class HeaderlinksComponent implements OnInit {
   userType: string;
   id:string;
   showtype:any;
+  parentseq:any;
+  ismenu:any;
   constructor(private dialog: MatDialog,private route: ActivatedRoute, private MailConfigService:MailConfigService,  private toastr: ToastrService,private router: Router, private loadingService: LoadingService, private changeDetectorRef:ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -40,6 +42,8 @@ export class HeaderlinksComponent implements OnInit {
     this.seq=null;
     this.popover=false;
     this.types='both';
+    this.parentseq=null;
+    this.ismenu=null;
   }
 
   getheaderlinks(){
@@ -74,6 +78,8 @@ export class HeaderlinksComponent implements OnInit {
       this.seq = data.seq;
       this.popover = data.popover;
       this.types = data.types;
+      this.parentseq = data.parent_seq;
+      this.ismenu = data.ismenu == null ? false : true;
       // this.sendMessage('stop');   
     });
   }
@@ -84,7 +90,6 @@ export class HeaderlinksComponent implements OnInit {
     });
   }
   UpdateHeaderlinkByID(){
-    
     if(this.linkname==undefined || this.linkname==null || this.linkname==''){
       this.toastr.error("Insert Link Name");
     }
@@ -94,10 +99,9 @@ export class HeaderlinksComponent implements OnInit {
     else if(this.seq==undefined || this.seq==null || this.seq==''){
       this.toastr.error("Insert Link sequence");
     }
-    
     else{
     this.sendMessage('start');
-    this.MailConfigService.UpdateHeaderlinkByID(this.linkid,this.linkname,this.linkurl,this.seq,this.popover ,this.memRefNo,this.types).subscribe((data: any) => {      
+    this.MailConfigService.UpdateHeaderlinkByID(this.linkid,this.linkname,this.linkurl,this.seq,this.popover ,this.memRefNo,this.types,this.parentseq,this.ismenu).subscribe((data: any) => {      
       this.toastr.success("Data Updated Successfully");
       this.sendMessage('stop');   
       this.getheaderlinks();

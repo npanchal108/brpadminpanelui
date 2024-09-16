@@ -1,0 +1,29 @@
+.divlogo{
+    background-color: black;
+    padding: 30px;
+}
+.logo-img{
+    padding-left: 190px;
+}
+
+.btn.btn-info{
+    background-color: black;
+}
+
+.form-group .form-control{
+    border-radius: 10px;
+    text-indent: 20px;
+    height: 50px;
+}
+
+.checkbox label, .radio label, label{
+    font-size: 20px;
+    line-height: 1.42857;
+    color: black;
+    font-weight: 500;
+}
+
+.btn.btn-info, .btn.btn-info:hover{
+    background-color: black;
+    color: #FFFFFF;
+}

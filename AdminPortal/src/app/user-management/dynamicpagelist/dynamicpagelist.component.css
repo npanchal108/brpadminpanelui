@@ -1,6 +1,10 @@
 a {
     cursor: pointer;
 }
+.mat-tab-label {
+    border : 1px solid grey !important;
+    margin-top: 12px !important;
+}
 
 @media (max-width: 767px) {
     .table-mobile table thead {

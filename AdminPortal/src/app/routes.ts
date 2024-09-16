@@ -19,6 +19,8 @@ import { HeaderlinksComponent } from './user-management/headerlinks/headerlinks.
 import { ActivitylogComponent } from './activitylog/activitylog.component';
 import { dynamicpagelistComponent } from './user-management/dynamicpagelist/dynamicpagelist.component';
 import { adddynamicpageComponent } from './adddynamicpage/adddynamicpage.component';
+import { productlistComponent } from './productdetails/productlist.component';
+import { addproductComponent } from './productdetails/addproduct.component';
 export const appRoutes: Routes = [
     // { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     {
@@ -49,6 +51,9 @@ export const appRoutes: Routes = [
         path: 'adddynamicpage/:id/:memRefNo/:userType', component: adddynamicpageComponent, canActivate: [AuthGuard]
     },
     {
+        path: 'addproduct/:id/:memRefNo/:itemId', component: addproductComponent, canActivate: [AuthGuard]
+    },
+    {
         path: 'manageuser/:id/:memRefNo/:userType', component: UserManagementComponent, canActivate: [AuthGuard], children: [
             
             { path: 'logo-upload', component: LogoUploadComponent, canActivate:[AuthGuard] },
@@ -60,6 +65,7 @@ export const appRoutes: Routes = [
             { path: 'dynamicpagelist', component: dynamicpagelistComponent, canActivate:[AuthGuard] },
             { path: 'headerlinks', component: HeaderlinksComponent, canActivate:[AuthGuard] },
             { path: 'activitylog', component: ActivitylogComponent, canActivate:[AuthGuard] },
+            { path: 'productlist', component: productlistComponent, canActivate:[AuthGuard] },
             
         ]
     },
